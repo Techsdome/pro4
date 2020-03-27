@@ -20,7 +20,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
-import { MainNavbarComponent } from './main-navbar/main-navbar.component';
+import { MainNavbarComponent } from './components/main-navbar/main-navbar.component';
 
 
 @NgModule({
