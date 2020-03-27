@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "techsdome-6983c"
+  },
+  "targets": {
+    "techsdome-6983c": {
+      "hosting": {
+        "Techsdome": [
+          "techsdome-6983c"
+        ]
+      }
+    }
   }
 }
