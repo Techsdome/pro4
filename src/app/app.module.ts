@@ -36,7 +36,7 @@ import { MainNavbarComponent } from './components/main-navbar/main-navbar.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    //AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
