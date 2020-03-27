@@ -1,0 +1,24 @@
+
+<div id="menuBar_top" class="black-standard-color">
+    <input class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
+</div>
+
+<div id="menuBar_left" class="black-standard-color">
+    <div id="round"></div>
+
+    <div id="sidebar-button-container">
+        <div id="plusButton-container">
+            <input [ngClass]="status ? 'translateMessage' : 'hide'" class="background-image-settings sidebar-button animation-button1 opacity-05" id="messageButton" type="button">
+            <input [ngClass]="status ? 'translateQuestion' : 'hide'" class="background-image-settings sidebar-button animation-button2 opacity-05" id="questionButton" type="button">
+            <input [ngClass]="status ? 'translateProject' : 'hide'" class="background-image-settings sidebar-button animation-button3 opacity-05" id="projectButton" type="button">
+            <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
+        </div>
+        <input class="background-image-settings sidebar-button" id="houseButton" type="button">
+        <input class="background-image-settings sidebar-button" id="directoryButton" type="button">
+        <input class="background-image-settings sidebar-button" id="peopleButton" type="button">
+        <input class="background-image-settings sidebar-button" id="forumButton" type="button">
+        <input class="background-image-settings sidebar-button" id="chatButton" type="button">
+    </div>
+</div>
+
+<script language="JavaScript" src="showButtons.js"></script>
