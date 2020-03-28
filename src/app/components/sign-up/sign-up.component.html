@@ -1,1 +1,47 @@
-<p>sign-up works!</p>
+<body class="text-center">
+<div class="displayTable">
+  <div class="displayTableCell">
+
+    <div class="authBlock">
+        <div class="text-center social-btn">
+    <!-- Continue with Google -->
+        <div class="form-group">
+      <button type="button" class="btn btn-danger btn-block" (click)="authService.GoogleAuth()">
+        <i class="fab fa-google-plus-g"></i>
+        Continue with Google
+      </button> <br>
+
+    <!-- Continue with Facebook -->
+      <div class="form-group">
+      <button type="button" class="btn btn-primary btn-block" (click)="authService.FacebookAuth()">
+        <i class="fab fa-facebook"></i>
+        Continue with Facebook
+      </button>
+      </div>
+
+
+      <h3>Sign Up</h3>
+
+      <div class="form-group">
+        <input type="email" class="formControl" placeholder="Email Address" #userEmail required>
+      </div>
+
+      <div class="formGroup">
+        <input type="password" class="formControl" placeholder="Password" #userPwd required>
+      </div> <br>
+
+      <div class="form-group">
+        <input type="button" class="btn btn-primary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value)">
+      </div>
+
+      <div class="formGroup">
+        <span class="or"><span class="orInner">Or</span></span>
+      </div>
+
+        </div>
+    <div class="redirectToLogin">
+      <span>Already have an account? <span class="redirect" routerLink="/sign-in">Log In</span></span>
+    </div>
+  </div>
+
+</div>
