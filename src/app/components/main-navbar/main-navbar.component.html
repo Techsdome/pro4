@@ -8,9 +8,18 @@
 
     <div id="sidebar-button-container">
         <div id="plusButton-container">
-            <input [ngClass]="status ? 'translateProject' : 'hide'" class="background-image-settings sidebar-button animation-button3 opacity-05" id="projectButton" type="button"  (click)="animateOn()">
-            <input [ngClass]="status ? 'translateQuestion' : 'hide'" class="background-image-settings sidebar-button animation-button2 opacity-05" id="questionButton" type="button"  (click)="animateOn()">
-            <input [ngClass]="status ? 'translateMessage' : 'hide'" class="background-image-settings sidebar-button animation-button1 opacity-05" id="messageButton" type="button" routerLink="/add-project"  (click)="animateOn()">
+            <div [ngClass]="status ? 'translateProject' : 'hide'">
+                <input class="background-image-settings sidebar-button animation-button3 opacity-05" id="projectButton" type="button"  (click)="animateOn()">
+                <p class="detail_info">create post</p>
+            </div>
+            <div [ngClass]="status ? 'translateQuestion' : 'hide'">
+                <input class="background-image-settings sidebar-button animation-button2 opacity-05" id="questionButton" type="button"  (click)="animateOn()">
+                <p class="detail_info">ask question</p>
+            </div>
+            <div [ngClass]="status ? 'translateMessage' : 'hide'">
+                <input class="background-image-settings sidebar-button animation-button1 opacity-05" id="messageButton" type="button" routerLink="/add-project"  (click)="animateOn()">
+                <p class="detail_info">create project</p>
+            </div>
             <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
         </div>
         <input class="background-image-settings sidebar-button" id="houseButton" type="button">
