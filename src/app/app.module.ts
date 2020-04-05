@@ -21,6 +21,9 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 import { MainNavbarComponent } from './components/main-navbar/main-navbar.component';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const config = {
     apiKey: 'AIzaSyDbzgGQ8OdmDebUM_2pJKxc3dMwciV0Q80',
@@ -48,7 +51,10 @@ const config = {
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    CoreModule,
+    SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
