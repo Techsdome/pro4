@@ -1,11 +1,20 @@
 
 <div id="menuBar_top" class="black-standard-color">
     <input class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
+    <input id="settingsButton" class="background-image-settings sidebar-button" type="button">
+    <div (click)="showMenuBar()" id="mobile-menu-icon-container">
+        <div></div>
+        <div></div>
+        <hr>
+        <hr>
+        <hr>
+        <div></div>
+        <div></div>
+    </div>
 </div>
 
-<div id="menuBar_left" class="black-standard-color">
+<div id="menuBar_left" [ngClass]="menuClicked ? 'showMenu' : 'hideMenu'" class="black-standard-color">
     <div id="round"></div>
-
     <div id="sidebar-button-container">
         <div id="plusButton-container">
             <div [ngClass]="status ? 'translateProject' : 'hide'">
@@ -22,12 +31,12 @@
             </div>
             <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
         </div>
+
         <input class="background-image-settings sidebar-button" id="houseButton" type="button">
         <input class="background-image-settings sidebar-button" id="directoryButton" type="button">
         <input class="background-image-settings sidebar-button" id="peopleButton" type="button">
         <input class="background-image-settings sidebar-button" id="forumButton" type="button">
         <input class="background-image-settings sidebar-button" id="chatButton" type="button">
+
     </div>
 </div>
-
-<script language="JavaScript" src="showButtons.js"></script>

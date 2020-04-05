@@ -7,9 +7,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MainNavbarComponent implements OnInit {
     public status = false;
+    public menuClicked = false;
 
     animateOn() {
         this.status = !this.status;
+    }
+
+    showMenuBar() {
+        this.menuClicked = !this.menuClicked;
     }
 
     constructor() {
