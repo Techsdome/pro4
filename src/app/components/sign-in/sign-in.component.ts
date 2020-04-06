@@ -10,7 +10,6 @@ import * as firebase from '@firebase/app';
 })
 
 export class SignInComponent implements OnInit {
-
   constructor(
     public authService: AuthService
   ) { }

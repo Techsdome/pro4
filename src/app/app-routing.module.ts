@@ -9,9 +9,8 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 //import { AuthGuard } from "../../shared/guard/auth.guard";
 import {VerifyEmailComponent} from './components/verify-email/verify-email.component';
-import {UserDashboardComponent} from './user/user-dashboard/user-dashboard.component';
-import {UserListComponent} from './user/user-list/user-list.component';
-import {UserDetailComponent} from './user/user-detail/user-detail.component';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
+
 
 const routes: Routes = [
     {path: '', redirectTo: '/sign-in', pathMatch: 'full'},
@@ -20,9 +19,7 @@ const routes: Routes = [
     {path: 'dashboard', component: DashboardComponent},
     {path: 'forgot-password', component: ForgotPasswordComponent},
     {path: 'verify-email-address', component: VerifyEmailComponent},
-    {path: 'me', component: UserDashboardComponent, data: {title: 'Dashboard'}},
-    {path: 'users', component: UserListComponent, data: {title: 'Users'}},
-    {path: 'profile', component: UserDetailComponent, data: {title: 'profile'}}
+    {path: 'app-user-profile', component: UserProfileComponent}
 ];
 
 @NgModule({

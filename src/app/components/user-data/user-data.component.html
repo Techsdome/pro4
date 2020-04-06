@@ -1,0 +1,9 @@
+<ul>
+    <li *ngFor="let item of items">
+        <img [src]="item.photoURL" alt="">
+        <div id="text-content">
+            <p>Display Name: {{item.displayName}}</p>
+            <p>Email: {{item.email}}</p>
+        </div>
+    </li>
+</ul>
