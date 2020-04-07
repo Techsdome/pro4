@@ -12,6 +12,20 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { ProjectPageComponent } from './components/project-page/project-page.component';
 import { NewProjectComponent } from './components/new-project/new-project.component';
 
+// Import canActivate guard services
+import { AuthGuard } from './shared/guard/auth.guard';
+import { SecureInnerPagesGuard } from './shared/guard/secure-inner-pages.guard';
+
+
+// const routes: Routes = [
+  // { path: '', redirectTo: '/sign-in', pathMatch: 'full'},
+  // { path: 'sign-in', component: SignInComponent, canActivate: [SecureInnerPagesGuard]},
+  // { path: 'register-user', component: SignUpComponent, canActivate: [SecureInnerPagesGuard]},
+  // { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  // { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
+  // { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] }
+// ];
+
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },

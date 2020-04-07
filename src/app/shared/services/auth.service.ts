@@ -87,6 +87,11 @@ export class AuthService {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
 
+  // Sign in with Facebooke
+  FacebookAuth() {
+    return this.AuthLogin(new auth.FacebookAuthProvider());
+  }
+
   // Auth logic to run auth providers
   AuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
@@ -109,6 +114,8 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
+      firstName: user.firstName,
+      lastName: user.lastName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
     };
