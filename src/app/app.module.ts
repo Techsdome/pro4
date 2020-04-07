@@ -21,6 +21,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 import { MainNavbarComponent } from './components/main-navbar/main-navbar.component';
+import { ProjectPageComponent } from './components/project-page/project-page.component';
+import { NewProjectComponent } from './components/new-project/new-project.component';
 
 const config = {
     apiKey: 'AIzaSyDbzgGQ8OdmDebUM_2pJKxc3dMwciV0Q80',
@@ -42,6 +44,8 @@ const config = {
     ForgotPasswordComponent,
     VerifyEmailComponent,
     MainNavbarComponent,
+    ProjectPageComponent,
+    NewProjectComponent,
   ],
   imports: [
     BrowserModule,
