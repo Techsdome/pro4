@@ -8,19 +8,19 @@ import {AuthService} from './auth.service';
     providedIn: 'root'
 })
 export class DataServiceService {
-    itemsCollection: AngularFirestoreCollection<Item>;
-    items: Observable<Item[]>;
-    myUser: AuthService;
+    public items: Observable<Item[]>;
 
-    constructor(public afs: AngularFirestore, myUser: AuthService) {
+    constructor(public afs: AngularFirestore, public authService: AuthService) {
         this.items = this.afs.collection('users').valueChanges();
-        this.myUser = myUser;
-        const test = this.myUser.getUserData();
-        console.log(test);
     }
+
 
     getItems() {
         return this.items;
+    }
+
+    getCurrentUser() {
+        return this.authService.getCurrentUser();
     }
 }
 
