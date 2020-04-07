@@ -6,12 +6,7 @@
     "techsdome-6983c": {
       "hosting": {
         "Techsdome": [
-          "dist/Techsdome",
           "techsdome-6983c"
-        ],
-        "test": [
-          "Techsdome",
-          "techsdome-6983c.web.app"
         ]
       }
     }
