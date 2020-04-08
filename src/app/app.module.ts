@@ -43,6 +43,8 @@ import {DataServiceService} from './shared/services/data-service.service';
         MainNavbarComponent,
         UserProfileComponent,
         UserDataComponent,
+        ProjectPageComponent,
+        NewProjectComponent,
     ],
     imports: [
         BrowserModule,
