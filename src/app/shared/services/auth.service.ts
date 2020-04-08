@@ -56,15 +56,20 @@ export class AuthService {
 
     // Sign up with email/password
     SignUp(email, password) {
-        return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-            .then((result) => {
-                /* Call the SendVerificaitonMail() function when new user sign
-                up and returns promise */
-                this.SendVerificationMail();
-                this.SetUserData(result.user);
-            }).catch((error) => {
-                window.alert(error.message);
+        return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((result) => {
+            /*this.afs.collection('users').doc(result.user.uid).set({});*/
+            /* Call the SendVerificaitonMail() function when new user sign
+            up and returns promise */
+            this.afs.collection('users').doc(result.user.uid).set({
+                job: 'techyTest',
+                description: 'Tell something about yourself..',
+                skills: []
             });
+            this.SendVerificationMail();
+            this.SetUserData(result.user);
+        }).catch((error) => {
+            window.alert(error.message);
+        });
     }
 
     // Send email verfificaiton when new user sign up

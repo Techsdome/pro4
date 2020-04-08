@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { AngularFireAuth } from '@angular/fire/auth';
+/*import { AngularFireAuth } from '@angular/fire/auth';*/
 import { AuthService } from '../../shared/services/auth.service';
 import * as firebase from '@firebase/app';
 

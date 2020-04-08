@@ -13,13 +13,27 @@ export class UserDataComponent implements OnInit {
 
     items: Item[];
     user: User;
+    job: string;
+    description: string;
 
     constructor(private dataService: DataServiceService) {
+    }
+
+    getJob(item) {
+        console.log('this.user.uid: ' + JSON.stringify(this.user.uid));
+        for (const it in item) {
+            if (this.user.uid === item[it].uid) {
+                this.job = item[it].job;
+                this.description = item[it].description;
+            }
+        }
     }
 
     ngOnInit(): void {
         this.dataService.getItems().subscribe(items => {
             this.items = items;
+            /*console.log(this.items);*/
+            this.getJob(items);
         });
 
         this.dataService.getCurrentUser().subscribe(user => {
