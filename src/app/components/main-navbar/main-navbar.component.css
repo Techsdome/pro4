@@ -47,9 +47,7 @@
 #plusButton-container {
     width: 100%;
     display: grid;
-    position: absolute;
     justify-self: center;
-    margin-top: -50px;
 }
 
 #sidebar-button-container {

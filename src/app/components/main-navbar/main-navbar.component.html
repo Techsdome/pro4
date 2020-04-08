@@ -15,7 +15,11 @@
 
 <div id="menuBar_left" [ngClass]="menuClicked ? 'showMenu' : 'hideMenu'" class="black-standard-color">
     <div id="round"></div>
+
     <div id="sidebar-button-container">
+
+        <input class="background-image-settings sidebar-button" id="profilePicture" type="button">
+
         <div id="plusButton-container">
             <div [ngClass]="status ? 'translateProject' : 'hide'">
                 <input class="background-image-settings sidebar-button animation-button3 opacity-05" id="projectButton" type="button"  (click)="animateOn()">
