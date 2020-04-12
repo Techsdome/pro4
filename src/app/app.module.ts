@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
 import {AuthService} from './shared/services/auth.service';
+import { FormsModule } from '@angular/forms';
 
 
 // Firebase services + enviorment module
@@ -29,6 +30,7 @@ import { MainNavbarComponent } from './components/main-navbar/main-navbar.compon
 import { ProjectPageComponent } from './components/project-page/project-page.component';
 import { NewProjectComponent } from './components/new-project/new-project.component';
 import {DataServiceService} from './shared/services/data-service.service';
+import { InputfieldComponent } from './components/inputfield/inputfield.component';
 
 
 
@@ -45,6 +47,7 @@ import {DataServiceService} from './shared/services/data-service.service';
         UserDataComponent,
         ProjectPageComponent,
         NewProjectComponent,
+        InputfieldComponent
     ],
     imports: [
         BrowserModule,
@@ -54,7 +57,8 @@ import {DataServiceService} from './shared/services/data-service.service';
         AngularFirestoreModule,
         CoreModule,
         SharedModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        FormsModule
     ],
     providers: [AuthService, DataServiceService],
     bootstrap: [AppComponent]

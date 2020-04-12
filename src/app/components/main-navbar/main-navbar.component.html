@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div id="menuBar_left" [ngClass]="menuClicked ? 'showMenu' : 'hideMenu'" class="black-standard-color">
+<div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" class="black-standard-color">
     <div id="round"></div>
 
     <div id="sidebar-button-container">
@@ -21,15 +21,15 @@
         <input class="background-image-settings sidebar-button" id="profilePicture" type="button">
 
         <div id="plusButton-container">
-            <div [ngClass]="status ? 'translateProject' : 'hide'">
+            <div [class]="status ? 'translateProject' : 'hide'">
                 <input class="background-image-settings sidebar-button animation-button3 opacity-05" id="projectButton" type="button"  (click)="animateOn()">
                 <p class="detail_info">create post</p>
             </div>
-            <div [ngClass]="status ? 'translateQuestion' : 'hide'">
+            <div [class]="status ? 'translateQuestion' : 'hide'">
                 <input class="background-image-settings sidebar-button animation-button2 opacity-05" id="questionButton" type="button"  (click)="animateOn()">
                 <p class="detail_info">ask question</p>
             </div>
-            <div [ngClass]="status ? 'translateMessage' : 'hide'">
+            <div [class]="status ? 'translateMessage' : 'hide'">
                 <input class="background-image-settings sidebar-button animation-button1 opacity-05" id="messageButton" type="button" routerLink="/add-project"  (click)="animateOn()">
                 <p class="detail_info">create project</p>
             </div>

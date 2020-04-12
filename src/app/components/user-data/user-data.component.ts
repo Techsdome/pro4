@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
+import {AuthService} from '../../shared/services/auth.service';
 
 
 @Component({
@@ -14,17 +15,26 @@ export class UserDataComponent implements OnInit {
     items: Item[];
     user: User;
     job: string;
-    description: string;
+    public description: string;
+    skills: [];
 
-    constructor(private dataService: DataServiceService) {
+//    this.afs.collection('users').doc(this.userData.uid).update({});
+
+    constructor(private dataService: DataServiceService, private authService: AuthService) {
     }
 
-    getJob(item) {
-        console.log('this.user.uid: ' + JSON.stringify(this.user.uid));
+    descriptionChange() {
+        this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
+            description: this.description
+        });
+    }
+
+    getExtendedData(item) {
         for (const it in item) {
             if (this.user.uid === item[it].uid) {
                 this.job = item[it].job;
                 this.description = item[it].description;
+                this.skills = item[it].skills;
             }
         }
     }
@@ -32,13 +42,11 @@ export class UserDataComponent implements OnInit {
     ngOnInit(): void {
         this.dataService.getItems().subscribe(items => {
             this.items = items;
-            /*console.log(this.items);*/
-            this.getJob(items);
+            this.getExtendedData(items);
         });
 
         this.dataService.getCurrentUser().subscribe(user => {
             this.user = user;
-            console.log(this.user);
         });
     }
 }

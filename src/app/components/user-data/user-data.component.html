@@ -1,21 +1,20 @@
 <div *ngIf="user" id="user-data-container" class="flex">
     <img class="profile-picutre" [src]="user.photoURL?user.photoURL:'https://lh3.googleusercontent.com/proxy/e2HbKxgHu-YsHYQaUDXXKK_-nb1SLgz37uJbzp_Gfyee2jsywrpj6Yo6bLLL7vDkLXk__5mZu3hBnS3c65_EZzQ99fgvGHVsvnNMGK-WFoRSJXd1w5lq4KLQtStyfwPUTsH7dfU'" alt="">
     <div id="text-content">
-        <h2>{{user.displayName?user.displayName:"Leeroy Jenkins"}}</h2>
+        <h2 style="display: inline">{{user.displayName?user.displayName:"Leeroy Jenkins"}}</h2>
+        <p style="display: inline">{{user.email}}</p>
         <hr>
         <p>{{job}}</p>
-        <p>Email: {{user.email}}</p>
+        <p *ngIf="user.emailVerified">Verified user</p>
         <br>
-        <!--<p>Verifizierter User: {{user.emailVerified}}</p>-->
-        <p>{{description}}</p>
+        <textarea id="description-textarea" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+        [(ngModel)]="description" (input)="descriptionChange()">{{description}}</textarea>
     </div>
     <div id="skills-container">
         <h2>Skills</h2>
         <hr>
-        <input type="button" value="java">
-        <input type="button" value="java">
-        <input type="button" value="java">
-        <input type="button" value="java">
-        <input type="button" value="java">
+        <li *ngFor="let skill of skills">
+            <input type="button" [value]="skill">
+        </li>
     </div>
 </div>

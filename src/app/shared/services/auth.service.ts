@@ -98,7 +98,14 @@ export class AuthService {
 
     // Sign in with Google
     GoogleAuth() {
-        return this.AuthLogin(new auth.GoogleAuthProvider());
+        const google = new auth.GoogleAuthProvider();
+        this.AuthLogin(google);
+        this.afs.collection('users').doc(this.userData.uid).set({
+            job: 'My job title',
+            description: 'Tell something about yourself..',
+            skills: []
+        });
+        /*console.log(JSON.parse(JSON.stringify(google)));*/
     }
 
     // Sign in with Facebooke
@@ -122,6 +129,13 @@ export class AuthService {
     /* Setting up user data when sign in with username/password,
     sign up with username/password and sign in with social auth
     provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+
+    public setDescription(descriptionParam: string) {
+        this.afs.collection('users').doc(this.userData.uid).update({
+            description: descriptionParam
+        });
+    }
+
     SetUserData(user) {
         const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
         const userData: User = {

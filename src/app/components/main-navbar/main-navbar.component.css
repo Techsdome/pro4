@@ -108,6 +108,7 @@
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(1, 1fr);
     z-index: 5;
+    height: 40px;
 }
 
 #round {
@@ -187,11 +188,6 @@
     background-image: url("https://image.flaticon.com/icons/png/512/40/40031.png");
     background-size: 25px;
     background-position: center;
-}
-
-#menuBar_top {
-    height: 40px;
-    width: 100vw;
 }
 
 #menuBar_left {
