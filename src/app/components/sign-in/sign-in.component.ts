@@ -10,9 +10,20 @@ import * as firebase from '@firebase/app';
 })
 
 export class SignInComponent implements OnInit {
+  public openMainLogin = true;
+
   constructor(
     public authService: AuthService
   ) { }
 
+  toggleLoginRegister() {
+    this.openMainLogin = !this.openMainLogin;
+  }
+
+  set setLoginState(b: boolean) {
+    this.openMainLogin = b;
+}
+
   ngOnInit() { }
+
 }

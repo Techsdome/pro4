@@ -3,10 +3,8 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-
 import {AuthService} from './shared/services/auth.service';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Firebase services + enviorment module
 import {AngularFireModule} from '@angular/fire';
@@ -31,7 +29,10 @@ import { ProjectPageComponent } from './components/project-page/project-page.com
 import { NewProjectComponent } from './components/new-project/new-project.component';
 import {DataServiceService} from './shared/services/data-service.service';
 import { InputfieldComponent } from './components/inputfield/inputfield.component';
-
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {DropzoneDirective} from './shared/services/dropzone.directive';
+import { UploaderComponent } from './components/uploader/uploader.component';
+import { UploadTaskComponent } from './components/uploader/upload-task/upload-task.component';
 
 
 @NgModule({
@@ -47,7 +48,10 @@ import { InputfieldComponent } from './components/inputfield/inputfield.componen
         UserDataComponent,
         ProjectPageComponent,
         NewProjectComponent,
-        InputfieldComponent
+        InputfieldComponent,
+        DropzoneDirective,
+        UploaderComponent,
+        UploadTaskComponent,
     ],
     imports: [
         BrowserModule,
@@ -58,9 +62,11 @@ import { InputfieldComponent } from './components/inputfield/inputfield.componen
         CoreModule,
         SharedModule,
         BrowserAnimationsModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule,
+        AngularFireStorageModule
     ],
-    providers: [AuthService, DataServiceService],
+    providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective],
     bootstrap: [AppComponent]
 })
 export class AppModule {

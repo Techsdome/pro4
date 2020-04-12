@@ -1,6 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic");
+@import url("https://fonts.googleapis.com/css?family=Cabin:700");
 
-* {
+/* You can add global styles to this file, and also import other style files */
+/*{
     margin: 0;
 }
 
@@ -23,4 +25,6 @@ body {
 
 .flex{
     display: flex;
-}
+}*/
+
+
