@@ -20,7 +20,6 @@ body body.page-top {
 .masthead {
   height: 100vh;
   background-image: url('./assets/img/intro-bg.jpg');
-  background-color: brown;
 }
 
 section {
@@ -38,9 +37,7 @@ form > div > label {
 }
 
 #about_pic {
-  background-image: url('./assets/img/student.jpg');
-  height: auto;
-  width: 100%;
+
   display: block;
 }
 
