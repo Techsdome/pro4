@@ -73,6 +73,18 @@
               </button>
             </div>
           </div>
+          <hr>
+          <div id="socialBtnGroup" class="btn-group-justified">
+            <div class="btn-group" role="group">
+              <a (click)="authService.FacebookAuth()"><i class="fa fa-facebook"></i></a>
+            </div>
+            <div class="btn-group" role="group">
+              <a (click)="authService.GoogleAuth()"><i class="fa fa-google-plus"></i></a>
+            </div>
+            <div class="btn-group" role="group">
+              <a><i class="fa fa-github"></i></a>
+            </div>
+          </div>
         </form>
         <ng-template #register>
           <form>
