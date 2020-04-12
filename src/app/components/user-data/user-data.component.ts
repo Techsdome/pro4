@@ -17,17 +17,15 @@ export class UserDataComponent implements OnInit {
     job: string;
     public description: string;
     skills: [];
+    firstname: string;
+    lastname: string;
+    photoURL = '';
 
 //    this.afs.collection('users').doc(this.userData.uid).update({});
 
-    constructor(private dataService: DataServiceService, private authService: AuthService) {
+    constructor(private dataService: DataServiceService) {
     }
 
-    descriptionChange() {
-        this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
-            description: this.description
-        });
-    }
 
     getExtendedData(item) {
         for (const it in item) {
@@ -35,6 +33,9 @@ export class UserDataComponent implements OnInit {
                 this.job = item[it].job;
                 this.description = item[it].description;
                 this.skills = item[it].skills;
+                this.firstname = item[it].firstname;
+                this.lastname = item[it].lastname;
+                this.photoURL = item[it].photoURL;
             }
         }
     }

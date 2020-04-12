@@ -3,13 +3,31 @@
 font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
+
+#user-data-container{
+    //background-color: rgba(0,0,0,0.3);
+}
+
 .profile-picutre{
     height: 100%;
 }
 
 #text-content{
-    display: inline;
-    width: 550px;
+    width: 100%;
+}
+
+#user-header{
+    display: grid;
+    grid-auto-flow: column;
+}
+
+
+.vertical-line{
+}
+
+.email{
+    justify-self: end;
+    align-self: end;
 }
 
 .profile-picutre{
@@ -26,32 +44,11 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
     margin: 0;
 }
 
-hr{
-    margin: 3px 0 5px 0;
-    width: 100%;
-}
 
 #text-content {
     margin-left: 20px;
 }
 
-h1,h2,h3,h4,h5{
-    margin: 0;
-    padding: 0;
-}
-
-textarea {
-    border: none;
-    background-color: transparent;
-    resize: none;
-    outline: none;
-    width: 100%;
-    height: 100%;
-}
-
-#user-data-container{
-    //background-color: rgba(0,0,0,0.3);
-}
 
 #skills-container input{
     border-radius: 100px;
@@ -61,10 +58,32 @@ textarea {
     margin: 2px 3px;
 }
 
+#skills-container{
+    max-width: 300px;
+}
+
 #skills-container li{
     display: inline;
 }
 
 #user-data-container > *{
     margin: 0 10px;
+}
+
+#image-container p{
+    text-align: center;
+}
+
+hr{
+    margin: 3px 0 5px 0;
+    width: 100%;
+}
+
+h1,h2,h3,h4,h5{
+    margin: 0;
+    padding: 0;
+}
+
+.line{
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }

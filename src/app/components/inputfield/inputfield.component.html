@@ -1,1 +1,9 @@
-<p>inputfield works!</p>
+<div>
+    <h4>About me</h4>
+    <textarea id="description-textarea" oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'
+    [(ngModel)]="description">{{description}}</textarea>
+    <div id="edit-container">
+        <img class="editButton button" src="https://i.ya-webdesign.com/images/edit-icon-png-16x16-10.png" alt="edit text">
+        <button class="button" (click)="saveData()">Save changes</button>
+    </div>
+</div>

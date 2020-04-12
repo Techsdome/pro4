@@ -12,6 +12,8 @@ import {Subject} from 'rxjs';
 
 export class AuthService {
     public userData: any; // Save logged in user data
+    public firstname: string;
+    public lastname: string;
 
     constructor(
         public afs: AngularFirestore,     // Inject Firestore service
@@ -37,10 +39,6 @@ export class AuthService {
         return this.afAuth.authState;
     }
 
-    public getUserData() {
-        return this.userData;
-    }
-
     // Sign in with email/password
     SignIn(email, password) {
         return this.afAuth.auth.signInWithEmailAndPassword(email, password)
@@ -60,16 +58,16 @@ export class AuthService {
             /*this.afs.collection('users').doc(result.user.uid).set({});*/
             /* Call the SendVerificaitonMail() function when new user sign
             up and returns promise */
-            this.afs.collection('users').doc(result.user.uid).set({
-                job: 'techyTest',
-                description: 'Tell something about yourself..',
-                skills: []
-            });
             this.SendVerificationMail();
             this.SetUserData(result.user);
         }).catch((error) => {
             window.alert(error.message);
         });
+    }
+
+    setName(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
 
     // Send email verfificaiton when new user sign up
@@ -100,17 +98,24 @@ export class AuthService {
     GoogleAuth() {
         const google = new auth.GoogleAuthProvider();
         this.AuthLogin(google);
+        this.addExtraFields();
+        /*console.log(JSON.parse(JSON.stringify(google)));*/
+    }
+
+    addExtraFields() {
         this.afs.collection('users').doc(this.userData.uid).set({
             job: 'My job title',
             description: 'Tell something about yourself..',
-            skills: []
+            skills: [],
+            firstname: this.firstname,
+            lastname: this.lastname
         });
-        /*console.log(JSON.parse(JSON.stringify(google)));*/
     }
 
     // Sign in with Facebooke
     FacebookAuth() {
-        return this.AuthLogin(new auth.FacebookAuthProvider());
+        this.AuthLogin(new auth.FacebookAuthProvider());
+        this.addExtraFields();
     }
 
     // Auth logic to run auth providers
@@ -130,21 +135,22 @@ export class AuthService {
     sign up with username/password and sign in with social auth
     provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
 
-    public setDescription(descriptionParam: string) {
-        this.afs.collection('users').doc(this.userData.uid).update({
-            description: descriptionParam
-        });
-    }
 
     SetUserData(user) {
         const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-        const userData: User = {
+        const userData: any = {
             uid: user.uid,
             email: user.email,
             displayName: user.displayName,
             photoURL: user.photoURL,
-            emailVerified: user.emailVerified
+            emailVerified: user.emailVerified,
+            job: 'My job title',
+            description: 'Tell something about yourself..',
+            skills: [],
+            firstname: this.firstname,
+            lastname: this.lastname
         };
+
         return userRef.set(userData, {
             merge: true
         });
