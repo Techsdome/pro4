@@ -108,6 +108,10 @@ export class AuthService {
         return this.AuthLogin(new auth.FacebookAuthProvider());
     }
 
+    GithubAuth() {
+        return this.AuthLogin(new auth.GithubAuthProvider());
+    }
+
     // Auth logic to run auth providers
     AuthLogin(provider) {
         return this.afAuth.auth.signInWithPopup(provider)
@@ -145,4 +149,5 @@ export class AuthService {
             this.router.navigate(['sign-in']);
         });
     }
+
 }
