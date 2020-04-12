@@ -2,6 +2,7 @@
 
 
 
+
 /* Will be overwritten by bootstrap reboot.css*/
 
 /*body, html {
@@ -17,6 +18,7 @@ body body.page-top {
 }*/
 
 .masthead {
+  height: 100vh;
   background-image: url('./assets/img/intro-bg.jpg');
   background-color: brown;
 }
@@ -320,8 +322,4 @@ section form {
 #btn_register {
   outline-color: #000000;
 }
-
-/**
-----------------------------------------------------------
- */
 
