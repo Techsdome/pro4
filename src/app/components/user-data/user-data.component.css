@@ -6,6 +6,7 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
 
 #user-data-container{
     //background-color: rgba(0,0,0,0.3);
+    display: flex;
 }
 
 .profile-picutre{
@@ -82,6 +83,11 @@ hr{
 h1,h2,h3,h4,h5{
     margin: 0;
     padding: 0;
+}
+
+li{
+    list-style: none;
+    display: flex;
 }
 
 .line{
