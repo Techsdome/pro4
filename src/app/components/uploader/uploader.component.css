@@ -1,0 +1,23 @@
+.dropzone {
+  background-color: #afafaf;
+  margin: 20px !important;
+  padding-bottom: 50px !important;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  border: 2px dashed #f16624;
+  border-radius: 5px;
+}
+
+.hovering {
+   border: 2px solid #f16624;
+   color: #dadada !important;
+ }
+
+.file-label {
+  font-size: 1.2em;
+}
+
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}

@@ -14,7 +14,6 @@ export class DataServiceService {
         this.items = this.afs.collection('users').valueChanges();
     }
 
-
     getItems() {
         return this.items;
     }

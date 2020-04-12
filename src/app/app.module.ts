@@ -3,9 +3,8 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-
 import {AuthService} from './shared/services/auth.service';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Firebase services + enviorment module
 import {AngularFireModule} from '@angular/fire';
@@ -29,7 +28,10 @@ import { MainNavbarComponent } from './components/main-navbar/main-navbar.compon
 import { ProjectPageComponent } from './components/project-page/project-page.component';
 import { NewProjectComponent } from './components/new-project/new-project.component';
 import {DataServiceService} from './shared/services/data-service.service';
-
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {DropzoneDirective} from './shared/services/dropzone.directive';
+import { UploaderComponent } from './components/uploader/uploader.component';
+import { UploadTaskComponent } from './components/uploader/upload-task/upload-task.component';
 
 
 @NgModule({
@@ -45,6 +47,10 @@ import {DataServiceService} from './shared/services/data-service.service';
         UserDataComponent,
         ProjectPageComponent,
         NewProjectComponent,
+        DropzoneDirective,
+        UploaderComponent,
+        UploadTaskComponent,
+
     ],
     imports: [
         BrowserModule,
@@ -54,9 +60,12 @@ import {DataServiceService} from './shared/services/data-service.service';
         AngularFirestoreModule,
         CoreModule,
         SharedModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AngularFireStorageModule
     ],
-    providers: [AuthService, DataServiceService],
+    providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective],
     bootstrap: [AppComponent]
 })
 export class AppModule {

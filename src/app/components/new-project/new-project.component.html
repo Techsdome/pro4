@@ -1,31 +1,37 @@
 <div id="newproject">
-  <h3>Project Name</h3>
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="Enter your project name" required>
-  </div>
-  <h3>Project description</h3>
-  <div class="form-group">
-    <label for="pdescription"> Project description </label>
-    <textarea class="form-control" id="pdescription" rows="3"> </textarea>
-  </div>
-  <div class="form-group">
+
+  <form id="myForm" class="form-group" #myForm="ngForm">
+    <label for="pname">  <h3>Project Name</h3> </label>
+    <input type="text" name="pname" id="pname" class="form-control" placeholder="Enter your project name" #name required>
+
+    <h3>Project description</h3>
+    <label for="pdescription"> Describe your project </label>
+    <textarea class="form-control" id="pdescription" rows="3" #description required> </textarea>
+
     <label for="pcategories"> Select categories </label>
-    <select multiple class="form-control" id="pcategories">
-      <option>Web programming </option>
-      <option>IT Security </option>
-      <option>Animation </option>
-      <option>Hardware</option>
-      <option>Software</option>
+    <select name="pcategories" multiple class="form-control" id="pcategories" (change)="addCategory()">
+      <option *ngFor="let cat of categories"> {{ cat }} </option>
     </select>
-  </div>
-  <!-- <div class="form-group">
-    <input type="text" class="form-control" placeholder="devlog">
-  </div>
-   <div id="discussion">
-    <h2> Username </h2>
-    <p> Username message </p>
-  </div> -->
-  <button class="btn btn-primary" type="submit" value="submit"> Submit </button>
+
+    <label> Team members </label>
+    <input type="text" class="form-control" placeholder="Enter your project partners" #members>
+
+    <p id="fillCorrectly" style="display: none; color: red">Please fill out the required fields</p>
+
+<!--    <label for="fileup">File:</label>-->
+<!--    <input type="file" id="fileup" (change)="upload($event)" accept=".png,.jpg" />-->
+<!--    <progress max="100" [value]="(uploadProgress | async)"></progress>-->
+<!--    <div class="result" *ngIf="downloadURL | async; let uploadSrc">-->
+<!--      <a [href]="uploadSrc">You just uploaded this file!</a>-->
+
+<!--      <div class="container" *ngIf="downloadURL | async; let url">-->
+<!--        <img [src]="url" alt="Image from AngularFireStorage">-->
+<!--      </div>-->
+<!--    </div>-->
+    <app-uploader> </app-uploader>
+<br>
+    <button class="btn btn-primary" (click)="Submit(name.value, description.value, members.value)">Submit</button>
+  </form>
 </div>
 
 <app-main-navbar></app-main-navbar>
