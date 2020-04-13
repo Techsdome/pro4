@@ -37,8 +37,7 @@ form > div > label {
 }
 
 #about_pic {
-
-  display: block;
+height: 100vh;
 }
 
 #download {
