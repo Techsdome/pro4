@@ -1,17 +1,23 @@
 .dropzone {
-  background-color: #afafaf;
+  background-color: #bcbcbc;
   margin: 20px !important;
-  padding-bottom: 50px !important;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  border: 2px dashed #f16624;
+  width:  60%;
+  height: 150px;
   border-radius: 5px;
+}
+.dropzone div {
+  align-self: center;
+  display: block;
+}
+
+#mydrop {
+  width: 100%;
 }
 
 .hovering {
-   border: 2px solid #f16624;
-   color: #dadada !important;
+   /*border: 2px solid #f16624;*/
+  background-color: #ebebeb;
+   color: #616161 !important;
  }
 
 .file-label {
@@ -20,4 +26,12 @@
 
 progress::-webkit-progress-value {
   transition: width 0.1s ease;
+}
+
+#myuploads {
+
+}
+
+.fas {
+  width: 50px;
 }

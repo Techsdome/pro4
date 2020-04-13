@@ -190,12 +190,12 @@ p {
 
 #interact-button .btn-primary {
   color: #fff;
-  background-color: #007bff;
+  background-color: #007bff !important;
   border-color: #d3d9dc;
 }
 
 a:hover {
   text-decoration: none;
-  background-color: #007bfff;
+  background-color: #007bff;
 }
 

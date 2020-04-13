@@ -34,6 +34,7 @@ import {DropzoneDirective} from './shared/services/dropzone.directive';
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { UploadTaskComponent } from './components/uploader/upload-task/upload-task.component';
 import { PartingLineComponent } from './components/parting-line/parting-line.component';
+// import {NgbdProgressbarShowvalue} from './components/uploader/upload-task/progressbar-showvalue';
 
 
 @NgModule({
@@ -54,6 +55,11 @@ import { PartingLineComponent } from './components/parting-line/parting-line.com
         UploaderComponent,
         UploadTaskComponent,
         PartingLineComponent,
+        DropzoneDirective,
+        UploaderComponent,
+        UploadTaskComponent,
+      // NgbdProgressbarShowvalue
+
     ],
     imports: [
         BrowserModule,
