@@ -15,6 +15,7 @@ export class AuthService {
     public userData: any; // Save logged in user data
     public firstname;
     public lastname;
+    public online;
 
     constructor(
         public afs: AngularFirestore,     // Inject Firestore service
