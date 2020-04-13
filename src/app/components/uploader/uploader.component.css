@@ -1,0 +1,37 @@
+.dropzone {
+  background-color: #bcbcbc;
+  margin: 20px !important;
+  width:  60%;
+  height: 150px;
+  border-radius: 5px;
+}
+.dropzone div {
+  align-self: center;
+  display: block;
+}
+
+#mydrop {
+  width: 100%;
+}
+
+.hovering {
+   /*border: 2px solid #f16624;*/
+  background-color: #ebebeb;
+   color: #616161 !important;
+ }
+
+.file-label {
+  font-size: 1.2em;
+}
+
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}
+
+#myuploads {
+
+}
+
+.fas {
+  width: 50px;
+}

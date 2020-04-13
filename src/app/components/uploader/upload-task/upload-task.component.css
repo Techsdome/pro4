@@ -1,0 +1,44 @@
+#myimg {
+  max-width: 250px;
+  border-radius: 20px;
+}
+
+.mypics {
+  display: inline;
+}
+
+progress:not([value]) {
+  /* Styling here */
+}
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+}
+progress {
+}
+progress::-webkit-progress-bar {
+  border-radius: 20px;
+}
+progress::-webkit-progress-value {
+  border-radius: 20px;
+  background-size: 25px 14px, 100% 100%, 100% 100%;
+  -webkit-animation: move 5s linear 0 infinite;
+}
+progress::-moz-progress-bar {
+  border-radius: 20px;
+}
+
+progress[value]::-moz-progress-bar {
+  border-radius: 20px;
+}
+
+@-webkit-keyframes move {
+  0% {background-position: 0 0, 0 0, 0 0}
+  100% {background-position: -100px 0, 0 0, 0 0}
+}
+
+

@@ -21,6 +21,14 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 import { MainNavbarComponent } from './components/main-navbar/main-navbar.component';
+import { ProjectPageComponent } from './components/project-page/project-page.component';
+import { NewProjectComponent } from './components/new-project/new-project.component';
+import {DataServiceService} from './shared/services/data-service.service';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {DropzoneDirective} from './shared/services/dropzone.directive';
+import { UploaderComponent } from './components/uploader/uploader.component';
+import { UploadTaskComponent } from './components/uploader/upload-task/upload-task.component';
+// import {NgbdProgressbarShowvalue} from './components/uploader/upload-task/progressbar-showvalue';
 
 const config = {
     apiKey: 'AIzaSyDbzgGQ8OdmDebUM_2pJKxc3dMwciV0Q80',
@@ -34,23 +42,38 @@ const config = {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SignInComponent,
-    DashboardComponent,
-    SignUpComponent,
-    ForgotPasswordComponent,
-    VerifyEmailComponent,
-    MainNavbarComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule
-  ],
-  providers: [AuthService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        SignInComponent,
+        DashboardComponent,
+        SignUpComponent,
+        ForgotPasswordComponent,
+        VerifyEmailComponent,
+        MainNavbarComponent,
+        UserProfileComponent,
+        UserDataComponent,
+        ProjectPageComponent,
+        NewProjectComponent,
+        DropzoneDirective,
+        UploaderComponent,
+        UploadTaskComponent,
+      // NgbdProgressbarShowvalue
+
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        CoreModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AngularFireStorageModule
+    ],
+    providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
