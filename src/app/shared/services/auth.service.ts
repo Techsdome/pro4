@@ -46,7 +46,6 @@ export class AuthService {
                 this.ngZone.run(() => {
                     this.router.navigate(['dashboard']);
                 });
-                this.SetUserData(result.user);
             }).catch((error) => {
                 window.alert(error.message);
             });
@@ -132,7 +131,6 @@ export class AuthService {
                 this.ngZone.run(() => {
                     this.router.navigate(['dashboard']);
                 });
-                this.SetUserData(result.user);
             }).catch((error) => {
                 window.alert(error);
             });
