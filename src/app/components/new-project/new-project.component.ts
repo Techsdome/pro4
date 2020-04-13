@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {NewProjectService} from '../../shared/services/new-project.service';
 import {User} from '../../shared/services/user';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AngularFireStorage, AngularFireUploadTask} from 'angularfire2/storage';
+import {FormsModule} from '@angular/forms';
+import {AngularFireStorage} from 'angularfire2/storage';
 import {UploadTaskComponent} from '../uploader/upload-task/upload-task.component';
 
 @Component({

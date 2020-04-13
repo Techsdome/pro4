@@ -1,11 +1,13 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
 <div id="newproject">
-
   <form id="myForm" class="form-group" #myForm="ngForm">
-    <label for="pname">  <h3>Project Name</h3> </label>
+    <label for="pname"><h3>Project Name</h3> </label>
     <input type="text" name="pname" id="pname" class="form-control" placeholder="Enter your project name" #name required>
 
-    <h3>Project description</h3>
-    <label for="pdescription"> Describe your project </label>
+    <label for="pdescription"> <h3>Project description</h3> </label>
     <textarea class="form-control" id="pdescription" rows="3" #description required> </textarea>
 
     <label for="pcategories"> Select categories </label>
@@ -28,10 +30,11 @@
 <!--        <img [src]="url" alt="Image from AngularFireStorage">-->
 <!--      </div>-->
 <!--    </div>-->
-    <app-uploader> </app-uploader>
+    <app-uploader id="uploader" class="row"> </app-uploader>
 <br>
     <button class="btn btn-primary" (click)="Submit(name.value, description.value, members.value)">Submit</button>
   </form>
 </div>
+</body>
 
 <app-main-navbar></app-main-navbar>
