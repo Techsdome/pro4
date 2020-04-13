@@ -27,6 +27,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 575.98px) {
+  .masthead {
+    padding: 20px;
+  }
+
 .display-1 {
   font-size: 3rem;
   font-weight: 300;
