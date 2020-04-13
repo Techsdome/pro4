@@ -1,36 +1,18 @@
 textarea {
-    border: none;
-    background-color: transparent;
     resize: none;
     outline: none;
     width: 100%;
     height: 95px;
 }
 
-.show{
-    display: inline-block;
-}
-
-.editButton{
-    width: 30px;
-    padding: 3px;
-}
-
 .editButton:hover{
     cursor: pointer;
 }
 
-#edit-container{
-    margin-top: 10px;
+#header-input{
+    display: flex;
 }
 
-.button{
-    background-color: rgba(0,0,0,0);
-    border-radius: 50px;
-    border: solid 2px #a6b0bf;
-    transition: 0.1s;
-}
-
-.button:hover{
-    background-color: rgba(0,0,0,0.1);
+h4{
+    display: inline;
 }

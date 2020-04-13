@@ -52,11 +52,11 @@
           <form>
             <p class="text-left">Welcome to <br>Techsdome</p>
             <div class="md-form">
-              <input id="input_fN" type="text" class="form-control" #firstName required>
+              <input id="input_fN" type="text" class="form-control" [(ngModel)]="firstname" name="fName" required>
               <label for="input_fN">First Name</label>
             </div>
             <div class="md-form">
-              <input id="input_lN" type="text" class="form-control" #lastName required>
+              <input id="input_lN" type="text" class="form-control" [(ngModel)]="lastname" name="lName" required>
               <label for="input_lN">Last Name</label>
             </div>
             <div class="md-form">
@@ -78,8 +78,8 @@
             <div class="btn-group-justified" role="group" aria-label="Basic example">
               <div class="btn-group" role="group">
                 <button type="button" class="btn btn-login btn-rounded btn-style"
-                        (click)="authService.SignUp(userEmail.value, userPwd.value)">
-                  Register
+                        (click)="authService.SignUp(userEmail.value, userPwd.value); authService.setFirstName(firstname); authService.setLastName(lastname); authService.setFirstName(firstname)">
+                        Register
                 </button>
               </div>
               <div class="btn-group" role="group">

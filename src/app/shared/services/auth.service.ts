@@ -12,8 +12,8 @@ import {Subject} from 'rxjs';
 
 export class AuthService {
     public userData: any; // Save logged in user data
-    public firstname: string;
-    public lastname: string;
+    public firstname;
+    public lastname;
 
     constructor(
         public afs: AngularFirestore,     // Inject Firestore service
@@ -65,8 +65,11 @@ export class AuthService {
         });
     }
 
-    setName(firstname, lastname) {
+    setFirstName(firstname) {
         this.firstname = firstname;
+    }
+
+    setLastName(lastname) {
         this.lastname = lastname;
     }
 
@@ -107,8 +110,8 @@ export class AuthService {
             job: 'My job title',
             description: 'Tell something about yourself..',
             skills: [],
-            firstname: this.firstname,
-            lastname: this.lastname
+            firstname: this.firstname ? this.firstname : 'First Name',
+            lastname: this.lastname  ? this.lastname : 'Last Name'
         });
     }
 
@@ -151,8 +154,8 @@ export class AuthService {
             job: 'My job title',
             description: 'Tell something about yourself..',
             skills: [],
-            firstname: this.firstname,
-            lastname: this.lastname
+            firstname: this.firstname ? this.firstname : 'First Name',
+            lastname: this.lastname  ? this.lastname : 'Last Name'
         };
 
         return userRef.set(userData, {

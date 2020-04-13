@@ -2,9 +2,11 @@
 @import url("https://fonts.googleapis.com/css?family=Cabin:700");
 
 /* You can add global styles to this file, and also import other style files */
-/*{
+{
     margin: 0;
 }
+
+
 
 .standardBackgroundColor {
     background-color: #f3f5f7;
@@ -18,6 +20,10 @@ html, body {
     height: 100%;
 }
 
+.standard-background-color{
+    background-color: #f3f5f7;
+}
+
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -25,6 +31,38 @@ body {
 
 .flex{
     display: flex;
-}*/
+}
+
+
+.smallButton{
+    transition: 0.1s;
+    width: 30px;
+    padding: 3px;
+}
+
+.boderButton{
+    background-color: rgba(0,0,0,0);
+    border-radius: 100px;
+    border: solid 2px #a6b0bf;
+    margin: 3px 3px;
+}
+
+.boderButton:hover{
+    background-color: rgba(0,0,0,0.1);
+}
+
+.showBtnTechsdome{
+    display:inline-block;
+}
+
+.skillInput{
+    display: inline;
+    text-align: center;
+    /*border: solid 3px #fff !important;*/
+}
+
+.hideBtnTechsdome{
+    display: none;
+}
 
 
