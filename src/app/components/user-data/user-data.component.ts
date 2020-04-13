@@ -16,7 +16,7 @@ export class UserDataComponent implements OnInit {
     user: User;
     job: string;
     public description: string;
-    skills: string[];
+    skills: string[] = ['test'];
     firstname: string;
     lastname: string;
     photoURL = '';
@@ -62,7 +62,7 @@ export class UserDataComponent implements OnInit {
 
     updateSkillsFirebase() {
         this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
-            skills: this.skills
+            skills: [] = this.skills
         });
     }
 

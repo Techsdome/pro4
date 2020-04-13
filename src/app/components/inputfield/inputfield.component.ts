@@ -13,7 +13,6 @@ export class InputfieldComponent implements OnInit {
     public description: string;
     items: Item[];
     user: User;
-    descriptionField: HTMLElement;
     edit = false;
 
     constructor(private dataService: DataServiceService, private authService: AuthService) {

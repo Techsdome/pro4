@@ -55,7 +55,6 @@ export class AuthService {
     // Sign up with email/password
     SignUp(email, password) {
         return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((result) => {
-
             /* Call the SendVerificaitonMail() function when new user sign
             up and returns promise */
             this.SendVerificationMail();
@@ -100,25 +99,27 @@ export class AuthService {
     // Sign in with Google
     GoogleAuth() {
         const google = new auth.GoogleAuthProvider();
-        this.AuthLogin(google);
-        this.addExtraFields();
+        return this.AuthLogin(google);
+        // this.addExtraFields();
         /*console.log(JSON.parse(JSON.stringify(google)));*/
     }
 
     addExtraFields() {
         this.afs.collection('users').doc(this.userData.uid).set({
             job: 'My job title',
-            description: 'Tell something about yourself..',
-            skills: [],
+            // description: 'Tell something about yourself..',
+            // skills: [],
             firstname: this.firstname ? this.firstname : 'First Name',
-            lastname: this.lastname  ? this.lastname : 'Last Name'
+            lastname: this.lastname ? this.lastname : 'Last Name'
+        }, {
+            merge: true
         });
     }
 
     // Sign in with Facebooke
     FacebookAuth() {
-        this.AuthLogin(new auth.FacebookAuthProvider());
-        this.addExtraFields();
+        return this.AuthLogin(new auth.FacebookAuthProvider());
+        // this.addExtraFields();
     }
 
     GithubAuth() {
@@ -132,6 +133,8 @@ export class AuthService {
                 this.ngZone.run(() => {
                     this.router.navigate(['dashboard']);
                 });
+                this.SetUserData(result.user);
+                console.log(this.userData);
             }).catch((error) => {
                 window.alert(error);
             });
@@ -150,11 +153,11 @@ export class AuthService {
             displayName: user.displayName,
             photoURL: user.photoURL,
             emailVerified: user.emailVerified,
-            job: 'My job title',
-            description: 'Tell something about yourself..',
-            skills: [],
+            job: user.job ? user.job : 'My job title',
+            // description: user.description ? user.description : 'Tell something about yourself..',
+            // skills: user.skills ? user.skills : [],
             firstname: this.firstname ? this.firstname : 'First Name',
-            lastname: this.lastname  ? this.lastname : 'Last Name'
+            lastname: this.lastname ? this.lastname : 'Last Name'
         };
 
         return userRef.set(userData, {
