@@ -16,16 +16,23 @@ export class UserDataComponent implements OnInit {
     user: User;
     job: string;
     public description: string;
-    skills: [];
+    skills: string[];
     firstname: string;
     lastname: string;
     photoURL = '';
+    edit = false;
+    skill: string;
+
 
 //    this.afs.collection('users').doc(this.userData.uid).update({});
 
-    constructor(private dataService: DataServiceService) {
+    constructor(private dataService: DataServiceService, private authService: AuthService) {
     }
 
+    editToggle() {
+        this.edit = !this.edit;
+        console.log(this.edit);
+    }
 
     getExtendedData(item) {
         for (const it in item) {
@@ -38,6 +45,16 @@ export class UserDataComponent implements OnInit {
                 this.photoURL = item[it].photoURL;
             }
         }
+    }
+
+    saveData() {
+        this.skills.push(this.skill);
+        if (this.edit) {
+            this.edit = !this.edit;
+        }
+        this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
+            skills: this.skills
+        });
     }
 
     ngOnInit(): void {

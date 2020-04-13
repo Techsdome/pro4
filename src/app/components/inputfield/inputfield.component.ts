@@ -13,12 +13,20 @@ export class InputfieldComponent implements OnInit {
     public description: string;
     items: Item[];
     user: User;
-    descriptionField: HTMLElement
+    descriptionField: HTMLElement;
+    edit = false;
 
     constructor(private dataService: DataServiceService, private authService: AuthService) {
     }
 
+    editToggle() {
+        this.edit = !this.edit;
+    }
+
     saveData() {
+        if (this.edit) {
+            this.edit = !this.edit;
+        }
         this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
             description: this.description
         });
@@ -33,12 +41,6 @@ export class InputfieldComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.descriptionField = document.getElementById('description-textarea');
-        this.descriptionField.style.height = '';
-        this.descriptionField.style.height = this.descriptionField.scrollHeight + 'px';
-        console.log(this.descriptionField);
-        console.log(this.descriptionField.scrollHeight);
-
         this.dataService.getItems().subscribe(items => {
             this.items = items;
             this.getDescription(items);

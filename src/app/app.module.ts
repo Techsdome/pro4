@@ -33,6 +33,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {DropzoneDirective} from './shared/services/dropzone.directive';
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { UploadTaskComponent } from './components/uploader/upload-task/upload-task.component';
+import { PartingLineComponent } from './components/parting-line/parting-line.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { UploadTaskComponent } from './components/uploader/upload-task/upload-ta
         DropzoneDirective,
         UploaderComponent,
         UploadTaskComponent,
+        PartingLineComponent,
     ],
     imports: [
         BrowserModule,

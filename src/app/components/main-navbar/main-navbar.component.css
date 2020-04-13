@@ -111,6 +111,10 @@
     height: 40px;
 }
 
+#profilePicture{
+    background-image: url("https://cdn.iconscout.com/icon/free/png-256/profile-199-436934.png");
+}
+
 #round {
     z-index: -1;
     left: 60px;

@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" class="black-standard-color">
+<div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" [routerLink]="['/app-user-profile']" class="black-standard-color">
     <div id="round"></div>
 
     <div id="sidebar-button-container">
@@ -36,7 +36,7 @@
             <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
         </div>
 
-        <input class="background-image-settings sidebar-button" id="houseButton" type="button">
+        <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="'/dashboard'" type="button">
         <input class="background-image-settings sidebar-button" id="directoryButton" type="button">
         <input class="background-image-settings sidebar-button" id="peopleButton" type="button">
         <input class="background-image-settings sidebar-button" id="forumButton" type="button">
