@@ -237,10 +237,11 @@
         position: relative;
         float: right;
         margin-right: -60px;
+        top:-60px !important;
     }
 
     #searchBar{
-        margin:0;
+        margin:0 10px;
     }
 
     #settingsButton{
