@@ -28,12 +28,12 @@
         <hr class="line">
         <li *ngFor="let skill of skills">
             <input class="skillInputButton" type="button" [value]="skill">
-            <img class="skillDeleteButton" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="delete">
+            <img class="skillDeleteButton" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="delete" (click)="deleteSkillElement($event)">
         </li>
-        <input [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'"  [(ngModel)]="skill" class="skillInput" type="text" placeholder="Java">
+        <input [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'"  [(ngModel)]="skill" class="skillInput" type="text" placeholder="e.g. Java ..">
         <img [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="createSkillButton boderButton smallButton button" (click)="editToggle()" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
         <br>
-        <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton" (click)="editToggle(); saveData();">Save</button>
+        <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton" (click)="editToggle(); saveSkill();">Save</button>
         <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton" (click)="editToggle();">Abort</button>
     </div>
 </div>

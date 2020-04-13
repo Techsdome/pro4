@@ -3,19 +3,21 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
 import {Project} from '../../models/Project';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'   // available to dependency injection, register to a provider
 })
 export class NewProjectService {
-  public projectItem: Observable<Project[]>;
+  public project: Observable<Project[]>;
+  public ref: any;
 
   constructor(public afs: AngularFirestore, public authService: AuthService) {
     // this.projectItem = this.afs.collection('project').valueChanges();
   }
 
   getPItems() {
-    return this.projectItem;
+    return this.project;
   }
 
   getCurrentUser() {
@@ -31,10 +33,18 @@ export class NewProjectService {
       projectCategories: pcategories,
       projectMembers: members,
       projectPhotoURL: photoURL ? photoURL : ' '
+    }).then(docRef => {
+      this.afs.doc(`users/${this.authService.userData.uid}`).update({
+        // pid: firebase.firestore.FieldValue.arrayUnion(projectId)
+        pid: docRef.id,
+      });
+      console.log('id: ' + docRef.id);
+    }).catch(error => {
+
     });
   }
 
-  updateData(id: string, pname?: string, pdescription?: string, pcategories?: string[], pmembers?: string, photoURL?: string){
+  updateData(id: string, pname?: string, pdescription?: string, pcategories?: string[], pmembers?: string, photoURL?: string) {
     this.afs.collection(`project/${id}`).doc().update({
       projectName: pname ? pname : ' ',
       projectDescription: pdescription ? pdescription : ' ',

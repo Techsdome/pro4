@@ -1,15 +1,25 @@
-<div class="dropzone justify-content-center"
-     dropzone
-     (hovered)="toggleHover($event)"
-     (dropped)="onDrop($event)"
-     [class.hovering]="isHovering">
+<div id="mydrop" class="row justify-content-center">
 
-  <h3>AngularFire Drop Zone</h3>
-  <p>Drag and Drop a File</p>
+  <div class="dropzone row justify-content-center"
+       dropzone
+       (hovered)="toggleHover($event)"
+       (dropped)="onDrop($event)"
+       [class.hovering]="isHovering">
+
+    <div class="col-12 text-center">
+      <h3>Add your files here </h3>
+    </div>
+    <div class="col-12 text-center">
+      <i class="fas fa-folder-plus"></i>
+      <p>Drag and Droop</p>
+    </div>
+  </div>
+</div>
+<br>
+
+<div id="myuploads" class="row" *ngFor="let file of files">
+  <app-upload-task class="col" [file]="file"></app-upload-task>
 </div>
 
-<h3>Uploads</h3>
 
-<div *ngFor="let file of files">
-  <app-upload-task [file]="file"></app-upload-task>
-</div>
+

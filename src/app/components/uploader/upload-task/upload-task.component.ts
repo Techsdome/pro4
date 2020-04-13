@@ -15,8 +15,9 @@ import {User} from '../../../shared/services/user';
 export class UploadTaskComponent implements OnInit {
 
   @Input() file: File;
-  user: User;
+  user: any;
   task: AngularFireUploadTask;
+  path: string;
 
   percentage: Observable<number>;
   snapshot: Observable<any>;
@@ -24,7 +25,6 @@ export class UploadTaskComponent implements OnInit {
 
   constructor(private storage: AngularFireStorage, private db: AngularFirestore,
               public authService: AuthService, public pservice: NewProjectService) {
-    this.getUser();
   }
 
   ngOnInit() {
@@ -34,27 +34,27 @@ export class UploadTaskComponent implements OnInit {
   getUser() {
     this.authService.getCurrentUser().subscribe(user => {
       this.user = user;
-      console.log("1");
     });
   }
 
   startUpload() {
-    console.log("2");
+    const uid = this.authService.userData.uid;
+    this.path = `project/${uid}/${this.file.name}`;
 
     // The storage path
-    const path = `project/` + this.user.uid + this.file.name;
+    // const path = `project/` + this.user.uid + this.file.name;
 
     // Reference to storage bucket
-    const ref = this.storage.ref(path);
+    const ref = this.storage.ref(this.path);
 
     // The main task
-    this.task = this.storage.upload(path, this.file);
+    this.task = this.storage.upload(this.path, this.file);
 
     // Progress monitoring
     this.percentage = this.task.percentageChanges();
 
     this.snapshot   = this.task.snapshotChanges().pipe(
-      tap(console.log),
+      // tap(console.log),
       // The file's download URL
       finalize( async() =>  {
         this.downloadURL = await ref.getDownloadURL().toPromise();

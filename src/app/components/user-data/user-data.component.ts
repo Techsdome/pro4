@@ -22,6 +22,7 @@ export class UserDataComponent implements OnInit {
     photoURL = '';
     edit = false;
     skill: string;
+    htmlSkillElements: HTMLCollection;
 
 
 //    this.afs.collection('users').doc(this.userData.uid).update({});
@@ -47,17 +48,41 @@ export class UserDataComponent implements OnInit {
         }
     }
 
-    saveData() {
+    deleteSkill() {
+        console.log(this.htmlSkillElements);
+    }
+
+    saveSkill() {
         this.skills.push(this.skill);
         if (this.edit) {
             this.edit = !this.edit;
         }
+        this.updateSkillsFirebase();
+    }
+
+    updateSkillsFirebase() {
         this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
             skills: this.skills
         });
     }
 
+
+    deleteSkillElement(event) {
+        for (let i = 0; i < this.skills.length; i++) {
+            if (this.skills[i] === event.target.previousElementSibling.value) {
+                this.skills.splice(i, 1);
+            }
+        }
+        this.updateSkillsFirebase();
+    }
+
+
     ngOnInit(): void {
+        this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillsElement = document.getElementsByClassName('skillDeleteButton');
+            console.log(skillsElement.length);
+        });
         this.dataService.getItems().subscribe(items => {
             this.items = items;
             this.getExtendedData(items);
