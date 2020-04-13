@@ -14,12 +14,12 @@
       <div class="text-white d-md-flex align-items-center h-100 p-5 justify-content-center">
         <form *ngIf="openMainLogin; else register">
           <p class="text-left">Welcome to <br>Techsdome</p>
-          <div class="md-form">
-            <input id="input_login_email" type="text" class="form-control" #email>
+          <div class="md-form form-group mt-5">
+            <input mdInput mdValidate id="input_login_email" type="text" class="form-control" #email>
             <label for="input_login_email">E-mail</label>
           </div>
-          <div class="md-form">
-            <input id="input_login_passwd" type="password" class="form-control validate" #userPassword>
+          <div class="md-form form-group mt-5">
+            <input mdInput mdValidate id="input_login_passwd" type="password" class="form-control validate" #userPassword>
             <label for="input_login_passwd" data-error="wrong" data-success="right">Password</label>
           </div>
           <div class="btn-group-justified" role="group" aria-label="Basic example">
@@ -51,27 +51,27 @@
         <ng-template #register>
           <form>
             <p class="text-left">Welcome to <br>Techsdome</p>
-            <div class="md-form">
+            <div class="md-form form-group mt-5">
               <input id="input_fN" type="text" class="form-control" [(ngModel)]="firstname" name="fName" required>
               <label for="input_fN">First Name</label>
             </div>
-            <div class="md-form">
+            <div class="md-form form-group mt-5">
               <input id="input_lN" type="text" class="form-control" [(ngModel)]="lastname" name="lName" required>
               <label for="input_lN">Last Name</label>
             </div>
-            <div class="md-form">
+            <div class="md-form form-group mt-5">
               <input id="input_register_email" type="email" class="form-control" #userEmail>
               <label for="input_register_email">E-mail</label>
             </div>
-            <div class="md-form">
+            <div class="md-form form-group mt-5">
               <input id="input_re_email" type="email" class="form-control" #repeatUserEmail>
               <label for="input_re_email">Repeat E-mail</label>
             </div>
-            <div class="md-form">
+            <div class="md-form form-group mt-5">
               <input id="input_register__passwd" type="password" class="form-control validate" #userPwd>
               <label for="input_register__passwd" data-error="wrong" data-success="right">Password</label>
             </div>
-            <div class="md-form">
+            <div class="md-form form-group mt-5">
               <input id="input_re_passwd" type="password" class="form-control validate" #repeatUserPwd>
               <label for="input_re_passwd" data-error="wrong" data-success="right">Repeat Password</label>
             </div>
@@ -96,7 +96,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h1 style="font-family: Lato, sans-serif;font-size: 74px;">Techsdome</h1>
+              <h1 class="display-3">Techsdome</h1>
               <p class="intro-text" style="font-family: Poppins, sans-serif;font-size: 20px;">A website to present your
                 projects to the World.</p>
             </div>
@@ -105,7 +105,7 @@
       </div>
     </div>
   </div>
-  <div id="arrow">
+  <div id="arrow" class="d-table-row">
     <a class="btn btn-link btn-circle" role="button">
       <span></span>
     </a>

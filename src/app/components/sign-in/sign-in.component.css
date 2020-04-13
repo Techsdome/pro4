@@ -22,6 +22,36 @@ body body.page-top {
   background-image: url('./assets/img/intro-bg.jpg');
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: Lato, sans-serif;
+}
+
+@media (max-width: 575.98px) {
+.display-1 {
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 1.0;
+}
+
+  .display-2 {
+    font-size: 2.75rem;
+    font-weight: 300;
+    line-height: 1.0;
+  }
+
+  .display-3 {
+    font-size: 2.25rem;
+    font-weight: 300;
+    line-height: 1.0;
+  }
+
+  .display-4 {
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 1.0;
+  }
+}
+
 section {
   background-color: #000;
   color: #fff;
@@ -37,8 +67,7 @@ form > div > label {
 }
 
 #about_pic {
-
-  display: block;
+height: 100vh;
 }
 
 #download {
