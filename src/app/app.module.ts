@@ -39,6 +39,7 @@ import { PartingLineComponent } from './components/parting-line/parting-line.com
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { UserStatusComponent } from './components/user-status/user-status.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { ProfileMenuComponent } from './components/profile-menu/profile-menu.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { SettingsComponent } from './components/settings/settings.component';
         UploaderComponent,
         UploadTaskComponent,
         SettingsComponent,
+        ProfileMenuComponent,
       // NgbdProgressbarShowvalue
 
     ],
