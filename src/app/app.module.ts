@@ -40,6 +40,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { UserStatusComponent } from './components/user-status/user-status.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ProfileMenuComponent } from './components/profile-menu/profile-menu.component';
+import { CreatePostComponent } from './components/create-post/create-post.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { ProfileMenuComponent } from './components/profile-menu/profile-menu.com
         UploadTaskComponent,
         SettingsComponent,
         ProfileMenuComponent,
+        CreatePostComponent,
       // NgbdProgressbarShowvalue
 
     ],

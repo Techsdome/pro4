@@ -106,14 +106,12 @@ export class AuthService {
     }
 
     addExtraFields() {
-        this.afs.collection('users').doc(this.userData.uid).set({
+        this.afs.collection('users').doc(this.userData.uid).update({
             job: 'My job title',
             // description: 'Tell something about yourself..',
             // skills: [],
             firstname: this.firstname ? this.firstname : 'First Name',
             lastname: this.lastname ? this.lastname : 'Last Name'
-        }, {
-            merge: true
         });
     }
 
@@ -161,9 +159,7 @@ export class AuthService {
             lastname: this.lastname ? this.lastname : 'Last Name'
         };
 
-        return userRef.set(userData, {
-            merge: true
-        });
+        return userRef.update(userData);
     }
 
     // Sign out
