@@ -38,6 +38,7 @@ import { PartingLineComponent } from './components/parting-line/parting-line.com
 
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { UserStatusComponent } from './components/user-status/user-status.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { UserStatusComponent } from './components/user-status/user-status.compon
         DropzoneDirective,
         UploaderComponent,
         UploadTaskComponent,
+        SettingsComponent,
       // NgbdProgressbarShowvalue
 
     ],

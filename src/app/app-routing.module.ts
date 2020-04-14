@@ -18,6 +18,7 @@ import {AuthGuard} from './shared/guard/auth.guard';
 import {SecureInnerPagesGuard} from './shared/guard/secure-inner-pages.guard';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {InputfieldComponent} from './components/inputfield/inputfield.component';
+import {SettingsComponent} from "./components/settings/settings.component";
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
     {path: 'project-page', component: ProjectPageComponent},
     {path: 'new-project', component: NewProjectComponent},
     {path: 'app-user-profile', component: UserProfileComponent},
-    {path: 'app-inputfield', component: InputfieldComponent}
+    {path: 'app-inputfield', component: InputfieldComponent},
+    {path: 'app-settings', component: SettingsComponent}
 ];
 
 
