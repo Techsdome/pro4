@@ -1,3 +1,13 @@
 #newproject {
   margin: 90px;
 }
+
+#uploader {
+  justify-content: center;
+  align-content: center;
+}
+
+label {
+  margin: 10px 0 3px 0;
+  padding: 10px 0 3px 0;
+}

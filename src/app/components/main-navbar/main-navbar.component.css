@@ -194,6 +194,12 @@
     background-position: center;
 }
 
+#loggoutButton {
+  background-image: url("https://image.flaticon.com/icons/svg/154/154348.svg");
+  background-size: 25px;
+  background-position: center;
+}
+
 #menuBar_left {
     width: 60px;
     height: 100%;

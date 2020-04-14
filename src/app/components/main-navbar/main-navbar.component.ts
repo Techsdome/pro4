@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../shared/services/auth.service';
 
 @Component({
     selector: 'app-main-navbar',
@@ -9,15 +10,17 @@ export class MainNavbarComponent implements OnInit {
     public status = false;
     public menuClicked = false;
 
+  constructor(
+    public authService: AuthService
+  ) {
+  }
+
     animateOn() {
         this.status = !this.status;
     }
 
     showMenuBar() {
         this.menuClicked = !this.menuClicked;
-    }
-
-    constructor() {
     }
 
     ngOnInit() {
