@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-profile-menu',
-  templateUrl: './profile-menu.component.html',
-  styleUrls: ['./profile-menu.component.css']
+    selector: 'app-profile-menu',
+    templateUrl: './profile-menu.component.html',
+    styleUrls: ['./profile-menu.component.css']
 })
 export class ProfileMenuComponent implements OnInit {
 
-  constructor() { }
+    test: string;
 
-  ngOnInit(): void {
-  }
+    constructor() {
+    }
 
+    ngOnInit(): void {
+    }
+  
 }

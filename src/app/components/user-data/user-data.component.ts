@@ -16,7 +16,7 @@ export class UserDataComponent implements OnInit {
     user: User;
     job: string;
     public description: string;
-    skills: string[] = ['test'];
+    skills: string[];
     firstname: string;
     lastname: string;
     photoURL = '';
@@ -32,7 +32,6 @@ export class UserDataComponent implements OnInit {
 
     editToggle() {
         this.edit = !this.edit;
-        console.log(this.edit);
     }
 
     getExtendedData(item) {
@@ -48,14 +47,7 @@ export class UserDataComponent implements OnInit {
         }
     }
 
-    deleteSkill() {
-        console.log(this.htmlSkillElements);
-    }
-
     saveSkill() {
-        if (this.skills === undefined) {
-            this.skills = [];
-        }
         this.skills.push(this.skill);
         if (this.edit) {
             this.edit = !this.edit;
@@ -82,10 +74,6 @@ export class UserDataComponent implements OnInit {
 
     ngOnInit(): void {
         this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
-        document.addEventListener('DOMContentLoaded', () => {
-            const skillsElement = document.getElementsByClassName('skillDeleteButton');
-            console.log(skillsElement.length);
-        });
         this.dataService.getItems().subscribe(items => {
             this.items = items;
             this.getExtendedData(items);

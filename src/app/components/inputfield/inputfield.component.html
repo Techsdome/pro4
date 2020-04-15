@@ -7,6 +7,6 @@
     <textarea [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" id="description-textarea" oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'
     [(ngModel)]="description">{{description}}</textarea>
     <div id="edit-container">
-        <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton" (click)="saveData()">Save changes</button>
+        <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="saveData()">Save changes</button>
     </div>
 </div>
