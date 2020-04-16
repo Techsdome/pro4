@@ -1,6 +1,6 @@
     <app-profile-menu></app-profile-menu>
 
-<div *ngIf="user; else noUserLogedIn" id="user-data-container" class="flex">
+<div *ngIf="user;" id="user-data-container" class="flex">
     <div id="image-container">
         <li>
             <img class="profile-picutre" [src]="photoURL?photoURL:'https://api-magazin.single.de/uploads/media/blog/0001/01/thumb_423_blog_big.jpeg'" alt="">
@@ -11,10 +11,12 @@
     </div>
     <div id="text-content">
         <div id="user-header">
-            <h2 *ngIf="firstname; else userNotLoadedYet" style="display: inline-block">{{user.displayName?user.displayName:firstname + " " +  lastname}}</h2>
+            <h2 *ngIf="firstname;" style="display: inline-block">{{user.displayName?user.displayName:firstname + " " +  lastname}}</h2>
+            <!--
             <ng-template #userNotLoadedYet>
                 <h2>Username</h2>
             </ng-template>
+            -->
           <app-user-status style="width: 10px;height: 10px; border-radius: 20px;" uid="user.uid"></app-user-status>
             <p class="email" style="display: inline">{{user.email}}</p>
         </div>
@@ -39,5 +41,7 @@
         <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle();">Abort</button>
     </div>
 </div>
+<!--
 <ng-template #noUserLogedIn><p style="background-color: rgba(255,0,0,0.5); display: inline-block; padding: 5px 15px; border-radius: 20px">No User Logged In</p></ng-template>
+-->
 
