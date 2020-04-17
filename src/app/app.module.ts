@@ -5,6 +5,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthService} from './shared/services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 
 // Firebase services + enviorment module
 import {AngularFireModule} from '@angular/fire';
@@ -83,10 +87,14 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
         FormsModule,
         ReactiveFormsModule,
         AngularFireStorageModule,
-        AngularFireDatabaseModule
+        AngularFireDatabaseModule,
+        FontAwesomeModule,
     ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective],
     bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor() {
+    library.add(fas, far);
+  }
 }
