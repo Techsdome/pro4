@@ -11,14 +11,17 @@ import {Item} from '../../models/Item';
     styleUrls: ['./main-navbar.component.css']
 })
 export class MainNavbarComponent implements OnInit {
-    public status = false;
-    public menuClicked = false;
+    
+
     user: Observable<User>;
     items: Item[];
+
     photoURL: string;
 
-    constructor(@Inject(AuthService) public authService: AuthService,
-                @Inject(DataServiceService) private dataService: DataServiceService) {
+    public status = false;
+    public menuClicked = false;
+
+    constructor(public authService: AuthService, public  dataService: DataServiceService) {
     }
 
     animateOn() {
