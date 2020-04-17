@@ -28,7 +28,7 @@ export class SettingsProfileComponent implements OnInit {
   }
 
   updateFields() {
-    /*this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
+    this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
       firstname: this.firstname,
       lastname: this.lastname,
       displayName: this.firstname + ' ' + this.lastname
@@ -36,7 +36,7 @@ export class SettingsProfileComponent implements OnInit {
       this.toastr.success('Data saved successfully.', 'Success!');
     }).catch(r => {
       this.toastr.error('Data could not be saved' + r, 'Error!');
-    });*/
+    });
   }
 
   getExtendedData(item) {
