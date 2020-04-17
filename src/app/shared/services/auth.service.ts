@@ -154,7 +154,7 @@ export class AuthService {
             description: 'Tell something about yourself..',
             skills: [],
             firstname: this.firstname ? this.firstname : 'First Name',
-            lastname: this.lastname  ? this.lastname : 'Last Name'
+            lastname: this.lastname  ? this.lastname : 'Last Name',
         };
 
         return userRef.set(userData, {

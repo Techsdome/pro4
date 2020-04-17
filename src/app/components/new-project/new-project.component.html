@@ -32,9 +32,10 @@
 <!--    </div>-->
     <app-uploader id="uploader" class="row"> </app-uploader>
 <br>
-    <button class="btn btn-primary" (click)="Submit(name.value, description.value, members.value)">Submit</button>
+    <button class="btn btn-primary" routerLink="/project-page" (click)="Submit(name.value, description.value, members.value)">Submit</button>
   </form>
 </div>
+<app-main-navbar></app-main-navbar>
 </body>
 
-<app-main-navbar></app-main-navbar>
+

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../shared/services/auth.service';
 import {Project} from '../../models/Project';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
-import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
-import {User} from "../../shared/services/user";
+import {User} from '../../shared/services/user';
+import {AuthService} from '../../shared/services/auth.service';
+import {DataServiceService} from '../../shared/services/data-service.service';
 
 @Component({
   selector: 'app-project-page',
@@ -20,32 +19,18 @@ export class ProjectPageComponent implements OnInit {
   docRef: any;
   user: User;
 
-  constructor(private storage: AngularFireStorage, private afs: AngularFirestore,
-              public authService: AuthService) {
+  constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
+              public authService: AuthService, public dataService: DataServiceService) {
   }
 
   ngOnInit() {
     this.getUserID();
-
-  }
-
-  getUser() {
-    console.log('getuser');
-    this.authService.getCurrentUser().subscribe(user => {
-      this.user = user;
-      console.log("1 " + this.user.pid);
-    });
-
-    console.log("2 " + this.user.pid);
   }
 
   getUserID() {
-    console.log('init');
-    // const data = this.authService.getUserData();
-    // const data2 = this.authService.userData.pid;
-    this.getUser();
 
-    this.docRef = this.afs.doc(`project/${this.user.pid}`);
+    console.log(this.authService.userData.pid);
+    this.docRef = this.afs.doc(`project/${this.authService.userData.pid}`);
 
     this.docRef.get().toPromise().then(doc => {
       if (doc.exists) {
@@ -58,6 +43,4 @@ export class ProjectPageComponent implements OnInit {
       console.log('Error getting document:', error);
     });
   }
-
-
 }

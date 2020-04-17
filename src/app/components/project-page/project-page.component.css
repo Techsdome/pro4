@@ -9,7 +9,7 @@ img {
 }
 
 * {
-  font-family: "Nunito Sans", "Helvetica Neue";
+  font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
 }
 
 #banner {
@@ -38,6 +38,7 @@ img {
   background-color: #bdc3c6;
   padding: 100px 40px 20px 120px;
   width: 100vw;
+  height: 100vh;
 }
 #headline {
   margin: 0;
