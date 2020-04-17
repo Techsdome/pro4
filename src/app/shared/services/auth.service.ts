@@ -100,8 +100,9 @@ export class AuthService {
     // Sign in with Google
     GoogleAuth() {
         const google = new auth.GoogleAuthProvider();
-        return this.AuthLogin(google);
-        // this.addExtraFields();
+        this.AuthLogin(google).then(() => {
+            this.addExtraFields();
+        });
         /*console.log(JSON.parse(JSON.stringify(google)));*/
     }
 
@@ -111,6 +112,7 @@ export class AuthService {
             // description: 'Tell something about yourself..',
             // skills: [],
             firstname: this.firstname ? this.firstname : 'First Name',
+
             lastname: this.lastname ? this.lastname : 'Last Name'
         });
     }
@@ -159,7 +161,9 @@ export class AuthService {
             lastname: this.lastname ? this.lastname : 'Last Name'
         };
 
-        return userRef.update(userData);
+        return userRef.set(userData, {
+            merge: true
+        });
     }
 
     // Sign out
