@@ -8,6 +8,7 @@
     </div>
   </div>
 </nav>
+<!-- Site Header -->
 <header class="masthead">
   <div class="intro-body content-section d-md-flex h-md-100 align-items-center">
     <div id="login" class="col-md-6 p-0 h-md-100">
@@ -19,7 +20,8 @@
             <label for="input_login_email">E-mail</label>
           </div>
           <div class="md-form form-group mt-5">
-            <input mdInput mdValidate id="input_login_passwd" type="password" class="form-control validate" #userPassword>
+            <input mdInput mdValidate id="input_login_passwd" type="password" class="form-control validate"
+                   #userPassword>
             <label for="input_login_passwd" data-error="wrong" data-success="right">Password</label>
           </div>
           <div class="btn-group-justified" role="group" aria-label="Basic example">
@@ -79,7 +81,7 @@
               <div class="btn-group" role="group">
                 <button type="button" class="btn btn-login btn-rounded btn-style"
                         (click)="authService.SignUp(userEmail.value, userPwd.value); authService.setFirstName(firstname); authService.setLastName(lastname);">
-                        Register
+                  Register
                 </button>
               </div>
               <div class="btn-group" role="group">
@@ -111,13 +113,14 @@
     </a>
   </div>
 </header>
-<section id="about" class="content-section d-md-flex h-md-100 align-items-center">
-  <div class="col-md-6 p-0 h-md-100 mh-100" style="height: auto;">
-    <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+<!-- End Header -->
+<section id="about" class="d-md-flex h-md-100 text-center bg-white">
+  <div class="col-md-6 p-0 h-md-100 text-black">
+    <div class="d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
-            <h2 style="font-family: Lato, sans-serif;">About Techsdome</h2>
+            <h2>About Techsdome</h2>
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
               diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
               et accusam et</p>
@@ -126,29 +129,59 @@
       </div>
     </div>
   </div>
+  <div id="about_pic" class="col-md-6 h-md-100 "></div>
+</section>
+<section id="tech" class="d-md-flex h-md-100 text-center bg-grey">
   <div class="col-md-6 p-0 h-md-100">
-    <div id="about_pic" class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
-      <img class="img-fluid" src="./assets/home/student.jpg" alt="pic">
+    <div class="row mb-4 mx-5 mt-4 justify-content-center align-items-center">
+      <div class="col-md-4 mb-4">
+        <img class="img-fluid img-responsive" src="./assets/home/Facebook.svg" alt="pic">
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <img class="img-fluid img-responsive" src="./assets/home/Google.svg" alt="pic">
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <img class="img-fluid img-responsive" src="./assets/home/Twitter.svg" alt="pic">
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <img class="img-fluid img-responsive" src="./assets/home/Angular.svg" alt="pic">
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="flex-center">
+          <img class="img-fluid img-responsive" src="./assets/home/Github.svg" alt="pic">
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <img class="img-fluid img-responsive" src="./assets/home/AdobeXD.svg" alt="pic">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 p-0 h-md-100 bg-white text-black">
+    <div class="d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>About Techsdome</h2>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+              diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+              et accusam et</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-<section id="download" class="download-section content-section text-center">
-  <div class="container">
-    <div class="col-lg-8 col-xl-11 offset-xl-5 mx-auto">
-      <h1>enter a project of your joice or create it</h1>
-      <p>You can register to Techsdome for free on the preview page.</p>
-      <button class="btn btn-outline-style" type="button" style="color: #325DFF;">Create Your Project
-      </button>
-    </div>
-  </div>
-</section>
-<section id="contact" class="content-section text-center">
+<section id="contact" class="content-section text-center bg-dark">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 mx-auto">
+      <div class="col-lg-8 mx-auto text-white">
         <h2>Contact us</h2>
-        <p>Feel free to leave us a comment on the<a href="#">&nbsp;Grayscale template overview page</a>&nbsp;to give
-          some feedback about this theme!</p>
+        <p>Feel free to leave comments...</p>
         <ul class="list-inline banner-social-buttons">
           <li class="list-inline-item">&nbsp;<button class="btn btn-outline-style" type="button"><i
             class="fa fa-google-plus fa-fw"></i><span class="network-name">&nbsp; Google+</span></button>
@@ -164,10 +197,57 @@
     </div>
   </div>
 </section>
-<footer>
-  <div class="container text-center">
-    <p>Copyright ©&nbsp;Techsdome 2020</p>
+<!-- Site footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <h6>About</h6>
+        <p class="text-justify">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+          invidunt ut labore et dolore magna aliquyam.</p>
+      </div>
+
+      <div class="col-xs-6 col-md-3">
+        <h6>Categories</h6>
+        <ul class="footer-links">
+          <li><a href="#">C</a></li>
+          <li><a href="#">UI Design</a></li>
+          <li><a href="#">PHP</a></li>
+          <li><a href="#">Java</a></li>
+          <li><a href="#">Android</a></li>
+        </ul>
+      </div>
+
+      <div class="col-xs-6 col-md-3">
+        <h6>Quick Links</h6>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Contribute</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by
+          <a href="#">Techsdome</a>.
+        </p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <ul class="social-icons">
+          <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </footer>
+<!-- End footer -->
 
 

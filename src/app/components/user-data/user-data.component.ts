@@ -32,7 +32,6 @@ export class UserDataComponent implements OnInit {
 
     editToggle() {
         this.edit = !this.edit;
-        console.log(this.edit);
     }
 
     getExtendedData(item) {
@@ -48,10 +47,6 @@ export class UserDataComponent implements OnInit {
         }
     }
 
-    deleteSkill() {
-        console.log(this.htmlSkillElements);
-    }
-
     saveSkill() {
         this.skills.push(this.skill);
         if (this.edit) {
@@ -62,7 +57,7 @@ export class UserDataComponent implements OnInit {
 
     updateSkillsFirebase() {
         this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
-            skills: this.skills
+            skills: [] = this.skills
         });
     }
 
@@ -79,10 +74,6 @@ export class UserDataComponent implements OnInit {
 
     ngOnInit(): void {
         this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
-        document.addEventListener('DOMContentLoaded', () => {
-            const skillsElement = document.getElementsByClassName('skillDeleteButton');
-            console.log(skillsElement.length);
-        });
         this.dataService.getItems().subscribe(items => {
             this.items = items;
             this.getExtendedData(items);

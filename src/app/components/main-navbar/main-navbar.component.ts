@@ -1,4 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {AuthService} from '../../shared/services/auth.service';
+import {User} from '../../shared/services/user';
+import {Observable} from 'rxjs';
+import {DataServiceService} from '../../shared/services/data-service.service';
+import {Item} from '../../models/Item';
 
 @Component({
     selector: 'app-main-navbar',
@@ -8,6 +13,13 @@ import {Component, OnInit} from '@angular/core';
 export class MainNavbarComponent implements OnInit {
     public status = false;
     public menuClicked = false;
+    user: Observable<User>;
+    items: Item[];
+    photoURL: string;
+
+    constructor(@Inject(AuthService) public authService: AuthService,
+                @Inject(DataServiceService) private dataService: DataServiceService) {
+    }
 
     animateOn() {
         this.status = !this.status;
@@ -17,10 +29,11 @@ export class MainNavbarComponent implements OnInit {
         this.menuClicked = !this.menuClicked;
     }
 
-    constructor() {
-    }
-
     ngOnInit() {
+        this.authService.afAuth.authState.subscribe(user => {
+            if (user) {
+                this.photoURL = user.photoURL;
+            }
+        });
     }
-
 }

@@ -1,0 +1,22 @@
+<div>
+    <input type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s" (click)="toggleScreen()" value="Create post">
+</div>
+
+<div [class]="showScreen?'showBtnTechsdome':'hideBtnTechsdome'" class="blurry-screen" (click)="toggleScreen()"></div>
+<div id="create-post-form" [class]="showScreen?'showBtnTechsdome':'hideBtnTechsdome'">
+    <div id="create-post-inner">
+        <div id="create-post-header flex">
+            <h5>Create a new post</h5>
+            <div id="create-post-button-container" class="flex">
+                <div class="create-post-button">
+                    <img src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png" alt="post" type="button" (click)="savePost()" class="boderButton smallButton button transition02s opacity-05" value="">
+                    <p class="detail_info">ask question</p>
+                </div>
+            </div>
+
+        </div>
+        <form action="">
+            <textarea [(ngModel)]="post" name="post" id="cpArea" placeholder="My post..."></textarea>
+        </form>
+    </div>
+</div>

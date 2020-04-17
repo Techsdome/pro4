@@ -1,7 +1,8 @@
 
 <div id="menuBar_top" class="black-standard-color">
+  <input id="loggoutButton" class="background-image-settings sidebar-button" type="button" (click)="authService.SignOut()" [routerLink]="['/sign-in']">
     <input class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
-    <input id="settingsButton" class="background-image-settings sidebar-button" type="button">
+    <input id="settingsButton" class="background-image-settings sidebar-button" [routerLink]="'/app-settings'" type="button">
     <div (click)="showMenuBar()" id="mobile-menu-icon-container">
         <div></div>
         <div></div>
@@ -18,19 +19,19 @@
 
     <div id="sidebar-button-container">
 
-        <input class="background-image-settings sidebar-button" id="profilePicture" type="button">
+        <img [src]="photoURL" class="background-image-settings sidebar-button">
 
         <div id="plusButton-container">
             <div [class]="status ? 'translateProject' : 'hide'">
-                <input class="background-image-settings sidebar-button animation-button3 opacity-05" id="projectButton" type="button"  (click)="animateOn()">
+                <input type="button" class="background-image-settings sidebar-button animation-button3 opacity-05" id="projectButton" type="button" type="button"  (click)="animateOn()">
                 <p class="detail_info">create post</p>
             </div>
             <div [class]="status ? 'translateQuestion' : 'hide'">
-                <input class="background-image-settings sidebar-button animation-button2 opacity-05" id="questionButton" type="button"  (click)="animateOn()">
+                <input type="button" class="background-image-settings sidebar-button animation-button2 opacity-05" id="questionButton" type="button"  (click)="animateOn()">
                 <p class="detail_info">ask question</p>
             </div>
             <div [class]="status ? 'translateMessage' : 'hide'">
-                <input class="background-image-settings sidebar-button animation-button1 opacity-05" id="messageButton" type="button" routerLink="/new-project"  (click)="animateOn()">
+                <input type="button" class="background-image-settings sidebar-button animation-button1 opacity-05" id="messageButton" (click)="animateOn()" [routerLink]="'/new-project'">
                 <p class="detail_info">create project</p>
             </div>
             <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">

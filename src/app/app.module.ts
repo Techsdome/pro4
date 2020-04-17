@@ -36,6 +36,12 @@ import { UploadTaskComponent } from './components/uploader/upload-task/upload-ta
 import { PartingLineComponent } from './components/parting-line/parting-line.component';
 // import {NgbdProgressbarShowvalue} from './components/uploader/upload-task/progressbar-showvalue';
 
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { UserStatusComponent } from './components/user-status/user-status.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { ProfileMenuComponent } from './components/profile-menu/profile-menu.component';
+import { CreatePostComponent } from './components/create-post/create-post.component';
+
 
 @NgModule({
     declarations: [
@@ -55,9 +61,13 @@ import { PartingLineComponent } from './components/parting-line/parting-line.com
         UploaderComponent,
         UploadTaskComponent,
         PartingLineComponent,
+        UserStatusComponent,
         DropzoneDirective,
         UploaderComponent,
         UploadTaskComponent,
+        SettingsComponent,
+        ProfileMenuComponent,
+        CreatePostComponent,
       // NgbdProgressbarShowvalue
 
     ],
@@ -72,7 +82,8 @@ import { PartingLineComponent } from './components/parting-line/parting-line.com
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        AngularFireStorageModule
+        AngularFireStorageModule,
+        AngularFireDatabaseModule
     ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective],
     bootstrap: [AppComponent]
