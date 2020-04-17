@@ -19,6 +19,8 @@ import {SecureInnerPagesGuard} from './shared/guard/secure-inner-pages.guard';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {InputfieldComponent} from './components/inputfield/inputfield.component';
 import {SettingsComponent} from './components/settings/settings.component';
+import {SettingsProfileComponent} from './components/settings-profile/settings-profile.component';
+import {SettingsSecurityComponent} from './components/settings-security/settings-security.component';
 
 
 const routes: Routes = [
@@ -31,7 +33,9 @@ const routes: Routes = [
     {path: 'project-page', component: ProjectPageComponent},
     {path: 'new-project', component: NewProjectComponent},
     {path: 'app-user-profile', component: UserProfileComponent},
-    {path: 'app-settings', component: SettingsComponent}
+    {path: 'app-settings', component: SettingsComponent},
+    {path: 'app-settings-profile', component: SettingsProfileComponent},
+    {path: 'app-settings-security', component: SettingsSecurityComponent}
 ];
 
 

@@ -1,0 +1,41 @@
+<app-main-navbar></app-main-navbar>
+<div class="container-style">
+  <nav>
+    <ul>
+      <li class="item"><a [routerLink]="['/app-settings-profile']"><h5>PROFILE</h5></a></li>
+      <li class="item"><a [routerLink]="['/app-settings-security']"><h5>SECURITY</h5></a></li>
+    </ul>
+  </nav>
+
+  <div *ngIf="user" id="user-data-container" class="container mx-0 my-5">
+    <div class="row">
+      <div class="col-md-2">
+        <img class="img-fluid rounded-lg z-depth-1-half" [src]="photoURL?photoURL:''" alt="">
+        <p>{{user.emailVerified ? "No verified user" : "Verified user"}}</p>
+      </div>
+      <div *ngIf="!edit" id="col-md3">
+        <h2 *ngIf="firstname;">{{user.displayName ? user.displayName : firstname + " " + lastname}}</h2>
+        <p class="email">{{user.email}}</p>
+      </div>
+      <div *ngIf="edit" class="col-md3">
+        <div class="md-form form-group">
+          <input mdInput mdValidate [(ngModel)]="firstname" id="input_fN" type="text"  class="form-control" required>
+          <label class="active" for="input_fN">Vorname</label>
+        </div>
+
+        <div class="md-form form-group">
+          <input mdInput mdValidate [(ngModel)]="lastname" id="input_sN" type="text" placeholder="{{ lastname }}" class="form-control" required>
+          <label class="active" for="input_sN">Nachname</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 btn-group">
+        <button type="button" (click)="toggleEdit();"
+                class="btn btn-primary shadow-none btn-rounded">{{ edit == false ? 'Bearbeiten' : 'Abbrechen' }}</button>
+        <button type="button" (click)="updateFields();" class="btn btn-success shadow-none btn-rounded">Speichern</button>
+      </div>
+    </div>
+  </div>
+
+</div>

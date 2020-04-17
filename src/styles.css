@@ -2,11 +2,11 @@
 @import url("https://fonts.googleapis.com/css?family=Cabin:700");
 
 /* You can add global styles to this file, and also import other style files */
-{
-    margin: 0;
+
+.container-style {
+  margin: 100px auto;
+  width: 80%;
 }
-
-
 
 .standardBackgroundColor {
     background-color: #f3f5f7;
@@ -17,7 +17,7 @@ li {
 }
 
 html, body {
-    height: 100%;
+  height: 100%;
 }
 
 .standard-background-color{
@@ -27,6 +27,11 @@ html, body {
 body {
     margin: 0;
     font-family: Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+
+.btn.btn-rounded {
+  border-radius: 35px !important;
 }
 
 .flex{
