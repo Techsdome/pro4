@@ -70,7 +70,53 @@ export class AuthService {
     this.firstname = splitName[0];
     this.lastname = splitName[1];
   }
-  
+
+
+  /* Setting up user data when sign in with username/password,
+  sign up with username/password and sign in with social auth
+  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+
+  setFirstName(firstname) {
+    this.firstname = firstname;
+  }
+
+  setLastName(lastname) {
+    this.lastname = lastname;
+  }
+
+  // Send email verfificaiton when new user sign up
+  SendVerificationMail() {
+    return this.afAuth.auth.currentUser.sendEmailVerification()
+      .then(() => {
+        this.router.navigate(['verify-email-address']);
+      });
+  }
+
+  // Reset Forggot password
+  ForgotPassword(passwordResetEmail) {
+    return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert('Password reset email sent, check your inbox.');
+      }).catch((error) => {
+        window.alert(error);
+      });
+  }
+
+  // Returns true when user is looged in and email is verified
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return (user !== null && user.emailVerified !== false) ? true : false;
+  }
+
+  // Sign in with Google
+  GoogleAuth() {
+    const google = new auth.GoogleAuthProvider();
+    this.AuthLogin(google).then(() => {
+      this.addExtraFields();
+    });
+    /*console.log(JSON.parse(JSON.stringify(google)));*/
+  }
+
   addExtraFields() {
     this.afs.collection('users').doc(this.userData.uid).update({
       job: 'My job title',
@@ -81,117 +127,61 @@ export class AuthService {
     });
   }
 
+  // Sign in with Facebooke
+  FacebookAuth() {
+    return this.AuthLogin(new auth.FacebookAuthProvider());
+    // this.addExtraFields();
+  }
+
+  GithubAuth() {
+    return this.AuthLogin(new auth.GithubAuthProvider());
+  }
+
+  // Auth logic to run auth providers
+  AuthLogin(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((result) => {
+        this.ngZone.run(() => {
+          this.router.navigate(['dashboard']);
+        });
+        this.setSocialNames(result.user.displayName);
+        this.SetUserData(result.user);
+        console.log(this.userData);
+      }).catch((error) => {
+        window.alert(error);
+      });
+  }
 
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
 
-    setFirstName(firstname) {
-        this.firstname = firstname;
-    }
 
-    setLastName(lastname) {
-        this.lastname = lastname;
-    }
+  SetUserData(user) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userData: any = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+      job: user.job ? user.job : 'My job title',
+      // description: user.description ? user.description : 'Tell something about yourself..',
+      // skills: user.skills ? user.skills : [],
+      firstname: this.firstname ? this.firstname : 'First Name',
+      lastname: this.lastname ? this.lastname : 'Last Name'
+    };
 
-    // Send email verfificaiton when new user sign up
-    SendVerificationMail() {
-        return this.afAuth.auth.currentUser.sendEmailVerification()
-            .then(() => {
-                this.router.navigate(['verify-email-address']);
-            });
-    }
+    return userRef.set(userData, {
+      merge: true
+    });
+  }
 
-    // Reset Forggot password
-    ForgotPassword(passwordResetEmail) {
-        return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
-            .then(() => {
-                window.alert('Password reset email sent, check your inbox.');
-            }).catch((error) => {
-                window.alert(error);
-            });
-    }
-
-    // Returns true when user is looged in and email is verified
-    get isLoggedIn(): boolean {
-        const user = JSON.parse(localStorage.getItem('user'));
-        return (user !== null && user.emailVerified !== false) ? true : false;
-    }
-
-    // Sign in with Google
-    GoogleAuth() {
-        const google = new auth.GoogleAuthProvider();
-        this.AuthLogin(google).then(() => {
-            this.addExtraFields();
-        });
-        /*console.log(JSON.parse(JSON.stringify(google)));*/
-    }
-
-    addExtraFields() {
-        this.afs.collection('users').doc(this.userData.uid).update({
-            job: 'My job title',
-            // description: 'Tell something about yourself..',
-            // skills: [],
-            firstname: this.firstname ? this.firstname : 'First Name',
-            lastname: this.lastname ? this.lastname : 'Last Name'
-        });
-    }
-
-    // Sign in with Facebooke
-    FacebookAuth() {
-        return this.AuthLogin(new auth.FacebookAuthProvider());
-        // this.addExtraFields();
-    }
-
-    GithubAuth() {
-        return this.AuthLogin(new auth.GithubAuthProvider());
-    }
-
-    // Auth logic to run auth providers
-    AuthLogin(provider) {
-        return this.afAuth.auth.signInWithPopup(provider)
-            .then((result) => {
-                this.ngZone.run(() => {
-                    this.router.navigate(['dashboard']);
-                });
-              this.setSocialNames(result.user.displayName);
-              this.SetUserData(result.user);
-                console.log(this.userData);
-            }).catch((error) => {
-                window.alert(error);
-            });
-    }
-
-    /* Setting up user data when sign in with username/password,
-    sign up with username/password and sign in with social auth
-    provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-
-
-    SetUserData(user) {
-        const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-        const userData: any = {
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-            emailVerified: user.emailVerified,
-            job: user.job ? user.job : 'My job title',
-            // description: user.description ? user.description : 'Tell something about yourself..',
-            // skills: user.skills ? user.skills : [],
-            firstname: this.firstname ? this.firstname : 'First Name',
-            lastname: this.lastname ? this.lastname : 'Last Name'
-        };
-
-        return userRef.set(userData, {
-            merge: true
-        });
-    }
-
-    // Sign out
-    SignOut() {
-        return this.afAuth.auth.signOut().then(() => {
-            localStorage.removeItem('user');
-            this.router.navigate(['sign-in']);
-        });
-    }
+  // Sign out
+  SignOut() {
+    return this.afAuth.auth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.router.navigate(['sign-in']);
+    });
+  }
 }
