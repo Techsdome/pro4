@@ -10,10 +10,6 @@ li {
     vertical-align: middle;
 }
 
-#profile-menu-bar{
-    margin: 40px 0;
-}
-
 a:hover, a:focus, a:active {
     color: #999;
     text-decoration: none;

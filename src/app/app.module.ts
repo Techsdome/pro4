@@ -38,6 +38,7 @@ import {DropzoneDirective} from './shared/services/dropzone.directive';
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { UploadTaskComponent } from './components/uploader/upload-task/upload-task.component';
 import { PartingLineComponent } from './components/parting-line/parting-line.component';
+import { ToastrModule } from 'ngx-toastr';
 // import {NgbdProgressbarShowvalue} from './components/uploader/upload-task/progressbar-showvalue';
 
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -45,6 +46,8 @@ import { UserStatusComponent } from './components/user-status/user-status.compon
 import { SettingsComponent } from './components/settings/settings.component';
 import { ProfileMenuComponent } from './components/profile-menu/profile-menu.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
+import { SettingsProfileComponent } from './components/settings-profile/settings-profile.component';
+import { SettingsSecurityComponent } from './components/settings-security/settings-security.component';
 
 
 @NgModule({
@@ -72,6 +75,8 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
         SettingsComponent,
         ProfileMenuComponent,
         CreatePostComponent,
+        SettingsProfileComponent,
+        SettingsSecurityComponent,
       // NgbdProgressbarShowvalue
 
     ],
@@ -89,6 +94,7 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
         AngularFireStorageModule,
         AngularFireDatabaseModule,
         FontAwesomeModule,
+        ToastrModule.forRoot()
     ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective],
     bootstrap: [AppComponent]

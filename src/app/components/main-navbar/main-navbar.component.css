@@ -143,33 +143,6 @@
     margin: 0 5px;
 }
 
-.opacity-05:hover > * {
-    opacity: 1;
-}
-
-.opacity-05:hover + * {
-    opacity: 1;
-}
-
-.detail_info {
-    transition: 0.2s;
-    opacity: 0;
-    width: 100px;
-    font-size: 8pt;
-    top: -50px;
-    margin-top: -25px;
-    margin-left: 40px;
-    background-color: #fff;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    border-radius: 100px;
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
-}
-
 .translateMessage {
     display: inline;
     transform: translate(28px, 35px);
@@ -192,9 +165,9 @@
 }
 
 #settingsButton {
-    background-image: url("https://image.flaticon.com/icons/png/512/40/40031.png");
+/*    background-image: url("https://image.flaticon.com/icons/png/512/40/40031.png");
     background-size: 25px;
-    background-position: center;
+    background-position: center;*/
 }
 
 #loggoutButton {
@@ -235,7 +208,7 @@
     margin-right: 0px !important;
 }
 
-@media (max-width: 630px){
+@media only screen and (max-width: 630px){
 
     #round{
         display: none;

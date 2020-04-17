@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 /*import { AngularFireAuth } from '@angular/fire/auth';*/
 import {AuthService} from '../../shared/services/auth.service';
 import * as firebase from '@firebase/app';
-import { faFilm } from '@fortawesome/free-solid-svg-icons';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-sign-in',
@@ -17,18 +17,24 @@ export class SignInComponent implements OnInit {
 
     constructor(
         public authService: AuthService
-    ) {
-    }
+    ) {}
+
 
     toggleLoginRegister() {
         this.openMainLogin = !this.openMainLogin;
     }
 
-    set setLoginState(b: boolean) {
-        this.openMainLogin = b;
-    }
-
     ngOnInit() {
+      $(document).ready(function(){
+        // Transition effect for navbar
+        $(window).scroll(function() {
+          if($(this).scrollTop() > 100) {
+              $('#mainNav').addClass('navbar-shrink');
+            } else {
+              $('#mainNav').removeClass('navbar-shrink');
+            }
+        });
+      });
     }
 
 }
