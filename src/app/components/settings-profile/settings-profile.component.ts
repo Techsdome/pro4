@@ -18,8 +18,9 @@ export class SettingsProfileComponent implements OnInit {
 
   items: Item[];
   user: User;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
+  displayName: string;
   photoURL = '';
   edit = false;
 
@@ -27,11 +28,12 @@ export class SettingsProfileComponent implements OnInit {
     this.edit = !this.edit;
   }
 
+
   updateFields() {
     this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
-      firstname: this.firstname,
-      lastname: this.lastname,
-      displayName: this.firstname + ' ' + this.lastname
+      firstname: this.firstName,
+      lastname: this.lastName,
+      displayName: this.firstName + ' ' + this.lastName
     }).then(r => {
       this.toastr.success('Data saved successfully.', 'Success!');
     }).catch(r => {
@@ -42,12 +44,14 @@ export class SettingsProfileComponent implements OnInit {
   getExtendedData(item) {
     for (const it in item) {
       if (this.user.uid === item[it].uid) {
-        this.firstname = item[it].firstname;
-        this.lastname = item[it].lastname;
+        this.firstName = item[it].firstname;
+        this.lastName = item[it].lastname;
         this.photoURL = item[it].photoURL;
+        this.displayName = item[it].displayName;
       }
     }
   }
+
 
 
   ngOnInit(): void {
@@ -59,6 +63,11 @@ export class SettingsProfileComponent implements OnInit {
     this.dataService.getCurrentUser().subscribe(user => {
       this.user = user;
     });
+
+    let splitName = this.displayName.split(' ');
+    this.firstName = splitName[0];
+    this.lastName = splitName[1];
+
   }
 
 }

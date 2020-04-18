@@ -14,17 +14,17 @@
         <p>{{user.emailVerified ? "No verified user" : "Verified user"}}</p>
       </div>
       <div *ngIf="!edit" id="col-md3">
-        <h2 *ngIf="firstname;">{{user.displayName ? user.displayName : firstname + " " + lastname}}</h2>
+        <h2 *ngIf="firstName;">{{user.displayName ? user.displayName : firstName + " " + lastName}}</h2>
         <p class="email">{{user.email}}</p>
       </div>
       <div *ngIf="edit" class="col-md3">
         <div class="md-form form-group">
-          <input mdInput mdValidate [(ngModel)]="firstname" id="input_fN" type="text"  class="form-control" required>
+          <input mdInput mdValidate [(ngModel)]="firstName" id="input_fN" type="text" class="form-control" required>
           <label class="active" for="input_fN">Vorname</label>
         </div>
 
         <div class="md-form form-group">
-          <input mdInput mdValidate [(ngModel)]="lastname" id="input_sN" type="text" placeholder="{{ lastname }}" class="form-control" required>
+          <input mdInput mdValidate [(ngModel)]="lastName" id="input_sN" type="text" placeholder="{{ lastName }}" class="form-control" required>
           <label class="active" for="input_sN">Nachname</label>
         </div>
       </div>

@@ -1,11 +1,8 @@
 import {Injectable, NgZone} from '@angular/core';
-import {User} from './user';
 import {auth} from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
-import {Subject} from 'rxjs';
-import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -65,11 +62,7 @@ export class AuthService {
     });
   }
 
-  setSocialNames(name) {
-    let splitName = name.split(' ');
-    this.firstname = splitName[0];
-    this.lastname = splitName[1];
-  }
+
 
 
   /* Setting up user data when sign in with username/password,
@@ -144,7 +137,6 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
         });
-        this.setSocialNames(result.user.displayName);
         this.SetUserData(result.user);
         console.log(this.userData);
       }).catch((error) => {
@@ -184,4 +176,5 @@ export class AuthService {
       this.router.navigate(['sign-in']);
     });
   }
+
 }
