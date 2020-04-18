@@ -55,7 +55,6 @@ export class CreatePostComponent implements OnInit {
         this.dataService.getItems().subscribe(items => {
             this.items = items;
             this.getExtendedData(items);
-            console.log(this.items);
         });
 
         this.dataService.getCurrentUser().subscribe(user => {

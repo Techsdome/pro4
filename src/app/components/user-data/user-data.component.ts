@@ -51,12 +51,12 @@ export class UserDataComponent implements OnInit {
         if (this.skills === undefined) {
             this.skills = [];
         }
-        console.log(this.skills);
         this.skills.push(this.skill);
         if (this.edit) {
             this.edit = !this.edit;
         }
         this.updateSkillsFirebase();
+        this.skill = '';
     }
 
     updateSkillsFirebase() {
