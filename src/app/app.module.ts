@@ -48,6 +48,7 @@ import { ProfileMenuComponent } from './components/profile-menu/profile-menu.com
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { SettingsProfileComponent } from './components/settings-profile/settings-profile.component';
 import { SettingsSecurityComponent } from './components/settings-security/settings-security.component';
+import { ShowPostComponent } from './components/show-post/show-post.component';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { SettingsSecurityComponent } from './components/settings-security/settin
         CreatePostComponent,
         SettingsProfileComponent,
         SettingsSecurityComponent,
+        ShowPostComponent,
       // NgbdProgressbarShowvalue
 
     ],

@@ -15,20 +15,13 @@ import DocumentData = firebase.firestore.DocumentData;
 export class CreatePostComponent implements OnInit {
 
     showScreen = false;
-
-
     items: Item[];
     user: User;
     posts: string[];
     post: string;
-    postsFetched: DocumentChangeAction<DocumentData>[];
-
-
-//    this.afs.collection('users').doc(this.userData.uid).update({});
 
     constructor(private dataService: DataServiceService, private authService: AuthService) {
     }
-
 
     getExtendedData(item) {
         for (const it in item) {
@@ -39,7 +32,6 @@ export class CreatePostComponent implements OnInit {
     }
 
     savePost() {
-        // this.posts.push(this.post);
         this.updatePostsFirebase();
     }
 
@@ -54,29 +46,16 @@ export class CreatePostComponent implements OnInit {
         });
     }
 
-    getAllPosts() {
-        const uid = this.authService.afAuth.auth.currentUser.uid;
-        // const test = this.authService.afs.collection(`users`).doc(`${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').snapshotChanges();
-        this.authService.afs.doc(`users/${uid}`).collection('posts').snapshotChanges().subscribe(item => {
-            this.postsFetched = item;
-            console.log(item);
-            for (let i = 0; i < item.length; i++) {
-                // console.log(item[i].payload.doc.um.Gw.zh.persistence.so.docs.root.value.bc);
-            }
-        });
-    }
-
     toggleScreen() {
         this.showScreen = !this.showScreen;
+        this.post = '';
     }
-
 
     ngOnInit(): void {
         this.dataService.getItems().subscribe(items => {
             this.items = items;
             this.getExtendedData(items);
             console.log(this.items);
-            this.getAllPosts();
         });
 
         this.dataService.getCurrentUser().subscribe(user => {
