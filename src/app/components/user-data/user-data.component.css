@@ -9,10 +9,6 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
     display: flex;
 }
 
-.profile-picutre{
-    height: 100%;
-}
-
 #text-content{
     width: 100%;
 }
@@ -36,9 +32,6 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
     background-color: #eee;
     width: 150px;
     height: 150px;
-    -webkit-box-shadow: -3px 3px 4px 1px rgba(0,0,0,0.1);
-    -moz-box-shadow: -3px 3px 4px 1px rgba(0,0,0,0.1);
-    box-shadow: -3px 3px 4px 1px rgba(0,0,0,0.1);
 }
 
 #text-content p{

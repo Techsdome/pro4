@@ -11,19 +11,16 @@ import * as admin from 'firebase-admin';
 export class ShowPostComponent implements OnInit {
     user: any;
     posts: any[] = [];
+    photoURL: string;
 
     constructor(public authservice: AuthService) {
-    }
-
-    showPosts() {
-        console.log(this.posts);
     }
 
     ngOnInit(): void {
         this.authservice.getCurrentUser().subscribe((result) => {
             this.user = result;
-            console.log('aaaaaaaaaaa');
-            console.log(this.user.uid);
+            this.photoURL = result.photoURL;
+            console.log(result.photoURL);
             this.authservice.afs.collection('users').doc(result.uid)
                 .collection('posts').valueChanges()
                 .subscribe((val) => {
@@ -31,7 +28,6 @@ export class ShowPostComponent implements OnInit {
                     val.forEach((value) => {
                         this.posts.push(value.post);
                     });
-                    this.showPosts();
                 });
         });
     }

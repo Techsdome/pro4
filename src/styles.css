@@ -187,6 +187,23 @@ ul > * {
     padding: 20px;
 }
 
+.small-profile-picture{
+    width: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    margin-left: -70px;
+    float: left;
+}
+
+.image-shadow{
+    -webkit-box-shadow: -3px 3px 4px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: -3px 3px 4px 1px rgba(0,0,0,0.1);
+    box-shadow: -3px 3px 4px 1px rgba(0,0,0,0.1);
+}
+
+.post-container{}
+
 /* @media css - responsive, damir */
 
 @media only screen and (max-width: 1100px) {
@@ -195,7 +212,16 @@ ul > * {
     }
 }
 
+.post-container{
+    margin-top: 20px;
+}
+
 @media only screen and (max-width: 880px) {
+    .small-profile-picture{
+        float: none;
+        margin-left: 0;
+    }
+
     #user-data-container {
         flex-direction: column;
     }
