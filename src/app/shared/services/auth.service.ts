@@ -74,6 +74,12 @@ export class AuthService {
     this.lastname = lastname;
   }
 
+  splitName(currentUser) {
+    let splitName = currentUser.displayName.split(' ');
+    this.firstname = splitName[0];
+    this.lastname = splitName[1];
+  }
+
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
     return this.afAuth.auth.currentUser.sendEmailVerification()
@@ -104,16 +110,6 @@ export class AuthService {
     this.AuthLogin(google).then(() => {});
   }
 
-  addExtraFields() {
-    this.afs.collection('users').doc(this.userData.uid).update({
-      job: 'My job title',
-      // description: 'Tell something about yourself..',
-      // skills: [],
-      firstname: this.firstname ? this.firstname : 'First Name',
-      lastname: this.lastname ? this.lastname : 'Last Name'
-    });
-  }
-
   // Sign in with Facebook
   FacebookAuth() {
     return this.AuthLogin(new auth.FacebookAuthProvider());
@@ -129,6 +125,7 @@ export class AuthService {
       .then((result) => {
         let usernew = result.additionalUserInfo.isNewUser;
         if (usernew === true) {
+          this.splitName(result.user);
           this.SetUserData(result.user);
         }
         this.ngZone.run(() => {

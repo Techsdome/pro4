@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
-import { ToastrService } from 'ngx-toastr';
-
+import {ToastrService} from 'ngx-toastr';
+import * as firebase from "firebase";
 
 
 @Component({
@@ -14,7 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SettingsProfileComponent implements OnInit {
 
-  constructor(private dataService: DataServiceService, private authService: AuthService, private toastr: ToastrService) { }
+  constructor(private dataService: DataServiceService, private authService: AuthService, private toastr: ToastrService) {
+  }
 
   items: Item[];
   user: User;
@@ -23,6 +24,7 @@ export class SettingsProfileComponent implements OnInit {
   displayName: string;
   photoURL = '';
   edit = false;
+  emailDisabled = false;
 
   toggleEdit() {
     this.edit = !this.edit;
@@ -36,6 +38,7 @@ export class SettingsProfileComponent implements OnInit {
       displayName: this.firstName + ' ' + this.lastName
     }).then(r => {
       this.toastr.success('Data saved successfully.', 'Success!');
+      this.toggleEdit();
     }).catch(r => {
       this.toastr.error('Data could not be saved' + r, 'Error!');
     });
@@ -50,20 +53,21 @@ export class SettingsProfileComponent implements OnInit {
     }
   }
 
-  splitName() {
-    if (this.firstName === 'First Name') {
-      let splitName = this.displayName.split(' ');
-      this.firstName = splitName[0];
-      this.lastName = splitName[1];
-      console.log(this.displayName);
+  checkIfSocialOnline() {
+    const providerData = firebase.auth().currentUser.providerData;
+    if (providerData[0].providerId === 'google.com' ||
+      providerData[0].providerId === 'facebook.com' ||
+      providerData[0].providerId === 'github.com') {
+      this.emailDisabled = true;
     }
   }
+
 
   ngOnInit(): void {
     this.dataService.getItems().subscribe(items => {
       this.items = items;
+      this.checkIfSocialOnline();
       this.getExtendedData(items);
-      this.splitName();
     });
 
     this.dataService.getCurrentUser().subscribe(user => {
