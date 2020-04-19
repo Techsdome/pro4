@@ -15,8 +15,11 @@
       <div *ngIf="!edit" id="col-md-3">
         <h2 *ngIf="firstName;">{{firstName + " " + lastName}}</h2>
         <p class="email">{{user.email}}</p>
-        <div *ngIf="!emailDisabled" class="alert alert-danger">
-          <p>{{user.emailVerified ? "Account not verified" : "Verified user"}}</p>
+        <div *ngIf="!user.emailVerified" class="alert alert-danger">
+          <p>"Account not verified"</p>
+        </div>
+        <div *ngIf="user.emailVerified" class="alert alert-success">
+          <p class="align-item-center">Verified Account</p>
         </div>
       </div>
 
