@@ -101,10 +101,7 @@ export class AuthService {
   // Sign in with Google
   GoogleAuth() {
     const google = new auth.GoogleAuthProvider();
-    this.AuthLogin(google).then(() => {
-      this.addExtraFields();
-    });
-    /*console.log(JSON.parse(JSON.stringify(google)));*/
+    this.AuthLogin(google).then(() => {});
   }
 
   addExtraFields() {
@@ -120,7 +117,6 @@ export class AuthService {
   // Sign in with Facebook
   FacebookAuth() {
     return this.AuthLogin(new auth.FacebookAuthProvider());
-    // this.addExtraFields();
   }
 
   GithubAuth() {
@@ -132,8 +128,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
         let usernew = result.additionalUserInfo.isNewUser;
-        console.log('Is this a new user ? => ' + usernew );
-        if (usernew !== true) {
+        if (usernew === true) {
           this.SetUserData(result.user);
         }
         this.ngZone.run(() => {

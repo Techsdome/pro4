@@ -14,7 +14,7 @@
         <p>{{user.emailVerified ? "No verified user" : "Verified user"}}</p>
       </div>
       <div *ngIf="!edit" id="col-md3">
-        <h2 *ngIf="firstName;">{{user.displayName ? user.displayName : firstName + " " + lastName}}</h2>
+        <h2 *ngIf="firstName;">{{firstName + " " + lastName}}</h2>
         <p class="email">{{user.email}}</p>
       </div>
       <div *ngIf="edit" class="col-md3">

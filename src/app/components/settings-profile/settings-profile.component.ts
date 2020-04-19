@@ -33,6 +33,7 @@ export class SettingsProfileComponent implements OnInit {
     this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
       firstname: this.firstName,
       lastname: this.lastName,
+      displayName: this.firstName + ' ' + this.lastName
     }).then(r => {
       this.toastr.success('Data saved successfully.', 'Success!');
     }).catch(r => {
