@@ -62,9 +62,6 @@ export class AuthService {
     });
   }
 
-
-
-
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
@@ -98,7 +95,7 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+    return (user !== null && user.emailVerified !== false);
   }
 
   // Sign in with Google
@@ -120,7 +117,7 @@ export class AuthService {
     });
   }
 
-  // Sign in with Facebooke
+  // Sign in with Facebook
   FacebookAuth() {
     return this.AuthLogin(new auth.FacebookAuthProvider());
     // this.addExtraFields();
@@ -134,11 +131,15 @@ export class AuthService {
   AuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
+        let usernew = result.additionalUserInfo.isNewUser;
+        console.log('Is this a new user ? => ' + usernew );
+        if (usernew !== true) {
+          this.SetUserData(result.user);
+        }
         this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
         });
-        this.SetUserData(result.user);
-        console.log(this.userData);
+        //console.log(this.userData);
       }).catch((error) => {
         window.alert(error);
       });

@@ -33,7 +33,6 @@ export class SettingsProfileComponent implements OnInit {
     this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
       firstname: this.firstName,
       lastname: this.lastName,
-      displayName: this.firstName + ' ' + this.lastName
     }).then(r => {
       this.toastr.success('Data saved successfully.', 'Success!');
     }).catch(r => {
@@ -46,28 +45,31 @@ export class SettingsProfileComponent implements OnInit {
       if (this.user.uid === item[it].uid) {
         this.firstName = item[it].firstname;
         this.lastName = item[it].lastname;
-        this.photoURL = item[it].photoURL;
-        this.displayName = item[it].displayName;
       }
     }
   }
 
-
+  splitName() {
+    if (this.firstName === 'First Name') {
+      let splitName = this.displayName.split(' ');
+      this.firstName = splitName[0];
+      this.lastName = splitName[1];
+      console.log(this.displayName);
+    }
+  }
 
   ngOnInit(): void {
     this.dataService.getItems().subscribe(items => {
       this.items = items;
       this.getExtendedData(items);
+      this.splitName();
     });
 
     this.dataService.getCurrentUser().subscribe(user => {
       this.user = user;
+      this.displayName = user.displayName;
+      this.photoURL = user.photoURL;
     });
-
-    let splitName = this.displayName.split(' ');
-    this.firstName = splitName[0];
-    this.lastName = splitName[1];
-
   }
 
 }
