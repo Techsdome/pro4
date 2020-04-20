@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 /*import { AngularFireAuth } from '@angular/fire/auth';*/
 import {AuthService} from '../../shared/services/auth.service';
-import * as firebase from '@firebase/app';
 import * as $ from 'jquery';
 
 @Component({
@@ -18,7 +17,6 @@ export class SignInComponent implements OnInit {
     constructor(
         public authService: AuthService
     ) {}
-
 
     toggleLoginRegister() {
         this.openMainLogin = !this.openMainLogin;

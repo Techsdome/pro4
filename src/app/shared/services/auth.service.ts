@@ -1,5 +1,4 @@
 import {Injectable, NgZone} from '@angular/core';
-import {User} from './user';
 import {auth} from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
@@ -7,6 +6,7 @@ import {Router} from '@angular/router';
 import {FirebaseDatabase} from '@angular/fire';
 import {Subject} from 'rxjs';
 import * as firebase from 'firebase';
+
 
 @Injectable({
     providedIn: 'root'
@@ -67,7 +67,7 @@ export class AuthService {
     }
 
     setSocialNames(name) {
-        let splitName = name.split(' ');
+        const splitName = name.split(' ');
         this.firstname = splitName[0];
         this.lastname = splitName[1];
     }
@@ -109,11 +109,26 @@ export class AuthService {
         return (user !== null && user.emailVerified !== false) ? true : false;
     }
 
-    // Sign in with Google
+    /*
+        get isLoggedIn(): boolean {
+            const user = JSON.parse(localStorage.getItem('user'));
+            return (user !== null && user.emailVerified !== false);
+        }
+    */
+
+    /*
+// Sign in with Google
+GoogleAuth() {
+    const google = new auth.GoogleAuthProvider();
+    this.AuthLogin(google).then(() => {
+        this.addExtraFields();
+    });
+}*/
+
+
     GoogleAuth() {
         const google = new auth.GoogleAuthProvider();
         this.AuthLogin(google).then(() => {
-            this.addExtraFields();
         });
     }
 
@@ -137,15 +152,17 @@ export class AuthService {
         return this.AuthLogin(new auth.GithubAuthProvider());
     }
 
-    // Auth logic to run auth providers
     AuthLogin(provider) {
         return this.afAuth.auth.signInWithPopup(provider)
             .then((result) => {
+                const usernew = result.additionalUserInfo.isNewUser;
+                if (usernew === true) {
+                    this.splitName(result.user);
+                    this.SetUserData(result.user);
+                }
                 this.ngZone.run(() => {
                     this.router.navigate(['dashboard']);
                 });
-                this.setSocialNames(result.user.displayName);
-                this.SetUserData(result.user);
             }).catch((error) => {
                 window.alert(error);
             });
@@ -182,5 +199,12 @@ export class AuthService {
             localStorage.removeItem('user');
             this.router.navigate(['sign-in']);
         });
+    }
+
+
+    splitName(currentUser) {
+        const splitName = currentUser.displayName.split(' ');
+        this.firstname = splitName[0];
+        this.lastname = splitName[1];
     }
 }

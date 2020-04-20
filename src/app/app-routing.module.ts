@@ -8,16 +8,10 @@ import {SignInComponent} from './components/sign-in/sign-in.component';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
-// import { AuthGuard } from "../../shared/guard/auth.guard";
 import {VerifyEmailComponent} from './components/verify-email/verify-email.component';
 import {ProjectPageComponent} from './components/project-page/project-page.component';
 import {NewProjectComponent} from './components/new-project/new-project.component';
-
-// Import canActivate guard services
-import {AuthGuard} from './shared/guard/auth.guard';
-import {SecureInnerPagesGuard} from './shared/guard/secure-inner-pages.guard';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
-import {InputfieldComponent} from './components/inputfield/inputfield.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {SettingsProfileComponent} from './components/settings-profile/settings-profile.component';
 import {SettingsSecurityComponent} from './components/settings-security/settings-security.component';
