@@ -47,7 +47,7 @@ export class CreatePostComponent implements OnInit {
             minutes: date.getMinutes(),
             second: date.getSeconds()
         });
-        this.authService.afs.doc(`generelPosts/${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').add({
+        this.authService.afs.doc(`generalPosts/${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').add({
             post: this.post,
             date: date.toLocaleDateString(),
             day: date.getUTCDate(),
@@ -57,7 +57,8 @@ export class CreatePostComponent implements OnInit {
             minutes: date.getMinutes(),
             second: date.getSeconds(),
             uid: this.authService.afAuth.auth.currentUser.uid,
-            photoURL: this.authService.afAuth.auth.currentUser.photoURL
+            photoURL: this.authService.afAuth.auth.currentUser.photoURL,
+            displayName: this.authService.afAuth.auth.currentUser.displayName
         });
     }
 

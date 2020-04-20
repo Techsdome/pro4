@@ -1,1 +1,13 @@
-<p>show-all-posts-main-feed works!</p>
+<ul>
+    <li *ngFor="let post of posts">
+    <div class="post-container">
+        <img [src]="photoURL" alt="profil picture" class="small-profile-picture image-shadow">
+        <div class="post">
+            <h4>{{post.displayName}} posted:</h4>
+            <p><strong>{{post.postDate}}</strong> | {{post.postHour}}:{{post.postMinutes}}, {{post.postSecond}} seconds</p>
+            <p>{{post.postText}}</p>
+        </div>
+    </div>
+        <app-parting-line></app-parting-line>
+    </li>
+</ul>

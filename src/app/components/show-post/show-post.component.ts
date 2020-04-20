@@ -13,6 +13,7 @@ export class ShowPostComponent implements OnInit {
     posts: any = [];
     photoURL: string;
 
+
     constructor(public authservice: AuthService) {
     }
 
