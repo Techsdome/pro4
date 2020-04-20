@@ -56,3 +56,10 @@ a:hover::before, a:focus::before {
     transform-origin: left top;
     transform: scale(1, 1);
 }
+
+@media only screen and (max-width: 630px){
+
+    #profile-menu-bar{
+        display: none !important;
+    }
+}

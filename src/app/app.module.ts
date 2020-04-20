@@ -49,6 +49,7 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
 import { SettingsProfileComponent } from './components/settings-profile/settings-profile.component';
 import { SettingsSecurityComponent } from './components/settings-security/settings-security.component';
 import { ShowPostComponent } from './components/show-post/show-post.component';
+import { ShowAllPostsMainFeedComponent } from './components/show-all-posts-main-feed/show-all-posts-main-feed.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { ShowPostComponent } from './components/show-post/show-post.component';
         SettingsProfileComponent,
         SettingsSecurityComponent,
         ShowPostComponent,
+        ShowAllPostsMainFeedComponent,
       // NgbdProgressbarShowvalue
 
     ],

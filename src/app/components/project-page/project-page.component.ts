@@ -5,7 +5,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
-import {User} from "../../shared/services/user";
+import {User} from '../../shared/services/user';
 
 @Component({
   selector: 'app-project-page',

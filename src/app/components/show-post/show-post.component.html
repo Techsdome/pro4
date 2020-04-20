@@ -7,7 +7,8 @@
         <img [src]="photoURL" alt="profil picture" class="small-profile-picture image-shadow">
         <div class="post">
             <h4>{{user.displayName}} posted:</h4>
-            <p>{{post}}</p>
+            <p><strong>{{post.postDate}}</strong> | {{post.postHour}}:{{post.postMinutes}}, {{post.postSecond}} seconds</p>
+            <p>{{post.postText}}</p>
         </div>
     </div>
         <app-parting-line></app-parting-line>
