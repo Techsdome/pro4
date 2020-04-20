@@ -40,9 +40,25 @@ export class CreatePostComponent implements OnInit {
         this.authService.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').add({
             post: this.post,
             date: date.toLocaleDateString(),
+            day: date.getUTCDate(),
+            month: (date.getUTCMonth() + 1),
+            year: date.getUTCFullYear(),
             hour: date.getHours(),
             minutes: date.getMinutes(),
             second: date.getSeconds()
+        });
+        this.authService.afs.doc(`generalPosts/${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').add({
+            post: this.post,
+            date: date.toLocaleDateString(),
+            day: date.getUTCDate(),
+            month: (date.getUTCMonth() + 1),
+            year: date.getUTCFullYear(),
+            hour: date.getHours(),
+            minutes: date.getMinutes(),
+            second: date.getSeconds(),
+            uid: this.authService.afAuth.auth.currentUser.uid,
+            photoURL: this.authService.afAuth.auth.currentUser.photoURL,
+            displayName: this.authService.afAuth.auth.currentUser.displayName
         });
     }
 

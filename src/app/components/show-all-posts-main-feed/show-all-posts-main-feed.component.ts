@@ -1,18 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
-import {ɵAnimationGroupPlayer} from '@angular/animations';
-import * as admin from 'firebase-admin';
 
 @Component({
-    selector: 'app-show-post',
-    templateUrl: './show-post.component.html',
-    styleUrls: ['./show-post.component.css']
+    selector: 'app-show-all-posts-main-feed',
+    templateUrl: './show-all-posts-main-feed.component.html',
+    styleUrls: ['./show-all-posts-main-feed.component.css']
 })
-export class ShowPostComponent implements OnInit {
+export class ShowAllPostsMainFeedComponent implements OnInit {
     user: any;
     posts: any = [];
     photoURL: string;
-
 
     constructor(public authservice: AuthService) {
     }
@@ -21,7 +18,7 @@ export class ShowPostComponent implements OnInit {
         this.authservice.getCurrentUser().subscribe((result) => {
             this.user = result;
             this.photoURL = result.photoURL;
-            this.authservice.afs.collection('users').doc(result.uid)
+            this.authservice.afs.collection('generalPosts').doc(result.uid)
                 .collection('posts').valueChanges()
                 .subscribe((val) => {
                     this.posts = [];
@@ -78,13 +75,13 @@ export class ShowPostComponent implements OnInit {
                             postText: value.post,
                             postHour: value.hour,
                             postMinutes: value.minutes,
-                            postSecond: value.second
+                            postSecond: value.second,
+                            photoURL: value.photoURL,
+                            displayName: value.displayName
                         };
-                        // this.posts.push(value.post);
                         this.posts.push(postObject);
                     });
                 });
         });
     }
-
 }

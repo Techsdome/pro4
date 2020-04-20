@@ -1,14 +1,15 @@
 
 #peopleButton {
-    background-image: url("https://www.pngitem.com/pimgs/m/524-5248250_2-people-icon-png-transparent-png.png");
+    background-image: url("https://cdn.onlinewebfonts.com/svg/img_286679.png");
 }
 
 #forumButton {
-    background-image: url("https://banner2.cleanpng.com/20180701/qyx/kisspng-computer-icons-online-chat-symbol-livechat-faceboo-5b38900a08f788.7773230315304335460367.jpg");
+    background-image: url("https://cdn.onlinewebfonts.com/svg/img_24038.png");
 }
 
 #chatButton {
-    background-image: url("https://www.pinclipart.com/picdir/middle/491-4917893_chat-icon-svg-png-icon-free-download-chat.png");
+    background-image: url("https://lh3.googleusercontent.com/proxy/hPfedjXL8wHB6O6tEdgrEFizWTBwpeaC9ThheEfCmOLWHuzne5c2JYy26zh0g_sRftIru75xUCwowpQhNs1MRfah4ZT4I_U");
+    padding: 3px;
 }
 
 .background-image-settings {
@@ -218,14 +219,6 @@
         display: none;
     }
 
-    #menuBar_left{
-        transition: 0.5s;
-        position: relative;
-        float: right;
-        margin-right: -60px;
-        top:-60px !important;
-    }
-
     #searchBar{
         margin:0 10px;
     }
@@ -236,5 +229,40 @@
 
     #mobile-menu-icon-container{
         display: grid;
+    }
+
+    #menuBar_left{
+        width: 100%;
+        height: 50px;
+        top: 92vh;
+    }
+
+    #sidebar-button-container{
+        display: flex !important;
+        margin-top: 0;
+        justify-content: center;
+        align-content: center;
+    }
+
+    #sidebar-button-container > *{
+        height: 50px;
+        width: 50px;
+        background-color: rgba(255,255,255,0.4);
+    }
+
+    .sidebar-button{
+        border-radius: 0;
+    }
+
+    #plusButton-container{
+        display: none;
+    }
+
+    #profileButtonSideBar{
+        /* display: none; */
+    }
+
+    #plusButton-container{
+        width: unset;
     }
 }
