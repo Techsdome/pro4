@@ -28,6 +28,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@nicky-lenaers/ngx-scroll-to": "^3.0.1",
     "angularfire2": "^5.4.2",
     "bootstrap": "^4.4.1",
     "firebase": "^7.11.0",
