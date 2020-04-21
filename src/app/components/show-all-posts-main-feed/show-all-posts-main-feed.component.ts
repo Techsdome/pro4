@@ -17,9 +17,8 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
     ngOnInit(): void {
         this.authservice.getCurrentUser().subscribe((result) => {
             this.user = result;
-            this.photoURL = result.photoURL;
-            this.authservice.afs.collection('generalPosts').doc(result.uid)
-                .collection('posts').valueChanges()
+            this.authservice.afs.collection('generalPosts').doc('allPosts')
+                .collection('post').valueChanges()
                 .subscribe((val) => {
                     this.posts = [];
                     val.sort((t1, t2) => {
@@ -79,6 +78,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
                             photoURL: value.photoURL,
                             displayName: value.displayName
                         };
+                        console.log(this.photoURL);
                         this.posts.push(postObject);
                     });
                 });
