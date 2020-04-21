@@ -89,6 +89,10 @@ form > div > label {
   }
 }
 
+.bg-black {
+  background-color: #000;
+}
+
 .img-responsive {
   width: 50%;
 }
@@ -131,11 +135,11 @@ form > div > label {
 }
 
 /* --- Arrow Animation --- */
-#arrow > .btn-circle {
+.arrow > .btn-circle, .arrow-up > .btn-circle{
   border: none;
 }
 
-#arrow a span {
+.arrow a span {
   position: absolute;
   top: 0;
   left: 50%;
@@ -146,9 +150,75 @@ form > div > label {
   border-bottom: 1px solid #fff;
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  -webkit-animation: sdb04 2s infinite;
-  animation: sdb04 2s infinite;
+  -webkit-animation: arrowDown 2s infinite;
+  animation: arrowDown 2s infinite;
   box-sizing: border-box;
+}
+
+.arrow-up a span {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+  -webkit-animation: arrowUp 2s infinite;
+  animation: arrowUp 2s infinite;
+  box-sizing: border-box;
+}
+
+/* --- Mobile Css ---*/
+
+@-webkit-keyframes arrowDown {
+  0% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+  }
+  20% {
+    -webkit-transform: rotate(-45deg) translate(-10px, 10px);
+  }
+  40% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+  }
+}
+
+@keyframes arrowDown {
+  0% {
+    transform: rotate(-45deg) translate(0, 0);
+  }
+  20% {
+    transform: rotate(-45deg) translate(-10px, 10px);
+  }
+  40% {
+    transform: rotate(-45deg) translate(0, 0);
+  }
+}
+
+@-webkit-keyframes arrowUp {
+  0% {
+    -webkit-transform: rotate(135deg) translate(0, 0);
+  }
+  20% {
+    -webkit-transform: rotate(135deg) translate(-10px, 10px);
+  }
+  40% {
+    -webkit-transform: rotate(135deg) translate(0, 0);
+  }
+}
+
+@keyframes arrowUp {
+  0% {
+    transform: rotate(135deg) translate(0, 0);
+  }
+  20% {
+    transform: rotate(135deg) translate(-10px, 10px);
+  }
+  40% {
+    transform: rotate(135deg) translate(0, 0);
+  }
 }
 
 /* --- Footer ---*/
@@ -313,31 +383,7 @@ form > div > label {
   }
 }
 
-/* --- Mobile Css ---*/
 
-@-webkit-keyframes sdb04 {
-  0% {
-    -webkit-transform: rotate(-45deg) translate(0, 0);
-  }
-  20% {
-    -webkit-transform: rotate(-45deg) translate(-10px, 10px);
-  }
-  40% {
-    -webkit-transform: rotate(-45deg) translate(0, 0);
-  }
-}
-
-@keyframes sdb04 {
-  0% {
-    transform: rotate(-45deg) translate(0, 0);
-  }
-  20% {
-    transform: rotate(-45deg) translate(-10px, 10px);
-  }
-  40% {
-    transform: rotate(-45deg) translate(0, 0);
-  }
-}
 
 .card {
   padding: 50px;
