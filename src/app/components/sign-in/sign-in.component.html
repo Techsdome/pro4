@@ -9,7 +9,7 @@
   </div>
 </nav>
 <!-- Site Header -->
-<header class="masthead">
+<header id="head" class="masthead">
   <div class="intro-body content-section d-md-flex h-md-100 align-items-center">
     <div id="login" class="col-md-6 p-0 h-md-100">
       <div class="text-white d-md-flex align-items-center h-100 p-5 justify-content-center">
@@ -107,8 +107,8 @@
       </div>
     </div>
   </div>
-  <div id="arrow" class="d-table-row">
-    <a class="btn btn-link btn-circle" role="button">
+  <div class="d-table-row arrow">
+    <a [ngx-scroll-to]="'#about'" class="btn btn-link btn-circle" role="button">
       <span></span>
     </a>
   </div>
@@ -194,6 +194,15 @@
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+<section class="bg-black text-center">
+  <div class="row">
+    <div class="col-lg-8 mx-auto arrow-up">
+        <a [ngx-scroll-to]="'#head'" class="btn btn-link btn-circle" role="button">
+          <span></span>
+        </a>
     </div>
   </div>
 </section>
