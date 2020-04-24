@@ -45,14 +45,53 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-3 btn-group p-2 h-25">
+    <div *ngIf="!edit" class="row">
+      <div class="col-md-2 offset-md-10 btn-group p-2">
         <button type="button" (click)="toggleEdit();"
-                class="btn btn-primary shadow-none btn-rounded">{{ edit == false ? 'Bearbeiten' : 'Abbrechen' }}</button>
-        <button type="button" (click)="updateFields();" class="btn btn-success shadow-none btn-rounded">Speichern
+                class="btn btn-primary shadow-none btn-rounded">Bearbeiten</button>
+      </div>
+    </div>
+    <div *ngIf="edit" class="row">
+      <div class="col-md-3 btn-group p-2">
+        <button type="button" class="btn shadow-none btn-rounded btn-danger" data-toggle="modal" data-target="#modalConfirmDelete">Account Löschen
         </button>
       </div>
+      <div class="col-md-2 offset-md-7 btn-group p-2">
+        <button type="button" (click)="toggleEdit();"
+                class="btn btn-primary shadow-none btn-rounded">Abbrechen</button>
+        <button *ngIf="edit" type="button" (click)="updateFields();" class="btn btn-success shadow-none btn-rounded">
+          Speichern
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
+<!--Modal: modalConfirmDelete-->
+<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <!--Content-->
+    <div class="modal-content text-center">
+      <!--Header-->
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Account löschen?</p>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a (click)="deleteAccount();" class="btn shadow-none btn-outline-danger">Ja</a>
+        <a type="button" class="btn  btn-danger shadow-none" data-dismiss="modal">Nein</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
 </div>
+<!--Modal: modalConfirmDelete-->

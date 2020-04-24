@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
 import {ToastrService} from 'ngx-toastr';
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,7 +16,8 @@ import * as firebase from "firebase";
 })
 export class SettingsProfileComponent implements OnInit {
 
-  constructor(private dataService: DataServiceService, private authService: AuthService, private toastr: ToastrService) {
+  constructor(private dataService: DataServiceService, private authService: AuthService, private ngZone: NgZone,
+              private afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService) {
   }
 
   items: Item[];
@@ -60,6 +63,18 @@ export class SettingsProfileComponent implements OnInit {
       providerData[0].providerId === 'github.com') {
       this.emailDisabled = true;
     }
+  }
+
+  deleteAccount() {
+    this.authService.afs.collection('users').doc(firebase.auth().currentUser.uid).delete().then(
+      r => firebase.auth().currentUser.delete().then((result) => {
+      this.ngZone.run(() => {
+        this.router.navigate(['sign-in']).then(() => window.location.reload());
+      });
+    }).catch((error) => {
+      window.alert(error.message);
+    }));
+
   }
 
 
