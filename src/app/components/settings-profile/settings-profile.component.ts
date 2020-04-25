@@ -92,8 +92,8 @@ export class SettingsProfileComponent implements OnInit {
             firebase.auth().currentUser.updateProfile({
               photoURL: url
             }).then(() => {
-              firebase.database().ref('users/' + this.user.uid).set({
-                photoURL: url
+              this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
+                photoURL: url,
               });
             });
           });
