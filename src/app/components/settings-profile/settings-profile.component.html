@@ -10,7 +10,13 @@
   <div *ngIf="user" id="user-data-container" class="container mx-0 my-5">
     <div class="row">
       <div class="col-md-2">
-        <img class="img-fluid rounded-lg z-depth-1-half" [src]="photoURL?photoURL:''" alt="">
+        <div class="view overlay">
+          <img class="img-fluid rounded-lg z-depth-1-half" [src]="photoURL?photoURL:''" alt="profilePic">
+          <div class="mask flex-center rgba-black-strong input-pic-wrapper">
+            <label for="picUpload"> <i class="fa fa-images text-white"></i></label>
+            <input (click)="fileUpload($event);" type="file" class="" id="picUpload">
+          </div>
+        </div>
       </div>
       <div *ngIf="!edit" id="col-md-3">
         <h2 *ngIf="firstName;">{{firstName + " " + lastName}}</h2>
@@ -48,17 +54,20 @@
     <div *ngIf="!edit" class="row">
       <div class="col-md-2 offset-md-10 btn-group p-2">
         <button type="button" (click)="toggleEdit();"
-                class="btn btn-primary shadow-none btn-rounded">Bearbeiten</button>
+                class="btn btn-primary shadow-none btn-rounded">Bearbeiten
+        </button>
       </div>
     </div>
     <div *ngIf="edit" class="row">
       <div class="col-md-3 btn-group p-2">
-        <button type="button" class="btn shadow-none btn-rounded btn-danger" data-toggle="modal" data-target="#modalConfirmDelete">Account Löschen
+        <button type="button" class="btn shadow-none btn-rounded btn-danger" data-toggle="modal"
+                data-target="#modalConfirmDelete">Account Löschen
         </button>
       </div>
       <div class="col-md-2 offset-md-7 btn-group p-2">
         <button type="button" (click)="toggleEdit();"
-                class="btn btn-primary shadow-none btn-rounded">Abbrechen</button>
+                class="btn btn-primary shadow-none btn-rounded">Abbrechen
+        </button>
         <button *ngIf="edit" type="button" (click)="updateFields();" class="btn btn-success shadow-none btn-rounded">
           Speichern
         </button>
@@ -95,3 +104,4 @@
   </div>
 </div>
 <!--Modal: modalConfirmDelete-->
+
