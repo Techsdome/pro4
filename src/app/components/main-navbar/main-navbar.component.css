@@ -41,7 +41,9 @@
 }
 
 #plusButton {
-    background-image: url("https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png");
+    background-image: url("../../../assets/icons/plusB.png");
+    height: 30px;
+    width: 30px;
     z-index: 10;
 }
 
@@ -90,6 +92,47 @@
     border: none;
     border-radius: 50px;
     background-color: #fff;
+}
+
+.sidebar-button:hover {
+  background-color: #1e7e34;
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.bubble {
+  position: absolute;
+  z-index: -2;
+  background-color: #721c24;
+  transition: all 0.5s ease;
+  width: 45px;
+  height: 45px;
+  left: 17px;
+  border-radius: 50%;
+}
+
+.slide-directory {
+  position: absolute;
+  z-index: -2;
+  background-color: #721c24;
+  transition: all 0.5s ease;
+  width: 45px;
+  height: 45px;
+  left: 17px;
+  border-radius: 50%;
+  transform: translate(0px, 150px);
+}
+
+.slide-pep {
+  position: absolute;
+  z-index: -2;
+  background-color: #721c24;
+  transition: all 0.5s ease;
+  width: 45px;
+  height: 45px;
+  left: 17px;
+  border-radius: 50%;
+  transform: translate(0px, 200px);
 }
 
 .button-image {
@@ -178,8 +221,9 @@
 }
 
 #menuBar_left {
-    width: 60px;
-    height: 100%;
+    width: 4rem;
+    height: 100vh;
+    position: fixed;
 }
 
 #mobile-menu-icon-container hr{
