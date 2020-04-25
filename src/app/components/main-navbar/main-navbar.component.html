@@ -40,7 +40,7 @@
     <img [src]="photoURL" class="background-image-settings sidebar-button" id="profileButtonSideBar">
     </div>
 
-    <div id="plusButton-container" class="navi">
+    <div id="plusButton-container">
       <div [class]="status ? 'translateProject' : 'hide'">
         <input type="button" class="background-image-settings sidebar-button animation-button3 opacity-05"
                id="projectButton" type="button" type="button" (click)="animateOn()">
@@ -60,7 +60,7 @@
     </div>
 
     <div class="navi">
-      <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="'/dashboard'" type="button">
+      <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="['/dashboard']" type="button">
     </div>
 
     <div class="navi">
@@ -83,7 +83,7 @@
 
   <div id="sidebar-link-container">
     <span class="link-text">Profile</span>
-    <span class="link-text">Create</span>
+    <span class="link-text" (click)="animateOn()">Create</span>
     <span class="link-text">Home</span>
     <span class="link-text">Directory</span>
     <span class="link-text">People</span>
