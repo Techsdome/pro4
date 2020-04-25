@@ -60,3 +60,15 @@ a:hover::before, a:focus::before {
   transform-origin: left top;
   transform: scale(1, 1);
 }
+
+#file-input {
+  display: none;
+}
+
+.input-pic-wrapper > label > i {
+  cursor: pointer;
+}
+
+.input-pic-wrapper > input {
+  display: none;
+}

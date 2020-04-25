@@ -28,6 +28,7 @@ export class SettingsProfileComponent implements OnInit {
   photoURL = '';
   edit = false;
   emailDisabled = false;
+  file: File;
 
   toggleEdit() {
     this.edit = !this.edit;
@@ -75,6 +76,35 @@ export class SettingsProfileComponent implements OnInit {
       window.alert(error.message);
     }));
 
+  }
+
+  fileUpload(e: any) {
+    let uploadPicInput = document.getElementById('picUpload');
+    uploadPicInput.click();
+    uploadPicInput.addEventListener('change', () => {
+      this.file = e.target.files[0];
+
+      firebase.storage().ref(`Users/${this.user.uid}/profilePic/profilePic`).put(this.file).then(
+        (snapshot) => {
+          this.toastr.success('Upload successfully.', 'Success!');
+
+          snapshot.ref.getDownloadURL().then((url) => {
+            firebase.auth().currentUser.updateProfile({
+              photoURL: url
+            }).then(() => {
+              firebase.database().ref('users/' + this.user.uid).set({
+                photoURL: url
+              });
+            });
+          });
+        }).catch( (error) => {
+        this.toastr.error('Data could not be saved!\n' + error.code, 'Error!');
+        console.log(error);
+      }).catch( (error) => {
+        this.toastr.error('Data could not be saved!\n' + error.code, 'Error!');
+        console.log(error);
+      });
+    });
   }
 
 
