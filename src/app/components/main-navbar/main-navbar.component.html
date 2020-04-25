@@ -36,9 +36,11 @@
 
   <div id="sidebar-button-container">
 
+    <div class="navi">
     <img [src]="photoURL" class="background-image-settings sidebar-button" id="profileButtonSideBar">
+    </div>
 
-    <div id="plusButton-container">
+    <div id="plusButton-container" class="navi">
       <div [class]="status ? 'translateProject' : 'hide'">
         <input type="button" class="background-image-settings sidebar-button animation-button3 opacity-05"
                id="projectButton" type="button" type="button" (click)="animateOn()">
@@ -57,18 +59,39 @@
       <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
     </div>
 
-    <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="'/dashboard'" type="button">
-    <input class="background-image-settings sidebar-button" id="directoryButton" type="button" (mouseover)="slideIt('dir')">
-    <input class="background-image-settings sidebar-button" id="peopleButton" type="button" (mouseover)="slideIt('pep')">
-    <input class="background-image-settings sidebar-button" id="forumButton" type="button">
-    <input class="background-image-settings sidebar-button" id="chatButton" type="button">
+    <div class="navi">
+      <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="'/dashboard'" type="button">
+    </div>
 
-    <div [ngSwitch]="stat">
-      <div *ngSwitchCase="'dir'" class="slide-directory" ></div>
-      <div *ngSwitchCase="'pep'" class="slide-pep"></div>
+    <div class="navi">
+    <input class="background-image-settings sidebar-button" id="directoryButton" type="button" (mouseover)="slideIt('dir')">
+    </div>
+
+    <div class="navi">
+    <input class="background-image-settings sidebar-button" id="peopleButton" type="button" (mouseover)="slideIt('pep')">
+    </div>
+
+    <div class="navi">
+    <input class="background-image-settings sidebar-button" id="forumButton" type="button">
+    </div>
+
+    <div class="navi">
+    <input class="background-image-settings sidebar-button" id="chatButton" type="button">
     </div>
 
   </div>
+
+  <div id="sidebar-link-container">
+    <span class="link-text">Profile</span>
+    <span class="link-text">Create</span>
+    <span class="link-text">Home</span>
+    <span class="link-text">Directory</span>
+    <span class="link-text">People</span>
+    <span class="link-text">Forum</span>
+    <span class="link-text">Chat</span>
+  </div>
+
+
 </div>
 
 
