@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
-import { ToastrService } from 'ngx-toastr';
-
+import {ToastrService} from 'ngx-toastr';
+import * as firebase from 'firebase';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,26 +16,32 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SettingsProfileComponent implements OnInit {
 
-  constructor(private dataService: DataServiceService, private authService: AuthService, private toastr: ToastrService) { }
+  constructor(private dataService: DataServiceService, private authService: AuthService, private ngZone: NgZone,
+              private afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService) {
+  }
 
   items: Item[];
   user: User;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
+  displayName: string;
   photoURL = '';
   edit = false;
+  emailDisabled = false;
 
   toggleEdit() {
     this.edit = !this.edit;
   }
 
+
   updateFields() {
     this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
-      firstname: this.firstname,
-      lastname: this.lastname,
-      displayName: this.firstname + ' ' + this.lastname
+      firstname: this.firstName,
+      lastname: this.lastName,
+      displayName: this.firstName + ' ' + this.lastName
     }).then(r => {
       this.toastr.success('Data saved successfully.', 'Success!');
+      this.toggleEdit();
     }).catch(r => {
       this.toastr.error('Data could not be saved' + r, 'Error!');
     });
@@ -42,22 +50,45 @@ export class SettingsProfileComponent implements OnInit {
   getExtendedData(item) {
     for (const it in item) {
       if (this.user.uid === item[it].uid) {
-        this.firstname = item[it].firstname;
-        this.lastname = item[it].lastname;
-        this.photoURL = item[it].photoURL;
+        this.firstName = item[it].firstname;
+        this.lastName = item[it].lastname;
       }
     }
+  }
+
+  checkIfSocialOnline() {
+    const providerData = firebase.auth().currentUser.providerData;
+    if (providerData[0].providerId === 'google.com' ||
+      providerData[0].providerId === 'facebook.com' ||
+      providerData[0].providerId === 'github.com') {
+      this.emailDisabled = true;
+    }
+  }
+
+  deleteAccount() {
+    this.authService.afs.collection('users').doc(firebase.auth().currentUser.uid).delete().then(
+      r => firebase.auth().currentUser.delete().then((result) => {
+      this.ngZone.run(() => {
+        this.router.navigate(['sign-in']).then(() => window.location.reload());
+      });
+    }).catch((error) => {
+      window.alert(error.message);
+    }));
+
   }
 
 
   ngOnInit(): void {
     this.dataService.getItems().subscribe(items => {
       this.items = items;
+      this.checkIfSocialOnline();
       this.getExtendedData(items);
     });
 
     this.dataService.getCurrentUser().subscribe(user => {
       this.user = user;
+      this.displayName = user.displayName;
+      this.photoURL = user.photoURL;
     });
   }
 

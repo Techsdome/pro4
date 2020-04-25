@@ -11,31 +11,87 @@
     <div class="row">
       <div class="col-md-2">
         <img class="img-fluid rounded-lg z-depth-1-half" [src]="photoURL?photoURL:''" alt="">
-        <p>{{user.emailVerified ? "No verified user" : "Verified user"}}</p>
       </div>
-      <div *ngIf="!edit" id="col-md3">
-        <h2 *ngIf="firstname;">{{user.displayName ? user.displayName : firstname + " " + lastname}}</h2>
+      <div *ngIf="!edit" id="col-md-3">
+        <h2 *ngIf="firstName;">{{firstName + " " + lastName}}</h2>
         <p class="email">{{user.email}}</p>
+        <div *ngIf="!user.emailVerified" class="alert alert-danger">
+          <p>"Account not verified"</p>
+        </div>
+        <div *ngIf="user.emailVerified" class="alert alert-success">
+          <p class="align-item-center">Verified Account</p>
+        </div>
       </div>
-      <div *ngIf="edit" class="col-md3">
+
+      <div *ngIf="edit" class="col-md-3">
         <div class="md-form form-group">
-          <input mdInput mdValidate [(ngModel)]="firstname" id="input_fN" type="text"  class="form-control" required>
+          <input mdInput mdValidate [(ngModel)]="firstName" id="input_fN" type="text" class="form-control" required>
           <label class="active" for="input_fN">Vorname</label>
         </div>
 
         <div class="md-form form-group">
-          <input mdInput mdValidate [(ngModel)]="lastname" id="input_sN" type="text" placeholder="{{ lastname }}" class="form-control" required>
+          <input mdInput mdValidate [(ngModel)]="lastName" id="input_sN" type="text" placeholder="{{ lastName }}"
+                 class="form-control" required>
           <label class="active" for="input_sN">Nachname</label>
         </div>
       </div>
+      <div *ngIf="edit" class="col-md-3">
+        <div class="md-form form-group">
+          <input mdInput mdValidate class="form-control" type="text" id="input_email" placeholder="{{ user.email }}"
+                 [disabled]="emailDisabled" required>
+          <label class="active" for="input_email">Email</label>
+          <small *ngIf="emailDisabled" id="emailHelp2" class="form-text text-muted">Email can not be modified if you are
+            registered with Social Network.</small>
+        </div>
+      </div>
     </div>
-    <div class="row">
-      <div class="col-md-3 btn-group">
+    <div *ngIf="!edit" class="row">
+      <div class="col-md-2 offset-md-10 btn-group p-2">
         <button type="button" (click)="toggleEdit();"
-                class="btn btn-primary shadow-none btn-rounded">{{ edit == false ? 'Bearbeiten' : 'Abbrechen' }}</button>
-        <button type="button" (click)="updateFields();" class="btn btn-success shadow-none btn-rounded">Speichern</button>
+                class="btn btn-primary shadow-none btn-rounded">Bearbeiten</button>
+      </div>
+    </div>
+    <div *ngIf="edit" class="row">
+      <div class="col-md-3 btn-group p-2">
+        <button type="button" class="btn shadow-none btn-rounded btn-danger" data-toggle="modal" data-target="#modalConfirmDelete">Account Löschen
+        </button>
+      </div>
+      <div class="col-md-2 offset-md-7 btn-group p-2">
+        <button type="button" (click)="toggleEdit();"
+                class="btn btn-primary shadow-none btn-rounded">Abbrechen</button>
+        <button *ngIf="edit" type="button" (click)="updateFields();" class="btn btn-success shadow-none btn-rounded">
+          Speichern
+        </button>
       </div>
     </div>
   </div>
-
 </div>
+
+<!--Modal: modalConfirmDelete-->
+<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <!--Content-->
+    <div class="modal-content text-center">
+      <!--Header-->
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Account löschen?</p>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a (click)="deleteAccount();" class="btn shadow-none btn-outline-danger">Ja</a>
+        <a type="button" class="btn  btn-danger shadow-none" data-dismiss="modal">Nein</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: modalConfirmDelete-->

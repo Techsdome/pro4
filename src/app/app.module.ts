@@ -9,6 +9,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+
 
 // Firebase services + enviorment module
 import {AngularFireModule} from '@angular/fire';
@@ -48,6 +50,8 @@ import { ProfileMenuComponent } from './components/profile-menu/profile-menu.com
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { SettingsProfileComponent } from './components/settings-profile/settings-profile.component';
 import { SettingsSecurityComponent } from './components/settings-security/settings-security.component';
+import { ShowPostComponent } from './components/show-post/show-post.component';
+import { ShowAllPostsMainFeedComponent } from './components/show-all-posts-main-feed/show-all-posts-main-feed.component';
 
 
 @NgModule({
@@ -77,6 +81,8 @@ import { SettingsSecurityComponent } from './components/settings-security/settin
         CreatePostComponent,
         SettingsProfileComponent,
         SettingsSecurityComponent,
+        ShowPostComponent,
+        ShowAllPostsMainFeedComponent,
       // NgbdProgressbarShowvalue
 
     ],
@@ -94,7 +100,9 @@ import { SettingsSecurityComponent } from './components/settings-security/settin
         AngularFireStorageModule,
         AngularFireDatabaseModule,
         FontAwesomeModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        ScrollToModule.forRoot()
+
     ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective],
     bootstrap: [AppComponent]

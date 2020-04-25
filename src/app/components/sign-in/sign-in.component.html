@@ -9,7 +9,7 @@
   </div>
 </nav>
 <!-- Site Header -->
-<header class="masthead">
+<header id="head" class="masthead">
   <div class="intro-body content-section d-md-flex h-md-100 align-items-center">
     <div id="login" class="col-md-6 p-0 h-md-100">
       <div class="text-white d-md-flex align-items-center h-100 p-5 justify-content-center">
@@ -40,13 +40,13 @@
           <hr>
           <div id="socialBtnGroup" class="btn-group-justified">
             <div class="btn-group" role="group">
-              <a (click)="authService.FacebookAuth()"><i class="fa fa-facebook"></i></a>
+              <a (click)="authService.FacebookAuth()"><i class="fab fa-facebook"></i></a>
             </div>
             <div class="btn-group" role="group">
-              <a (click)="authService.GoogleAuth()"><i class="fa fa-google-plus"></i></a>
+              <a (click)="authService.GoogleAuth()"><i class="fab fa-google-plus-g"></i></a>
             </div>
             <div class="btn-group" role="group">
-              <a (click)="authService.GithubAuth()"><i class="fa fa-github"></i></a>
+              <a (click)="authService.GithubAuth()"><i class="fab fa-github"></i></a>
             </div>
           </div>
         </form>
@@ -107,8 +107,8 @@
       </div>
     </div>
   </div>
-  <div id="arrow" class="d-table-row">
-    <a class="btn btn-link btn-circle" role="button">
+  <div class="d-table-row arrow">
+    <a [ngx-scroll-to]="'#about'" class="btn btn-link btn-circle" role="button">
       <span></span>
     </a>
   </div>
@@ -184,16 +184,25 @@
         <p>Feel free to leave comments...</p>
         <ul class="list-inline banner-social-buttons">
           <li class="list-inline-item">&nbsp;<button class="btn btn-outline-style" type="button"><i
-            class="fa fa-google-plus fa-fw"></i><span class="network-name">&nbsp; Google+</span></button>
+            class="fab fa-google-plus-g fa-fw"></i><span class="network-name">&nbsp; Google+</span></button>
           </li>
           <li class="list-inline-item">&nbsp;<button class="btn btn-outline-style" type="button"><i
-            class="fa fa-twitter fa-fw"></i><span class="network-name">&nbsp;Twitter</span></button>
+            class="fab fa-twitter fa-fw"></i><span class="network-name">&nbsp;Twitter</span></button>
           </li>
           <li class="list-inline-item">&nbsp;<button class="btn btn-outline-style" type="button"><i
-            class="fa fa-github fa-fw"></i><span class="network-name">&nbsp;github</span></button>
+            class="fab fa-github fa-fw"></i><span class="network-name">&nbsp;github</span></button>
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+<section class="bg-black text-center">
+  <div class="row">
+    <div class="col-lg-8 mx-auto arrow-up">
+        <a [ngx-scroll-to]="'#head'" class="btn btn-link btn-circle" role="button">
+          <span></span>
+        </a>
     </div>
   </div>
 </section>
@@ -240,9 +249,9 @@
 
       <div class="col-md-4 col-sm-6 col-xs-12">
         <ul class="social-icons">
-          <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-          <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-          <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+          <li><a class="facebook" href="#"><i class="fab fa-facebook"></i></a></li>
+          <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+          <li><a class="linkedin" href="#"><i class="fab fa-linkedin"></i></a></li>
         </ul>
       </div>
     </div>

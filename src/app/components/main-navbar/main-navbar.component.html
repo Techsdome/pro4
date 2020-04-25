@@ -17,6 +17,7 @@
     </div>
   </div>
 
+<!--
   <div (click)="showMenuBar()" id="mobile-menu-icon-container">
     <div></div>
     <div></div>
@@ -27,6 +28,7 @@
     <div></div>
   </div>
 </div>
+-->
 
 <div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" [routerLink]="['/app-user-profile']"
      class="black-standard-color">
@@ -34,7 +36,7 @@
 
   <div id="sidebar-button-container">
 
-    <img [src]="photoURL" class="background-image-settings sidebar-button">
+    <img [src]="photoURL" class="background-image-settings sidebar-button" id="profileButtonSideBar">
 
     <div id="plusButton-container">
       <div [class]="status ? 'translateProject' : 'hide'">
