@@ -28,15 +28,15 @@
 }
 
 #questionButton {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/1200px-Icon-round-Question_mark.svg.png");
+  background-image: url("../../../assets/icons/q.svg");
 }
 
 #messageButton {
-    background-image: url("https://images.vexels.com/media/users/3/136808/isolated/preview/d3455a22af5f3ed7565fb5fb71bb8d43-send-message-icon-by-vexels.png");
+  background-image: url("../../../assets/icons/talk.svg");
 }
 
 #projectButton {
-    background-image: url("https://img.icons8.com/carbon-copy/2x/pencil.png");
+  background-image: url("../../../assets/icons/pen.svg");
 }
 
 #plusButton {
@@ -51,12 +51,6 @@
     width: 100%;
     display: grid;
     justify-self: center;
-}
-
-.navi {
-  z-index: -3;
-  width: 30px;
-  height: 30px;
 }
 
 #sidebar-button-container {
@@ -109,7 +103,6 @@
 
 .link-text {
   display: none;
-  justify-content: center !important;
   color: #fff;
   margin-left: 55px;
   filter: grayscale(100%) opacity(0.7);
@@ -128,37 +121,14 @@
 
 .bubble {
   position: absolute;
-  z-index: -2;
-  background-color: #721c24;
-  transition: all 0.5s ease;
+  z-index: -4;
+  background-color: #fff;
+  top: 245px;
   width: 45px;
   height: 45px;
-  left: 17px;
+  left: 8px;
   border-radius: 50%;
-}
-
-.slide-directory {
-  position: absolute;
-  z-index: -2;
-  background-color: #721c24;
-  transition: all 0.5s ease;
-  width: 45px;
-  height: 45px;
-  left: 17px;
-  border-radius: 50%;
-  transform: translate(0px, 150px);
-}
-
-.slide-pep {
-  position: absolute;
-  z-index: -2;
-  background-color: #721c24;
-  transition: all 0.5s ease;
-  width: 45px;
-  height: 45px;
-  left: 17px;
-  border-radius: 50%;
-  transform: translate(0px, 200px);
+  transition: 300ms;
 }
 
 .button-image {
@@ -167,6 +137,15 @@
 
 #directoryButton {
   background-image: url("../../../assets/icons/dir.svg");
+}
+
+#directoryButton:hover {
+  background-image: url("../../../assets/icons/house.svg");
+}
+
+#directoryButton:hover .bubble {
+  transform: translate(0px, 200px);
+  background-color: green;
 }
 
 #houseButton {
@@ -260,7 +239,7 @@
 }
 
 #menuBar_left:hover .link-text {
-    display: block !important;
+  display: grid;
 }
 
 #menuBar_left:hover #round {
@@ -296,6 +275,16 @@
 
 #menuBar_top{
     overflow: hidden;
+}
+
+.navi {
+  width: 30px;
+  height: 30px;
+}
+
+.dir:hover .bubble {
+  transform: translate(0px, 200px);
+  background-color: green;
 }
 
 @media only screen and (max-width: 630px){
