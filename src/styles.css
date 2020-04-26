@@ -148,6 +148,12 @@ body {
     display: none;
 }
 
+.commentField{
+    resize: none;
+    width: 80%;
+    height: 100px;
+}
+
 .button:hover {
     cursor: pointer;
 }
