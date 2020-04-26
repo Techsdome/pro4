@@ -100,7 +100,9 @@ import { ShowAllPostsMainFeedComponent } from './components/show-all-posts-main-
         AngularFireStorageModule,
         AngularFireDatabaseModule,
         FontAwesomeModule,
-        ToastrModule.forRoot(),
+        ToastrModule.forRoot({
+          preventDuplicates: true,
+        }),
         ScrollToModule.forRoot()
 
     ],

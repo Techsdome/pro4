@@ -10,8 +10,13 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
     user: any;
     posts: any = [];
     photoURL: string;
+    edit = false;
 
     constructor(public authservice: AuthService) {
+    }
+
+    openComment() {
+        this.edit = !this.edit;
     }
 
     ngOnInit(): void {

@@ -6,6 +6,13 @@
             <h4>{{post.displayName}} posted:</h4>
             <p><strong>{{post.postDate}}</strong> | {{post.postHour}}:{{post.postMinutes}}, {{post.postSecond}} seconds</p>
             <p>{{post.postText}}</p>
+            <button class="boderButton button" (click)="openComment()">Comment</button>
+                            <strong>muss ich als eigenen component machen!!</strong>
+
+            <div [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'">
+                <textarea name="comment" id="comment" class="commentField" cols="30" rows="10"></textarea>
+                <button class="boderButton button" (click)="openComment()">Save</button>
+            </div>
         </div>
     </div>
         <app-parting-line></app-parting-line>
