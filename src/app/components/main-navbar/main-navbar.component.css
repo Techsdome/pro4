@@ -46,7 +46,6 @@
     z-index: 10;
 }
 
-
 #plusButton-container {
     width: 100%;
     display: grid;
@@ -58,19 +57,10 @@
     width: 100%;
     display: grid;
     grid-template-rows: repeat(7, 1fr);
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 35px);
     grid-gap: 20px;
     height: max-content;
     margin-top: 150px;
-}
-
-#sidebar-link-container {
-  z-index: 0;
-  transform: translate(0px, -330px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 330px;
 }
 
 .top-100margin {
@@ -101,9 +91,9 @@
 }
 
 .link-text {
-  display: none;
+  visibility: hidden;
   color: #F3F4F6;
-  margin-left: 55px;
+  margin-left: 0px;
   filter: grayscale(100%) opacity(0.7);
   transition: 300ms;
 }
@@ -116,12 +106,6 @@
   filter: grayscale(0%) opacity(1);
 }
 
-.sidebar-button:hover {
-  background-color: #1e7e34;
-  opacity: 1;
-  transform: scaleY(1);
-}
-
 .bubble {
   z-index: -4;
   position: absolute;
@@ -130,7 +114,7 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  transition: 300ms;
+  transition: 500ms;
 }
 
 .wings {
@@ -152,13 +136,8 @@
   background-image: url("../../../assets/icons/dir.svg");
 }
 
-#directoryButton:hover {
-  background-image: url("../../../assets/icons/house.svg");
-}
-
-#directoryButton:hover .bubble {
-  transform: translate(0px, 200px);
-  background-color: green;
+#directoryButton:hover ~ .bubble {
+  transform: translate(0px, 50px);
 }
 
 #houseButton {
@@ -252,7 +231,8 @@
 }
 
 #menuBar_left:hover .link-text {
-  display: flex;
+  visibility: visible;
+  display: block;
 }
 
 #menuBar_left:hover #round {

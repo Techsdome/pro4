@@ -30,17 +30,17 @@
 </div>
 -->
 
+
+
 <div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" [routerLink]="['/app-user-profile']"
      class="black-standard-color">
   <div id="round"></div>
 
-  <div class="bubble"></div>
-  <div class="wings"></div>
 
   <div id="sidebar-button-container">
 
-
-    <img [src]="photoURL" class="background-image-settings sidebar-button" id="profileButtonSideBar">
+    <img [src]="photoURL" class="background-image-settings sidebar-button" id="profileButtonSideBar" [routerLink]="'/app-user-profile'" >
+    <span class="link-text">Profile</span>
 
 
     <div id="plusButton-container">
@@ -61,29 +61,27 @@
       </div>
       <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
     </div>
+    <span class="link-text" (click)="animateOn()">Create</span>
 
 
     <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="['/dashboard']" type="button">
+    <span class="link-text home">Home</span>
 
     <input class="background-image-settings sidebar-button" id="directoryButton" type="button">
+    <span class="link-text dir">Directory</span>
 
     <input class="background-image-settings sidebar-button" id="peopleButton" type="button">
+    <span class="link-text">People</span>
 
     <input class="background-image-settings sidebar-button" id="forumButton" type="button">
+    <span class="link-text">Forum</span>
 
     <input class="background-image-settings sidebar-button" id="chatButton" type="button">
-
-
-  </div>
-
-  <div id="sidebar-link-container">
-    <span class="link-text">Profile</span>
-    <span class="link-text" (click)="animateOn()">Create</span>
-    <span class="link-text home">Home</span>
-    <span class="link-text dir">Directory</span>
-    <span class="link-text">People</span>
-    <span class="link-text">Forum</span>
     <span class="link-text">Chat</span>
+
+    <div class="bubble"></div>
+    <div class="wings"></div>
+
   </div>
 
 
