@@ -29,6 +29,7 @@ export class SettingsProfileComponent implements OnInit {
   edit = false;
   emailDisabled = false;
   file: File;
+  progress: any = 0;
 
   toggleEdit() {
     this.edit = !this.edit;
@@ -69,12 +70,12 @@ export class SettingsProfileComponent implements OnInit {
   deleteAccount() {
     this.authService.afs.collection('users').doc(firebase.auth().currentUser.uid).delete().then(
       r => firebase.auth().currentUser.delete().then((result) => {
-      this.ngZone.run(() => {
-        this.router.navigate(['sign-in']).then(() => window.location.reload());
-      });
-    }).catch((error) => {
-      window.alert(error.message);
-    }));
+        this.ngZone.run(() => {
+          this.router.navigate(['sign-in']).then(() => window.location.reload());
+        });
+      }).catch((error) => {
+        window.alert(error.message);
+      }));
 
   }
 
@@ -84,7 +85,26 @@ export class SettingsProfileComponent implements OnInit {
     uploadPicInput.addEventListener('change', () => {
       this.file = e.target.files[0];
 
-      firebase.storage().ref(`Users/${this.user.uid}/profilePic/profilePic`).put(this.file).then(
+      let uploadTask = firebase.storage().ref(`Users/${this.user.uid}/profilePic/profilePic`).put(this.file);
+      uploadTask.on('state_changed', (snapshot) => {
+        this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      }, (error) => {
+        this.toastr.error('Data could not be saved!\n' + error.message, 'Error!');
+        console.log(error);
+      }, () => {
+        this.toastr.success('Upload successfully.', 'Success!');
+        this.progress = 0;
+        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+          firebase.auth().currentUser.updateProfile({
+            photoURL: url
+          }).then(() => {
+            this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
+              photoURL: url,
+            });
+          });
+        });
+      });
+      /*const uploadTask = firebase.storage().ref(`Users/${this.user.uid}/profilePic/profilePic`).put(this.file).then(
         (snapshot) => {
           this.toastr.success('Upload successfully.', 'Success!');
           snapshot.ref.getDownloadURL().then((url) => {
@@ -96,16 +116,15 @@ export class SettingsProfileComponent implements OnInit {
               });
             });
           });
-        }).catch( (error) => {
+        }).catch((error) => {
         this.toastr.error('Data could not be saved!\n' + error.code, 'Error!');
         console.log(error);
-      }).catch( (error) => {
+      }).catch((error) => {
         this.toastr.error('Data could not be saved!\n' + error.code, 'Error!');
         console.log(error);
-      });
+      });*/
     });
   }
-
 
   ngOnInit(): void {
     this.dataService.getItems().subscribe(items => {

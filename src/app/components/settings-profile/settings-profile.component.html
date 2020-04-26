@@ -17,6 +17,10 @@
             <input (click)="fileUpload($event);" type="file" class="" id="picUpload">
           </div>
         </div>
+        <div class="progress form-group p-1" *ngIf="progress > 0">
+          <div class="progress-bar" role="progressbar" [style.width.%]="progress">
+          </div>
+        </div>
       </div>
       <div *ngIf="!edit" id="col-md-3">
         <h2 *ngIf="firstName;">{{firstName + " " + lastName}}</h2>
