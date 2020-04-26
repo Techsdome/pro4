@@ -133,6 +133,17 @@
   transition: 300ms;
 }
 
+.wings {
+  z-index: -4;
+  position: absolute;
+  background-image: url("../../../assets/icons/pwings.svg");
+  top: 192px;
+  width: 150px;
+  height: 150px;
+  margin-left: -21px;
+  transition: 200ms ease;
+}
+
 .button-image {
     width: 100%;
 }
@@ -279,7 +290,8 @@
     overflow: hidden;
 }
 
-#menuBar_left:hover .bubble {
+#menuBar_left:hover .wings {
+  transform: translate(68px, 0px);
 }
 
 @media only screen and (max-width: 630px){
