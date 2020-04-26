@@ -38,9 +38,9 @@
 
   <div id="sidebar-button-container">
 
-    <div class="navi">
+
     <img [src]="photoURL" class="background-image-settings sidebar-button" id="profileButtonSideBar">
-    </div>
+
 
     <div id="plusButton-container">
       <div [class]="status ? 'translateProject' : 'hide'">
@@ -61,32 +61,24 @@
       <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
     </div>
 
-    <div class="navi">
-      <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="['/dashboard']" type="button">
-    </div>
 
-    <div class="navi">
+    <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="['/dashboard']" type="button">
+
     <input class="background-image-settings sidebar-button" id="directoryButton" type="button">
-    </div>
 
-    <div class="navi">
     <input class="background-image-settings sidebar-button" id="peopleButton" type="button">
-    </div>
 
-    <div class="navi">
     <input class="background-image-settings sidebar-button" id="forumButton" type="button">
-    </div>
 
-    <div class="navi">
     <input class="background-image-settings sidebar-button" id="chatButton" type="button">
-    </div>
+
 
   </div>
 
   <div id="sidebar-link-container">
     <span class="link-text">Profile</span>
     <span class="link-text" (click)="animateOn()">Create</span>
-    <span class="link-text">Home</span>
+    <span class="link-text home">Home</span>
     <span class="link-text dir">Directory</span>
     <span class="link-text">People</span>
     <span class="link-text">Forum</span>
