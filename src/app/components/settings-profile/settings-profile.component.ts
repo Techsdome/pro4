@@ -87,7 +87,6 @@ export class SettingsProfileComponent implements OnInit {
       firebase.storage().ref(`Users/${this.user.uid}/profilePic/profilePic`).put(this.file).then(
         (snapshot) => {
           this.toastr.success('Upload successfully.', 'Success!');
-
           snapshot.ref.getDownloadURL().then((url) => {
             firebase.auth().currentUser.updateProfile({
               photoURL: url
