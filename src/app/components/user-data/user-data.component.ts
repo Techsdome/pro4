@@ -23,6 +23,7 @@ export class UserDataComponent implements OnInit {
     edit = false;
     skill: string;
     htmlSkillElements: HTMLCollection;
+    displayName: string;
 
 
 //    this.afs.collection('users').doc(this.userData.uid).update({});
@@ -43,7 +44,11 @@ export class UserDataComponent implements OnInit {
                 this.firstname = item[it].firstname;
                 this.lastname = item[it].lastname;
                 this.photoURL = item[it].photoURL;
+                this.displayName = item[it].displayName;
             }
+        }
+        if (this.firstname) {
+            this.displayName = this.firstname;
         }
     }
 
