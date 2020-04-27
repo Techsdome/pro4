@@ -1,10 +1,10 @@
 <!--<body>-->
-<div *ngIf="project.projectBanner" class="border-dark router-output" id="bg">
+<div *ngIf="project || project === undefined " class="border-dark router-output" id="bg">
   <div class="container-fluid" id="project-container">
     <div class="row" id="banner">
       <div class="col" id="banner-picture">
-        <img [src]="project.projectBanner" alt="Project Banner"
-             height="359" width="1920">
+        <img [src]="project? project.projectBanner : '../../../assets/Project/20180726_Budapest_23.jpg'" height="359"
+             alt="ProjectBanner" width="1920"/>
       </div>
     </div>
     <div id="content" class="row">

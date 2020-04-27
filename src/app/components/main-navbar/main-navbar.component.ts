@@ -44,10 +44,6 @@ export class MainNavbarComponent implements OnInit {
     // modalRef.componentInstance.name = 'World';
   }
 
-  openScrollableContent() {
-    this.modalService.open(NewProjectComponent, { scrollable: true });
-  }
-
   animateOn() {
     this.status = !this.status;
   }

@@ -111,11 +111,19 @@ body {
     background-color: #eee;
     border-radius: 10px;
     width: 550px;
-    height: 400px;
+    height: 400px
 }
 
+
 #create-post-form form {
-    margin-top: 30px;
+  margin-top: 30px;
+  left: 0;
+  margin-left: 12.5%;
+  padding-right: 40px;
+  padding-left: 5px;
+  width: 80%;
+  max-height: calc(100vh - 100px);
+  height: auto;
 }
 
 .smallButton {
@@ -215,8 +223,19 @@ body {
 .modal-dialog .modal-content {
   border-radius: 10px;
 }
+
+.modal {
+  overflow: auto !important;
+}
+
+.modal-body {
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
+}
+
 .modal-dialog {
-  margin-top: 15% !important;
+  width: 100%;
+  height: auto;
 }
 
 ul {
