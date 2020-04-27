@@ -79,6 +79,8 @@ export class SettingsProfileComponent implements OnInit {
 
   }
 
+
+
   fileUpload(e: any) {
     let uploadPicInput = document.getElementById('picUpload');
     uploadPicInput.click();
@@ -104,25 +106,6 @@ export class SettingsProfileComponent implements OnInit {
           });
         });
       });
-      /*const uploadTask = firebase.storage().ref(`Users/${this.user.uid}/profilePic/profilePic`).put(this.file).then(
-        (snapshot) => {
-          this.toastr.success('Upload successfully.', 'Success!');
-          snapshot.ref.getDownloadURL().then((url) => {
-            firebase.auth().currentUser.updateProfile({
-              photoURL: url
-            }).then(() => {
-              this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
-                photoURL: url,
-              });
-            });
-          });
-        }).catch((error) => {
-        this.toastr.error('Data could not be saved!\n' + error.code, 'Error!');
-        console.log(error);
-      }).catch((error) => {
-        this.toastr.error('Data could not be saved!\n' + error.code, 'Error!');
-        console.log(error);
-      });*/
     });
   }
 
@@ -139,5 +122,4 @@ export class SettingsProfileComponent implements OnInit {
       this.photoURL = user.photoURL;
     });
   }
-
 }
