@@ -61,7 +61,6 @@ export class UserDataComponent implements OnInit {
         });
     }
 
-
     deleteSkillElement(event) {
         for (let i = 0; i < this.skills.length; i++) {
             if (this.skills[i] === event.target.previousElementSibling.value) {
@@ -74,6 +73,7 @@ export class UserDataComponent implements OnInit {
 
     ngOnInit(): void {
         this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
+
         this.dataService.getItems().subscribe(items => {
             this.items = items;
             this.getExtendedData(items);

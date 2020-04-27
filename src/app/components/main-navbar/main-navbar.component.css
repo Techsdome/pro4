@@ -16,6 +16,12 @@
     background-size: contain;
 }
 
+#myproject .showBtnTechsdome {
+  display: block;
+}
+
+
+
 #searchBar {
     background-image: url("https://img.favpng.com/10/4/11/computer-icons-search-box-button-clip-art-png-favpng-7TdWywgFBhJ2y81D9kE6nhjbT.jpg");
     padding-left: 30px;

@@ -1,28 +1,16 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-
-<!--<head>-->
-<!--  <meta charset="utf-8">-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">-->
-<!--  <title>ProjectPage</title>-->
-<!--  &lt;!&ndash;    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">&ndash;&gt;-->
-<!--  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">-->
-<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">-->
-<!--  <link rel="stylesheet" href="./assets/css/styles.css">-->
-<!--</head>-->
-
 <!--<body>-->
-<div class="border-dark" id="bg">
+<div *ngIf="project.projectBanner" class="border-dark router-output" id="bg">
   <div class="container-fluid" id="project-container">
     <div class="row" id="banner">
       <div class="col" id="banner-picture">
-        <img [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/20180726_Budapest_23.jpg'" alt="Project Banner" height="359" width="1920">
+        <img [src]="project.projectBanner" alt="Project Banner"
+             height="359" width="1920">
       </div>
     </div>
     <div id="content" class="row">
       <div id="headline" class="row">
         <div id="project-name" class="col">
-          <h1 class="text-black-50"> {{ project.projectName ? project.projectName : "Project Alpha" }}</h1>
+          <h1 class="text-black-50"> {{ project ? project.projectName : "Project Alpha" }}</h1>
         </div>
         <div class="text-right d-xl-flex justify-content-xl-end align-items-xl-center col" id="interact-button">
           <button class="btn btn-primary text-black-50 i-btn" data-bs-hover-animate="pulse" id="follow" type="submit">
@@ -47,88 +35,40 @@
         </div>
         <div id="info" class="row">
           <div id="text-description" class="col-8">
-            <p>{{ project.projectDescription ? project.projectDescription : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, " +
+            <p>{{ project ? project.projectDescription : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, " +
               "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
-              "At vero eos et accusam et justo duo dolores et ea rebum." +
+              "At vero eos et saccusam et justo duo dolores et ea rebum." +
               "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet," +
               "consetetur sadipscing elitr, sed df diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam" +
               " erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata" +
               "sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam" +
               "nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et" +
-              "justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."}} </p>
+              "justo duo dolores et ea rebum.Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."}} </p>
           </div>
+
           <div class="shadow-sm align-self-end flex-nowrap col-4" id="info-panel">
-            <div id="contributors" class="col">
+            <div id="contributors" class="col-12">
               <h3>Contributors</h3>
-              <div id="circular" class="circular">
-                <img class="contributor"
-                     [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/Howto.JPG'"
-                     alt="Contributer#" height="514" width="913">
+              <div class="row">
+                <div class="col-3 border rounded-circle" *ngFor="let contri of images">
+                  <img class="contributor" [src]="contri ? contri : './assets/Project/Howto.JPG'"
+                       alt="Contributer#" height="514" width="913">
+                </div>
               </div>
-              <div id="circular-4" class="circular">
-                <img class="contributor"
-                     [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/Howto.JPG'"
-                     alt="Contributer#" height="514" width="913">
-              </div>
-              <div id="circular-3" class="circular">
-                <img class="contributor"
-                     [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/Howto.JPG'"
-                     alt="Contributer#" height="514" width="913">
-              </div>
-              <div id="circular-2" class="circular">
-                <img class="contributor"
-                     [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/Howto.JPG'"
-                     alt="Contributer#" height="514" width="913">
-              </div>
-              <div id="circular-1" class="circular">
-                <img class="contributor"
-                     [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/Howto.JPG'"
-                     alt="Contributer#" height="514" width="913">
-              </div>
-            </div>
-            <div id="hashtags" class="hash">
-              <h3>Hashtags</h3>
-              <ul>
-                <li *ngFor="let hash of project.projectCategories">
-                  <a data-bs-hover-animate="pulse" href="#">{{ hash ? hash : "3D" }}</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
+
         <div id="gallery" class="pictures row">
           <div id="gallery-heading" class="row">
             <h2>Gallery</h2>
           </div>
-          <div id="gallery-picture" class="gallery-pictures">
-            <img class="g-pictures" alt="project pic"
-                 [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/IMG-20181025-WA0016.jpg'"
-                 width="899" height="1599">
-          </div>
-          <div id="gallery-picture-5" class="gallery-pictures">
-            <img alt="project pic"
-                 [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/IMG-20181025-WA0016.jpg'"
-                 width="899" height="1599">
-          </div>
-          <div id="gallery-picture-4" class="gallery-pictures">
-            <img alt="project pic"
-                 [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/IMG-20181025-WA0016.jpg'"
-                 width="899" height="1599">
-          </div>
-          <div id="gallery-picture-3" class="gallery-pictures">
-            <img alt="project pic"
-                 [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/IMG-20181025-WA0016.jpg'"
-                 width="899" height="1599">
-          </div>
-          <div id="gallery-picture-2" class="gallery-pictures">
-            <img alt="project pic"
-                 [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/IMG-20181025-WA0016.jpg'"
-                 width="899" height="1599">
-          </div>
-          <div id="gallery-picture-1" class="gallery-pictures">
-            <img alt="project pic"
-                 [src]="project.projectPhotoURL ? project.projectPhotoURL : './assets/Project/IMG-20181025-WA0016.jpg'"
-                 width="899" height="1599">
+          <div *ngFor="let picture of images">
+            <div id="gallery-picture" class="gallery-pictures">
+              <img class="g-pictures" alt="project pic"
+                   [src]="picture ? picture : './assets/Project/IMG-20181025-WA0016.jpg'"
+                   width="899" height="1599">
+            </div>
           </div>
         </div>
       </div>
@@ -136,9 +76,4 @@
   </div>
 </div>
 <app-main-navbar></app-main-navbar>
-<!--<script src="/assets/js/jquery.min.js"></script>-->
-<!--&lt;!&ndash;    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>&ndash;&gt;-->
-<!--<script src="/assets/js/bs-init.js"></script>-->
-<!--</body>-->
 
-<!--</html>-->

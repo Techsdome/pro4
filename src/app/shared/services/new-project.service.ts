@@ -4,6 +4,7 @@ import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
 import {Project} from '../../models/Project';
 import * as firebase from 'firebase';
+import FieldValue = firebase.firestore.FieldValue;
 
 @Injectable({
   providedIn: 'root'   // available to dependency injection, register to a provider
@@ -11,6 +12,7 @@ import * as firebase from 'firebase';
 export class NewProjectService {
   public project: Observable<Project[]>;
   public ref: any;
+  projectID: string;
 
   constructor(public afs: AngularFirestore, public authService: AuthService) {
     // this.projectItem = this.afs.collection('project').valueChanges();
@@ -25,20 +27,25 @@ export class NewProjectService {
   }
 
 
-  addData(id, pname, pdescription, pcategories, members, photoURL: string) {
+  addData(id, pname, pdescription, pcategories, bannerURL, imageURL, members) {
     this.afs.collection('project').add({
       uid: id,
-      projectName: pname,
-      projectDescription: pdescription,
-      projectCategories: pcategories,
-      projectMembers: members,
-      projectPhotoURL: photoURL ? photoURL : ' '
+      projectName: pname ? pname : 'Project Alpha',
+      projectDescription: pdescription ? pdescription : 'This is my description',
+      projectCategories: pcategories ? pcategories : ['Default', 'Default2'],
+      projectMembers: members ? members : ['Markus', 'Damir', 'Andrea'],
+      projectBanner: bannerURL ? bannerURL : './assets/Project/20180726_Budapest_23.jpg',
+      projectImages: imageURL ? imageURL : './assets/Project/IMG-20181025-WA0016.jpg',
+      projectTimeStamp: firebase.firestore.Timestamp.now()
     }).then(docRef => {
-      this.afs.doc(`users/${this.authService.userData.uid}`).update({
-        // pid: firebase.firestore.FieldValue.arrayUnion(projectId)
-        pid: docRef.id,
+      this.afs.doc(`project/${docRef.id}`).update({
+        projectId: docRef.id,
       });
-      console.log('id: ' + docRef.id);
+      this.afs.doc(`users/${this.authService.userData.uid}`).update({
+        // pid: docRef.id,
+        pid: FieldValue.arrayUnion(docRef.id)
+      });
+      this.projectID = docRef.id;
     }).catch(error => {
 
     });

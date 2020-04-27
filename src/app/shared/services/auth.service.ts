@@ -41,6 +41,10 @@ export class AuthService {
         return this.afAuth.authState;
     }
 
+    public getUserData() {
+      return this.userData;
+    }
+
     // Sign in with email/password
     SignIn(email, password) {
         return this.afAuth.auth.signInWithEmailAndPassword(email, password)
@@ -156,7 +160,7 @@ export class AuthService {
             // description: user.description ? user.description : 'Tell something about yourself..',
             // skills: user.skills ? user.skills : [],
             firstname: this.firstname ? this.firstname : 'First Name',
-            lastname: this.lastname ? this.lastname : 'Last Name'
+            lastname: this.lastname ? this.lastname : 'Last Name',
         };
 
         return userRef.update(userData);

@@ -41,7 +41,10 @@ import { UserStatusComponent } from './components/user-status/user-status.compon
 import { SettingsComponent } from './components/settings/settings.component';
 import { ProfileMenuComponent } from './components/profile-menu/profile-menu.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
-
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FileUploadModule } from 'ng2-file-upload';
+import { AddTagComponent } from './components/add-tag/add-tag.component';
+import { PresentProjectsComponent } from './components/present-projects/present-projects.component';
 
 @NgModule({
     declarations: [
@@ -68,8 +71,8 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
         SettingsComponent,
         ProfileMenuComponent,
         CreatePostComponent,
-      // NgbdProgressbarShowvalue
-
+        AddTagComponent,
+        PresentProjectsComponent,
     ],
     imports: [
         BrowserModule,
@@ -83,9 +86,11 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
         FormsModule,
         ReactiveFormsModule,
         AngularFireStorageModule,
-        AngularFireDatabaseModule
+        AngularFireDatabaseModule,
+        NgbModule,
+        FileUploadModule,
     ],
-    providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective],
+    providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective, NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal],
     bootstrap: [AppComponent]
 })
 export class AppModule {

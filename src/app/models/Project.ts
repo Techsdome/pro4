@@ -3,6 +3,8 @@ export interface Project {
   projectName: string;
   projectDescription: string;
   projectCategories: string[];
-  ProjectMembers: string;
-  projectPhotoURL: string;
+  ProjectMembers: string[];
+  projectBanner: string;
+  projectImages: string[];
+  projectTimeStamp: string;
 }

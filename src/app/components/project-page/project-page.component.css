@@ -2,7 +2,8 @@ img {
   width: 100%;
   height: auto;
 }
-#bannerpic {
+
+#banner-picture {
   margin: 0;
   padding: 0;
   max-width: 100%;
@@ -12,13 +13,12 @@ img {
   font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
 }
 
+
+
 #banner {
   width: 100%;
   margin: 0;
   padding: 0;
-}
-
-#banner img {
   border-radius: 20px;
 }
 

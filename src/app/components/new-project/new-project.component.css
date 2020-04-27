@@ -1,5 +1,55 @@
 #newproject {
-  margin: 90px;
+
+}
+.photoResults {
+  margin: 10px;
+  padding: 0;
+}
+
+#photoUpload {
+  margin-bottom: 10px;
+}
+
+.myImg {
+  margin:0;
+}
+
+#newproject .myImg .myButtons button {
+  margin: 0;
+}
+.photoResults p {
+  font-size: 10pt;
+}
+
+.myButtons {
+  margin: 5px;
+}
+
+.photoResults div {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.filename:hover {
+  overflow: visible !important;
+  white-space: normal;
+}
+
+
+#newproject .photoRemove {
+  margin: 0;
+}
+
+.hidden-file {
+  visibility: hidden;
+  position: absolute;
+  overflow: hidden;
+  width: 0px;
+  height:0px;
+  border:none;
+  margin:0;
+  padding:0
 }
 
 #uploader {
@@ -11,3 +61,49 @@ label {
   margin: 10px 0 3px 0;
   padding: 10px 0 3px 0;
 }
+
+#newproject #create-post-form {
+  height: auto;
+  top: -300px;
+}
+
+#newproject input {
+  border: none;
+  border: solid 1px #ccc;
+  border-radius: 30px;
+}
+
+.showBtnTechsdome{
+  display:inline-block;
+}
+
+.hideBtnTechsdome{
+  display: none;
+}
+
+#newproject button {
+  margin: 10px 5px;
+}
+
+#newproject #create {
+  float: right;
+  margin: 2px 0 15px 0;
+  padding: 2px 15px;
+}
+
+#newproject h6 {
+  margin-left: 10px;
+}
+
+#myForm textarea {
+  resize: none;
+  overflow: auto;
+  margin-bottom: 5px;
+}
+
+#item-container .createItemButton {
+  margin-left: 5px;
+}
+
+
+

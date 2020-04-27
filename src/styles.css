@@ -131,7 +131,7 @@ body {
     background-color: rgba(0,0,0,0.1);
 }
 
-.skillInput{
+.itemInput{
     display: inline;
     text-align: center;
     /*border: solid 3px #fff !important;*/
@@ -166,4 +166,48 @@ body {
     padding: 3px;
 }
 
+.itemDeleteButton{
+  margin: -5px 10px 0 -25px;
+  width: 15px;
+  transform: rotate(45deg);
+}
+
+.itemDeleteButton:hover{
+  cursor: pointer;
+}
+
+.itemInputButton:hover{
+  cursor: inherit !important;
+}
+
+.itemInputButton{
+  padding-right: 25px;
+}
+
+#item-container input{
+  border-radius: 100px;
+  border: none;
+  background-color: #0058ff;
+  color: #fff;
+  margin: 2px 3px;
+  max-width: 30%;
+}
+
+#item-container{
+  max-width: 300px;
+}
+
+#item-container li{
+  display: inline;
+}
+
+/* modal content */
+
+.modal-dialog .modal-content {
+  border-radius: 10px;
+}
+
+.modal-dialog {
+  margin-top: 15% !important;
+}
 

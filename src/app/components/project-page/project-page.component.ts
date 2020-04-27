@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Project} from '../../models/Project';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
-import {DataServiceService} from '../../shared/services/data-service.service';
+import { Router, NavigationStart, NavigationCancel, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-project-page',
@@ -18,29 +18,46 @@ export class ProjectPageComponent implements OnInit {
   project: Project;
   docRef: any;
   user: User;
+  images: string[];
+
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
-              public authService: AuthService, public dataService: DataServiceService) {
+              public authService: AuthService ) {
   }
 
   ngOnInit() {
-    this.getUserID();
+    this.getProject();
   }
 
-  getUserID() {
-
-    console.log(this.authService.userData.pid);
-    this.docRef = this.afs.doc(`project/${this.authService.userData.pid}`);
-
-    this.docRef.get().toPromise().then(doc => {
-      if (doc.exists) {
-        this.project = doc.data();
-        console.log('Document data:', doc.data());
-      } else {
-        console.log('No such document!');
-      }
-    }).catch(error => {
-      console.log('Error getting document:', error);
+  getUser() {
+    this.authService.getCurrentUser().subscribe(user => {
+      this.user = user;
     });
   }
+
+  getProject() {
+    this.authService.getCurrentUser().subscribe(uval => {
+      this.authService.afs.collection('users').doc(uval.uid)
+        .valueChanges()
+        .subscribe((val) => {
+          const us = val as User;
+          const i = us.pid.length;
+          this.projectID = us.pid[i - 1];
+
+          this.docRef = this.afs.doc(`project/${this.projectID}`);
+          this.docRef.get().toPromise().then(doc => {
+            if (doc.exists) {
+              this.project = doc.data();
+              this.images = this.project.projectImages;
+            } else {
+              console.log('No such document!');
+            }
+          }).catch(error => {
+            console.log('Error getting document:', error);
+          });
+        });
+    });
+  }
+
+
 }

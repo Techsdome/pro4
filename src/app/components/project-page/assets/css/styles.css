@@ -30,7 +30,6 @@ body {
 
 #banner-picture img {
   max-width: 100%;
-  border-radius: 20px;
   height: auto;
 }
 
@@ -71,6 +70,14 @@ body {
   margin-top: 15px;
 }
 
+#contributors .border {
+  padding: 0;
+  overflow: hidden;
+  margin: 5px;
+  width: 80px;
+  height: 80px;
+}
+
 #description h2 a {
   color: #808080;
   margin: 10px;
@@ -97,16 +104,16 @@ p {
 
 #contributors .h3, h3 {
   font-size: 18px;
-  font-weight: 550;
+  font-weight: 500;
 }
 
 .contributor:hover {
   height: 110%;
-  width: 110%;
+  width: 150%;
 }
 
 .contributor {
-  width: 100%;
+  width: 140%;
   height: 100%;
 }
 
@@ -151,15 +158,14 @@ p {
 }
 
 #gallery img:hover {
-  max-width: 130px;
-  height: auto;
   margin-left: -5px;
+  width: 120%;
+  height: 120%;
 }
 
 #gallery img {
-  max-width: 120px;
-  height: auto;
-  /*content:url('../img/IMG-20181025-WA0016.jpg');*/
+  width: 110%;
+  height: 110%;
 }
 
 .gallery-pictures {
@@ -179,6 +185,7 @@ p {
 #banner {
   max-height: 250px;
   overflow: hidden;
+  border-radius: 20px;
 }
 
 #interact-button .btn-primary.focus, .btn-primary:focus {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NewProjectComponent} from "../new-project/new-project.component";
 
 @Component({
   selector: 'app-user-profile',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(public newproject: NewProjectComponent) { }
 
   ngOnInit(): void {
   }
 
+  toggleProject(){
+    this.newproject.toggleScreen();
+  }
 }
