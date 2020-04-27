@@ -1,14 +1,14 @@
 
 #peopleButton {
-    background-image: url("https://www.pngitem.com/pimgs/m/524-5248250_2-people-icon-png-transparent-png.png");
+  background-image: url("../../../assets/icons/people.svg");
 }
 
 #forumButton {
-    background-image: url("https://banner2.cleanpng.com/20180701/qyx/kisspng-computer-icons-online-chat-symbol-livechat-faceboo-5b38900a08f788.7773230315304335460367.jpg");
+  background-image: url("../../../assets/icons/message.svg");
 }
 
 #chatButton {
-    background-image: url("https://www.pinclipart.com/picdir/middle/491-4917893_chat-icon-svg-png-icon-free-download-chat.png");
+    background-image: url("../../../assets/icons/chat.svg");
 }
 
 .background-image-settings {
@@ -34,19 +34,21 @@
 }
 
 #questionButton {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/1200px-Icon-round-Question_mark.svg.png");
+  background-image: url("../../../assets/icons/q.svg");
 }
 
 #messageButton {
-    background-image: url("https://images.vexels.com/media/users/3/136808/isolated/preview/d3455a22af5f3ed7565fb5fb71bb8d43-send-message-icon-by-vexels.png");
+  background-image: url("../../../assets/icons/talk.svg");
 }
 
 #projectButton {
-    background-image: url("https://img.icons8.com/carbon-copy/2x/pencil.png");
+  background-image: url("../../../assets/icons/pen.svg");
 }
 
 #plusButton {
-    background-image: url("https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png");
+    background-image: url("../../../assets/icons/plus.svg");
+    height: 30px;
+    width: 30px;
     z-index: 10;
 }
 
@@ -57,10 +59,11 @@
 }
 
 #sidebar-button-container {
+    z-index: 1;
     width: 100%;
     display: grid;
     grid-template-rows: repeat(7, 1fr);
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 35px);
     grid-gap: 20px;
     height: max-content;
     margin-top: 150px;
@@ -70,31 +73,65 @@
     margin-top: -100px !important;
 }
 
-.sidebar-button:hover {
-    cursor: pointer;
-}
-
 #plusButton-container > * {
-    left: 15px;
+    margin-left: 1rem;
     transition: .25s;
     position: absolute;
 }
 
 #other-buttons-sidebar{
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .opacity-05 {
-    opacity: 0.95;
+  opacity: 0.95;
 }
 
 .sidebar-button {
-    justify-self: center;
-    width: 30px;
-    height: 30px;
-    border: none;
-    border-radius: 50px;
-    background-color: #fff;
+  margin-left: 1rem;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50px;
+  background-color: #F3F4F6;
+}
+
+.link-text {
+  visibility: hidden;
+  color: #F3F4F6;
+  margin-left: 0px;
+  filter: grayscale(100%) opacity(0.7);
+  transition: 300ms;
+}
+
+.home {
+  color: #222;
+}
+
+.link-text:hover {
+  filter: grayscale(0%) opacity(1);
+}
+
+.bubble {
+  z-index: -4;
+  position: absolute;
+  background-image: url("../../../assets/icons/pointer.svg");
+  top: 192px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  transition: 500ms;
+}
+
+.wings {
+  z-index: -4;
+  position: absolute;
+  background-image: url("../../../assets/icons/pwings.svg");
+  top: 192px;
+  width: 150px;
+  height: 150px;
+  margin-left: -21px;
+  transition: 200ms ease;
 }
 
 .button-image {
@@ -102,11 +139,16 @@
 }
 
 #directoryButton {
-    background-image: url("https://cdn0.iconfinder.com/data/icons/iconico-3/1024/63.png");
+  background-image: url("../../../assets/icons/dir.svg");
+}
+
+#directoryButton:hover ~ .bubble {
+  transform: translate(0px, 50px);
 }
 
 #houseButton {
-    background-image: url("https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_home_48px-512.png");
+    background-image: url("../../../assets/icons/house.svg");
+    align: center;
 }
 
 #menuBar_top {
@@ -130,6 +172,7 @@
     height: 50px;
     border-radius: 30%;
     box-shadow: -15px -15px 0 0 #222;
+    transition: transform 200ms ease;
 }
 
 .black-standard-color {
@@ -171,9 +214,9 @@
 }
 
 #settingsButton {
-    background-image: url("https://image.flaticon.com/icons/png/512/40/40031.png");
+/*    background-image: url("https://image.flaticon.com/icons/png/512/40/40031.png");
     background-size: 25px;
-    background-position: center;
+    background-position: center;*/
 }
 
 #loggoutButton {
@@ -183,12 +226,27 @@
 }
 
 #menuBar_left {
-    width: 60px;
-    height: 100%;
+    width: 4rem;
+    height: 100vh;
+    transition: width 200ms ease;
+}
+
+#menuBar_left:hover {
+  z-index: -10;
+  width: 8rem;
+}
+
+#menuBar_left:hover .link-text {
+  visibility: visible;
+  display: block;
+}
+
+#menuBar_left:hover #round {
+  transform: translate(68px, 0px);
 }
 
 #mobile-menu-icon-container hr{
-    background-color: #fff;
+    background-color: #F3F4F6;
     height: 2px;
     margin: 3px 0;
     padding: 0;
@@ -214,18 +272,18 @@
     margin-right: 0px !important;
 }
 
-@media (max-width: 630px){
+#menuBar_top{
+    overflow: hidden;
+}
+
+#menuBar_left:hover .wings {
+  transform: translate(68px, 0px);
+}
+
+@media only screen and (max-width: 630px){
 
     #round{
         display: none;
-    }
-
-    #menuBar_left{
-        transition: 0.5s;
-        position: relative;
-        float: right;
-        margin-right: -60px;
-        top:-60px !important;
     }
 
     #searchBar{
@@ -238,5 +296,41 @@
 
     #mobile-menu-icon-container{
         display: grid;
+    }
+
+    #menuBar_left{
+      z-index: -10;
+      width: 100%;
+        height: 50px;
+        top: 92vh;
+    }
+
+    #sidebar-button-container {
+        display: flex !important;
+        margin-top: 0;
+        justify-content: center;
+        align-content: center;
+    }
+
+    #sidebar-button-container > *{
+        height: 50px;
+        width: 50px;
+        background-color: rgba(255,255,255,0.4);
+    }
+
+    .sidebar-button{
+        border-radius: 0;
+    }
+
+    #plusButton-container{
+        display: none;
+    }
+
+    #profileButtonSideBar{
+        /* display: none; */
+    }
+
+    #plusButton-container{
+        width: unset;
     }
 }

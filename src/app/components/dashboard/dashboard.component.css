@@ -2,3 +2,13 @@ p{
   font-size: 20px;
   margin: 50px;
 }
+
+.normal{
+  background-color: red;
+  color:white;
+}
+.fixed{
+  background-color: red;
+  color:white;
+}
+

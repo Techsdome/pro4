@@ -7,12 +7,21 @@ import {Item} from '../../models/Item';
 import {NewProjectComponent} from '../new-project/new-project.component';
 import {UtilitiesService} from '../../app.component';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {trigger, state, style, animate, transition, keyframes, query, stagger} from '@angular/animations';
 
 @Component({
   selector: 'app-main-navbar',
   templateUrl: './main-navbar.component.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./main-navbar.component.css']
+  styleUrls: ['./main-navbar.component.css'],
+  animations: [
+    trigger('slide', [
+      transition(':enter', [
+        style({transform: 'translate(0px, 150px)'}),
+        animate('1s')
+      ]),
+    ]),
+]
 })
 export class MainNavbarComponent implements OnInit {
   public status = false;
@@ -20,6 +29,7 @@ export class MainNavbarComponent implements OnInit {
   user: Observable<User>;
   items: Item[];
   photoURL: string;
+  stat: string;
 
   // @ViewChild('myproject', {read: ElementRef, static: false}) myproject: ElementRef
 
@@ -53,16 +63,11 @@ export class MainNavbarComponent implements OnInit {
       }
     });
 
-    // this.utilitiesService.documentClickedTarget.subscribe(target => this.documentClickListener(target));
   }
 
-  // documentClickListener(target: any): void {
-  //   if (this.myproject.nativeElement.contains(target)) {
-  //     // clicked inside
-  //     this.addproject.showScreen = true;
-  //   } else {
-  //     // clicked outside
-  //     this.addproject.showScreen = false;
-  //   }
-  // }
+// const directory = document.querySelector('.bubble').getBoundingClientRect();
+
+    slideIt(dat) {
+      this.stat = dat;
+    }
 }

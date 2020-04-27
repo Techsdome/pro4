@@ -5,6 +5,8 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
 import { Router, NavigationStart, NavigationCancel, NavigationEnd } from '@angular/router';
+import { Observable } from 'rxjs';
+import { finalize, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-page',

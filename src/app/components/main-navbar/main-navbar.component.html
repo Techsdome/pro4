@@ -1,9 +1,23 @@
 <div id="menuBar_top" class="black-standard-color">
-  <input id="loggoutButton" class="background-image-settings sidebar-button" type="button"
-         (click)="authService.SignOut()" [routerLink]="['/sign-in']">
+
   <input class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
-  <input id="settingsButton" class="background-image-settings sidebar-button" [routerLink]="'/app-settings'"
-         type="button">
+
+
+  <div id="settingsButton" class="dropdown text-white">
+    <button type="button" class="btn m-0 shadow-none" id="dropdownMenu" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-cog fa-lg text-white"></i>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+      <h4 class="dropdown-header">Settings</h4>
+      <a class="dropdown-item" [routerLink]="['/app-settings-profile']">Profile Settings</a>
+      <a class="dropdown-item" [routerLink]="['/app-settings-security']">Security Settings</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="authService.SignOut()" [routerLink]="['/sign-in']">Logout</a>
+    </div>
+  </div>
+
+<!--
   <div (click)="showMenuBar()" id="mobile-menu-icon-container">
     <div></div>
     <div></div>
@@ -14,14 +28,20 @@
     <div></div>
   </div>
 </div>
+-->
 
-<div id="menuBar_left" class="black-standard-color"
-     [class]="menuClicked ? 'showMenu black-standard-color' : 'hideMenu black-standard-color'">
+
+
+<div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" [routerLink]="['/app-user-profile']"
+     class="black-standard-color">
   <div id="round"></div>
+
 
   <div id="sidebar-button-container">
 
-    <img [src]="photoURL" class="background-image-settings sidebar-button" [routerLink]="['/app-user-profile']">
+    <img [src]="photoURL" class="background-image-settings sidebar-button" id="profileButtonSideBar" [routerLink]="'/app-user-profile'" >
+    <span class="link-text">Profile</span>
+
 
     <div id="plusButton-container">
       <div [class]="status ? 'translateProject' : 'hide'">
@@ -41,30 +61,30 @@
       </div>
       <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
     </div>
+    <span class="link-text" (click)="animateOn()">Create</span>
 
-    <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="'/dashboard'" type="button">
+
+    <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="['/dashboard']" type="button">
+    <span class="link-text home">Home</span>
+
     <input class="background-image-settings sidebar-button" id="directoryButton" [routerLink]="'/project-page'" type="button">
+    <span class="link-text dir">Directory</span>
+
     <input class="background-image-settings sidebar-button" id="peopleButton" type="button">
+    <span class="link-text">People</span>
+
     <input class="background-image-settings sidebar-button" id="forumButton" type="button">
+    <span class="link-text">Forum</span>
+
     <input class="background-image-settings sidebar-button" id="chatButton" type="button">
+    <span class="link-text">Chat</span>
+
+    <div class="bubble"></div>
+    <div class="wings"></div>
 
   </div>
+
+
 </div>
-
-<!--<div>-->
-<!--  <div class="modal-header">-->
-<!--    <h4 class="modal-title">Hi there!</h4>-->
-<!--    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">-->
-<!--      <span aria-hidden="true">&times;</span>-->
-<!--    </button>-->
-<!--  </div>-->
-<!--  <div class="modal-body">-->
-<!--    <p>Hello!</p>-->
-<!--  </div>-->
-<!--  <div class="modal-footer">-->
-<!--    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>-->
-<!--  </div>-->
-<!--</div>-->
-
 
 

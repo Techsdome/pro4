@@ -10,10 +10,6 @@ li {
     vertical-align: middle;
 }
 
-#profile-menu-bar{
-    margin: 40px 0;
-}
-
 a:hover, a:focus, a:active {
     color: #999;
     text-decoration: none;
@@ -59,4 +55,11 @@ a:active::before {
 a:hover::before, a:focus::before {
     transform-origin: left top;
     transform: scale(1, 1);
+}
+
+@media only screen and (max-width: 630px){
+
+    #profile-menu-bar{
+        display: none !important;
+    }
 }

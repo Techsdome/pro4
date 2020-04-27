@@ -1,11 +1,12 @@
 import {Injectable, NgZone} from '@angular/core';
-import {User} from './user';
 import {auth} from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
+import {FirebaseDatabase} from '@angular/fire';
 import {Subject} from 'rxjs';
 import * as firebase from 'firebase';
+
 
 @Injectable({
     providedIn: 'root'
@@ -69,6 +70,17 @@ export class AuthService {
         });
     }
 
+    setSocialNames(name) {
+        const splitName = name.split(' ');
+        this.firstname = splitName[0];
+        this.lastname = splitName[1];
+    }
+
+
+    /* Setting up user data when sign in with username/password,
+    sign up with username/password and sign in with social auth
+    provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+
     setFirstName(firstname) {
         this.firstname = firstname;
     }
@@ -101,12 +113,27 @@ export class AuthService {
         return (user !== null && user.emailVerified !== false) ? true : false;
     }
 
-    // Sign in with Google
+    /*
+        get isLoggedIn(): boolean {
+            const user = JSON.parse(localStorage.getItem('user'));
+            return (user !== null && user.emailVerified !== false);
+        }
+    */
+
+    /*
+// Sign in with Google
+GoogleAuth() {
+    const google = new auth.GoogleAuthProvider();
+    this.AuthLogin(google).then(() => {
+        this.addExtraFields();
+    });
+}*/
+
+
     GoogleAuth() {
         const google = new auth.GoogleAuthProvider();
-        return this.AuthLogin(google);
-        // this.addExtraFields();
-        /*console.log(JSON.parse(JSON.stringify(google)));*/
+        this.AuthLogin(google).then(() => {
+        });
     }
 
     addExtraFields() {
@@ -129,15 +156,17 @@ export class AuthService {
         return this.AuthLogin(new auth.GithubAuthProvider());
     }
 
-    // Auth logic to run auth providers
     AuthLogin(provider) {
         return this.afAuth.auth.signInWithPopup(provider)
             .then((result) => {
+                const usernew = result.additionalUserInfo.isNewUser;
+                if (usernew === true) {
+                    this.splitName(result.user);
+                    this.SetUserData(result.user);
+                }
                 this.ngZone.run(() => {
                     this.router.navigate(['dashboard']);
                 });
-                this.SetUserData(result.user);
-                console.log(this.userData);
             }).catch((error) => {
                 window.alert(error);
             });
@@ -163,7 +192,9 @@ export class AuthService {
             lastname: this.lastname ? this.lastname : 'Last Name',
         };
 
-        return userRef.update(userData);
+        return userRef.set(userData, {
+            merge: true
+        });
     }
 
     // Sign out
@@ -174,4 +205,10 @@ export class AuthService {
         });
     }
 
+
+    splitName(currentUser) {
+        const splitName = currentUser.displayName.split(' ');
+        this.firstname = splitName[0];
+        this.lastname = splitName[1];
+    }
 }

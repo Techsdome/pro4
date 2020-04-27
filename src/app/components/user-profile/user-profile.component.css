@@ -1,8 +1,13 @@
-#user-profile-container{
-    margin: 100px auto;
-    width: 80%;
+#app-parting-line-container {
+    margin-top: 30px;
 }
 
-#app-parting-line-container{
-    margin-top: 30px;
+#user-profile-posts-container {
+    margin-left: 175px !important;
+}
+
+@media only screen and (max-width: 630px) {
+    #user-profile-container {
+        width: 95%;
+    }
 }

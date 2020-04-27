@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic");
 @import url("https://fonts.googleapis.com/css?family=Cabin:700");
+@import "~@fortawesome/fontawesome-free/css/all.css";
 
 /* You can add global styles to this file, and also import other style files */
-{
-    margin: 0;
+
+.container-style {
+    margin: 100px auto;
+    width: 80%;
 }
-
-
 
 .standardBackgroundColor {
     background-color: #f3f5f7;
@@ -20,7 +21,7 @@ html, body {
     height: 100%;
 }
 
-.standard-background-color{
+.standard-background-color {
     background-color: #f3f5f7;
 }
 
@@ -29,25 +30,29 @@ body {
     font-family: Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
-.flex{
+.btn.btn-rounded {
+    border-radius: 35px !important;
+}
+
+.flex {
     display: flex;
 }
 
-.transition02s{
+.transition02s {
     transition: 0.2s;
 }
 
-.blurry-screen{
+.blurry-screen {
     width: 100vw;
     height: 100vh;
     position: fixed;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     top: 0;
     left: 0;
     z-index: 10;
 }
 
-#create-post-form > *{
+#create-post-form > * {
     width: 400px;
     position: relative;
     left: -200px;
@@ -83,20 +88,20 @@ body {
     display: grid;
 }
 
-#create-post-inner{
+#create-post-inner {
     margin-top: 20px;
 }
 
-#create-post-form textarea{
+#create-post-form textarea {
     border-radius: 10px;
-    border: 2px solid rgba(0,0,0,0.1);
+    border: 2px solid rgba(0, 0, 0, 0.1);
     resize: none;
     width: 100%;
     height: 150px;
     padding: 10px;
 }
 
-#create-post-form{
+#create-post-form {
     z-index: 15;
     position: fixed;
     top: -200px;
@@ -109,56 +114,60 @@ body {
     height: 400px;
 }
 
-#create-post-form form{
+#create-post-form form {
     margin-top: 30px;
 }
 
-.smallButton{
+.smallButton {
     width: 30px;
     padding: 3px;
 }
 
-
-
-.boderButton{
-    background-color: rgba(0,0,0,0);
+.boderButton {
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 100px;
     border: solid 2px #a6b0bf;
     margin: 3px 3px;
 }
 
-.boderButton:hover{
-    background-color: rgba(0,0,0,0.1);
+.boderButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
-.itemInput{
+.itemInput, .skillInput {
     display: inline;
     text-align: center;
     /*border: solid 3px #fff !important;*/
 }
 
-.showBtnTechsdome{
-    display:inline-block;
+.showBtnTechsdome {
+    display: inline-block;
 }
 
-.hideBtnTechsdome{
+.hideBtnTechsdome {
     display: none;
 }
 
-.button:hover{
+.commentField{
+    resize: none;
+    width: 80%;
+    height: 100px;
+}
+
+.button:hover {
     cursor: pointer;
 }
 
-.roundButton{
+.roundButton {
     border-radius: 100px;
 }
 
-.smallButton:hover{
-    background-color: rgba(0,0,0,0.1);
+.smallButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
-.smallButton{
-    background-color: rgba(0,0,0,0);
+.smallButton {
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 50px;
     border: solid 2px #a6b0bf;
     transition: 0.1s;
@@ -206,8 +215,111 @@ body {
 .modal-dialog .modal-content {
   border-radius: 10px;
 }
-
 .modal-dialog {
   margin-top: 15% !important;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul > * {
+    list-style: none;
+}
+
+.post {
+    width: 100%;
+    /* min-height: 200px; */
+    background-color: #fff;
+    border-radius: 20px;
+    margin: 10px 0;
+    padding: 20px;
+}
+
+.small-profile-picture {
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    margin-left: -70px;
+    float: left;
+}
+
+.image-shadow {
+    -webkit-box-shadow: -3px 3px 4px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: -3px 3px 4px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: -3px 3px 4px 1px rgba(0, 0, 0, 0.1);
+}
+
+.post-main-feed {
+    margin-left: 175px !important;
+}
+
+#all-posts-container {
+    margin: 100px auto;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-container {
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 1100px) {
+    #skills-container {
+        max-width: 200px !important;
+    }
+}
+
+@media only screen and (max-width: 880px) {
+    .small-profile-picture {
+        float: none;
+        margin-left: 0;
+    }
+
+    #user-data-container {
+        flex-direction: column;
+    }
+
+    #image-container {
+        display: flex;
+        align-self: center;
+        flex-direction: column;
+    }
+
+    #user-header {
+        justify-content: center;
+    }
+
+    #user-header .email {
+        display: none !important;
+    }
+
+    #user-data-container > * {
+        margin: 0 !important;
+    }
+
+    #user-profile-posts-container {
+        margin-left: 0 !important;
+    }
+
+    #skills-container {
+        margin: 15px 0 !important;
+        max-width: 100% !important;
+    }
+}
+
+body::-webkit-scrollbar {
+  width: 1rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #202020;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #5a6268;
+}

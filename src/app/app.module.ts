@@ -5,6 +5,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthService} from './shared/services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 // Firebase services + enviorment module
 import {AngularFireModule} from '@angular/fire';
@@ -34,6 +39,7 @@ import {DropzoneDirective} from './shared/services/dropzone.directive';
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { UploadTaskComponent } from './components/uploader/upload-task/upload-task.component';
 import { PartingLineComponent } from './components/parting-line/parting-line.component';
+import { ToastrModule } from 'ngx-toastr';
 // import {NgbdProgressbarShowvalue} from './components/uploader/upload-task/progressbar-showvalue';
 
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -45,6 +51,11 @@ import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
 import { AddTagComponent } from './components/add-tag/add-tag.component';
 import { PresentProjectsComponent } from './components/present-projects/present-projects.component';
+import { SettingsProfileComponent } from './components/settings-profile/settings-profile.component';
+import { SettingsSecurityComponent } from './components/settings-security/settings-security.component';
+import { ShowPostComponent } from './components/show-post/show-post.component';
+import { ShowAllPostsMainFeedComponent } from './components/show-all-posts-main-feed/show-all-posts-main-feed.component';
+
 
 @NgModule({
     declarations: [
@@ -73,6 +84,11 @@ import { PresentProjectsComponent } from './components/present-projects/present-
         CreatePostComponent,
         AddTagComponent,
         PresentProjectsComponent,
+        SettingsProfileComponent,
+        SettingsSecurityComponent,
+        ShowPostComponent,
+        ShowAllPostsMainFeedComponent
+
     ],
     imports: [
         BrowserModule,
@@ -89,9 +105,19 @@ import { PresentProjectsComponent } from './components/present-projects/present-
         AngularFireDatabaseModule,
         NgbModule,
         FileUploadModule,
+        FontAwesomeModule,
+        ToastrModule.forRoot({
+          preventDuplicates: true,
+        }),
+        ScrollToModule.forRoot()
+
     ],
-    providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective, NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal],
+    providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
+      NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal],
     bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor() {
+    library.add(fas, far);
+  }
 }
