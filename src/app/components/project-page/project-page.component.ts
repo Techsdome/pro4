@@ -4,9 +4,9 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
-import { Router, NavigationStart, NavigationCancel, NavigationEnd } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import {Router, NavigationStart, NavigationCancel, NavigationEnd} from '@angular/router';
+import {Observable} from 'rxjs';
+import {finalize, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-page',
@@ -24,7 +24,7 @@ export class ProjectPageComponent implements OnInit {
 
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
-              public authService: AuthService ) {
+              public authService: AuthService) {
   }
 
   ngOnInit() {
@@ -43,23 +43,30 @@ export class ProjectPageComponent implements OnInit {
         .valueChanges()
         .subscribe((val) => {
           const us = val as User;
-          const i = us.pid.length;
-          this.projectID = us.pid[i - 1];
+          if (us) {
+            if (us.pid) {
+              const i = us.pid.length;
+              this.projectID = us.pid[i - 1];
 
-          this.docRef = this.afs.doc(`project/${this.projectID}`);
-          this.docRef.get().toPromise().then(doc => {
-            if (doc.exists) {
-              this.project = doc.data();
-              this.images = this.project.projectImages;
+              this.docRef = this.afs.doc(`project/${this.projectID}`);
+              this.docRef.get().toPromise().then(doc => {
+                if (doc.exists) {
+                  this.project = doc.data();
+                  this.images = this.project.projectImages;
+                } else {
+                  console.log('No such document!');
+                }
+              }).catch(error => {
+                console.log('Error getting document:', error);
+              });
             } else {
-              console.log('No such document!');
+              console.log('No pid!');
             }
-          }).catch(error => {
-            console.log('Error getting document:', error);
-          });
+          } else {
+            console.log('No User!');
+          }
         });
     });
   }
-
 
 }

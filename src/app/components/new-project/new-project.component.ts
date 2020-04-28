@@ -72,7 +72,6 @@ export class NewProjectComponent implements OnInit {
       const file: File = event[it];
 
       const URL = `project/${this.user.uid}/images/${file.name}`;
-      console.log('file: ' + file.name);
 
       this.uploader2.queue[it].url = URL;
       this.task = this.storage.upload(URL, file);
@@ -81,12 +80,10 @@ export class NewProjectComponent implements OnInit {
         finalize(() => {
           this.storage.ref(URL).getDownloadURL().subscribe(url => {
             this.imagesURL.push(url);
-            console.log('finalize: ' + url);
           });
         }),
       ).subscribe();
       it++;
-      console.log('iterator: ' + it);
     });
   }
 

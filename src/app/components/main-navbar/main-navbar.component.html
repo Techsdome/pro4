@@ -17,74 +17,72 @@
     </div>
   </div>
 
-<!--
-  <div (click)="showMenuBar()" id="mobile-menu-icon-container">
-    <div></div>
-    <div></div>
-    <hr>
-    <hr>
-    <hr>
-    <div></div>
-    <div></div>
-  </div>
-</div>
--->
-
-
-
-<div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" [routerLink]="['/app-user-profile']"
-     class="black-standard-color">
-  <div id="round"></div>
-
-
-  <div id="sidebar-button-container">
-
-    <img [src]="photoURL" class="background-image-settings sidebar-button" id="profileButtonSideBar" [routerLink]="'/app-user-profile'" >
-    <span class="link-text">Profile</span>
-
-
-    <div id="plusButton-container">
-      <div [class]="status ? 'translateProject' : 'hide'">
-        <input type="button" class="background-image-settings sidebar-button animation-button3 opacity-05"
-               id="projectButton" type="button" type="button" (click)="animateOn()">
-        <p class="detail_info">create post</p>
-      </div>
-      <div [class]="status ? 'translateQuestion' : 'hide'">
-        <input type="button" class="background-image-settings sidebar-button animation-button2 opacity-05"
-               id="questionButton" type="button" (click)="animateOn()">
-        <p class="detail_info">ask question</p>
-      </div>
-      <div [class]="status ? 'translateMessage' : 'hide'">
-        <input type="button" class="background-image-settings sidebar-button animation-button1 opacity-05"
-               id="messageButton" (click)="animateOn(); open();">
-        <p class="detail_info">create project</p>
-      </div>
-      <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
+  <!--
+    <div (click)="showMenuBar()" id="mobile-menu-icon-container">
+      <div></div>
+      <div></div>
+      <hr>
+      <hr>
+      <hr>
+      <div></div>
+      <div></div>
     </div>
-    <span class="link-text" (click)="animateOn()">Create</span>
-
-
-    <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="['/dashboard']" type="button">
-    <span class="link-text home">Home</span>
-
-    <input class="background-image-settings sidebar-button" id="directoryButton" [routerLink]="'/project-page'" type="button">
-    <span class="link-text dir">Directory</span>
-
-    <input class="background-image-settings sidebar-button" id="peopleButton" type="button">
-    <span class="link-text">People</span>
-
-    <input class="background-image-settings sidebar-button" id="forumButton" type="button">
-    <span class="link-text">Forum</span>
-
-    <input class="background-image-settings sidebar-button" id="chatButton" type="button">
-    <span class="link-text">Chat</span>
-
-    <div class="bubble"></div>
-    <div class="wings"></div>
-
   </div>
+  -->
 
 
+  <div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" [routerLink]="['/app-user-profile']"
+       class="black-standard-color">
+    <div id="round"></div>
+
+
+    <div id="sidebar-button-container">
+
+      <img [src]="photoURL" class="background-image-settings sidebar-button" id="profileButtonSideBar"
+           [routerLink]="'/app-user-profile'">
+      <span class="link-text">Profile</span>
+
+      <div id="plusButton-container">
+        <div [class]="status ? 'translateProject' : 'hide'">
+          <input type="button" class="background-image-settings sidebar-button animation-button3 opacity-05"
+                 id="projectButton"  (click)="animateOn()">
+          <p class="detail_info">create post</p>
+        </div>
+        <div [class]="status ? 'translateQuestion' : 'hide'">
+          <input type="button" class="background-image-settings sidebar-button animation-button2 opacity-05"
+                 id="questionButton"  (click)="animateOn()">
+          <p class="detail_info">ask question</p>
+        </div>
+        <div [class]="status ? 'translateMessage' : 'hide'">
+          <input type="button" class="background-image-settings sidebar-button animation-button1 opacity-05"
+                 id="messageButton" (click)="animateOn(); open();">
+          <p class="detail_info">create project</p>
+        </div>
+        <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
+      </div>
+      <span class="link-text" (click)="animateOn()">Create</span>
+
+
+      <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="['/dashboard']"
+             type="button">
+      <span class="link-text home">Home</span>
+
+      <input class="background-image-settings sidebar-button" id="directoryButton" [routerLink]="['/project-page']"
+             type="button">
+      <span class="link-text dir">Directory</span>
+
+      <input class="background-image-settings sidebar-button" id="peopleButton" type="button">
+      <span class="link-text">People</span>
+
+      <input class="background-image-settings sidebar-button" id="forumButton" type="button">
+      <span class="link-text">Forum</span>
+
+      <input class="background-image-settings sidebar-button" id="chatButton" type="button">
+      <span class="link-text">Chat</span>
+
+      <div class="bubble"></div>
+      <div class="wings"></div>
+
+    </div>
+  </div>
 </div>
-
-
