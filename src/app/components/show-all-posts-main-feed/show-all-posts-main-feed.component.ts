@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
+import {take} from "rxjs/operators";
+import * as path from "path";
 
 @Component({
     selector: 'app-show-all-posts-main-feed',
@@ -8,16 +10,18 @@ import {AuthService} from '../../shared/services/auth.service';
 })
 export class ShowAllPostsMainFeedComponent implements OnInit {
     user: any;
-    posts: any = [];
+    posts: any[] = [];
     photoURL: string;
     edit = false;
+    postLenght: any;
 
     constructor(public authservice: AuthService) {
     }
 
-    openComment() {
+
+    /*openComment() {
         this.edit = !this.edit;
-    }
+    }*/
 
     ngOnInit(): void {
         this.authservice.getCurrentUser().subscribe((result) => {
@@ -25,6 +29,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
             this.authservice.afs.collection('generalPosts').doc('allPosts')
                 .collection('post').valueChanges()
                 .subscribe((val) => {
+                    console.log(val);
                     this.posts = [];
                     val.sort((t1, t2) => {
                         const year1 = t1.year;
@@ -83,9 +88,9 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
                             photoURL: value.photoURL,
                             displayName: value.displayName
                         };
-                        console.log(this.photoURL);
                         this.posts.push(postObject);
                     });
+                    this.postLenght = this.posts.length;
                 });
         });
     }

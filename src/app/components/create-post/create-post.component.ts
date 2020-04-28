@@ -80,7 +80,7 @@ export class CreatePostComponent implements OnInit {
                         second: date.getSeconds(),
                         uid: this.authService.afAuth.auth.currentUser.uid,
                         photoURL: tempPhotoUrl,
-                        displayName: tempDisplayName
+                        displayName: `${val.firstname} ${val.lastname}`
                     });
                 });
         });

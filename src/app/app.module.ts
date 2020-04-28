@@ -55,6 +55,7 @@ import { SettingsProfileComponent } from './components/settings-profile/settings
 import { SettingsSecurityComponent } from './components/settings-security/settings-security.component';
 import { ShowPostComponent } from './components/show-post/show-post.component';
 import { ShowAllPostsMainFeedComponent } from './components/show-all-posts-main-feed/show-all-posts-main-feed.component';
+import {GeneralPostComponent} from './components/general-post/general-post.component';
 
 
 @NgModule({
@@ -87,8 +88,8 @@ import { ShowAllPostsMainFeedComponent } from './components/show-all-posts-main-
         SettingsProfileComponent,
         SettingsSecurityComponent,
         ShowPostComponent,
-        ShowAllPostsMainFeedComponent
-
+        ShowAllPostsMainFeedComponent,
+        GeneralPostComponent
     ],
     imports: [
         BrowserModule,

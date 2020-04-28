@@ -1,3 +1,4 @@
+<!--
 <ul>
     <li *ngFor="let post of posts">
     <div class="post-container">
@@ -7,8 +8,7 @@
             <p><strong>{{post.postDate}}</strong> | {{post.postHour}}:{{post.postMinutes}}, {{post.postSecond}} seconds</p>
             <p>{{post.postText}}</p>
             <button class="boderButton button" (click)="openComment()">Comment</button>
-                            <strong>muss ich als eigenen component machen!!</strong>
-
+            <strong>muss ich als eigenen component machen!!</strong>
             <div [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'">
                 <textarea name="comment" id="comment" class="commentField" cols="30" rows="10"></textarea>
                 <button class="boderButton button" (click)="openComment()">Save</button>
@@ -18,3 +18,14 @@
         <app-parting-line></app-parting-line>
     </li>
 </ul>
+-->
+
+<app-general-post *ngFor="let post of posts"
+[postMessage] = 'post.postText'
+[postDate] = 'post.postDate'
+[postHour] = 'post.postHour'
+[postMinute] = 'post.postMinutes'
+[postSecond] = 'post.postSecond'
+[postDisplayName] = 'post.displayName'
+[postPhotoUrl] = 'post.photoURL'></app-general-post>
+
