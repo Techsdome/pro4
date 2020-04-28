@@ -1,5 +1,5 @@
 <div id="newproject">
-  <div id="create-post-form ">
+  <div id="create-post-form">
     <form id="myForm" class="form-group modal-body" #myForm="ngForm">
 
       <input type="text" name="pname" id="pname" class="form-control" placeholder="New Project" #name required>
@@ -16,7 +16,7 @@
           <div class="btn-group row myButtons" (click)="fileInput.click()">
             <!--        <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">-->
             <!--          <i class="ion-plus-round">  </i>-->
-            <!--        </button>-->
+            <!--           </button>-->
             <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">
               Add Banner
             </button>
@@ -84,7 +84,6 @@
       <!--      </div>-->
       <!--    </div>-->
       <!--      <app-uploader id="uploader" class="row"></app-uploader>-->
-      <br>
       <button id="create" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s"
               routerLink="/project-page"
               (click)="Submit(name.value, description.value)">

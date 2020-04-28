@@ -62,11 +62,6 @@ label {
   padding: 10px 0 3px 0;
 }
 
-#newproject #create-post-form {
-  height: auto;
-  top: -300px;
-}
-
 #newproject input {
   border: none;
   border: solid 1px #ccc;
@@ -103,6 +98,26 @@ label {
 
 #item-container .createItemButton {
   margin-left: 5px;
+}
+
+#newproject #create-post-form {
+  height: 580px;
+  top: -250px;
+  max-height: calc(100vw - 100px);
+  overflow: hidden;
+}
+
+#newproject #create-post-form form {
+  margin-top: 30px;
+  left: 0;
+  margin-left: 12.5%;
+  padding-right: 40px;
+  padding-left: 5px;
+  width: 80%;
+  max-height: calc(100vh - 180px);
+  height: 90%;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 
