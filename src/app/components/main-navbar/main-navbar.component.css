@@ -107,17 +107,23 @@
 
 #questionButton {
   background-image: url("../../../assets/icons/q.svg");
-  transform: scale(1.5);
+  transform: scale(1.3);
+  border-style: solid;
+  border-width: thin;
 }
 
 #messageButton {
   background-image: url("../../../assets/icons/talk.svg");
-  transform: scale(1.5);
+  transform: scale(1.3);
+  border-style: solid;
+  border-width: thin;
 }
 
 #projectButton {
   background-image: url("../../../assets/icons/pen.svg");
-  transform: scale(1.5);
+  transform: scale(1.3);
+  border-style: solid;
+  border-width: thin;
 }
 
 #plusButton {
