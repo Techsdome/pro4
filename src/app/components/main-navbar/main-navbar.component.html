@@ -42,19 +42,19 @@
            [routerLink]="'/app-user-profile'" [routerLinkActive]="['active']">
       <span class="link-text pro">Profile</span>
 
-      <div id="plusButton-container" class="plus">
+      <div id="plusButton-container" class="plus" [routerLinkActive]="['active']">
         <div [class]="status ? 'translateProject' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button animation-button3 opacity-05"
+          <input type="button" class="background-image-settings sidebar-button opacity-05"
                  id="projectButton"  (click)="animateOn()">
           <p class="detail_info">create post</p>
         </div>
         <div [class]="status ? 'translateQuestion' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button animation-button2 opacity-05"
+          <input type="button" class="background-image-settings sidebar-button opacity-05"
                  id="questionButton"  (click)="animateOn()">
           <p class="detail_info">ask question</p>
         </div>
         <div [class]="status ? 'translateMessage' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button animation-button1 opacity-05"
+          <input type="button" class="background-image-settings sidebar-button opacity-05"
                  id="messageButton" (click)="animateOn(); open();">
           <p class="detail_info">create project</p>
         </div>
