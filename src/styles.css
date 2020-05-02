@@ -138,6 +138,12 @@ body {
     margin: 3px 3px;
 }
 
+.roundInputField{
+    border-radius: 20px;
+    padding: 0 10px;
+    border: solid 2px #a6b0bf;
+}
+
 .boderButton:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
@@ -254,6 +260,8 @@ ul > * {
     border-radius: 20px;
     margin: 10px 0;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .small-profile-picture {
@@ -273,10 +281,38 @@ ul > * {
 }
 
 .post-main-feed {
-    margin-left: 175px !important;
+     margin-left: 175px !important;
+ }
+
+.side-container{
+    display: grid;
+    background-color: #0f6674;
+    width: 25%;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0; /* required */
+    border-radius: 100px;
 }
 
-#all-posts-container {
+.side-content{
+    align-self: center;
+    width: 100px;
+    height: 200px;
+    border-radius: 20px;
+    background-color: #00aced;
+}
+
+.side-content ul{
+    justify-self: center !important;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    min-width: 70%;
+}
+
+#main-dashboard-container {
     margin: 100px auto;
     width: 80%;
     display: flex;
@@ -342,3 +378,4 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background: #5a6268;
 }
+

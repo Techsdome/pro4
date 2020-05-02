@@ -81,6 +81,10 @@ export class CreatePostComponent implements OnInit {
                         uid: this.authService.afAuth.auth.currentUser.uid,
                         photoURL: tempPhotoUrl,
                         displayName: `${val.firstname} ${val.lastname}`
+                    }).then(docRef => {
+                        this.authService.afs.doc(`generalPosts/allPosts`).collection('post').doc(docRef.id).update({
+                            postId: docRef.id
+                        });
                     });
                 });
         });

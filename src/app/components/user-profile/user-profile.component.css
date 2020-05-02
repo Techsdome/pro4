@@ -3,7 +3,11 @@
 }
 
 #user-profile-posts-container {
-    margin-left: 175px !important;
+    margin-left: 175px;
+}
+
+#all-posts-container{
+    padding: 100px 150px;
 }
 
 @media only screen and (max-width: 630px) {
