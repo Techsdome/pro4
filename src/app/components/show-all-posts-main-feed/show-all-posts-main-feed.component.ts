@@ -86,7 +86,8 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
                             postMinutes: value.minutes,
                             postSecond: value.second,
                             photoURL: value.photoURL,
-                            displayName: value.displayName
+                            displayName: value.displayName,
+                            postId: value.postId
                         };
                         this.posts.push(postObject);
                     });

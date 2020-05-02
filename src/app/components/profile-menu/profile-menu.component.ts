@@ -7,12 +7,10 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ProfileMenuComponent implements OnInit {
 
-    test: string;
 
     constructor() {
     }
 
     ngOnInit(): void {
     }
-  
 }

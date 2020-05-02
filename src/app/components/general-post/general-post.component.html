@@ -3,14 +3,22 @@
     <div class="post-container">
         <img [src]="postPhotoUrl" alt="profil picture" class="small-profile-picture image-shadow">
         <div class="post">
+        <div>
             <h4>{{postDisplayName}} posted:</h4>
             <p><strong>{{postDate}}</strong> | {{postHour}}:{{postMinute}}, {{postSecond}} seconds</p>
             <p>{{postMessage}}</p>
-            <button class="boderButton button" (click)="openComment()">Comment</button>
-            <div [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'">
-                <textarea name="comment" id="comment" class="commentField" cols="30" rows="10"></textarea>
-                <button class="boderButton button" (click)="openComment()">Save</button>
-            </div>
+            <button class="boderButton button" (click)="openCommentSection()">{{commentsLenght}} comments</button>
+        </div>
+        <section id="comment-section" [ngClass]= "showCommentSection?'showBtnTechsdome':'hideBtnTechsdome'">
+            <hr>
+                <ul>
+                    <li *ngFor="let item of allComments">
+                        <p><strong>{{item.name}}</strong>: {{item.text}}</p>
+                    </li>
+                </ul>
+                <input class="roundInputField" id="comment" type="text" [(ngModel)]= "comment">
+                <button class="boderButton" (click)="addComment()">Save comment</button>
+            </section>
         </div>
     </div>
         <app-parting-line></app-parting-line>
