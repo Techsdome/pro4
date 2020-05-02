@@ -350,17 +350,17 @@
 
 .translateMessage {
     display: inline;
-    transform: translate(108px, 45px) scale(1.5);
+    transform: translate(84px, 45px) scale(1.5);
 }
 
 .translateQuestion {
     display: inline;
-    transform: translate(120px, 0px) scale(1.5);
+    transform: translate(96px, 0px) scale(1.5);
 }
 
 .translateProject {
     display: inline;
-    transform: translate(108px, -45px) scale(1.5);
+    transform: translate(84px, -45px) scale(1.5);
 }
 
 #puffer-60-margin {
