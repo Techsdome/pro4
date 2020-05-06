@@ -1,3 +1,75 @@
+#houseButton:hover ~ .home {
+  visibility: visible;
+  color: #222;
+}
+
+#houseButton.active ~ .p_before, #houseButton:hover ~ .p_after {
+  visibility: visible;
+}
+
+#directoryButton:hover  ~ .dir {
+  visibility: visible;
+  color: #222;
+}
+
+#directoryButton.active  ~ .p_before, #directoryButton:hover ~ .p_after {
+  visibility: visible;
+  transform: translate(0px, 50px);
+}
+
+#peopleButton:hover  ~ .pep {
+  visibility: visible;
+  color: #222;
+}
+
+#peopleButton.active  ~ .p_before, #peopleButton:hover ~ .p_after {
+  visibility: visible;
+  transform: translate(0px, 100px);
+}
+
+#forumButton:hover  ~ .for {
+  visibility: visible;
+  color: #222;
+}
+
+#forumButton.active  ~ .p_before, #forumButton:hover ~ .p_after {
+  visibility: visible;
+  transform: translate(0px, 150px);
+}
+
+#chatButton:hover  ~ .cha {
+  visibility: visible;
+  color: #222;
+}
+
+#chatButton.active  ~ .p_before, #chatButton:hover ~ .p_after {
+  visibility: visible;
+  transform: translate(0px, 200px);
+}
+
+#profileButtonSideBar:hover  ~ .pro {
+  visibility: visible;
+  color: #222;
+}
+
+#profileButtonSideBar.active  ~ .p_before, #profileButtonSideBar:hover ~ .p_after {
+  visibility: visible;
+  transform: translate(0px, -100px);
+}
+
+#plusButton-container:hover  ~ .plus, #plusButton-container.active  ~ .plus{
+  visibility: visible;
+  color: #222;
+}
+
+#plusButton-container.active  ~ .p_before, #plusButton-container:hover ~ .p_after {
+  visibility: visible;
+  transform: translate(0px, -50px);
+}
+
+.link-text:hover, .link-text.active {
+  color: #222;
+}
 
 #peopleButton {
   background-image: url("../../../assets/icons/people.svg");
@@ -35,14 +107,23 @@
 
 #questionButton {
   background-image: url("../../../assets/icons/q.svg");
+  transform: scale(1.3);
+  border-style: solid;
+  border-width: thin;
 }
 
 #messageButton {
   background-image: url("../../../assets/icons/talk.svg");
+  transform: scale(1.3);
+  border-style: solid;
+  border-width: thin;
 }
 
 #projectButton {
   background-image: url("../../../assets/icons/pen.svg");
+  transform: scale(1.3);
+  border-style: solid;
+  border-width: thin;
 }
 
 #plusButton {
@@ -101,37 +182,54 @@
   color: #F3F4F6;
   margin-left: 0px;
   filter: grayscale(100%) opacity(0.7);
-  transition: 300ms;
 }
 
-.home {
-  color: #222;
-}
+/*.bubble {*/
+/*  visibility: hidden;*/
+/*  z-index: -4;*/
+/*  position: absolute;*/
+/*  background-image: url("../../../assets/icons/pointer.svg");*/
+/*  top: 192px;*/
+/*  width: 150px;*/
+/*  height: 150px;*/
+/*  border-radius: 50%;*/
+/*  transition: 500ms;*/
+/*}*/
 
-.link-text:hover {
-  filter: grayscale(0%) opacity(1);
-}
+/*.wings {*/
+/*  visibility: hidden;*/
+/*  z-index: -4;*/
+/*  position: absolute;*/
+/*  background-image: url("../../../assets/icons/pwings.svg");*/
+/*  top: 192px;*/
+/*  width: 150px;*/
+/*  height: 150px;*/
+/*  margin-left: -21px;*/
+/*  transition: 200ms ease;*/
+/*}*/
 
-.bubble {
+.p_before {
+  visibility: hidden;
   z-index: -4;
   position: absolute;
-  background-image: url("../../../assets/icons/pointer.svg");
-  top: 192px;
+  background-image: url("../../../assets/icons/p_before.svg");
+  top: 190px;
+  left: 3px;
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  transition: 500ms;
 }
 
-.wings {
+.p_after {
+  visibility: hidden;
   z-index: -4;
   position: absolute;
-  background-image: url("../../../assets/icons/pwings.svg");
-  top: 192px;
+  background-image: url("../../../assets/icons/p_before.svg");
+  top: 190px;
+  left: 3px;
   width: 150px;
   height: 150px;
-  margin-left: -21px;
-  transition: 200ms ease;
+  border-radius: 50%;
 }
 
 .button-image {
@@ -140,10 +238,6 @@
 
 #directoryButton {
   background-image: url("../../../assets/icons/dir.svg");
-}
-
-#directoryButton:hover ~ .bubble {
-  transform: translate(0px, 50px);
 }
 
 #houseButton {
@@ -165,7 +259,7 @@
 
 #round {
     z-index: -1;
-    left: 60px;
+    left: 64px;
     top: 40px;
     position: fixed;
     width: 50px;
@@ -194,17 +288,17 @@
 
 .translateMessage {
     display: inline;
-    transform: translate(28px, 35px);
+    transform: translate(84px, 45px);
 }
 
 .translateQuestion {
     display: inline;
-    transform: translate(40px, 0px);
+    transform: translate(96px, 0px);
 }
 
 .translateProject {
     display: inline;
-    transform: translate(28px, -35px);
+    transform: translate(84px, -45px);
 }
 
 #puffer-60-margin {
@@ -229,20 +323,6 @@
     width: 4rem;
     height: 100vh;
     transition: width 200ms ease;
-}
-
-#menuBar_left:hover {
-  z-index: -10;
-  width: 8rem;
-}
-
-#menuBar_left:hover .link-text {
-  visibility: visible;
-  display: block;
-}
-
-#menuBar_left:hover #round {
-  transform: translate(68px, 0px);
 }
 
 #mobile-menu-icon-container hr{
@@ -274,10 +354,6 @@
 
 #menuBar_top{
     overflow: hidden;
-}
-
-#menuBar_left:hover .wings {
-  transform: translate(68px, 0px);
 }
 
 @media only screen and (max-width: 630px){

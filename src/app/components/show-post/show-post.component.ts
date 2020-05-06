@@ -78,9 +78,9 @@ export class ShowPostComponent implements OnInit {
                             postText: value.post,
                             postHour: value.hour,
                             postMinutes: value.minutes,
-                            postSecond: value.second
+                            postSecond: value.second,
+                            postId: value.postId
                         };
-                        // this.posts.push(value.post);
                         this.posts.push(postObject);
                     });
                 });

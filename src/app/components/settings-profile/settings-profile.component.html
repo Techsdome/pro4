@@ -36,13 +36,13 @@
       <div *ngIf="edit" class="col-md-3">
         <div class="md-form form-group">
           <input mdInput mdValidate [(ngModel)]="firstName" id="input_fN" type="text" class="form-control" required>
-          <label class="active" for="input_fN">Vorname</label>
+          <label class="active" for="input_fN">First Name</label>
         </div>
 
         <div class="md-form form-group">
           <input mdInput mdValidate [(ngModel)]="lastName" id="input_sN" type="text" placeholder="{{ lastName }}"
                  class="form-control" required>
-          <label class="active" for="input_sN">Nachname</label>
+          <label class="active" for="input_sN">Last Name</label>
         </div>
       </div>
       <div *ngIf="edit" class="col-md-3">
@@ -58,22 +58,22 @@
     <div *ngIf="!edit" class="row">
       <div class="col-md-2 offset-md-10 btn-group p-2">
         <button type="button" (click)="toggleEdit();"
-                class="btn btn-primary shadow-none btn-rounded">Bearbeiten
+                class="btn btn-primary shadow-none btn-rounded">Edit
         </button>
       </div>
     </div>
     <div *ngIf="edit" class="row">
       <div class="col-md-3 btn-group p-2">
         <button type="button" class="btn shadow-none btn-rounded btn-danger" data-toggle="modal"
-                data-target="#modalConfirmDelete">Account Löschen
+                data-target="#modalConfirmDelete">Delete account
         </button>
       </div>
       <div class="col-md-2 offset-md-7 btn-group p-2">
         <button type="button" (click)="toggleEdit();"
-                class="btn btn-primary shadow-none btn-rounded">Abbrechen
+                class="btn btn-primary shadow-none btn-rounded">Cancel
         </button>
         <button *ngIf="edit" type="button" (click)="updateFields();" class="btn btn-success shadow-none btn-rounded">
-          Speichern
+          Save
         </button>
       </div>
     </div>
@@ -88,7 +88,7 @@
     <div class="modal-content text-center">
       <!--Header-->
       <div class="modal-header d-flex justify-content-center">
-        <p class="heading">Account löschen?</p>
+        <p class="heading">Delete account?</p>
       </div>
 
       <!--Body-->
@@ -100,8 +100,8 @@
 
       <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a (click)="deleteAccount();" class="btn shadow-none btn-outline-danger">Ja</a>
-        <a type="button" class="btn  btn-danger shadow-none" data-dismiss="modal">Nein</a>
+        <a (click)="deleteAccount();" class="btn shadow-none btn-outline-danger">Yes</a>
+        <a type="button" class="btn  btn-danger shadow-none" data-dismiss="modal">No</a>
       </div>
     </div>
     <!--/.Content-->

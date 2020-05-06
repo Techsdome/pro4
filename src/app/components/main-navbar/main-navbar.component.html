@@ -35,53 +35,79 @@
        class="black-standard-color">
     <div id="round"></div>
 
-
     <div id="sidebar-button-container">
 
-      <img [src]="photoURL" class="background-image-settings sidebar-button" id="profileButtonSideBar"
-           [routerLink]="'/app-user-profile'">
-      <span class="link-text">Profile</span>
 
-      <div id="plusButton-container">
+      <img [src]="photoURL" class="background-image-settings sidebar-button pro" id="profileButtonSideBar"
+           [routerLink]="['/app-user-profile']" [routerLinkActive]="['active']">
+      <span class="link-text pro">Profile</span>
+
+      <div id="plusButton-container" class="plus" [routerLinkActive]="['active']">
         <div [class]="status ? 'translateProject' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button animation-button3 opacity-05"
+          <input type="button" class="background-image-settings sidebar-button opacity-05"
                  id="projectButton"  (click)="animateOn()">
           <p class="detail_info">create post</p>
         </div>
         <div [class]="status ? 'translateQuestion' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button animation-button2 opacity-05"
+          <input type="button" class="background-image-settings sidebar-button opacity-05"
                  id="questionButton"  (click)="animateOn()">
           <p class="detail_info">ask question</p>
         </div>
         <div [class]="status ? 'translateMessage' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button animation-button1 opacity-05"
+          <input type="button" class="background-image-settings sidebar-button opacity-05"
                  id="messageButton" (click)="animateOn(); open();">
           <p class="detail_info">create project</p>
         </div>
         <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
       </div>
-      <span class="link-text" (click)="animateOn()">Create</span>
+      <span class="link-text plus" (click)="animateOn()">Create</span>
 
-
-      <input class="background-image-settings sidebar-button" id="houseButton" [routerLink]="['/dashboard']"
+      <input class="background-image-settings sidebar-button home" id="houseButton" [routerLink]="['/dashboard']" [routerLinkActive]="['active']"
              type="button">
-      <span class="link-text home">Home</span>
+      <span class="link-text home" [routerLink]="['/dashboard']">Home</span>
 
-      <input class="background-image-settings sidebar-button" id="directoryButton" [routerLink]="['/project-page']"
+      <input class="background-image-settings sidebar-button dir" id="directoryButton" [routerLink]="['/project-page']" [routerLinkActive]="['active']"
              type="button">
-      <span class="link-text dir">Directory</span>
+      <span class="link-text dir" [routerLink]="['/project-page']" [routerLinkActive]="['active']">Directory</span>
 
-      <input class="background-image-settings sidebar-button" id="peopleButton" type="button">
-      <span class="link-text">People</span>
+      <input class="background-image-settings sidebar-button pep" id="peopleButton" type="button">
+      <span class="link-text pep">People</span>
 
-      <input class="background-image-settings sidebar-button" id="forumButton" type="button">
-      <span class="link-text">Forum</span>
+      <input class="background-image-settings sidebar-button for" id="forumButton" type="button">
+      <span class="link-text for">Forum</span>
 
-      <input class="background-image-settings sidebar-button" id="chatButton" type="button">
-      <span class="link-text">Chat</span>
+      <input class="background-image-settings sidebar-button cha" id="chatButton" type="button">
+      <span class="link-text cha">Chat</span>
 
-      <div class="bubble"></div>
-      <div class="wings"></div>
+      <div class="p_before"></div>
+      <div class="p_after"></div>
+<!--<div class="menu">-->
+<!--  <span>-->
+<!--    <svg viewBox="220 0 300 300" class="whitething">-->
+
+<!--      <path class="st0 anim" d="M122.1,110.7l-0.6-57.6h-7.8c0,25.9-17,47.7-40.5,55h-1.8c-23.1,0-41.9,18.8-41.9,41.9-->
+<!--	c0,23.1,18.8,41.9,41.9,41.9h1.8c23.5,7.3,40.5,29.1,40.5,55h7.8l0.6-57.6H122L122.1,110.7L122.1,110.7z">-->
+<!--        <animate-->
+<!--          attributeName="d"-->
+<!--          to="M270.4,108.1l-0.5-55h-7.8c0,25.8-17,47.7-40.4,55H71.4c-23.1,0-41.9,18.8-41.9,41.9s18.8,41.9,41.9,41.9h150.2-->
+<!--	c23.4,7.3,40.4,29.2,40.4,55h7.8l0.5-55h0L270.4,108.1L270.4,108.1z"-->
+<!--          dur="1s"-->
+<!--          begin="mouseover"-->
+<!--          fill="freeze"/>-->
+<!--        <animate-->
+<!--          attributeName="d"-->
+<!--          to="M122.1,110.7l-0.6-57.6h-7.8c0,25.9-17,47.7-40.5,55h-1.8c-23.1,0-41.9,18.8-41.9,41.9-->
+<!--	c0,23.1,18.8,41.9,41.9,41.9h1.8c23.5,7.3,40.5,29.1,40.5,55h7.8l0.6-57.6H122L122.1,110.7L122.1,110.7z"-->
+<!--          dur="1s"-->
+<!--          begin="mouseout"-->
+<!--          fill="freeze"/>-->
+<!--      </path>-->
+<!--      <path class="st0 open" d="M270.4,108.1l-0.5-55h-7.8c0,25.8-17,47.7-40.4,55H71.4c-23.1,0-41.9,18.8-41.9,41.9s18.8,41.9,41.9,41.9h150.2-->
+<!--	c23.4,7.3,40.4,29.2,40.4,55h7.8l0.5-55h0L270.4,108.1L270.4,108.1z" />-->
+<!--    </svg>-->
+<!--  </span>-->
+<!--</div>-->
+
 
     </div>
   </div>
