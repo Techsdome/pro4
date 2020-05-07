@@ -1,68 +1,103 @@
+.dir:hover~.p_after {
+    top: 265px;
+    opacity: 100%;
+}
+
+.pep:hover~.p_after {
+  top: 315px;
+  opacity: 100%;
+}
+
+.for:hover~.p_after {
+  top: 364px;
+  opacity: 100%;
+}
+
+.cha:hover~.p_after {
+  top: 414px;
+  opacity: 100%;
+}
+
+.plus:hover~.p_after {
+  top: 166px;
+  opacity: 100%;
+}
+
+.pro:hover~.p_after {
+  top: 117px;
+  opacity: 100%;
+}
+
+.home:hover~.p_after {
+  opacity: 100%;
+}
+
+
 #houseButton:hover ~ .home {
   visibility: visible;
   color: #222;
 }
 
-#houseButton.active ~ .p_before, #houseButton:hover ~ .p_after {
+#houseButton.active ~ .p_before {
   visibility: visible;
 }
 
-#directoryButton:hover  ~ .dir {
+#directoryButton:hover  ~ .dirt {
   visibility: visible;
   color: #222;
 }
 
-#directoryButton.active  ~ .p_before, #directoryButton:hover ~ .p_after {
+#directoryButton.active  ~ .p_before {
   visibility: visible;
   transform: translate(0px, 50px);
 }
 
-#peopleButton:hover  ~ .pep {
+#peopleButton:hover  ~ .pept {
   visibility: visible;
   color: #222;
 }
 
-#peopleButton.active  ~ .p_before, #peopleButton:hover ~ .p_after {
+#peopleButton.active  ~ .p_before {
   visibility: visible;
   transform: translate(0px, 100px);
 }
 
-#forumButton:hover  ~ .for {
+#forumButton:hover  ~ .fort {
   visibility: visible;
   color: #222;
 }
 
-#forumButton.active  ~ .p_before, #forumButton:hover ~ .p_after {
+#forumButton.active  ~ .p_before {
   visibility: visible;
   transform: translate(0px, 150px);
 }
 
-#chatButton:hover  ~ .cha {
+#chatButton:hover  ~ .chat {
   visibility: visible;
   color: #222;
 }
 
-#chatButton.active  ~ .p_before, #chatButton:hover ~ .p_after {
+#chatButton.active  ~ .p_before {
   visibility: visible;
   transform: translate(0px, 200px);
 }
 
-#profileButtonSideBar:hover  ~ .pro {
+#profileButtonSideBar:hover  ~ .prot {
   visibility: visible;
   color: #222;
 }
 
-#profileButtonSideBar.active  ~ .p_before, #profileButtonSideBar:hover ~ .p_after {
+#profileButtonSideBar.active  ~ .p_before {
   visibility: visible;
   transform: translate(0px, -100px);
 }
 
-#plusButton-container:hover  ~ .plus, #plusButton-container.active  ~ .plus{
+#plusButton-container:hover  ~ .plust, #plusButton-container.active  ~ .plust{
   visibility: visible;
   color: #222;
 }
 
-#plusButton-container.active  ~ .p_before, #plusButton-container:hover ~ .p_after {
+#plusButton-container.active  ~ .p_before {
   visibility: visible;
   transform: translate(0px, -50px);
 }
@@ -180,56 +215,32 @@
 .link-text {
   visibility: hidden;
   color: #F3F4F6;
-  margin-left: 0px;
   filter: grayscale(100%) opacity(0.7);
 }
-
-/*.bubble {*/
-/*  visibility: hidden;*/
-/*  z-index: -4;*/
-/*  position: absolute;*/
-/*  background-image: url("../../../assets/icons/pointer.svg");*/
-/*  top: 192px;*/
-/*  width: 150px;*/
-/*  height: 150px;*/
-/*  border-radius: 50%;*/
-/*  transition: 500ms;*/
-/*}*/
-
-/*.wings {*/
-/*  visibility: hidden;*/
-/*  z-index: -4;*/
-/*  position: absolute;*/
-/*  background-image: url("../../../assets/icons/pwings.svg");*/
-/*  top: 192px;*/
-/*  width: 150px;*/
-/*  height: 150px;*/
-/*  margin-left: -21px;*/
-/*  transition: 200ms ease;*/
-/*}*/
 
 .p_before {
   visibility: hidden;
   z-index: -4;
   position: absolute;
   background-image: url("../../../assets/icons/p_before.svg");
-  top: 190px;
-  left: 3px;
-  width: 150px;
-  height: 150px;
+  top: 215px;
+  left: 10px;
+  width: 69px;
+  height: 105px;
   border-radius: 50%;
 }
 
 .p_after {
-  visibility: hidden;
   z-index: -4;
   position: absolute;
   background-image: url("../../../assets/icons/p_before.svg");
-  top: 190px;
-  left: 3px;
-  width: 150px;
-  height: 150px;
+  top: 215px;
+  left: 10px;
+  width: 69px;
+  height: 105px;
   border-radius: 50%;
+  opacity: 0%;
+  transition: all .5s ease 0s;
 }
 
 .button-image {
@@ -267,6 +278,42 @@
     border-radius: 30%;
     box-shadow: -15px -15px 0 0 #222;
     transition: transform 200ms ease;
+}
+
+#round_right {
+  z-index: -4;
+  left: 1854px;
+  top: 40px;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  box-shadow: 15px -15px 0 0 #222;
+  transition: transform 200ms ease;
+}
+
+#round_below {
+  z-index: -4;
+  left: 64px;
+  top: 919px;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  box-shadow: -15px 15px 0 0 #222;
+  transition: transform 200ms ease;
+}
+
+#round_r_b {
+  z-index: -4;
+  left: 1854px;
+  top: 919px;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  box-shadow: 15px 15px 0 0 #222;
+  transition: transform 200ms ease;
 }
 
 .black-standard-color {

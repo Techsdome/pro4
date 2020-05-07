@@ -2,7 +2,7 @@
 
   <input class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
 
-
+  <div id="round_right"></div>
   <div id="settingsButton" class="dropdown text-white">
     <button type="button" class="btn m-0 shadow-none" id="dropdownMenu" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -34,53 +34,59 @@
   <div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" [routerLink]="['/app-user-profile']"
        class="black-standard-color">
     <div id="round"></div>
+    <div id="round_below"></div>
+    <div id="round_r_b"></div>
 
     <div id="sidebar-button-container">
 
 
       <img [src]="photoURL" class="background-image-settings sidebar-button pro" id="profileButtonSideBar"
            [routerLink]="['/app-user-profile']" [routerLinkActive]="['active']">
-      <span class="link-text pro">Profile</span>
+      <span class="link-text prot"><strong>Profile</strong></span>
 
       <div id="plusButton-container" class="plus" [routerLinkActive]="['active']">
         <div [class]="status ? 'translateProject' : 'hide'">
           <input type="button" class="background-image-settings sidebar-button opacity-05"
                  id="projectButton"  (click)="animateOn()">
-          <p class="detail_info">create post</p>
+          <p class="detail_info"><strong>create post</strong></p>
         </div>
         <div [class]="status ? 'translateQuestion' : 'hide'">
           <input type="button" class="background-image-settings sidebar-button opacity-05"
                  id="questionButton"  (click)="animateOn()">
-          <p class="detail_info">ask question</p>
+          <p class="detail_info"><strong>ask question</strong></p>
         </div>
         <div [class]="status ? 'translateMessage' : 'hide'">
           <input type="button" class="background-image-settings sidebar-button opacity-05"
                  id="messageButton" (click)="animateOn(); open();">
-          <p class="detail_info">create project</p>
+          <p class="detail_info"><strong>create project</strong></p>
         </div>
         <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
       </div>
-      <span class="link-text plus" (click)="animateOn()">Create</span>
+      <span class="link-text plust" (click)="animateOn()"><strong>Create</strong></span>
 
       <input class="background-image-settings sidebar-button home" id="houseButton" [routerLink]="['/dashboard']" [routerLinkActive]="['active']"
              type="button">
-      <span class="link-text home" [routerLink]="['/dashboard']">Home</span>
+      <span class="link-text homet" [routerLink]="['/dashboard']"><strong>Home</strong></span>
 
       <input class="background-image-settings sidebar-button dir" id="directoryButton" [routerLink]="['/project-page']" [routerLinkActive]="['active']"
              type="button">
-      <span class="link-text dir" [routerLink]="['/project-page']" [routerLinkActive]="['active']">Directory</span>
+      <span class="link-text dirt" [routerLink]="['/project-page']" [routerLinkActive]="['active']"><strong>Directory</strong></span>
 
       <input class="background-image-settings sidebar-button pep" id="peopleButton" type="button">
-      <span class="link-text pep">People</span>
+      <span class="link-text pept"><strong>People</strong></span>
 
       <input class="background-image-settings sidebar-button for" id="forumButton" type="button">
-      <span class="link-text for">Forum</span>
+      <span class="link-text fort"><strong>Forum</strong></span>
 
       <input class="background-image-settings sidebar-button cha" id="chatButton" type="button">
-      <span class="link-text cha">Chat</span>
+      <span class="link-text chat"><strong>Chat</strong></span>
 
       <div class="p_before"></div>
+
       <div class="p_after"></div>
+
+
+
 <!--<div class="menu">-->
 <!--  <span>-->
 <!--    <svg viewBox="220 0 300 300" class="whitething">-->
