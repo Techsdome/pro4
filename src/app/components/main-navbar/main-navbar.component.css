@@ -1,45 +1,65 @@
 .dir:hover~.p_after {
-    top: 265px;
-    opacity: 100%;
+    top: 265px !important;
+    transition: .5s ease;
+}
+
+#directoryButton.active  ~ .p_after {
+  top: 265px;
 }
 
 .pep:hover~.p_after {
+  top: 315px !important;
+  transition: .5s ease;
+}
+
+#peopleButton.active  ~ .p_after {
   top: 315px;
-  opacity: 100%;
 }
 
 .for:hover~.p_after {
+  top: 364px !important;
+  transition: .5s ease;
+}
+
+#forumButton.active  ~ .p_after {
   top: 364px;
-  opacity: 100%;
 }
 
 .cha:hover~.p_after {
+  top: 414px !important;
+  transition: .5s ease;
+}
+
+#chatButton.active  ~ .p_after {
   top: 414px;
-  opacity: 100%;
 }
 
 .plus:hover~.p_after {
+  top: 166px !important;
+  transition: .5s ease;
+}
+
+#plusButton.active  ~ .p_after {
   top: 166px;
-  opacity: 100%;
 }
 
 .pro:hover~.p_after {
+  top: 117px !important;
+  transition: .5s ease;
+}
+
+#profileButtonSideBar.active  ~ .p_after {
   top: 117px;
-  opacity: 100%;
 }
 
 .home:hover~.p_after {
-  opacity: 100%;
+  top: 215px !important;
+  transition: .5s ease;
 }
 
-
-#houseButton:hover ~ .home {
+#houseButton:hover ~ .homet {
   visibility: visible;
   color: #222;
-}
-
-#houseButton.active ~ .p_before {
-  visibility: visible;
 }
 
 #directoryButton:hover  ~ .dirt {
@@ -47,19 +67,9 @@
   color: #222;
 }
 
-#directoryButton.active  ~ .p_before {
-  visibility: visible;
-  transform: translate(0px, 50px);
-}
-
 #peopleButton:hover  ~ .pept {
   visibility: visible;
   color: #222;
-}
-
-#peopleButton.active  ~ .p_before {
-  visibility: visible;
-  transform: translate(0px, 100px);
 }
 
 #forumButton:hover  ~ .fort {
@@ -67,19 +77,9 @@
   color: #222;
 }
 
-#forumButton.active  ~ .p_before {
-  visibility: visible;
-  transform: translate(0px, 150px);
-}
-
 #chatButton:hover  ~ .chat {
   visibility: visible;
   color: #222;
-}
-
-#chatButton.active  ~ .p_before {
-  visibility: visible;
-  transform: translate(0px, 200px);
 }
 
 #profileButtonSideBar:hover  ~ .prot {
@@ -87,19 +87,9 @@
   color: #222;
 }
 
-#profileButtonSideBar.active  ~ .p_before {
-  visibility: visible;
-  transform: translate(0px, -100px);
-}
-
 #plusButton-container:hover  ~ .plust, #plusButton-container.active  ~ .plust{
   visibility: visible;
   color: #222;
-}
-
-#plusButton-container.active  ~ .p_before {
-  visibility: visible;
-  transform: translate(0px, -50px);
 }
 
 .link-text:hover, .link-text.active {
@@ -218,29 +208,16 @@
   filter: grayscale(100%) opacity(0.7);
 }
 
-.p_before {
-  visibility: hidden;
-  z-index: -4;
-  position: absolute;
-  background-image: url("../../../assets/icons/p_before.svg");
-  top: 215px;
-  left: 10px;
-  width: 69px;
-  height: 105px;
-  border-radius: 50%;
-}
-
 .p_after {
   z-index: -4;
   position: absolute;
   background-image: url("../../../assets/icons/p_before.svg");
   top: 215px;
-  left: 10px;
-  width: 69px;
+  left: 5px;
+  width: 75px;
   height: 105px;
   border-radius: 50%;
-  opacity: 0%;
-  transition: all .5s ease 0s;
+  transition: 1s ease;
 }
 
 .button-image {
