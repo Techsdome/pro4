@@ -57,6 +57,9 @@ import { ShowPostComponent } from './components/show-post/show-post.component';
 import { ShowAllPostsMainFeedComponent } from './components/show-all-posts-main-feed/show-all-posts-main-feed.component';
 import {GeneralPostComponent} from './components/general-post/general-post.component';
 
+import { QuillModule } from 'ngx-quill';
+import { QUILL_CONFIG_TOKEN } from 'ngx-quill';
+
 
 @NgModule({
     declarations: [
@@ -107,6 +110,7 @@ import {GeneralPostComponent} from './components/general-post/general-post.compo
         NgbModule,
         FileUploadModule,
         FontAwesomeModule,
+        QuillModule.forRoot(),
         ToastrModule.forRoot({
           preventDuplicates: true,
         }),

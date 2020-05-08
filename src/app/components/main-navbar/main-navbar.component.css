@@ -1,59 +1,59 @@
 .dir:hover~.p_after {
-    top: 265px !important;
+    top: 262px !important;
     transition: .5s ease;
 }
 
 #directoryButton.active  ~ .p_after {
-  top: 265px;
+  top: 262px;
 }
 
 .pep:hover~.p_after {
-  top: 315px !important;
+  top: 313px !important;
   transition: .5s ease;
 }
 
 #peopleButton.active  ~ .p_after {
-  top: 315px;
+  top: 313px;
 }
 
 .for:hover~.p_after {
-  top: 364px !important;
+  top: 361px !important;
   transition: .5s ease;
 }
 
 #forumButton.active  ~ .p_after {
-  top: 364px;
+  top: 361px;
 }
 
 .cha:hover~.p_after {
-  top: 414px !important;
+  top: 413px !important;
   transition: .5s ease;
 }
 
 #chatButton.active  ~ .p_after {
-  top: 414px;
+  top: 413px;
 }
 
 .plus:hover~.p_after {
-  top: 166px !important;
+  top: 163px !important;
   transition: .5s ease;
 }
 
 #plusButton.active  ~ .p_after {
-  top: 166px;
+  top: 163px;
 }
 
 .pro:hover~.p_after {
-  top: 117px !important;
+  top: 113px !important;
   transition: .5s ease;
 }
 
 #profileButtonSideBar.active  ~ .p_after {
-  top: 117px;
+  top: 113px;
 }
 
 .home:hover~.p_after {
-  top: 215px !important;
+  top: 214px !important;
   transition: .5s ease;
 }
 
@@ -206,13 +206,14 @@
   visibility: hidden;
   color: #F3F4F6;
   filter: grayscale(100%) opacity(0.7);
+  transition: .5s ease;
 }
 
 .p_after {
   z-index: -4;
   position: absolute;
   background-image: url("../../../assets/icons/p_before.svg");
-  top: 215px;
+  top: 214px;
   left: 5px;
   width: 75px;
   height: 105px;

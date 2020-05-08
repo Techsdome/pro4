@@ -15,8 +15,9 @@
             </div>
 
         </div>
-        <form action="">
-            <textarea [(ngModel)]="post" name="post" id="cpArea" placeholder="My post..."></textarea>
+        <form [style]="editorStyle" action="">
+<!--            <textarea [(ngModel)]="post" name="post" id="cpArea" placeholder="My post..."></textarea>-->
+          <quill-editor [modules]="config" (onContentChanged)="maxLength($event)" [(ngModel)]="post" name="post" id="cpArea" placeholder="My post..."></quill-editor>
         </form>
     </div>
 </div>
