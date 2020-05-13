@@ -231,7 +231,7 @@
 
 #houseButton {
     background-image: url("../../../assets/icons/house.svg");
-    align: center;
+    text-align: center;
 }
 
 #menuBar_top {
@@ -378,7 +378,9 @@
 }
 
 #menuBar_top{
-    overflow: hidden;
+    /*
+    overflow: hidden;                       // destory dropdown menue
+    */
 }
 
 @media only screen and (max-width: 630px){
