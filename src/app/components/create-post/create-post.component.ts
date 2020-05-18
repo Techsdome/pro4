@@ -3,6 +3,7 @@ import {DataServiceService} from '../../shared/services/data-service.service';
 import {AuthService} from '../../shared/services/auth.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
+import {FormControl, FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -17,6 +18,23 @@ export class CreatePostComponent implements OnInit {
     user: User;
     posts: string[];
     post: string;
+
+    editorForm: FormGroup;
+
+  editorStyle = {
+    justifyContent: 'center',
+    alignContent: 'center',
+    marginLeft: '-30px',
+    height: '200px',
+    width: '500px',
+  };
+
+  config = {
+    toolbar: [
+      ['bold', 'italic', 'underline'],
+      ['code-block']
+    ]
+  };
 
     constructor(private dataService: DataServiceService, private authService: AuthService) {
     }
@@ -105,5 +123,14 @@ export class CreatePostComponent implements OnInit {
         this.dataService.getCurrentUser().subscribe(user => {
             this.user = user;
         });
+        this.editorForm = new FormGroup({
+          editor: new FormControl(null)
+        });
+    }
+
+    maxLength(e) {
+      if (e.editor.getLength() > 1000) {
+        e.editor.deleteText(10, e.editor.getLength());
+      }
     }
 }

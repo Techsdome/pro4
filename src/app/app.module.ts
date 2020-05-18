@@ -60,6 +60,9 @@ import { ShowProjectsComponent } from './components/show-projects/show-projects.
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { UploadImagesComponent } from './components/upload-images/upload-images.component';
 
+import { QuillModule } from 'ngx-quill';
+import { QUILL_CONFIG_TOKEN } from 'ngx-quill';
+
 
 @NgModule({
     declarations: [
@@ -113,6 +116,7 @@ import { UploadImagesComponent } from './components/upload-images/upload-images.
         NgbModule,
         FileUploadModule,
         FontAwesomeModule,
+        QuillModule.forRoot(),
         ToastrModule.forRoot({
           preventDuplicates: true,
         }),

@@ -1,70 +1,95 @@
-#houseButton:hover ~ .home {
+.dir:hover~.p_after {
+    top: 262px !important;
+    transition: .5s ease;
+}
+
+#directoryButton.active  ~ .p_after {
+  top: 262px;
+}
+
+.pep:hover~.p_after {
+  top: 313px !important;
+  transition: .5s ease;
+}
+
+#peopleButton.active  ~ .p_after {
+  top: 313px;
+}
+
+.for:hover~.p_after {
+  top: 361px !important;
+  transition: .5s ease;
+}
+
+#forumButton.active  ~ .p_after {
+  top: 361px;
+}
+
+.cha:hover~.p_after {
+  top: 413px !important;
+  transition: .5s ease;
+}
+
+#chatButton.active  ~ .p_after {
+  top: 413px;
+}
+
+.plus:hover~.p_after {
+  top: 163px !important;
+  transition: .5s ease;
+}
+
+#plusButton.active  ~ .p_after {
+  top: 163px;
+}
+
+.pro:hover~.p_after {
+  top: 113px !important;
+  transition: .5s ease;
+}
+
+#profileButtonSideBar.active  ~ .p_after {
+  top: 113px;
+}
+
+.home:hover~.p_after {
+  top: 214px !important;
+  transition: .5s ease;
+}
+
+#houseButton:hover ~ .homet {
   visibility: visible;
   color: #222;
 }
 
-#houseButton.active ~ .p_before, #houseButton:hover ~ .p_after {
-  visibility: visible;
-}
-
-#directoryButton:hover  ~ .dir {
+#directoryButton:hover  ~ .dirt {
   visibility: visible;
   color: #222;
 }
 
-#directoryButton.active  ~ .p_before, #directoryButton:hover ~ .p_after {
-  visibility: visible;
-  transform: translate(0px, 50px);
-}
-
-#peopleButton:hover  ~ .pep {
+#peopleButton:hover  ~ .pept {
   visibility: visible;
   color: #222;
 }
 
-#peopleButton.active  ~ .p_before, #peopleButton:hover ~ .p_after {
-  visibility: visible;
-  transform: translate(0px, 100px);
-}
-
-#forumButton:hover  ~ .for {
+#forumButton:hover  ~ .fort {
   visibility: visible;
   color: #222;
 }
 
-#forumButton.active  ~ .p_before, #forumButton:hover ~ .p_after {
-  visibility: visible;
-  transform: translate(0px, 150px);
-}
-
-#chatButton:hover  ~ .cha {
+#chatButton:hover  ~ .chat {
   visibility: visible;
   color: #222;
 }
 
-#chatButton.active  ~ .p_before, #chatButton:hover ~ .p_after {
-  visibility: visible;
-  transform: translate(0px, 200px);
-}
-
-#profileButtonSideBar:hover  ~ .pro {
+#profileButtonSideBar:hover  ~ .prot {
   visibility: visible;
   color: #222;
 }
 
-#profileButtonSideBar.active  ~ .p_before, #profileButtonSideBar:hover ~ .p_after {
-  visibility: visible;
-  transform: translate(0px, -100px);
-}
-
-#plusButton-container:hover  ~ .plus, #plusButton-container.active  ~ .plus{
+#plusButton-container:hover  ~ .plust, #plusButton-container.active  ~ .plust{
   visibility: visible;
   color: #222;
-}
-
-#plusButton-container.active  ~ .p_before, #plusButton-container:hover ~ .p_after {
-  visibility: visible;
-  transform: translate(0px, -50px);
 }
 
 .link-text:hover, .link-text.active {
@@ -180,56 +205,20 @@
 .link-text {
   visibility: hidden;
   color: #F3F4F6;
-  margin-left: 0px;
   filter: grayscale(100%) opacity(0.7);
-}
-
-/*.bubble {*/
-/*  visibility: hidden;*/
-/*  z-index: -4;*/
-/*  position: absolute;*/
-/*  background-image: url("../../../assets/icons/pointer.svg");*/
-/*  top: 192px;*/
-/*  width: 150px;*/
-/*  height: 150px;*/
-/*  border-radius: 50%;*/
-/*  transition: 500ms;*/
-/*}*/
-
-/*.wings {*/
-/*  visibility: hidden;*/
-/*  z-index: -4;*/
-/*  position: absolute;*/
-/*  background-image: url("../../../assets/icons/pwings.svg");*/
-/*  top: 192px;*/
-/*  width: 150px;*/
-/*  height: 150px;*/
-/*  margin-left: -21px;*/
-/*  transition: 200ms ease;*/
-/*}*/
-
-.p_before {
-  visibility: hidden;
-  z-index: -4;
-  position: absolute;
-  background-image: url("../../../assets/icons/p_before.svg");
-  top: 190px;
-  left: 3px;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+  transition: .5s ease;
 }
 
 .p_after {
-  visibility: hidden;
   z-index: -4;
   position: absolute;
   background-image: url("../../../assets/icons/p_before.svg");
-  top: 190px;
-  left: 3px;
-  width: 150px;
-  height: 150px;
+  top: 214px;
+  left: 5px;
+  width: 75px;
+  height: 105px;
   border-radius: 50%;
+  transition: 1s ease;
 }
 
 .button-image {
@@ -242,7 +231,7 @@
 
 #houseButton {
     background-image: url("../../../assets/icons/house.svg");
-    align: center;
+    text-align: center;
 }
 
 #menuBar_top {
@@ -267,6 +256,42 @@
     border-radius: 30%;
     box-shadow: -15px -15px 0 0 #222;
     transition: transform 200ms ease;
+}
+
+#round_right {
+  z-index: -4;
+  left: 1854px;
+  top: 40px;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  box-shadow: 15px -15px 0 0 #222;
+  transition: transform 200ms ease;
+}
+
+#round_below {
+  z-index: -4;
+  left: 64px;
+  top: 919px;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  box-shadow: -15px 15px 0 0 #222;
+  transition: transform 200ms ease;
+}
+
+#round_r_b {
+  z-index: -4;
+  left: 1854px;
+  top: 919px;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  box-shadow: 15px 15px 0 0 #222;
+  transition: transform 200ms ease;
 }
 
 .black-standard-color {
@@ -353,7 +378,9 @@
 }
 
 #menuBar_top{
-    overflow: hidden;
+    /*
+    overflow: hidden;                       // destory dropdown menue
+    */
 }
 
 @media only screen and (max-width: 630px){

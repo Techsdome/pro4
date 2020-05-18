@@ -182,7 +182,7 @@ GoogleAuth() {
         const userData: any = {
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName,
+            displayName: user.displayName ? user.displayName : this.firstname + ' ' + this.lastname,
             photoURL: user.photoURL,
             emailVerified: user.emailVerified,
             job: user.job ? user.job : 'My job title',

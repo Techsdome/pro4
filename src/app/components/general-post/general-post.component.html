@@ -6,7 +6,7 @@
         <div>
             <h4>{{postDisplayName}} posted:</h4>
             <p><strong>{{postDate}}</strong> | {{postHour}}:{{postMinute}}, {{postSecond}} seconds</p>
-            <p>{{postMessage}}</p>
+            <p innerHTML = "{{ postMessage }}"></p>
             <button class="boderButton button" (click)="openCommentSection()">{{commentsLenght}} comments</button>
         </div>
         <section id="comment-section" [ngClass]= "showCommentSection?'showBtnTechsdome':'hideBtnTechsdome'">
