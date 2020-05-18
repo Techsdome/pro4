@@ -1,0 +1,25 @@
+<div class="myImg">
+          <span class="hidden-file">
+                <input type="file" #fileInput2 ng2FileSelect [uploader]="uploader"
+                       (onFileSelected)="onFilesSelected($event)" multiple/>
+          </span>
+  <div class="btn-group row myButtons" (click)="fileInput2.click()">
+    <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">
+      {{ addButton }}
+    </button>
+  </div>
+
+  <div class="row photoResults justify-content-center" *ngFor="let photo of uploader.queue">
+    <div class="row">
+      <div class="col-8 text-center filename">
+        <p class="text-break text-truncate filename">{{ photo?.file?.name }}</p>
+      </div>
+      <div class="col-4 text-center">
+        <button type="button" class="roundButton boderButton photoRemove"
+                (click)="photo.remove()">
+          x
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

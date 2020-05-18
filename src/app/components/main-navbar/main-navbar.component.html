@@ -2,7 +2,6 @@
 
   <input class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
 
-  <div id="round_right"></div>
   <div id="settingsButton" class="dropdown text-white">
     <button type="button" class="btn m-0 shadow-none" id="dropdownMenu" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -16,19 +15,6 @@
       <a class="dropdown-item" (click)="authService.SignOut()" [routerLink]="['/sign-in']">Logout</a>
     </div>
   </div>
-
-  <!--
-    <div (click)="showMenuBar()" id="mobile-menu-icon-container">
-      <div></div>
-      <div></div>
-      <hr>
-      <hr>
-      <hr>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  -->
 
 
   <div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" [routerLink]="['/app-user-profile']"
@@ -68,7 +54,7 @@
              type="button">
       <span class="link-text homet" [routerLink]="['/dashboard']"><strong>Home</strong></span>
 
-      <input class="background-image-settings sidebar-button dir" id="directoryButton" [routerLink]="['/project-page']" [routerLinkActive]="['active']"
+      <input class="background-image-settings sidebar-button dir" id="directoryButton" [routerLink]="['/present-projects']" [routerLinkActive]="['active']"
              type="button">
       <span class="link-text dirt" [routerLink]="['/project-page']" [routerLinkActive]="['active']"><strong>Directory</strong></span>
 

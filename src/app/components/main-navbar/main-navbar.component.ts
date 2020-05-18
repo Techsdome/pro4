@@ -21,7 +21,7 @@ import {trigger, state, style, animate, transition, keyframes, query, stagger} f
         animate('1s')
       ]),
     ]),
-]
+  ]
 })
 export class MainNavbarComponent implements OnInit {
   public status = false;
@@ -40,7 +40,12 @@ export class MainNavbarComponent implements OnInit {
   }
 
   open() {
-    const modalRef = this.modalService.open(NewProjectComponent, { scrollable: true });
+    const modalRef = this.modalService.open(NewProjectComponent,
+      {
+        scrollable: true,  beforeDismiss: () => {
+          return confirm('Do you want to lose your changes?');
+        }
+      });
     // modalRef.componentInstance.name = 'World';
   }
 
@@ -63,7 +68,7 @@ export class MainNavbarComponent implements OnInit {
 
 // const directory = document.querySelector('.bubble').getBoundingClientRect();
 
-    slideIt(dat) {
-      this.stat = dat;
-    }
+  slideIt(dat) {
+    this.stat = dat;
+  }
 }
