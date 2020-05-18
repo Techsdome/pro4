@@ -24,15 +24,15 @@ export class CreatePostComponent implements OnInit {
   editorStyle = {
     justifyContent: 'center',
     alignContent: 'center',
-    marginLeft: '-30px',
     height: '200px',
-    width: '500px',
+    width: '100%',
+    backgroundColor: 'white',
   };
 
   config = {
     toolbar: [
-      ['bold', 'italic', 'underline'],
-      ['code-block']
+      ['bold', 'italic', 'underline', 'size'],
+      ['blockquote', 'code-block', 'link'],
     ]
   };
 

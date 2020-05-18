@@ -6,7 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {AngularFireStorage} from 'angularfire2/storage';
 import {FileUploader} from 'ng2-file-upload';
 import {AngularFireUploadTask} from '@angular/fire/storage';
-import {finalize} from 'rxjs/operators';
+import {finalize} from 'rxjs/operators';3
 import {Observable} from 'rxjs';
 
 @Component({
@@ -17,6 +17,7 @@ import {Observable} from 'rxjs';
 
 export class NewProjectComponent implements OnInit {
   user: User;
+  description: string;
   task: AngularFireUploadTask;
   showScreen = false;
   URL: string;
@@ -24,6 +25,21 @@ export class NewProjectComponent implements OnInit {
   imagesURL = [];
   @Input() selectedCategories: string[];
   @Input() selectedMembers: string;
+
+  editorStyle = {
+    justifyContent: 'center',
+    alignContent: 'center',
+    height: '200px',
+    width: '100%',
+    backgroundColor: 'white',
+  };
+
+  config = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'size'],
+      ['blockquote', 'code-block', 'link'],
+    ]
+  };
 
   constructor(public authService: AuthService, public pservice: NewProjectService,
               public form: FormsModule,
@@ -105,9 +121,9 @@ export class NewProjectComponent implements OnInit {
     this.selectedMembers = message;
   }
 
-  Submit(name: string, description: string) {
-    if (name && description && this.user) {
-      this.pservice.addData(this.user.uid, name, description, this.selectedCategories, this.bannerURL, this.imagesURL, this.selectedMembers);
+  Submit(name: string) {
+    if (name && this.user) {
+      this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories, this.bannerURL, this.imagesURL, this.selectedMembers);
       (document.getElementById('myForm') as HTMLFormElement).reset();
       document.getElementById('fillCorrectly').style.display = 'none';
     } else {

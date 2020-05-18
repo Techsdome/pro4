@@ -5,7 +5,12 @@
       <input type="text" name="pname" id="pname" class="form-control" placeholder="New Project" #name required>
 
       <label for="pdescription"><h6>Description</h6></label>
-      <textarea class="form-control" id="pdescription" rows="3" #description required> </textarea>
+
+<!--      <textarea class="form-control" id="pdescription" rows="3" #description required> </textarea>-->
+
+      <!--      quill editor -->
+      <quill-editor [styles]="editorStyle" id="pdescription" [modules]="config" placeholder="describe your project..." name="description" [(ngModel)]="description"></quill-editor>
+      <!--      quill editor -->
 
       <div id="photoUpload" class="row">
         <div class="myImg col-6">
@@ -86,7 +91,7 @@
       <!--      <app-uploader id="uploader" class="row"></app-uploader>-->
       <button id="create" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s"
               routerLink="/project-page"
-              (click)="Submit(name.value, description.value)">
+              (click)="Submit(name.value)">
         Create
       </button>
     </form>
