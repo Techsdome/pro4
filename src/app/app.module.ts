@@ -56,6 +56,9 @@ import { SettingsSecurityComponent } from './components/settings-security/settin
 import { ShowPostComponent } from './components/show-post/show-post.component';
 import { ShowAllPostsMainFeedComponent } from './components/show-all-posts-main-feed/show-all-posts-main-feed.component';
 import {GeneralPostComponent} from './components/general-post/general-post.component';
+import { ShowProjectsComponent } from './components/show-projects/show-projects.component';
+import { UploadImageComponent } from './components/upload-image/upload-image.component';
+import { UploadImagesComponent } from './components/upload-images/upload-images.component';
 
 
 @NgModule({
@@ -89,7 +92,10 @@ import {GeneralPostComponent} from './components/general-post/general-post.compo
         SettingsSecurityComponent,
         ShowPostComponent,
         ShowAllPostsMainFeedComponent,
-        GeneralPostComponent
+        GeneralPostComponent,
+        ShowProjectsComponent,
+        UploadImageComponent,
+        UploadImagesComponent
     ],
     imports: [
         BrowserModule,

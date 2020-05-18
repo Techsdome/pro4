@@ -1,10 +1,9 @@
 #bg {
-  background-color: #bdc3c6;
-  padding: 100px 40px 20px 120px;
+  padding: 100px 40px 20px 175px;
 }
 
 #project-container {
-  background-color: #fff6ff;
+  background-color: #fff;
   margin: 0;
   padding: 0;
   height: auto;
@@ -70,15 +69,6 @@ body {
   margin-top: 15px;
 }
 
-#contributors .border {
-  padding: 0;
-  overflow: hidden;
-  margin: 5px;
-  min-width: 50px;
-  min-height: 50px;
-  max-height: 60px;
-  max-width: 60px;
-}
 
 #description h2 a {
   color: #808080;
@@ -109,33 +99,8 @@ p {
   font-weight: 500;
 }
 
-.contributor:hover {
-  height: 110%;
-  width: 150%;
-}
-
-.contributor {
-  width: 150%;
-  height: 100%;
-}
-
-#contributors a {
-  width: 100%;
-  height: auto;
-}
-
-.circular {
-  display: inline-block;
-  position: relative;
-  width: 55px;
-  height: 55px;
-  overflow: hidden;
-  border-radius: 50%;
-  margin: 3px;
-}
-
-#contributors {
-  padding-left: 20px;
+.username {
+  color: #8e908c;
 }
 
 #info-panel {

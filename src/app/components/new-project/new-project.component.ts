@@ -8,6 +8,7 @@ import {FileUploader} from 'ng2-file-upload';
 import {AngularFireUploadTask} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-new-project',
@@ -18,73 +19,21 @@ import {Observable} from 'rxjs';
 export class NewProjectComponent implements OnInit {
   user: User;
   task: AngularFireUploadTask;
+  taskPromises = [];
+
   showScreen = false;
-  URL: string;
-  bannerURL: string;
-  imagesURL = [];
-  @Input() selectedCategories: string[];
-  @Input() selectedMembers: string;
+  bannerURLPromise: Promise<any>;
+  imagesURLPromises = [];
+  bannerFile: File;
+  imageFiles: File[];
+  projectID: string;
+  selectedCategories: string[];
+  selectedMembers: string[];
+  isPurpose: string;
 
   constructor(public authService: AuthService, public pservice: NewProjectService,
-              public form: FormsModule,
+              public form: FormsModule, public activeModal: NgbActiveModal, private modalService: NgbModal,
               private storage: AngularFireStorage) {
-  }
-
-  public uploader: FileUploader = new FileUploader({
-    url: ' ',
-    disableMultipart: false,
-    autoUpload: true,
-    method: 'post',
-    itemAlias: 'attachment',
-    allowedFileType: ['image']
-  });
-
-  public uploader2: FileUploader = new FileUploader({
-    url: ' ',
-    disableMultipart: false,
-    autoUpload: true,
-    method: 'post',
-    itemAlias: 'attachment',
-    allowedFileType: ['image']
-  });
-
-  public onFileSelected(event: EventEmitter<File[]>) {
-    if (this.uploader.queue.length < 2) {
-      const file: File = event[0];
-      this.bannerURL = `project/${this.user.uid}/banner/${file.name}`;
-      this.uploader.queue[0].url = this.bannerURL;
-
-      this.task = this.storage.upload(this.bannerURL, file);
-      this.task.snapshotChanges().pipe(
-        finalize(() => {
-          this.storage.ref(this.bannerURL).getDownloadURL().subscribe(url => {
-            this.bannerURL = url;
-          });
-        }),
-      ).subscribe();
-    }
-  }
-
-  public onFileSelected2(event: EventEmitter<File[]>) {
-    let it = 0;
-
-    this.uploader2.queue.forEach((myfile) => {
-      const file: File = event[it];
-
-      const URL = `project/${this.user.uid}/images/${file.name}`;
-
-      this.uploader2.queue[it].url = URL;
-      this.task = this.storage.upload(URL, file);
-
-      this.task.snapshotChanges().pipe(
-        finalize(() => {
-          this.storage.ref(URL).getDownloadURL().subscribe(url => {
-            this.imagesURL.push(url);
-          });
-        }),
-      ).subscribe();
-      it++;
-    });
   }
 
   ngOnInit() {
@@ -98,21 +47,89 @@ export class NewProjectComponent implements OnInit {
   }
 
   getChildMessage(message: any) {
-    this.selectedCategories = message;
+    if (this.isPurpose === 'tags') {
+      this.selectedCategories = message;
+    }
+    if (this.isPurpose === 'members')
+      this.selectedMembers = message;
   }
 
   getPurposeMessage(message: string) {
-    this.selectedMembers = message;
+    this.isPurpose = message;
   }
 
-  Submit(name: string, description: string) {
+  getBannerFile(message: any) {
+    this.bannerFile = message;
+  }
+
+  getImageFiles(message) {
+    this.imageFiles = message;
+  }
+
+  uploadBannerImage(): Promise<any> {
+    if (this.pservice.getProjectID()) {
+      this.projectID = this.pservice.getProjectID();
+      if (this.bannerFile) {
+        const URL = `project/${this.user.uid}/${this.projectID}/banner/${this.bannerFile.name}`;
+
+        this.task = this.storage.upload(URL, this.bannerFile);
+        return this.task.snapshotChanges().pipe(
+          finalize(() => {
+            this.bannerURLPromise = this.storage.ref(URL).getDownloadURL().toPromise();
+          }),
+        ).toPromise();
+      } else {
+        alert('Please select a banner picture');
+      }
+    } else {
+      alert('Could not upload banner');
+    }
+  }
+
+  async uploadImages(): Promise<any> {
+    if (this.pservice.getProjectID()) {
+      this.projectID = this.pservice.getProjectID();
+      if (this.imageFiles) {
+        this.imageFiles.forEach((myFile) => {
+          if (myFile) {
+            const URL = `project/${this.user.uid}/${this.projectID}/images/${myFile.name}`;
+            this.task = this.storage.upload(URL, myFile);
+
+            this.taskPromises.push(this.task.snapshotChanges().pipe(
+              finalize(() => {
+                this.imagesURLPromises.push(this.storage.ref(URL).getDownloadURL().toPromise());
+              })
+            ).toPromise());
+          }
+        });
+      }
+    } else {
+      alert('Could not upload images');
+    }
+  }
+
+  async Submit(name: string, description: string) {
     if (name && description && this.user) {
-      this.pservice.addData(this.user.uid, name, description, this.selectedCategories, this.bannerURL, this.imagesURL, this.selectedMembers);
+
+      await this.pservice.addData(this.user.uid, name, description, this.selectedCategories, this.selectedMembers);
+
       (document.getElementById('myForm') as HTMLFormElement).reset();
       document.getElementById('fillCorrectly').style.display = 'none';
+
+      await this.uploadBannerImage();
+      const bannerURL =  await this.bannerURLPromise;
+
+      const imagesURLs = [];
+      this.uploadImages();
+      await Promise.all(this.taskPromises);
+      for (const URL of this.imagesURLPromises) {
+        imagesURLs.push(await URL);
+      }
+
+      this.pservice.uploadPictures(bannerURL, imagesURLs);
+      this.activeModal.close();
     } else {
       document.getElementById('fillCorrectly').style.display = 'block';
     }
   }
-
 }

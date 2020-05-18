@@ -205,6 +205,37 @@ body {
 
 .itemInputButton{
   padding-right: 25px;
+  border-radius: 100px;
+  border: none;
+  background-color: #0058ff;
+  color: #fff;
+  margin: 2px 3px;
+}
+
+.itemInputButton{
+  padding: 0;
+  border-radius: 100px;
+  border: none;
+  background-color: #0058ff;
+  color: #fff;
+  margin: 2px 0 2px 5px !important;
+  width: auto;
+  display: inline-block;
+}
+
+.itemInputButton p {
+  padding-left: 8px !important;
+  padding-right: 10px !important;
+  margin: 0 !important;
+}
+
+#tags {
+  padding-left: 20px;
+}
+
+.myTag {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 #item-container input{
@@ -213,7 +244,7 @@ body {
   background-color: #0058ff;
   color: #fff;
   margin: 2px 3px;
-  max-width: 30%;
+  /*max-width: 30%;*/
 }
 
 #item-container{
@@ -379,3 +410,95 @@ body::-webkit-scrollbar-thumb {
   background: #5a6268;
 }
 
+/* picture upload  */
+
+.photoResults {
+  margin: 10px !important;
+  padding: 0;
+}
+
+#photoUpload {
+  margin-bottom: 10px;
+}
+
+.myImg {
+  margin:0;
+}
+
+#newproject .myImg .myButtons button {
+  margin: 0;
+}
+.photoResults p {
+  font-size: 10pt;
+}
+
+.myButtons {
+  margin: 5px !important;
+}
+
+.photoResults div {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.filename:hover {
+  overflow: visible !important;
+  white-space: normal;
+}
+
+
+#newproject .photoRemove {
+  margin: 0;
+}
+
+.hidden-file {
+  visibility: hidden;
+  position: absolute;
+  overflow: hidden;
+  width: 0;
+  height:0;
+  border:none;
+  margin:0;
+  padding:0
+}
+
+#uploader {
+  justify-content: center;
+  align-content: center;
+}
+
+.circular {
+  display: inline-block;
+  position: relative;
+  width: 55px;
+  height: 55px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 3px;
+}
+
+#contributors {
+  padding: 0;
+  margin: 5px;
+}
+
+.contributors {
+  padding: 0 !important;
+  overflow: hidden;
+  margin: 5px !important;
+  width: 60px !important;
+  height: 60px !important;
+  max-height: 60px !important;
+  max-width: 60px !important;
+}
+
+.contributor {
+  height: 102% !important;
+  min-width: 100%;
+}
+
+#contributors {
+  padding-left: 20px !important;
+  margin-bottom: 10px !important;
+}

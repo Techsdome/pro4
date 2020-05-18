@@ -1,0 +1,27 @@
+<div class="myImg">
+          <span class="hidden-file">
+                <input type="file" #fileInput ng2FileSelect [uploader]="uploader"
+                       (onFileSelected)="onFileSelected($event)"/>
+          </span>
+  <div class="btn-group row myButtons" (click)="fileInput.click()">
+    <!--        <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">-->
+    <!--          <i class="ion-plus-round">  </i>-->
+    <!--           </button>-->
+    <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">
+      {{ addButton }}
+    </button>
+  </div>
+  <div class="row photoResults justify-content-center align-items-center" *ngIf="uploader.queue[0]">
+    <div class="row">
+      <div class="col-8 text-center filename">
+        <p class="text-break text-truncate filename"> {{ uploader.queue[0]?.file?.name }}</p>
+      </div>
+      <div class="col-4 text-center">
+        <button type="button" class="roundButton boderButton photoRemove"
+                (click)="uploader.queue[0].remove()">
+          x
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

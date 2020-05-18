@@ -101,7 +101,7 @@ label {
 }
 
 #newproject #create-post-form {
-  height: 580px;
+  height: 590px;
   top: -250px;
   max-height: calc(100vw - 100px);
   overflow: hidden;
@@ -120,5 +120,27 @@ label {
   margin-bottom: 0;
 }
 
+/* scrollbar  */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /*box-shadow: inset 0 0 5px grey;*/
+  /*border-radius: 10px;*/
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c8cac6;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #bdbfbb;
+}
 
 

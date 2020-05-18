@@ -29,7 +29,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
             this.authservice.afs.collection('generalPosts').doc('allPosts')
                 .collection('post').valueChanges()
                 .subscribe((val) => {
-                    console.log(val);
+                    // console.log(val);
                     this.posts = [];
                     val.sort((t1, t2) => {
                         const year1 = t1.year;

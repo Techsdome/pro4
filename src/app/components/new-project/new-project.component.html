@@ -1,95 +1,109 @@
 <div id="newproject">
-  <div id="create-post-form">
-    <form id="myForm" class="form-group modal-body" #myForm="ngForm">
+  <div class="scrollbar scrollbar-black bordered-black square thin">
+    <div class="force-overflow">
+      <div id="create-post-form">
+        <form id="myForm" class="form-group modal-body" #myForm="ngForm">
 
-      <input type="text" name="pname" id="pname" class="form-control" placeholder="New Project" #name required>
+          <input type="text" name="pname" id="pname" class="form-control" placeholder="New Project" #name required>
 
-      <label for="pdescription"><h6>Description</h6></label>
-      <textarea class="form-control" id="pdescription" rows="3" #description required> </textarea>
+          <label for="pdescription"><h6>Description</h6></label>
+          <textarea class="form-control" id="pdescription" rows="3" #description required> </textarea>
 
-      <div id="photoUpload" class="row">
-        <div class="myImg col-6">
-          <span class="hidden-file">
-                <input type="file" #fileInput ng2FileSelect [uploader]="uploader"
-                       (onFileSelected)="onFileSelected($event)"/>
-          </span>
-          <div class="btn-group row myButtons" (click)="fileInput.click()">
-            <!--        <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">-->
-            <!--          <i class="ion-plus-round">  </i>-->
-            <!--           </button>-->
-            <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">
-              Add Banner
-            </button>
+
+          <div id="photoUpload" class="row">
+            <app-upload-image class="col-6" [addButton]="'Add banner'"
+                              (childMessage)="getBannerFile($event)"></app-upload-image>
+            <app-upload-images class="col-6" [addButton]="'Add images'"
+                               (imagesMessage)="getImageFiles($event)"></app-upload-images>
           </div>
-          <div class="row photoResults justify-content-center align-items-center" *ngIf="uploader.queue[0]">
-            <div class="row">
-              <div class="col-8 text-center filename">
-                <p class="text-break text-truncate filename"> {{ uploader.queue[0]?.file?.name }}</p>
-              </div>
-              <div class="col-4 text-center">
-                <button type="button" class="roundButton boderButton photoRemove"
-                        (click)="uploader.queue[0].remove()">
-                  x
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+          <!--        <div class="myImg col-6">-->
+          <!--          <span class="hidden-file">-->
+          <!--                <input type="file" #fileInput ng2FileSelect [uploader]="uploader"-->
+          <!--                       (onFileSelected)="onFileSelected($event)"/>-->
+          <!--          </span>-->
+          <!--          <div class="btn-group row myButtons" (click)="fileInput.click()">-->
+          <!--            &lt;!&ndash;        <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">&ndash;&gt;-->
+          <!--            &lt;!&ndash;          <i class="ion-plus-round">  </i>&ndash;&gt;-->
+          <!--            &lt;!&ndash;           </button>&ndash;&gt;-->
+          <!--            <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">-->
+          <!--              Add Banner-->
+          <!--            </button>-->
+          <!--          </div>-->
+          <!--          <div class="row photoResults justify-content-center align-items-center" *ngIf="uploader.queue[0]">-->
+          <!--            <div class="row">-->
+          <!--              <div class="col-8 text-center filename">-->
+          <!--                <p class="text-break text-truncate filename"> {{ uploader.queue[0]?.file?.name }}</p>-->
+          <!--              </div>-->
+          <!--              <div class="col-4 text-center">-->
+          <!--                <button type="button" class="roundButton boderButton photoRemove"-->
+          <!--                        (click)="uploader.queue[0].remove()">-->
+          <!--                  x-->
+          <!--                </button>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
 
-        <div class="myImg col-6">
-          <span class="hidden-file">
-                <input type="file" #fileInput2 ng2FileSelect [uploader]="uploader2"
-                       (onFileSelected)="onFileSelected2($event)" multiple/>
-          </span>
-          <div class="btn-group row myButtons" (click)="fileInput2.click()">
-            <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">
-              Add images
-            </button>
-          </div>
+          <!--        <div class="myImg col-6">-->
+          <!--          <span class="hidden-file">-->
+          <!--                <input type="file" #fileInput2 ng2FileSelect [uploader]="uploader2"-->
+          <!--                       (onFileSelected)="onFileSelected2($event)" multiple/>-->
+          <!--          </span>-->
+          <!--          <div class="btn-group row myButtons" (click)="fileInput2.click()">-->
+          <!--            <button type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s">-->
+          <!--              Add images-->
+          <!--            </button>-->
+          <!--          </div>-->
 
-          <div class="row photoResults justify-content-center" *ngFor="let photo of uploader2.queue">
-            <div class="row">
-              <div class="col-8 text-center filename">
-                <p class="text-break text-truncate filename">{{ photo?.file?.name }}</p>
-              </div>
-              <div class="col-4 text-center">
-                <button type="button" class="roundButton boderButton photoRemove"
-                        (click)="photo.remove()">
-                  x
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+          <!--          <div class="row photoResults justify-content-center" *ngFor="let photo of uploader2.queue">-->
+          <!--            <div class="row">-->
+          <!--              <div class="col-8 text-center filename">-->
+          <!--                <p class="text-break text-truncate filename">{{ photo?.file?.name }}</p>-->
+          <!--              </div>-->
+          <!--              <div class="col-4 text-center">-->
+          <!--                <button type="button" class="roundButton boderButton photoRemove"-->
+          <!--                        (click)="photo.remove()">-->
+          <!--                  x-->
+          <!--                </button>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--      </div>-->
+
+          <app-add-tag [purpose]="'tags'" [headline]="'Tags'" [placeholder]="'add tag'"
+                       (purposeMessage)="getPurposeMessage($event)"
+                       (childMessage)="getChildMessage($event)"></app-add-tag>
+
+          <!--      <h6> Members  </h6>-->
+          <!--      <button id="addMembers"  class="saveDataButton boderButton roundButton showBtnTechsdome transition02s"><i-->
+          <!--        class="fas fa-plus"></i></button>-->
+          <!--      <input type="text" class="form-control" placeholder="Search members" #members><br>-->
+          <app-add-tag [purpose]="'members'" [headline]="'Members'" [placeholder]="'member'"
+                       (purposeMessage)="getPurposeMessage($event)"
+                       (childMessage)="getChildMessage($event)"></app-add-tag>
+          <p id="fillCorrectly" style="display: none; color: red">Please fill out the required fields!</p>
+
+          <!-- <input type="file" ng2FileSelect [uploader]="uploader" (click)="item.cancel()"/>-->
+          <!--    <label for="fileup">File:</label>-->
+          <!--    <input type="file" id="fileup" (change)="upload($event)" accept=".png,.jpg" />-->
+          <!--    <progress max="100" [value]="(uploadProgress | async)"></progress>-->
+          <!--    <div class="result" *ngIf="downloadURL | async; let uploadSrc">-->
+          <!--      <a [href]="uploadSrc">You just uploaded this file!</a>-->
+
+          <!--      <div class="container" *ngIf="downloadURL | async; let url">-->
+          <!--        <img [src]="url" alt="Image from AngularFireStorage">-->
+          <!--      </div>-->
+          <!--    </div>-->
+          <!--      <app-uploader id="uploader" class="row"></app-uploader>-->
+          <button id="create" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s"
+                  routerLink="/project-page"
+                  (click)="Submit(name.value, description.value)">
+            Create
+          </button>
+        </form>
       </div>
-
-      <app-add-tag [purpose]="'tags'" [headline]="'Tags'" [placeholder]="'add tag'" (childMessage)="getChildMessage($event)" (purposeMessage)="getPurposeMessage($event)"></app-add-tag>
-
-<!--      <h6> Members  </h6>-->
-<!--      <button id="addMembers"  class="saveDataButton boderButton roundButton showBtnTechsdome transition02s"><i-->
-<!--        class="fas fa-plus"></i></button>-->
-<!--      <input type="text" class="form-control" placeholder="Search members" #members><br>-->
-      <app-add-tag [purpose]="'members'" [headline]="'Members'" [placeholder]="'member'" (childMessage)="getChildMessage($event)" (purposeMessage)="getPurposeMessage($event)"></app-add-tag>
-      <p id="fillCorrectly" style="display: none; color: red">Please fill out the required fields!</p>
-
-      <!-- <input type="file" ng2FileSelect [uploader]="uploader" (click)="item.cancel()"/>-->
-      <!--    <label for="fileup">File:</label>-->
-      <!--    <input type="file" id="fileup" (change)="upload($event)" accept=".png,.jpg" />-->
-      <!--    <progress max="100" [value]="(uploadProgress | async)"></progress>-->
-      <!--    <div class="result" *ngIf="downloadURL | async; let uploadSrc">-->
-      <!--      <a [href]="uploadSrc">You just uploaded this file!</a>-->
-
-      <!--      <div class="container" *ngIf="downloadURL | async; let url">-->
-      <!--        <img [src]="url" alt="Image from AngularFireStorage">-->
-      <!--      </div>-->
-      <!--    </div>-->
-      <!--      <app-uploader id="uploader" class="row"></app-uploader>-->
-      <button id="create" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s"
-              routerLink="/project-page"
-              (click)="Submit(name.value, description.value)">
-        Create
-      </button>
-    </form>
+    </div>
   </div>
 </div>
 
