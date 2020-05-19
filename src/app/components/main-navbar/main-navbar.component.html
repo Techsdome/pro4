@@ -38,12 +38,12 @@
         </div>
         <div [class]="status ? 'translateQuestion' : 'hide'">
           <input type="button" class="background-image-settings sidebar-button opacity-05"
-                 id="questionButton"  (click)="animateOn()">
+                 id="questionButton"  (click)="animateOn(); Qopen();">
           <p class="detail_info"><strong>ask question</strong></p>
         </div>
         <div [class]="status ? 'translateMessage' : 'hide'">
           <input type="button" class="background-image-settings sidebar-button opacity-05"
-                 id="messageButton" (click)="animateOn(); open();">
+                 id="messageButton" (click)="animateOn(); Popen();">
           <p class="detail_info"><strong>create project</strong></p>
         </div>
         <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">

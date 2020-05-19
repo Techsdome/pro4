@@ -8,6 +8,7 @@ import {NewProjectComponent} from '../new-project/new-project.component';
 import {UtilitiesService} from '../../app.component';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {trigger, state, style, animate, transition, keyframes, query, stagger} from '@angular/animations';
+import {NewQuestionComponent} from '../new-question/new-question.component';
 
 @Component({
   selector: 'app-main-navbar',
@@ -39,8 +40,18 @@ export class MainNavbarComponent implements OnInit {
               public activeModal: NgbActiveModal, private modalService: NgbModal) {
   }
 
-  open() {
+  Popen() {
     const modalRef = this.modalService.open(NewProjectComponent,
+      {
+        scrollable: true,  beforeDismiss: () => {
+          return confirm('Do you want to lose your changes?');
+        }
+      });
+    // modalRef.componentInstance.name = 'World';
+  }
+
+  Qopen() {
+    const modalRef = this.modalService.open(NewQuestionComponent,
       {
         scrollable: true,  beforeDismiss: () => {
           return confirm('Do you want to lose your changes?');

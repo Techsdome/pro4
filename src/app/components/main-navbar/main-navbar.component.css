@@ -97,15 +97,30 @@
 }
 
 #peopleButton {
+  filter: invert(90%);
   background-image: url("../../../assets/icons/people.svg");
 }
 
+#peopleButton:hover {
+  filter: invert(0%);
+}
+
 #forumButton {
+  filter: invert(90%);
   background-image: url("../../../assets/icons/message.svg");
 }
 
+#forumButton:hover {
+  filter: invert(0%);
+}
+
 #chatButton {
+    filter: invert(90%);
     background-image: url("../../../assets/icons/chat.svg");
+}
+
+#chatButton:hover {
+  filter: invert(0%);
 }
 
 .background-image-settings {
@@ -132,30 +147,50 @@
 
 #questionButton {
   background-image: url("../../../assets/icons/q.svg");
-  transform: scale(1.3);
+  transform: scale(1.1);
   border-style: solid;
   border-width: thin;
+  border-color: #000;
+}
+
+#questionButton:hover, #questionButton.active {
+  border-color: #F3F4F6;
 }
 
 #messageButton {
   background-image: url("../../../assets/icons/talk.svg");
-  transform: scale(1.3);
+  transform: scale(1.1);
   border-style: solid;
   border-width: thin;
+  border-color: #000;
+}
+
+#messageButton:hover, #messageButton.active {
+  border-color: #F3F4F6;
 }
 
 #projectButton {
   background-image: url("../../../assets/icons/pen.svg");
-  transform: scale(1.3);
+  transform: scale(1.1);
   border-style: solid;
   border-width: thin;
+  border-color: #000;
+}
+
+#projectButton:hover, #projectButton.active {
+  border-color: #F3F4F6;
 }
 
 #plusButton {
+    filter: invert(90%);
     background-image: url("../../../assets/icons/plus.svg");
     height: 30px;
     width: 30px;
     z-index: 10;
+}
+
+#plusButton:hover, #plusButton.active {
+  filter: invert(0%);
 }
 
 #plusButton-container {
@@ -199,7 +234,7 @@
   height: 30px;
   border: none;
   border-radius: 50px;
-  background-color: #F3F4F6;
+  background: rgba(0, 0, 0, 0.0);
 }
 
 .link-text {
@@ -226,12 +261,22 @@
 }
 
 #directoryButton {
+  filter: invert(90%);
   background-image: url("../../../assets/icons/dir.svg");
 }
 
+#directoryButton:hover, #directoryButton.active {
+  filter: invert(0%);
+}
+
 #houseButton {
+  filter: invert(90%);
     background-image: url("../../../assets/icons/house.svg");
     text-align: center;
+}
+
+#houseButton:hover, #houseButton.active {
+  filter: invert(0%);
 }
 
 #menuBar_top {
@@ -313,17 +358,17 @@
 
 .translateMessage {
     display: inline;
-    transform: translate(84px, 45px);
+    transform: translate(44px, 35px);
 }
 
 .translateQuestion {
     display: inline;
-    transform: translate(96px, 0px);
+    transform: translate(56px, 0px);
 }
 
 .translateProject {
     display: inline;
-    transform: translate(84px, -45px);
+    transform: translate(44px, -35px);
 }
 
 #puffer-60-margin {

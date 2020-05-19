@@ -6,7 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {AngularFireStorage} from 'angularfire2/storage';
 import {FileUploader} from 'ng2-file-upload';
 import {AngularFireUploadTask} from '@angular/fire/storage';
-import {finalize} from 'rxjs/operators';3
+import {finalize} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 

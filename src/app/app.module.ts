@@ -62,6 +62,7 @@ import { UploadImagesComponent } from './components/upload-images/upload-images.
 
 import { QuillModule } from 'ngx-quill';
 import { QUILL_CONFIG_TOKEN } from 'ngx-quill';
+import { NewQuestionComponent } from './components/new-question/new-question.component';
 
 
 @NgModule({
@@ -98,7 +99,8 @@ import { QUILL_CONFIG_TOKEN } from 'ngx-quill';
         GeneralPostComponent,
         ShowProjectsComponent,
         UploadImageComponent,
-        UploadImagesComponent
+        UploadImagesComponent,
+        NewQuestionComponent
     ],
     imports: [
         BrowserModule,
