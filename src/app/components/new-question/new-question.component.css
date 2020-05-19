@@ -1,0 +1,131 @@
+#newquestion {
+
+}
+.photoResults {
+  margin: 10px;
+  padding: 0;
+}
+
+#photoUpload {
+  margin-bottom: 10px;
+}
+
+.myImg {
+  margin:0;
+}
+
+#newproject .myImg .myButtons button {
+  margin: 0;
+}
+
+.myButtons {
+  margin: 5px;
+}
+
+#newquestion .photoRemove {
+  margin: 0;
+}
+
+.hidden-file {
+  visibility: hidden;
+  position: absolute;
+  overflow: hidden;
+  width: 0px;
+  height:0px;
+  border:none;
+  margin:0;
+  padding:0
+}
+
+#uploader {
+  justify-content: center;
+  align-content: center;
+}
+
+label {
+  margin: 10px 0 3px 0;
+  padding: 10px 0 3px 0;
+}
+
+#newquestion input {
+  border: none;
+  border: solid 1px #ccc;
+  border-radius: 30px;
+}
+
+.showBtnTechsdome{
+  display:inline-block;
+}
+
+.hideBtnTechsdome{
+  display: none;
+}
+
+#newquestion button {
+  margin: 10px 5px;
+}
+
+#newquestion #create {
+  float: right;
+  margin: 2px 0 15px 0;
+  padding: 2px 15px;
+}
+
+#newquestion h6 {
+  margin-left: 10px;
+}
+
+#myForm textarea {
+  resize: none;
+  overflow: auto;
+  margin-bottom: 5px;
+}
+
+#item-container .createItemButton {
+  margin-left: 5px;
+}
+
+#newquestion #create-post-form {
+  height: 590px;
+  top: -250px;
+  max-height: calc(100vw - 100px);
+  overflow: hidden;
+}
+
+#newquestion #create-post-form form {
+  margin-top: 30px;
+  left: 0;
+  margin-left: 12.5%;
+  padding-right: 40px;
+  padding-left: 5px;
+  width: 80%;
+  max-height: calc(100vh - 180px);
+  height: 90%;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* scrollbar  */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /*box-shadow: inset 0 0 5px grey;*/
+  /*border-radius: 10px;*/
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c8cac6;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #bdbfbb;
+}
+
+

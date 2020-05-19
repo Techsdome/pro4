@@ -97,7 +97,6 @@
 }
 
 #peopleButton {
-  filter: invert(90%);
   background-image: url("../../../assets/icons/people.svg");
 }
 
@@ -106,7 +105,7 @@
 }
 
 #forumButton {
-  filter: invert(90%);
+  /*filter: invert(90%);*/
   background-image: url("../../../assets/icons/message.svg");
 }
 
@@ -115,7 +114,6 @@
 }
 
 #chatButton {
-    filter: invert(90%);
     background-image: url("../../../assets/icons/chat.svg");
 }
 
@@ -132,7 +130,13 @@
   display: block;
 }
 
+.sidebar-button {
+  filter: invert(90%);
+}
 
+#profileButtonSideBar{
+  filter: invert(0%) !important;
+}
 
 #searchBar {
     background-image: url("https://img.favpng.com/10/4/11/computer-icons-search-box-button-clip-art-png-favpng-7TdWywgFBhJ2y81D9kE6nhjbT.jpg");
@@ -182,7 +186,6 @@
 }
 
 #plusButton {
-    filter: invert(90%);
     background-image: url("../../../assets/icons/plus.svg");
     height: 30px;
     width: 30px;
@@ -229,12 +232,20 @@
 }
 
 .sidebar-button {
+     margin-left: 1rem;
+     width: 30px;
+     height: 30px;
+     border: none;
+     border-radius: 50px;
+     background: rgba(0, 0, 0, 0.0);
+   }
+
+.bar-button {
   margin-left: 1rem;
   width: 30px;
   height: 30px;
   border: none;
   border-radius: 50px;
-  background: rgba(0, 0, 0, 0.0);
 }
 
 .link-text {
@@ -261,7 +272,6 @@
 }
 
 #directoryButton {
-  filter: invert(90%);
   background-image: url("../../../assets/icons/dir.svg");
 }
 
@@ -270,7 +280,6 @@
 }
 
 #houseButton {
-  filter: invert(90%);
     background-image: url("../../../assets/icons/house.svg");
     text-align: center;
 }
@@ -304,7 +313,7 @@
 }
 
 #round_right {
-  z-index: -4;
+  z-index: -8;
   right: 0%;
   top: 3.7%;
   position: fixed;

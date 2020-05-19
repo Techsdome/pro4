@@ -1,7 +1,7 @@
 <div id="menuBar_top" class="black-standard-color">
 
   <input class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
-
+  <div id="round_right"></div>
   <div id="settingsButton" class="dropdown text-white">
     <button type="button" class="btn m-0 shadow-none" id="dropdownMenu" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -32,17 +32,17 @@
 
       <div id="plusButton-container" class="plus" [routerLinkActive]="['active']">
         <div [class]="status ? 'translateProject' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button opacity-05"
+          <input type="button" class="background-image-settings bar-button opacity-05"
                  id="projectButton"  (click)="animateOn()">
           <p class="detail_info"><strong>create post</strong></p>
         </div>
         <div [class]="status ? 'translateQuestion' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button opacity-05"
+          <input type="button" class="background-image-settings bar-button"
                  id="questionButton"  (click)="animateOn(); Qopen();">
           <p class="detail_info"><strong>ask question</strong></p>
         </div>
         <div [class]="status ? 'translateMessage' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button opacity-05"
+          <input type="button" class="background-image-settings bar-button opacity-05"
                  id="messageButton" (click)="animateOn(); Popen();">
           <p class="detail_info"><strong>create project</strong></p>
         </div>

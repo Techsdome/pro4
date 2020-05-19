@@ -1,1 +1,35 @@
-<p>new-question works!</p>
+<div id="newquestion">
+  <div class="scrollbar scrollbar-black bordered-black square thin">
+    <div class="force-overflow">
+      <div id="create-post-form">
+        <form id="myForm" class="form-group modal-body" #myForm="ngForm">
+
+          <input type="text" name="pname" id="pname" class="form-control" placeholder="New Question" #name required>
+
+          <label for="pdescription"><h6>Description</h6></label>
+
+          <!--      <textarea class="form-control" id="pdescription" rows="3" #description required> </textarea>-->
+
+          <!--      quill editor -->
+          <quill-editor [styles]="editorStyle" id="pdescription" [modules]="config" placeholder="describe your question..." name="description" [(ngModel)]="description"></quill-editor>
+          <!--      quill editor -->
+
+
+          <app-add-tag [purpose]="'tags'" [headline]="'Tags'" [placeholder]="'add tag'"
+                       (purposeMessage)="getPurposeMessage($event)"
+                       (childMessage)="getChildMessage($event)"></app-add-tag>
+
+          <p id="fillCorrectly" style="display: none; color: red">Please fill out the required fields!</p>
+
+          <button id="create" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s"
+                  routerLink="/dashboard"
+                  (click)="Submit(name.value)">
+            Ask
+          </button>
+        </form>
+      </div>
+    </div>
+
+
+
+
