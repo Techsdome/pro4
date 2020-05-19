@@ -63,6 +63,8 @@ import { UploadImagesComponent } from './components/upload-images/upload-images.
 import { QuillModule } from 'ngx-quill';
 import { QUILL_CONFIG_TOKEN } from 'ngx-quill';
 import { NewQuestionComponent } from './components/new-question/new-question.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -102,29 +104,30 @@ import { NewQuestionComponent } from './components/new-question/new-question.com
         UploadImagesComponent,
         NewQuestionComponent
     ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        CoreModule,
-        SharedModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        AngularFireStorageModule,
-        AngularFireDatabaseModule,
-        NgbModule,
-        FileUploadModule,
-        FontAwesomeModule,
-        QuillModule.forRoot(),
-        ToastrModule.forRoot({
-          preventDuplicates: true,
-        }),
-        ScrollToModule.forRoot()
-
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    CoreModule,
+    SharedModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    NgbModule,
+    FileUploadModule,
+    FontAwesomeModule,
+    QuillModule.forRoot(),
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+    }),
+    ScrollToModule.forRoot(),
+    MatFormFieldModule,
+    MatInputModule
+  ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
       NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal],
     bootstrap: [AppComponent]

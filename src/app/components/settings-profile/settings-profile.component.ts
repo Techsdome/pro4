@@ -37,6 +37,7 @@ export class SettingsProfileComponent implements OnInit {
 
 
   updateFields() {
+    if (this.firstName.length !== 0 && this.lastName.length !== 0) {
     this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
       firstname: this.firstName,
       lastname: this.lastName,
@@ -47,6 +48,7 @@ export class SettingsProfileComponent implements OnInit {
     }).catch(r => {
       this.toastr.error('Data could not be saved' + r, 'Error!');
     });
+    }
   }
 
   getExtendedData(item) {
@@ -120,6 +122,17 @@ export class SettingsProfileComponent implements OnInit {
       this.user = user;
       this.displayName = user.displayName;
       this.photoURL = user.photoURL;
+    });
+
+    const input = document.querySelector('input');
+    input.addEventListener('input', evt => {
+      const value = input.value.trim();
+      console.log("here");
+      if (value) {
+        input.dataset.state = 'valid';
+      } else {
+        input.dataset.state = 'invalid';
+      }
     });
   }
 }

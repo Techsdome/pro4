@@ -54,7 +54,8 @@ export class AuthService {
                     this.router.navigate(['dashboard']);
                 });
             }).catch((error) => {
-                window.alert(error.message);
+              return(error.message);
+                //window.alert(error.message);
             });
     }
 
