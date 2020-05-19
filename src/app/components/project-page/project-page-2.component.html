@@ -1,73 +1,85 @@
 <!--<body>-->
-<div *ngIf="project || project === undefined " class="border-dark router-output" id="bg">
-  <div class="container-fluid" id="project-container">
-    <div class="row" id="banner">
-      <div class="col" id="banner-picture">
-        <img [src]="project? project.projectBanner : '../../../assets/Project/20180726_Budapest_23.jpg'" height="359"
-             alt="ProjectBanner" width="1920"/>
-      </div>
-    </div>
-    <div id="content" class="row">
-      <div id="headline" class="row">
-        <div id="project-name" class="col">
-          <h1 class="text-black-50"> {{ project ? project.projectName : "Project Alpha" }}</h1>
-        </div>
-        <div class="text-right d-xl-flex justify-content-xl-end align-items-xl-center col" id="interact-button">
-          <button class="btn btn-primary text-black-50 i-btn" data-bs-hover-animate="pulse" id="follow" type="submit">
-            Follow
-          </button>
-          <button class="btn btn-primary text-black-50 i-btn" data-bs-hover-animate="pulse" id="share" type="submit">
-            Like
-          </button>
-          <button
-            class="btn btn-primary text-black-50 i-btn" data-bs-hover-animate="pulse" id="like-1" type="submit">
-            Share
-          </button>
+<div *ngIf="project">
+  <div *ngIf="project.projectBanner" class="border-dark router-output standard-background-color" id="bg">
+    <div class="container-fluid" id="project-container">
+      <div class="row" id="banner">
+        <div class="col" id="banner-picture">
+          <img [src]="project? project.projectBanner : '../../../assets/Project/20180726_Budapest_23.jpg'" height="359"
+               alt="ProjectBanner" width="1920"/>
         </div>
       </div>
-      <div id="description" class="col">
-        <div id="menu" class="row">
-          <h2><a href="#">DISCUSSION</a></h2>
-          <h2><a href="#">DESCRIPTION</a></h2>
-          <h2><a href="#">DEVLOG</a></h2>
-          <h2><a href="#">ROADMAP</a></h2>
-          <h2><a href="#">WIKI</a></h2>
-        </div>
-        <div id="info" class="row">
-          <div id="text-description" class="col-8">
-            <p>{{ project ? project.projectDescription : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, " +
-              "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
-              "At vero eos et saccusam et justo duo dolores et ea rebum." +
-              "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet," +
-              "consetetur sadipscing elitr, sed df diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam" +
-              " erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata" +
-              "sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam" +
-              "nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et" +
-              "justo duo dolores et ea rebum.Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."}} </p>
+      <div id="content" class="row">
+        <div id="headline" class="row">
+          <div id="project-name" class="col">
+            <h1 class="text-black-50"> {{ project ? project.projectName : "Project Alpha" }}</h1>
           </div>
+          <div class="text-right d-xl-flex justify-content-xl-end align-items-xl-center col" id="interact-button">
+            <button class="boderButton" data-bs-hover-animate="pulse" id="follow" type="submit">
+              Follow
+            </button>
+            <button class="boderButton" data-bs-hover-animate="pulse" id="share" type="submit">
+              Like
+            </button>
+            <button class="boderButton" data-bs-hover-animate="pulse" id="like-1" type="submit">
+              Share
+            </button>
+          </div>
+        </div>
+        <div id="description" class="col">
+          <div id="menu" class="row">
+            <h2><a href="#">DISCUSSION</a></h2>
+            <h2><a href="#">DESCRIPTION</a></h2>
+            <h2><a href="#">DEVLOG</a></h2>
+            <h2><a href="#">ROADMAP</a></h2>
+            <h2><a href="#">WIKI</a></h2>
+          </div>
+          <div id="info" class="row">
+            <div id="text-description" class="col-8">
+              <p innerHTML = "{{ project.projectDescription }}">{{ project ? project.projectDescription : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, " +
+                "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
+                "At vero eos et saccusam et justo duo dolores et ea rebum." +
+                "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet," +
+                "consetetur sadipscing elitr, sed df diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam" +
+                " erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata" +
+                "sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam" +
+                "nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et" +
+                "justo duo dolores et ea rebum.Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."}} </p>
+            </div>
 
-          <div class="shadow-sm align-self-end flex-nowrap col-4" id="info-panel">
-            <div id="contributors" class="col-12">
-              <h3>Contributors</h3>
-              <div class="row">
-                <div class="col-3 border rounded-circle" *ngFor="let contri of images">
-                  <img class="contributor" [src]="contri ? contri : './assets/Project/Howto.JPG'"
-                       alt="Contributer#" height="514" width="913">
+            <div class="shadow-sm align-self-end flex-nowrap col-4" id="info-panel">
+              <div id="contributors" class="col-12" *ngIf="project.projectMembers != []">
+                <h3>Contributors</h3>
+                <div class="row">
+                  <div *ngFor="let mem of project.projectMembers">
+                    <div class="col-3 border rounded-circle view overlay zoom contributors">
+                      <img class="contributor img-fluid" src="../../../assets/Project/Howto.JPG" alt="contributer" height="514"
+                           width="913"/>
+                    </div>
+                    <h6 class="username text-center"> {{ mem }} </h6>
+                  </div>
+                </div>
+              </div>
+              <div id="tags" class="col-12">
+                <h3> Tags </h3>
+                <div class="row">
+                  <div *ngFor="let tag of project.projectCategories" class="myTag">
+                    <div class="itemInputButton"><p> {{ tag }} </p></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div id="gallery" class="pictures row">
-          <div id="gallery-heading" class="row">
-            <h2>Gallery</h2>
-          </div>
-          <div *ngFor="let picture of images">
-            <div id="gallery-picture" class="gallery-pictures">
-              <img class="g-pictures" alt="project pic"
-                   [src]="picture ? picture : './assets/Project/IMG-20181025-WA0016.jpg'"
-                   width="899" height="1599">
+          <div id="gallery" class="pictures row">
+            <div id="gallery-heading" class="row">
+              <h2>Gallery</h2>
+            </div>
+            <div *ngFor="let picture of images">
+              <div id="gallery-picture" class="gallery-pictures">
+                <img class="g-pictures" alt="project pic"
+                     [src]="picture"
+                     width="899" height="1599">
+              </div>
             </div>
           </div>
         </div>

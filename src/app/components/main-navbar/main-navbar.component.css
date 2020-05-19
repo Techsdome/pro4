@@ -260,8 +260,8 @@
 
 #round_right {
   z-index: -4;
-  left: 1854px;
-  top: 40px;
+  right: 0%;
+  top: 3.7%;
   position: fixed;
   width: 50px;
   height: 50px;
@@ -272,8 +272,8 @@
 
 #round_below {
   z-index: -4;
-  left: 64px;
-  top: 919px;
+  left: 3.35%;
+  bottom: 0%;
   position: fixed;
   width: 50px;
   height: 50px;
@@ -284,8 +284,8 @@
 
 #round_r_b {
   z-index: -4;
-  left: 1854px;
-  top: 919px;
+  right: 0%;
+  bottom: 0%;
   position: fixed;
   width: 50px;
   height: 50px;

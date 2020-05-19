@@ -21,6 +21,7 @@ export class ProjectPageComponent implements OnInit {
   docRef: any;
   user: User;
   images: string[];
+  myPID = history.state.data;
 
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
@@ -28,13 +29,33 @@ export class ProjectPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getProject();
+    if(this.myPID) {
+      this.loadProject();
+    } else {
+      this.getProject();
+    }
   }
 
   getUser() {
     this.authService.getCurrentUser().subscribe(user => {
       this.user = user;
     });
+  }
+
+  loadProject() {
+    this.docRef = this.afs.doc(`project/${this.myPID}`);
+    if (this.docRef) {
+      this.docRef.get().toPromise().then(doc => {
+        if (doc.exists) {
+          this.project = doc.data();
+          this.images = this.project.projectImages;
+        } else {
+          console.log('No such document!');
+        }
+      }).catch(error => {
+        console.log('Error getting document:', error);
+      });
+    }
   }
 
   getProject() {
@@ -49,16 +70,20 @@ export class ProjectPageComponent implements OnInit {
               this.projectID = us.pid[i - 1];
 
               this.docRef = this.afs.doc(`project/${this.projectID}`);
-              this.docRef.get().toPromise().then(doc => {
-                if (doc.exists) {
-                  this.project = doc.data();
-                  this.images = this.project.projectImages;
-                } else {
-                  console.log('No such document!');
-                }
-              }).catch(error => {
-                console.log('Error getting document:', error);
-              });
+              if (this.docRef) {
+                this.docRef.get().toPromise().then(doc => {
+                  if (doc.exists) {
+                    this.project = doc.data();
+                    this.images = this.project.projectImages;
+                  } else {
+                    console.log('No such document!');
+                  }
+                }).catch(error => {
+                  console.log('Error getting document:', error);
+                });
+              } else {
+                console.log('No document!');
+              }
             } else {
               console.log('No pid!');
             }

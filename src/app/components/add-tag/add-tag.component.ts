@@ -20,13 +20,13 @@ export class AddTagComponent implements OnInit {
   @Input() headline: string;
   @Input() purpose: string;
   @Input() placeholder: string;
-  mypurpose: string;
   item: string;
   edit = false;
   htmlItemsElements: HTMLCollection;
   path: string;
 
-  constructor(private dataService: DataServiceService, private authService: AuthService, private pservice: NewProjectService) { }
+  constructor(private dataService: DataServiceService, private authService: AuthService, private pservice: NewProjectService) {
+  }
 
   ngOnInit(): void {
     this.htmlItemsElements = (document.getElementsByClassName('itemDeleteButton') as HTMLCollection);
@@ -37,7 +37,7 @@ export class AddTagComponent implements OnInit {
   }
 
   sendToParent() {
-    this.purposeMessage.emit(this.mypurpose);
+    this.purposeMessage.emit(this.purpose);
     this.childMessage.emit(this.itemsList);
   }
 
@@ -46,18 +46,19 @@ export class AddTagComponent implements OnInit {
   }
 
   saveItem() {
-    if (this.items) {
-      this.items.push(this.item);
-      if (this.edit) {
-        this.edit = !this.edit;
-      }
-    } else {
-      this.itemsList.push(this.item);
-      if (this.edit) {
-        this.edit = !this.edit;
+    if (this.item) {
+      if (this.items) {
+        this.items.push(this.item);
+        if (this.edit) {
+          this.edit = !this.edit;
+        }
+      } else {
+        this.itemsList.push(this.item);
+        if (this.edit) {
+          this.edit = !this.edit;
+        }
       }
     }
-
     this.item = '';
 
     // this.update();
@@ -71,7 +72,7 @@ export class AddTagComponent implements OnInit {
 
   updateTagsFirebase() {
     this.authService.afs.collection('project').doc(this.pservice.projectID).update({
-      tags: [] =  this.itemsList
+      tags: [] = this.itemsList
     });
   }
 
@@ -86,7 +87,7 @@ export class AddTagComponent implements OnInit {
   }
 
   deleteItemElement(event) {
-    if(this.items){
+    if (this.items) {
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i] === event.target.previousElementSibling.value) {
           this.items.splice(i, 1);
