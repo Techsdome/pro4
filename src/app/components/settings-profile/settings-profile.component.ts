@@ -7,6 +7,31 @@ import {ToastrService} from 'ngx-toastr';
 import * as firebase from 'firebase';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  ValidationErrors, ValidatorFn,
+  Validators
+} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
+export const passwordMatchValidator: ValidatorFn = (formGroup: FormGroup): ValidationErrors | null => {
+  if (formGroup.get('newPassword').value === formGroup.get('confirmPassword').value) {
+    return null;
+  } else {
+    return {passwordMismatch: true};
+  }
+};
 
 
 @Component({
@@ -14,10 +39,22 @@ import {Router} from '@angular/router';
   templateUrl: './settings-profile.component.html',
   styleUrls: ['./settings-profile.component.css']
 })
+
 export class SettingsProfileComponent implements OnInit {
+  emailFormControl: FormControl;
+  passwordFormControl: FormControl;
+  formGroup: FormGroup;
 
   constructor(private dataService: DataServiceService, private authService: AuthService, private ngZone: NgZone,
-              private afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService) {
+              private afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService, private formBuilder: FormBuilder) {
+    this.emailFormControl = new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]);
+    this.passwordFormControl = new FormControl('', [
+      Validators.required,
+    ]);
+
   }
 
   items: Item[];
@@ -28,15 +65,54 @@ export class SettingsProfileComponent implements OnInit {
   photoURL = '';
   edit = false;
   emailDisabled = false;
+  emailChanged = false;
+  confirmPasswordActive = false;
   file: File;
   progress: any = 0;
+  changeValid = true;
+
+  curUser = firebase.auth().currentUser;
+  credential;
+  matcher = new MyErrorStateMatcher();
 
   toggleEdit() {
     this.edit = !this.edit;
   }
 
+  emailChange() {
+    if (this.emailFormControl.value !== this.user.email) {
+      this.emailChanged = true;
+    }
+  }
+
+  get newPassword() { return this.formGroup.get('newPassword'); }
+  get confirmPassword() { return this.formGroup.get('confirmPassword'); }
+
+  onPasswordInput() {
+    if (this.formGroup.hasError('passwordMismatch')) {
+      this.confirmPassword.setErrors([{passwordMismatch: true}]);
+    } else {
+      this.confirmPassword.setErrors(null);
+    }
+  }
+
 
   updateFields() {
+    /*if (this.emailChanged) {
+
+      this.curUser.reauthenticateWithCredential(this.credential).then(() => {
+        this.curUser.updateEmail(this.emailFormControl.value).then(() => {
+          this.toastr.success('Email changed successfully.', 'Success!');
+        }).catch((error) => {
+          this.toastr.error('Email could not be saved' + error, 'Error!');
+        });
+      }).catch((error) => {
+        this.toastr.error('Re-login error' + error, 'Error!');
+      });
+    }*/
+
+
+
     if (this.firstName.length !== 0 && this.lastName.length !== 0) {
     this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
       firstname: this.firstName,
@@ -81,15 +157,13 @@ export class SettingsProfileComponent implements OnInit {
 
   }
 
-
-
   fileUpload(e: any) {
-    let uploadPicInput = document.getElementById('picUpload');
+    const uploadPicInput = document.getElementById('picUpload');
     uploadPicInput.click();
     uploadPicInput.addEventListener('change', () => {
       this.file = e.target.files[0];
 
-      let uploadTask = firebase.storage().ref(`Users/${this.user.uid}/profilePic/profilePic`).put(this.file);
+      const uploadTask = firebase.storage().ref(`Users/${this.user.uid}/profilePic/profilePic`).put(this.file);
       uploadTask.on('state_changed', (snapshot) => {
         this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       }, (error) => {
@@ -112,6 +186,11 @@ export class SettingsProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.formGroup = this.formBuilder.group({
+      newPassword: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]]
+    }, {validator: passwordMatchValidator});
+
     this.dataService.getItems().subscribe(items => {
       this.items = items;
       this.checkIfSocialOnline();
@@ -122,17 +201,8 @@ export class SettingsProfileComponent implements OnInit {
       this.user = user;
       this.displayName = user.displayName;
       this.photoURL = user.photoURL;
+      this.emailFormControl.setValue(user.email);
     });
 
-    const input = document.querySelector('input');
-    input.addEventListener('input', evt => {
-      const value = input.value.trim();
-      console.log("here");
-      if (value) {
-        input.dataset.state = 'valid';
-      } else {
-        input.dataset.state = 'invalid';
-      }
-    });
   }
 }

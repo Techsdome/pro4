@@ -1,7 +1,11 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {User} from '../../shared/services/user';
+
 import {Observable} from 'rxjs';
+import {Subject} from 'rxjs';
+import {switchMap, filter} from 'rxjs/operators';
+
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {Item} from '../../models/Item';
 import {NewProjectComponent} from '../new-project/new-project.component';
@@ -9,6 +13,9 @@ import {UtilitiesService} from '../../app.component';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {trigger, state, style, animate, transition, keyframes, query, stagger} from '@angular/animations';
 import {NewQuestionComponent} from '../new-question/new-question.component';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import {FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-main-navbar',
@@ -32,12 +39,30 @@ export class MainNavbarComponent implements OnInit {
   photoURL: string;
   stat: string;
 
-  // @ViewChild('myproject', {read: ElementRef, static: false}) myproject: ElementRef
+  myControl = new FormControl();
+  results: Observable<any[]>;
+  offset = new Subject<string>();
+
 
   constructor(@Inject(AuthService) public authService: AuthService,
               @Inject(DataServiceService) private dataService: DataServiceService,
               public addproject: NewProjectComponent, private utilitiesService: UtilitiesService,
-              public activeModal: NgbActiveModal, private modalService: NgbModal) {
+              public activeModal: NgbActiveModal, private modalService: NgbModal, private afs: AngularFirestore) {
+  }
+
+  onkeyup(e) {
+    this.offset.next(e.target.value.toLowerCase());
+  }
+
+  search() {
+    return this.offset.pipe(
+      filter(val => !!val),
+      switchMap(offset => {
+        return this.afs.collection('users', ref =>
+          ref.orderBy(`searchableIndex.${offset}`).limit(5)
+        ).valueChanges();
+      })
+    );
   }
 
   Popen() {
@@ -69,6 +94,7 @@ export class MainNavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.results = this.search();
     this.authService.afAuth.authState.subscribe(user => {
       if (user) {
         this.photoURL = user.photoURL;
