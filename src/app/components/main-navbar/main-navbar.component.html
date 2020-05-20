@@ -54,12 +54,14 @@
           <input type="button" class="background-image-settings bar-button"
                  id="questionButton"  (click)="animateOn(); Qopen();">
           <p class="detail_info"><strong>ask question</strong></p>
+
         </div>
         <div [class]="status ? 'translateMessage' : 'hide'">
           <input type="button" class="background-image-settings bar-button opacity-05"
-                 id="messageButton" (click)="animateOn(); Popen();">
+                 id="messageButton" (click)="animateOn(); createNewPost();">
           <p class="detail_info"><strong>create project</strong></p>
         </div>
+
         <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
       </div>
       <span class="link-text plust" (click)="animateOn()"></span>
