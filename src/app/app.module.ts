@@ -62,6 +62,7 @@ import { NewQuestionComponent } from './components/new-question/new-question.com
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {CreatePostNewComponent} from './components/create-post-new/create-post-new.component';
 
 
 @NgModule({
@@ -99,7 +100,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
         ShowProjectsComponent,
         UploadImageComponent,
         UploadImagesComponent,
-        NewQuestionComponent
+        NewQuestionComponent,
+        CreatePostNewComponent
     ],
     imports: [
         BrowserModule,
