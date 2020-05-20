@@ -65,6 +65,7 @@ import { QUILL_CONFIG_TOKEN } from 'ngx-quill';
 import { NewQuestionComponent } from './components/new-question/new-question.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 @NgModule({
@@ -104,30 +105,31 @@ import {MatInputModule} from '@angular/material/input';
         UploadImagesComponent,
         NewQuestionComponent
     ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    CoreModule,
-    SharedModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
-    NgbModule,
-    FileUploadModule,
-    FontAwesomeModule,
-    QuillModule.forRoot(),
-    ToastrModule.forRoot({
-      preventDuplicates: true,
-    }),
-    ScrollToModule.forRoot(),
-    MatFormFieldModule,
-    MatInputModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        CoreModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AngularFireStorageModule,
+        AngularFireDatabaseModule,
+        NgbModule,
+        FileUploadModule,
+        FontAwesomeModule,
+        QuillModule.forRoot(),
+        ToastrModule.forRoot({
+            preventDuplicates: true,
+        }),
+        ScrollToModule.forRoot(),
+        MatFormFieldModule,
+        MatInputModule,
+        MatAutocompleteModule
+    ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
       NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal],
     bootstrap: [AppComponent]

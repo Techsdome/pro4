@@ -1,6 +1,20 @@
 <div id="menuBar_top" class="black-standard-color">
 
-  <input class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
+<!--
+  <input (keyup)="onkeyup($event)" class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
+-->
+  <input (keyup)="onkeyup($event)" class="standardBackgroundColor background-image-settings" id="searchBar" type="text"
+         placeholder="Search"
+         aria-label="Number"
+         matInput
+         [formControl]="myControl"
+         [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let offset of results | async" [value]="offset">
+      {{ offset.displayName }}
+    </mat-option>
+  </mat-autocomplete>
+
   <div id="round_right"></div>
   <div id="settingsButton" class="dropdown text-white">
     <button type="button" class="btn m-0 shadow-none" id="dropdownMenu" data-toggle="dropdown"
