@@ -32,7 +32,6 @@ export class MainNavbarComponent implements OnInit {
   photoURL: string;
   stat: string;
 
-  // @ViewChild('myproject', {read: ElementRef, static: false}) myproject: ElementRef
 
   constructor(@Inject(AuthService) public authService: AuthService,
               @Inject(DataServiceService) private dataService: DataServiceService,

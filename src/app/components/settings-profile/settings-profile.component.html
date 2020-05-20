@@ -34,30 +34,50 @@
       </div>
 
       <div *ngIf="edit" class="col-md-3">
-        <div class="md-form form-group">
-          <input mdInput mdValidate [(ngModel)]="firstName" id="input_fN" type="text" class="form-control">
-          <label class="active" for="input_fN">First Name</label>
-        </div>
+        <mat-form-field class="my-form-field">
+          <mat-label>First Name</mat-label>
+          <input matInput [(ngModel)]="firstName" (keydown)="changeValid = false" id="input_fN" type="text">
+        </mat-form-field>
 
-        <div class="md-form form-group">
-          <input mdInput mdValidate [(ngModel)]="lastName" id="input_sN" type="text" class="form-control">
-          <label class="active" for="input_sN">Last Name</label>
-        </div>
+        <mat-form-field class="my-form-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput [(ngModel)]="lastName" (keydown)="changeValid = false" id="input_sN" type="text">
+        </mat-form-field>
       </div>
       <div *ngIf="edit" class="col-md-3">
-        <div class="md-form form-group">
-          <input mdInput mdValidate class="form-control" type="text" id="input_email" placeholder="{{ user.email }}"
-                 [disabled]="emailDisabled" required>
-          <label class="active" for="input_email">Email</label>
-          <small *ngIf="emailDisabled" id="emailHelp2" class="form-text text-muted">Email can not be modified if you are
-            registered with Social Network.</small>
+        <div class="form-group">
+          <mat-form-field class="my-form-field">
+            <mat-label>Email</mat-label>
+           <input matInput value="{{ user.email }}" [formControl]="emailFormControl" (change)="emailChange(); changeValid = false" [disabled]="emailDisabled" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address.
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>!
+            </mat-error>
+          </mat-form-field>
         </div>
       </div>
       <div *ngIf="edit && !emailDisabled" class="col-md-3">
-        <div class="md-form form-group">
-          <input mdInput mdValidate class="form-control" type="text" id="input_passwd" placeholder="{{ user.email }}"
-                 [disabled]="emailDisabled" required>
-          <label class="active" for="input_email">Email</label>
+        <mat-form-field class="my-form-field">
+          <mat-label>Password</mat-label>
+          <input matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" required>
+          <mat-hint>Password required to change your data!</mat-hint>
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong>!
+          </mat-error>
+        </mat-form-field>
+
+        <div [formGroup]="formGroup">
+          <mat-form-field>
+            <input matInput type="password" placeholder="New password" formControlName="newPassword" (keydown)="confirmPasswordActive = true" (input)="onPasswordInput()">
+          </mat-form-field>
+
+          <mat-form-field *ngIf="confirmPasswordActive">
+            <input matInput type="password" placeholder="Confirm new password" formControlName="confirmPassword" (input)="onPasswordInput()">
+            <mat-error *ngIf="confirmPassword.hasError('required')">Please confirm your password</mat-error>
+            <mat-error *ngIf="newPassword.invalid && !confirmPassword.hasError('required')">Passwords don't match</mat-error>
+          </mat-form-field>
         </div>
       </div>
     </div>
@@ -78,7 +98,7 @@
         <button type="button" (click)="toggleEdit();"
                 class="btn btn-primary shadow-none btn-rounded">Cancel
         </button>
-        <button *ngIf="edit" type="button" (click)="updateFields();" class="btn btn-success shadow-none btn-rounded">
+        <button *ngIf="edit" type="submit" [disabled]="!changeValid" (click)="updateFields();" class="btn btn-success shadow-none btn-rounded">
           Save
         </button>
       </div>
