@@ -69,11 +69,13 @@ export class NewQuestionComponent implements OnInit {
   async Submit(name: string) {
     if (name && this.user) {
 
-      await this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories, this.selectedMembers);
+
+      // questions abspeichern
+      // await this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories, this.selectedMembers);
 
       (document.getElementById('myForm') as HTMLFormElement).reset();
       document.getElementById('fillCorrectly').style.display = 'none';
-      await Promise.all(this.taskPromises);
+      // await Promise.all(this.taskPromises);
       this.activeModal.close();
     } else {
       document.getElementById('fillCorrectly').style.display = 'block';
