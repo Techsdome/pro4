@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
-import {take} from "rxjs/operators";
-import * as path from "path";
+import {take} from 'rxjs/operators';
+import * as path from 'path';
 
 @Component({
     selector: 'app-show-all-posts-main-feed',

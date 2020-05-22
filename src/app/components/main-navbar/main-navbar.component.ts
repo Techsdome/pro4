@@ -15,7 +15,7 @@ import {trigger, state, style, animate, transition, keyframes, query, stagger} f
 import {NewQuestionComponent} from '../new-question/new-question.component';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {FormControl} from '@angular/forms';
-import {CreatePostNewComponent} from "../create-post-new/create-post-new.component";
+import {CreatePostNewComponent} from '../create-post-new/create-post-new.component';
 
 
 @Component({
@@ -56,10 +56,10 @@ export class MainNavbarComponent implements OnInit {
     }
 
     search() {
-        return this.offset.pipe(
+      return this.offset.pipe(
             filter(val => !!val),
             switchMap(offset => {
-                return this.afs.collection('users', ref =>
+                 return this.afs.collection('users', ref =>
                     ref.orderBy(`searchableIndex.${offset}`).limit(5)
                 ).valueChanges();
             })
@@ -105,8 +105,8 @@ export class MainNavbarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.results = this.search();
-        this.authService.afAuth.authState.subscribe(user => {
+      this.results = this.search();
+      this.authService.afAuth.authState.subscribe(user => {
             if (user) {
                 this.photoURL = user.photoURL;
             }
