@@ -3,7 +3,11 @@ import {DataServiceService} from '../../shared/services/data-service.service';
 import {AuthService} from '../../shared/services/auth.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule} from '@angular/forms';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
+import {finalize} from 'rxjs/operators';
+import {NewProjectService} from '../../shared/services/new-project.service';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -18,6 +22,21 @@ export class CreatePostNewComponent implements OnInit {
     user: User;
     posts: string[];
     post: string;
+
+    postType: string;
+
+    description: string;
+    task: AngularFireUploadTask;
+    taskPromises = [];
+
+    bannerURLPromise: Promise<any>;
+    imagesURLPromises = [];
+    bannerFile: File;
+    imageFiles: File[];
+    projectID: string;
+    selectedCategories: string[];
+    selectedMembers: string[];
+    isPurpose: string;
 
     editorForm: FormGroup;
 
@@ -36,7 +55,110 @@ export class CreatePostNewComponent implements OnInit {
         ]
     };
 
-    constructor(private dataService: DataServiceService, private authService: AuthService) {
+    changePostTypeNormalPost() {
+        this.postType = 'post';
+    }
+
+    changePostTypeQuestion() {
+        this.postType = 'question';
+    }
+
+    changePostTypeProject() {
+        this.postType = 'project';
+    }
+
+    constructor(private dataService: DataServiceService, private authService: AuthService, public pservice: NewProjectService,
+                public form: FormsModule, public activeModal: NgbActiveModal, private modalService: NgbModal,
+                private storage: AngularFireStorage) {
+    }
+
+    getChildMessage(message: any) {
+        if (this.isPurpose === 'tags') {
+            this.selectedCategories = message;
+        }
+        if (this.isPurpose === 'members') {
+            this.selectedMembers = message;
+        }
+    }
+
+
+    getPurposeMessage(message: string) {
+        this.isPurpose = message;
+    }
+
+    getBannerFile(message: any) {
+        this.bannerFile = message;
+    }
+
+    getImageFiles(message) {
+        this.imageFiles = message;
+    }
+
+    uploadBannerImage(): Promise<any> {
+        if (this.pservice.getProjectID()) {
+            this.projectID = this.pservice.getProjectID();
+            if (this.bannerFile) {
+                const URL = `project/${this.user.uid}/${this.projectID}/banner/${this.bannerFile.name}`;
+
+                this.task = this.storage.upload(URL, this.bannerFile);
+                return this.task.snapshotChanges().pipe(
+                    finalize(() => {
+                        this.bannerURLPromise = this.storage.ref(URL).getDownloadURL().toPromise();
+                    }),
+                ).toPromise();
+            } else {
+                alert('Please select a banner picture');
+            }
+        } else {
+            alert('Could not upload banner');
+        }
+    }
+
+    async uploadImages(): Promise<any> {
+        if (this.pservice.getProjectID()) {
+            this.projectID = this.pservice.getProjectID();
+            if (this.imageFiles) {
+                this.imageFiles.forEach((myFile) => {
+                    if (myFile) {
+                        const URL = `project/${this.user.uid}/${this.projectID}/images/${myFile.name}`;
+                        this.task = this.storage.upload(URL, myFile);
+
+                        this.taskPromises.push(this.task.snapshotChanges().pipe(
+                            finalize(() => {
+                                this.imagesURLPromises.push(this.storage.ref(URL).getDownloadURL().toPromise());
+                            })
+                        ).toPromise());
+                    }
+                });
+            }
+        } else {
+            alert('Could not upload images');
+        }
+    }
+
+    async Submit(name: string) {
+        if (name && this.user) {
+
+            await this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories, this.selectedMembers);
+
+            (document.getElementById('myForm') as HTMLFormElement).reset();
+            document.getElementById('fillCorrectly').style.display = 'none';
+
+            await this.uploadBannerImage();
+            const bannerURL = await this.bannerURLPromise;
+
+            const imagesURLs = [];
+            this.uploadImages();
+            await Promise.all(this.taskPromises);
+            for (const URL of this.imagesURLPromises) {
+                imagesURLs.push(await URL);
+            }
+
+            this.pservice.uploadPictures(bannerURL, imagesURLs);
+            this.activeModal.close();
+        } else {
+            document.getElementById('fillCorrectly').style.display = 'block';
+        }
     }
 
     getExtendedData(item) {
@@ -49,6 +171,12 @@ export class CreatePostNewComponent implements OnInit {
 
     savePost() {
         this.updatePostsFirebase(this.post);
+    }
+
+    updatePostTypeInFirebase() {
+        this.authService.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').add({
+            type: this.postType
+        });
     }
 
     updatePostsFirebase(postParam) {
@@ -87,7 +215,7 @@ export class CreatePostNewComponent implements OnInit {
                         tempDisplayName = this.authService.afAuth.auth.currentUser.displayName;
                     }
 
-                    this.authService.afs.doc(`generalPosts/allPosts`).collection('post').add({
+                    this.authService.afs.doc(`mainFeed/allPosts`).collection('post').add({
                         post: postParam,
                         date: date.toLocaleDateString(),
                         day: date.getUTCDate(),
@@ -100,13 +228,13 @@ export class CreatePostNewComponent implements OnInit {
                         photoURL: tempPhotoUrl,
                         displayName: `${val.firstname} ${val.lastname}`
                     }).then(docRef => {
-                        this.authService.afs.doc(`generalPosts/allPosts`).collection('post').doc(docRef.id).update({
+                        this.authService.afs.doc(`mainFeed/allPosts`).collection('post').doc(docRef.id).update({
                             postId: docRef.id
                         });
                     });
                 });
         });
-
+        this.updatePostTypeInFirebase();
     }
 
     toggleScreen() {

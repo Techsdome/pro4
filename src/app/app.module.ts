@@ -63,6 +63,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {CreatePostNewComponent} from './components/create-post-new/create-post-new.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -104,6 +105,7 @@ import {CreatePostNewComponent} from './components/create-post-new/create-post-n
         CreatePostNewComponent
     ],
     imports: [
+        MatTabsModule,
         BrowserModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(environment.firebase),

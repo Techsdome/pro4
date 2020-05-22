@@ -10,6 +10,21 @@
   margin-bottom: 10px;
 }
 
+.mat-tab-label {
+  min-width: 33% !important;
+  padding: 5px;
+  background-color: transparent;
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+  min-width: 33% !important;
+  padding: 5px;
+  background-color: transparent;
+}
+
+/* Styles for the ink bar */
+
 .myImg {
   margin:0;
 }

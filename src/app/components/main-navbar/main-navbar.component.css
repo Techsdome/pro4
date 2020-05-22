@@ -149,40 +149,28 @@
     max-width: 400px;
 }
 
-#questionButton {
-  background-image: url("../../../assets/icons/q.svg");
-  transform: scale(1.1);
-  border-style: solid;
-  border-width: thin;
-  border-color: #000;
+.bar-button{
+    border: 1px solid #000 !important;
 }
 
-#questionButton:hover, #questionButton.active {
-  border-color: #F3F4F6;
+.bar-button:hover{
+    background-color: #e0e0e0;
+}
+
+#questionButton {
+  background-image: url("../../../assets/icons/q.svg");
 }
 
 #messageButton {
   background-image: url("../../../assets/icons/talk.svg");
-  transform: scale(1.1);
-  border-style: solid;
-  border-width: thin;
-  border-color: #000;
 }
 
-#messageButton:hover, #messageButton.active {
-  border-color: #F3F4F6;
+#questionButton:hover ~ .detail_info{
+    display: grid;
 }
 
 #projectButton {
   background-image: url("../../../assets/icons/pen.svg");
-  transform: scale(1.1);
-  border-style: solid;
-  border-width: thin;
-  border-color: #000;
-}
-
-#projectButton:hover, #projectButton.active {
-  border-color: #F3F4F6;
 }
 
 #plusButton {
