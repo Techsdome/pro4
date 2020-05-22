@@ -53,11 +53,35 @@ body {
   z-index: 10;
 }
 
+/*
 #create-post-form > * {
   width: 400px;
   position: relative;
   left: -200px;
   margin-left: 50%;
+}
+
+mat-tab-body{
+  margin-top: 25px;
+}
+*/
+
+mat-tab-label{
+  min-width: 30% !important;
+}
+
+::ng-deep.mat-tab-link,  ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active, ::ng-deep.mat-tab-labels:nth-child(1){
+  min-width: 10px!important;
+}
+
+/deep/ .mat-tab-labels:nth-child(1) {
+  min-width: 10px !important;
+}
+
+#groupTabGroup ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+  min-width: 0 !important;
+  padding: 3px;
+  margin: 3px;
 }
 
 .detail_info {
@@ -67,7 +91,7 @@ body {
   font-size: 8pt;
   top: -50px;
   margin-top: -25px;
-  margin-left: 40px;
+  margin-left: 50px;
   background-color: #fff;
   display: none;
   justify-items: center;
@@ -90,7 +114,7 @@ body {
 }
 
 #create-post-inner {
-  margin-top: 20px;
+  padding: 20px 20px 0 20px;
 }
 
 #create-post-form textarea {
@@ -103,28 +127,15 @@ body {
 }
 
 #create-post-form {
-  z-index: 15;
-  position: fixed;
-  top: -200px;
-  left: -275px;
-  margin-left: 50%;
-  margin-top: 50vh;
   background-color: #eee;
-  border-radius: 10px;
-  width: 550px;
-  height: 400px
 }
 
 
 #create-post-form form {
-  margin-top: 30px;
   left: 0;
-  margin-left: 12.5%;
-  padding-right: 40px;
-  padding-left: 5px;
-  width: 80%;
   max-height: calc(100vh - 100px);
   height: auto;
+  padding: 0;
 }
 
 .smallButton {

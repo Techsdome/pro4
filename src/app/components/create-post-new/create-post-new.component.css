@@ -1,0 +1,20 @@
+.create-post-button{
+    width: 100%;
+}
+
+.choosePostType{
+    display: flex;
+    justify-content: space-between;
+}
+
+.choosePostType > li{
+    text-align: center;
+    width: 100%;
+    border: 2px solid rgba(0,0,0,0.1);
+}
+
+.choosePostType > li:hover{
+    background-color: rgba(50,50,50,0.1);
+    border: 2px solid rgba(0,0,0,0.2);
+    cursor: pointer;
+}

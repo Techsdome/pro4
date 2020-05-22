@@ -66,25 +66,6 @@ export class MainNavbarComponent implements OnInit {
         );
     }
 
-    Popen() {
-        const modalRef = this.modalService.open(NewProjectComponent,
-            {
-                scrollable: true, beforeDismiss: () => {
-                    return confirm('Do you want to lose your changes?');
-                }
-            });
-        // modalRef.componentInstance.name = 'World';
-    }
-
-    Qopen() {
-        const modalRef = this.modalService.open(NewQuestionComponent,
-            {
-                scrollable: true, beforeDismiss: () => {
-                    return confirm('Do you want to lose your changes?');
-                }
-            });
-        // modalRef.componentInstance.name = 'World';
-    }
 
     animateOn() {
         this.status = !this.status;
@@ -97,11 +78,8 @@ export class MainNavbarComponent implements OnInit {
     createNewPost() {
         const openPost = this.modalService.open(CreatePostNewComponent,
             {
-                scrollable: true, beforeDismiss: () => {
-                    return confirm('Do you want to lose your changes?');
-                }
+                scrollable: true
             });
-        // modalRef.componentInstance.name = 'World';
     }
 
     ngOnInit() {
@@ -113,8 +91,6 @@ export class MainNavbarComponent implements OnInit {
         });
 
     }
-
-// const directory = document.querySelector('.bubble').getBoundingClientRect();
 
     slideIt(dat) {
         this.stat = dat;
