@@ -1,26 +1,36 @@
 <div>
-    <div>
-        <input type="button" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s" (click)="toggleScreen()" value="Create post">
-    </div>
-
-    <div [class]="showScreen?'showBtnTechsdome':'hideBtnTechsdome'" class="blurry-screen" (click)="toggleScreen()"></div>
-    <div id="create-post-form" [class]="showScreen?'showBtnTechsdome':'hideBtnTechsdome'">
+     <div id="create-post-form"l>
         <div id="create-post-inner">
-            <div id="create-post-header flex">
-                <h5>Create a new post</h5>
-                <div id="create-post-button-container" class="flex">
-                    <div class="create-post-button">
-                        <img src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png" alt="post" type="button" (click)="savePost(); toggleScreen();" class="boderButton smallButton button transition02s opacity-05">
-                        <p class="detail_info">ask question</p>
-                    </div>
+            <mat-tab-group >
+                <mat-tab label="Post">
+                <br>
+                 <div id="create-post-header flex">
+                    <h5>Create a new post</h5>
                 </div>
+                <quill-editor [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
+                <img src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png" alt="post" type="button" (click)="savePost(); toggleScreen(); changePostTypeNormalPost();" class="boderButton smallButton button transition02s opacity-05">
+                <br>
+                <br>
+                <br>
+                </mat-tab>
 
-            </div>
-    <!--        <form action="">-->
-    <!--            <textarea [(ngModel)]="post" name="post" id="cpArea" placeholder="My post..."></textarea>-->
-          <br>
-              <quill-editor action="" [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
-    <!--        </form>-->
+                <mat-tab label="Question">
+                <br>
+                <div id="create-post-header flex">
+                <h5>Ask a question</h5>
+                </div>
+                <quill-editor action="" [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
+                <img src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png" alt="post" type="button" (click)="savePost(); toggleScreen(); changePostTypeNormalPost();" class="boderButton smallButton button transition02s opacity-05">
+                <br>
+                <br>
+                <br>
+                </mat-tab>
+
+                <mat-tab label="Project">
+                <app-new-project></app-new-project>
+                </mat-tab>
+            </mat-tab-group>
+
         </div>
     </div>
 </div>
