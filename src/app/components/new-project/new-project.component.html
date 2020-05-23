@@ -9,7 +9,6 @@
           <label for="pdescription"><h6>Description</h6></label>
           <textarea class="form-control" id="pdescription" rows="3" #description required> </textarea>
 
-
           <div id="photoUpload" class="row">
             <app-upload-image class="col-6" [addButton]="'Add banner'"
                               (childMessage)="getBannerFile($event)"></app-upload-image>

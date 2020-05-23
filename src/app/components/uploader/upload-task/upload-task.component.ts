@@ -1,9 +1,12 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import {Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
+import {finalize, tap} from 'rxjs/operators';
 import {AuthService} from '../../../shared/services/auth.service';
+import {ProjectPageComponent} from '../../project-page/project-page.component';
+import FieldValue = firebase.firestore.FieldValue;
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -13,52 +16,54 @@ import {AuthService} from '../../../shared/services/auth.service';
 })
 export class UploadTaskComponent implements OnInit {
 
-  @Input() file: File;
+  file: File;
   task: AngularFireUploadTask;
   path: string;
 
   percentage: Observable<number>;
   snapshot: Observable<any>;
-  downloadURL: string;
+  downloadURL: Promise<any>;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore,
-              public authService: AuthService) {
+  constructor(private storage: AngularFireStorage, private afs: AngularFirestore,
+              public authService: AuthService, private project: ProjectPageComponent) {
   }
 
   ngOnInit() {
     this.startUpload();
   }
 
-  startUpload() {
-    // The storage path
-    const uid = this.authService.userData.uid;
-    this.path = `project/${uid}/${this.file.name}`;
-    
-    // Reference to storage bucket
-    const ref = this.storage.ref(this.path);
-
-    // The main task
-    this.task = this.storage.upload(this.path, this.file);
-
-    // Progress monitoring
-    this.percentage = this.task.percentageChanges();
-
-    this.snapshot   = this.task.snapshotChanges().pipe(
-      // tap(console.log),
-      // The file's download URL
-      finalize( async() =>  {
-        this.downloadURL = await ref.getDownloadURL().toPromise();
-
-        // this.db.collection('projects').doc().update({ downloadURL: this.downloadURL, path });
-        // this.authService.afs.collection('users').doc(this.user.uid).set({
-        //
-        // });
-      }),
-    );
+  async startUpload() {
+    await this.upload();
+    this.afs.doc(`project/${this.project.projectID}`).update(  {
+      projectImages: FieldValue.arrayUnion(await this.downloadURL)
+    }).then((data) => {
+      this.project.loadProject();
+    });
   }
 
-  getDownloadURL() {
-    return this.downloadURL;
+  upload() {
+    // The storage path
+    if (this.file) {
+      const uid = this.authService.userData.uid;
+      const URL = `project/${uid}/${this.project.projectID}/images/${this.file.name}`;
+
+      // Reference to storage bucket
+      const ref = this.storage.ref(URL);
+
+      // The main task
+      this.task = this.storage.upload(URL, this.file);
+      return this.task.snapshotChanges().pipe(
+        // The file's download URL
+        finalize(() => {
+          this.downloadURL = ref.getDownloadURL().toPromise();
+
+          // this.db.collection('projects').doc().update({ downloadURL: this.downloadURL, path });
+          // this.authService.afs.collection('users').doc(this.user.uid).set({
+          //
+          // });
+        }),
+      ).toPromise();
+    }
   }
 
   isActive(snapshot) {

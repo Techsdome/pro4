@@ -22,18 +22,71 @@ export class ProjectPageComponent implements OnInit {
   user: User;
   images: string[];
   myPID = history.state.data;
+  isOwner: boolean;
+  projectPromise: Promise<any>;
+  editMode = false;
+
+  pictureChange = false;
+  tmpChangedValues = [];
+  tmpimages: string[];
+  tmpName = '';
+  tmpDescription = '';
 
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
               public authService: AuthService) {
   }
 
-  ngOnInit() {
-    if(this.myPID) {
-      this.loadProject();
+  async ngOnInit() {
+    this.getUser();
+    if (this.myPID) {
+      await this.loadProject();
     } else {
-      this.getProject();
+      await this.getProject();
     }
+  }
+
+  editProject() {
+    this.editMode = true;
+  }
+
+  pushValue(mykey, myvalue) {
+    this.tmpChangedValues.push({key: mykey, value: myvalue});
+  }
+
+  saveChanges() {
+    this.editMode = false;
+    const data = {};
+    let i = 0;
+    this.tmpChangedValues.forEach( (item) => {
+      if (item.value != null) {
+        data[item.key] = item.value;
+        i++;
+      }
+   });
+    if (this.pictureChange) {
+      data['projectImages'] = this.tmpimages;
+    }
+    this.afs.doc(`project/${this.projectID}`).update(data).then( () => {
+      this.loadProject();
+    });
+  }
+
+  removePicture(index) {
+    this.tmpimages.forEach((pic, i) => {
+      if (i === index) {
+        this.tmpimages.splice(index, 1);
+        this.pictureChange = true;
+      }
+    });
+  }
+
+  isUserOwner() {
+    this.authService.getCurrentUser().subscribe(async (user) => {
+      this.user = user;
+      await this.projectPromise;
+      this.isOwner = this.user.uid === this.project.uid;
+    });
   }
 
   getUser() {
@@ -43,12 +96,16 @@ export class ProjectPageComponent implements OnInit {
   }
 
   loadProject() {
+    if (this.projectID) {
+      this.myPID = this.projectID;
+    }
     this.docRef = this.afs.doc(`project/${this.myPID}`);
     if (this.docRef) {
-      this.docRef.get().toPromise().then(doc => {
+      this.projectPromise = this.docRef.get().toPromise().then(doc => {
         if (doc.exists) {
           this.project = doc.data();
-          this.images = this.project.projectImages;
+          this.tmpimages = this.project.projectImages;
+          this.isUserOwner();
         } else {
           console.log('No such document!');
         }
@@ -71,10 +128,11 @@ export class ProjectPageComponent implements OnInit {
 
               this.docRef = this.afs.doc(`project/${this.projectID}`);
               if (this.docRef) {
-                this.docRef.get().toPromise().then(doc => {
+                this.projectPromise = this.docRef.get().toPromise().then((doc) => {
                   if (doc.exists) {
                     this.project = doc.data();
-                    this.images = this.project.projectImages;
+                    this.tmpimages = this.project.projectImages;
+                    this.isUserOwner();
                   } else {
                     console.log('No such document!');
                   }
@@ -93,5 +151,4 @@ export class ProjectPageComponent implements OnInit {
         });
     });
   }
-
 }

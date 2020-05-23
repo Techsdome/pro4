@@ -1,8 +1,7 @@
 .dropzone {
-  background-color: #bcbcbc;
-  margin: 20px !important;
+  margin: 5px !important;
   width:  60%;
-  height: 150px;
+  height: 100%;
   border-radius: 5px;
 }
 .dropzone div {
@@ -10,8 +9,20 @@
   display: block;
 }
 
+.addPictureButton {
+  border: none;
+  background: none;
+}
+
 #mydrop {
   width: 100%;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.addPicture {
+  color: #8e908c;
 }
 
 .hovering {
