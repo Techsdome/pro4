@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthService} from './shared/services/auth.service';
@@ -10,7 +9,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
-
 // Firebase services + enviorment module
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
@@ -41,7 +39,6 @@ import { UploadTaskComponent } from './components/uploader/upload-task/upload-ta
 import { PartingLineComponent } from './components/parting-line/parting-line.component';
 import { ToastrModule } from 'ngx-toastr';
 // import {NgbdProgressbarShowvalue} from './components/uploader/upload-task/progressbar-showvalue';
-
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { UserStatusComponent } from './components/user-status/user-status.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -59,9 +56,14 @@ import {GeneralPostComponent} from './components/general-post/general-post.compo
 import { ShowProjectsComponent } from './components/show-projects/show-projects.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { UploadImagesComponent } from './components/upload-images/upload-images.component';
-
 import { QuillModule } from 'ngx-quill';
 import { QUILL_CONFIG_TOKEN } from 'ngx-quill';
+import { NewQuestionComponent } from './components/new-question/new-question.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {CreatePostNewComponent} from './components/create-post-new/create-post-new.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -98,9 +100,12 @@ import { QUILL_CONFIG_TOKEN } from 'ngx-quill';
         GeneralPostComponent,
         ShowProjectsComponent,
         UploadImageComponent,
-        UploadImagesComponent
+        UploadImagesComponent,
+        NewQuestionComponent,
+        CreatePostNewComponent
     ],
     imports: [
+        MatTabsModule,
         BrowserModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(environment.firebase),
@@ -118,10 +123,12 @@ import { QUILL_CONFIG_TOKEN } from 'ngx-quill';
         FontAwesomeModule,
         QuillModule.forRoot(),
         ToastrModule.forRoot({
-          preventDuplicates: true,
+            preventDuplicates: true,
         }),
-        ScrollToModule.forRoot()
-
+        ScrollToModule.forRoot(),
+        MatFormFieldModule,
+        MatInputModule,
+        MatAutocompleteModule
     ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
       NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal],

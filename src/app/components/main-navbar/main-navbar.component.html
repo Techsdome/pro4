@@ -1,7 +1,21 @@
 <div id="menuBar_top" class="black-standard-color">
 
-  <input class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
+<!--
+  <input (keyup)="onkeyup($event)" class="standardBackgroundColor background-image-settings" placeholder="Search" type="search" id="searchBar">
+-->
+  <input (keyup)="onkeyup($event)" class="standardBackgroundColor background-image-settings" id="searchBar" type="text"
+         placeholder="Search"
+         aria-label="Number"
+         matInput
+         [formControl]="myControl"
+         [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let offset of results | async" [value]="offset">
+      {{ offset.displayName }}
+    </mat-option>
+  </mat-autocomplete>
 
+  <div id="round_right"></div>
   <div id="settingsButton" class="dropdown text-white">
     <button type="button" class="btn m-0 shadow-none" id="dropdownMenu" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -17,35 +31,34 @@
   </div>
 
 
-  <div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'" [routerLink]="['/app-user-profile']"
+  <div id="menuBar_left" [class]="menuClicked ? 'showMenu' : 'hideMenu'"
        class="black-standard-color">
     <div id="round"></div>
     <div id="round_below"></div>
     <div id="round_r_b"></div>
 
     <div id="sidebar-button-container">
-
-
       <img [src]="photoURL" class="background-image-settings sidebar-button pro" id="profileButtonSideBar"
            [routerLink]="['/app-user-profile']" [routerLinkActive]="['active']">
       <span class="link-text prot"><strong>Profile</strong></span>
 
-      <div id="plusButton-container" class="plus" [routerLinkActive]="['active']">
+      <div id="plusButton-container" class="plus">
         <div [class]="status ? 'translateProject' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button opacity-05"
-                 id="projectButton"  (click)="animateOn()">
+          <input type="button" class="background-image-settings bar-button opacity-05"
+                 id="projectButton"  (click)="animateOn(); createNewPost();">
           <p class="detail_info"><strong>create post</strong></p>
         </div>
         <div [class]="status ? 'translateQuestion' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button opacity-05"
-                 id="questionButton"  (click)="animateOn()">
+          <input type="button" class="background-image-settings bar-button"
+                 id="questionButton"  (click)="animateOn(); createNewPost();">
           <p class="detail_info"><strong>ask question</strong></p>
         </div>
         <div [class]="status ? 'translateMessage' : 'hide'">
-          <input type="button" class="background-image-settings sidebar-button opacity-05"
-                 id="messageButton" (click)="animateOn(); open();">
+          <input type="button" class="background-image-settings bar-button opacity-05"
+                 id="messageButton" (click)="animateOn(); createNewPost();">
           <p class="detail_info"><strong>create project</strong></p>
         </div>
+
         <input (click)="animateOn()" class="background-image-settings sidebar-button" id="plusButton" type="button">
       </div>
       <span class="link-text plust" (click)="animateOn()"></span>
@@ -68,37 +81,6 @@
       <span class="link-text chat"><strong>Chat</strong></span>
 
       <div class="p_after"></div>
-
-
-
-<!--<div class="menu">-->
-<!--  <span>-->
-<!--    <svg viewBox="220 0 300 300" class="whitething">-->
-
-<!--      <path class="st0 anim" d="M122.1,110.7l-0.6-57.6h-7.8c0,25.9-17,47.7-40.5,55h-1.8c-23.1,0-41.9,18.8-41.9,41.9-->
-<!--	c0,23.1,18.8,41.9,41.9,41.9h1.8c23.5,7.3,40.5,29.1,40.5,55h7.8l0.6-57.6H122L122.1,110.7L122.1,110.7z">-->
-<!--        <animate-->
-<!--          attributeName="d"-->
-<!--          to="M270.4,108.1l-0.5-55h-7.8c0,25.8-17,47.7-40.4,55H71.4c-23.1,0-41.9,18.8-41.9,41.9s18.8,41.9,41.9,41.9h150.2-->
-<!--	c23.4,7.3,40.4,29.2,40.4,55h7.8l0.5-55h0L270.4,108.1L270.4,108.1z"-->
-<!--          dur="1s"-->
-<!--          begin="mouseover"-->
-<!--          fill="freeze"/>-->
-<!--        <animate-->
-<!--          attributeName="d"-->
-<!--          to="M122.1,110.7l-0.6-57.6h-7.8c0,25.9-17,47.7-40.5,55h-1.8c-23.1,0-41.9,18.8-41.9,41.9-->
-<!--	c0,23.1,18.8,41.9,41.9,41.9h1.8c23.5,7.3,40.5,29.1,40.5,55h7.8l0.6-57.6H122L122.1,110.7L122.1,110.7z"-->
-<!--          dur="1s"-->
-<!--          begin="mouseout"-->
-<!--          fill="freeze"/>-->
-<!--      </path>-->
-<!--      <path class="st0 open" d="M270.4,108.1l-0.5-55h-7.8c0,25.8-17,47.7-40.4,55H71.4c-23.1,0-41.9,18.8-41.9,41.9s18.8,41.9,41.9,41.9h150.2-->
-<!--	c23.4,7.3,40.4,29.2,40.4,55h7.8l0.5-55h0L270.4,108.1L270.4,108.1z" />-->
-<!--    </svg>-->
-<!--  </span>-->
-<!--</div>-->
-
-
     </div>
   </div>
 </div>

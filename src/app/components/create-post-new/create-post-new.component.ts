@@ -1,23 +1,22 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DataServiceService} from '../../shared/services/data-service.service';
 import {AuthService} from '../../shared/services/auth.service';
-import {NewProjectService} from '../../shared/services/new-project.service';
+import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {FormControl, FormGroup, FormsModule} from '@angular/forms';
-import {AngularFireStorage} from 'angularfire2/storage';
-import {AngularFireUploadTask} from '@angular/fire/storage';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
+import {NewProjectService} from '../../shared/services/new-project.service';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Item} from '../../models/Item';
-import {DataServiceService} from '../../shared/services/data-service.service';
+
 
 @Component({
-  selector: 'app-new-project',
-  templateUrl: './new-project.component.html',
-  styleUrls: ['./new-project.component.css'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-create-post-new',
+    templateUrl: './create-post-new.component.html',
+    styleUrls: ['./create-post-new.component.css']
 })
+export class CreatePostNewComponent implements OnInit {
 
-export class NewProjectComponent implements OnInit {
     showScreen = false;
     items: Item[];
     user: User;

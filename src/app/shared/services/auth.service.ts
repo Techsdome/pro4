@@ -54,7 +54,7 @@ export class AuthService {
                     this.router.navigate(['dashboard']);
                 });
             }).catch((error) => {
-                window.alert(error.message);
+              return(error.message);
             });
     }
 
@@ -189,7 +189,7 @@ GoogleAuth() {
             // description: user.description ? user.description : 'Tell something about yourself..',
             // skills: user.skills ? user.skills : [],
             firstname: this.firstname ? this.firstname : 'First Name',
-            lastname: this.lastname ? this.lastname : 'Last Name',
+            lastname: this.lastname ? this.lastname : 'Last Name'
         };
 
         return userRef.set(userData, {

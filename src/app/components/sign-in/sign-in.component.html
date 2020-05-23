@@ -16,7 +16,7 @@
         <form *ngIf="openMainLogin; else register">
           <p class="text-left">Welcome to <br>Techsdome</p>
           <div class="md-form form-group mt-5">
-            <input mdInput mdValidate id="input_login_email" type="text" class="form-control" autofocus #email>
+            <input mdInput mdValidate id="input_login_email" type="email" class="form-control" autofocus #email>
             <label for="input_login_email">E-mail</label>
           </div>
           <div class="md-form form-group mt-5">
@@ -51,35 +51,52 @@
           </div>
         </form>
         <ng-template #register>
-          <form>
+          <form [formGroup]="myForm">
             <p class="text-left">Welcome to <br>Techsdome</p>
-            <div class="md-form form-group mt-5">
-              <input id="input_fN" type="text" class="form-control" [(ngModel)]="firstname" name="fName" required>
-              <label for="input_fN">First Name</label>
+
+            <div class="row">
+              <mat-form-field class="form-group col-6">
+                <input matInput placeholder="First Name" type="text" [(ngModel)]="firstname" name="fName"
+                       formControlName="firstName" required>
+                <mat-error *ngIf="myForm.hasError('required', 'firstName')">
+                  Please enter your First Name.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="form-group col-6">
+                <input matInput placeholder="Last Name" type="text" [(ngModel)]="lastname" name="lName"
+                       formControlName="lastName">
+              </mat-form-field>
             </div>
-            <div class="md-form form-group mt-5">
-              <input id="input_lN" type="text" class="form-control" [(ngModel)]="lastname" name="lName" required>
-              <label for="input_lN">Last Name</label>
+
+            <div class="row">
+              <mat-form-field class="form-group col-12">
+                <input matInput placeholder="Email" type="email" formControlName="email" #userEmail required>
+                <mat-error *ngIf="myForm.hasError('required', 'email')">
+                  Please enter your email.
+                </mat-error>
+              </mat-form-field>
             </div>
-            <div class="md-form form-group mt-5">
-              <input id="input_register_email" type="email" class="form-control" #userEmail required>
-              <label for="input_register_email">E-mail</label>
-            </div>
-            <div class="md-form form-group mt-5">
-              <input id="input_re_email" type="email" class="form-control" #repeatUserEmail>
-              <label for="input_re_email">Repeat E-mail</label>
-            </div>
-            <div class="md-form form-group mt-5">
-              <input id="input_register__passwd" type="password" class="form-control validate" #userPwd required>
-              <label for="input_register__passwd" data-error="wrong" data-success="right">Password</label>
-            </div>
-            <div class="md-form form-group mt-5">
-              <input id="input_re_passwd" type="password" class="form-control validate" #repeatUserPwd>
-              <label for="input_re_passwd" data-error="wrong" data-success="right">Repeat Password</label>
+
+            <div class="row">
+              <mat-form-field class="form-group col-6">
+                <input matInput placeholder="Password" type="password" formControlName="password" #userPwd required>
+                <mat-error *ngIf="myForm.hasError('required', 'password')">
+                  Please enter your password.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="form-group col-6">
+                <input matInput placeholder="Repeat password" type="password" formControlName="confirmPassword"
+                       [errorStateMatcher]="matcher" required>
+                <mat-error *ngIf="myForm.hasError('notSame')">
+                  Passwords do not match.
+                </mat-error>
+              </mat-form-field>
             </div>
             <div class="btn-group-justified" role="group" aria-label="Basic example">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-login btn-rounded btn-style"
+                <button [disabled]="!myForm.valid" type="button" class="btn btn-login btn-rounded btn-style"
                         (click)="authService.SignUp(userEmail.value, userPwd.value); authService.setFirstName(firstname); authService.setLastName(lastname);">
                   Register
                 </button>
@@ -200,9 +217,9 @@
 <section class="bg-black text-center">
   <div class="row">
     <div class="col-lg-8 mx-auto arrow-up">
-        <a [ngx-scroll-to]="'#head'" class="btn btn-link btn-circle" role="button">
-          <span></span>
-        </a>
+      <a [ngx-scroll-to]="'#head'" class="btn btn-link btn-circle" role="button">
+        <span></span>
+      </a>
     </div>
   </div>
 </section>

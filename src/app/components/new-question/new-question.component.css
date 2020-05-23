@@ -1,4 +1,4 @@
-#newproject {
+#newquestion {
 
 }
 .photoResults {
@@ -10,21 +10,6 @@
   margin-bottom: 10px;
 }
 
-.mat-tab-label {
-  min-width: 33% !important;
-  padding: 5px;
-  background-color: transparent;
-}
-
-/* Styles for the active tab label */
-.mat-tab-label.mat-tab-label-active {
-  min-width: 33% !important;
-  padding: 5px;
-  background-color: transparent;
-}
-
-/* Styles for the ink bar */
-
 .myImg {
   margin:0;
 }
@@ -32,27 +17,12 @@
 #newproject .myImg .myButtons button {
   margin: 0;
 }
-.photoResults p {
-  font-size: 10pt;
-}
 
 .myButtons {
   margin: 5px;
 }
 
-.photoResults div {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-.filename:hover {
-  overflow: visible !important;
-  white-space: normal;
-}
-
-
-#newproject .photoRemove {
+#newquestion .photoRemove {
   margin: 0;
 }
 
@@ -77,7 +47,7 @@ label {
   padding: 10px 0 3px 0;
 }
 
-#newproject input {
+#newquestion input {
   border: none;
   border: solid 1px #ccc;
   border-radius: 30px;
@@ -91,17 +61,17 @@ label {
   display: none;
 }
 
-#newproject button {
+#newquestion button {
   margin: 10px 5px;
 }
 
-#newproject #create {
+#newquestion #create {
   float: right;
   margin: 2px 0 15px 0;
   padding: 2px 15px;
 }
 
-#newproject h6 {
+#newquestion h6 {
   margin-left: 10px;
 }
 
@@ -115,14 +85,14 @@ label {
   margin-left: 5px;
 }
 
-#newproject #create-post-form {
+#newquestion #create-post-form {
   height: 590px;
   top: -250px;
   max-height: calc(100vw - 100px);
   overflow: hidden;
 }
 
-#newproject #create-post-form form {
+#newquestion #create-post-form form {
   margin-top: 30px;
   left: 0;
   margin-left: 12.5%;
