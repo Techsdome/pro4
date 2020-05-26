@@ -11,10 +11,10 @@ import {Item} from '../../models/Item';
 import {DataServiceService} from '../../shared/services/data-service.service';
 
 @Component({
-  selector: 'app-new-project',
-  templateUrl: './new-project.component.html',
-  styleUrls: ['./new-project.component.css'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-new-project',
+    templateUrl: './new-project.component.html',
+    styleUrls: ['./new-project.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class NewProjectComponent implements OnInit {
@@ -23,13 +23,9 @@ export class NewProjectComponent implements OnInit {
     user: User;
     posts: string[];
     post: string;
-
-    postType: string;
-
     description: string;
     task: AngularFireUploadTask;
     taskPromises = [];
-
     bannerURLPromise: Promise<any>;
     imagesURLPromises = [];
     bannerFile: File;
@@ -55,18 +51,6 @@ export class NewProjectComponent implements OnInit {
             ['blockquote', 'code-block', 'link'],
         ]
     };
-
-    changePostTypeNormalPost() {
-        this.postType = 'post';
-    }
-
-    changePostTypeQuestion() {
-        this.postType = 'question';
-    }
-
-    changePostTypeProject() {
-        this.postType = 'project';
-    }
 
     constructor(private dataService: DataServiceService, private authService: AuthService, public pservice: NewProjectService,
                 public form: FormsModule, public activeModal: NgbActiveModal, private modalService: NgbModal,
@@ -137,7 +121,7 @@ export class NewProjectComponent implements OnInit {
         }
     }
 
-    async Submit(name: string) {
+    async submit(name: string) {
         if (name && this.user) {
 
             await this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories, this.selectedMembers);
@@ -168,74 +152,6 @@ export class NewProjectComponent implements OnInit {
                 this.posts = item[it].posts;
             }
         }
-    }
-
-    savePost() {
-        this.updatePostsFirebase(this.post);
-    }
-
-    updatePostTypeInFirebase() {
-        this.authService.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').add({
-            type: this.postType
-        });
-    }
-
-    updatePostsFirebase(postParam) {
-        const date: Date = new Date();
-        this.authService.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').add({
-            post: this.post,
-            date: date.toLocaleDateString(),
-            day: date.getUTCDate(),
-            month: (date.getUTCMonth() + 1),
-            year: date.getUTCFullYear(),
-            hour: date.getHours(),
-            minutes: date.getMinutes(),
-            second: date.getSeconds()
-        });
-        let tempPhotoUrl: string;
-        let tempDisplayName: string;
-        let tempFirstName: string;
-        let tempLastName: string;
-
-        this.authService.getCurrentUser().subscribe((result) => {
-            this.user = result;
-            this.authService.afs.collection('users').doc(result.uid).valueChanges()
-                .subscribe((val: any) => {
-                    tempFirstName = val.firstname;
-                    tempLastName = val.lastname;
-                    if (this.authService.afAuth.auth.currentUser.photoURL === undefined ||
-                        this.authService.afAuth.auth.currentUser.photoURL === null) {
-                        tempPhotoUrl = 'https://d2x5ku95bkycr3.cloudfront.net/App_Themes/Common/images/profile/0_200.png';
-                    } else {
-                        tempPhotoUrl = this.authService.afAuth.auth.currentUser.photoURL;
-                    }
-                    if (this.authService.afAuth.auth.currentUser.displayName === undefined ||
-                        this.authService.afAuth.auth.currentUser.displayName === null) {
-                        tempDisplayName = tempFirstName + ' ' + tempLastName;
-                    } else {
-                        tempDisplayName = this.authService.afAuth.auth.currentUser.displayName;
-                    }
-
-                    this.authService.afs.doc(`mainFeed/allPosts`).collection('post').add({
-                        post: postParam,
-                        date: date.toLocaleDateString(),
-                        day: date.getUTCDate(),
-                        month: (date.getUTCMonth() + 1),
-                        year: date.getUTCFullYear(),
-                        hour: date.getHours(),
-                        minutes: date.getMinutes(),
-                        second: date.getSeconds(),
-                        uid: this.authService.afAuth.auth.currentUser.uid,
-                        photoURL: tempPhotoUrl,
-                        displayName: `${val.firstname} ${val.lastname}`
-                    }).then(docRef => {
-                        this.authService.afs.doc(`mainFeed/allPosts`).collection('post').doc(docRef.id).update({
-                            postId: docRef.id
-                        });
-                    });
-                });
-        });
-        this.updatePostTypeInFirebase();
     }
 
     toggleScreen() {
