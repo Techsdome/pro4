@@ -1,11 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {finalize} from "rxjs/operators";
-import {AuthService} from "../../shared/services/auth.service";
-import {NewProjectService} from "../../shared/services/new-project.service";
-import {AngularFireStorage} from "angularfire2/storage";
-import {User} from "../../shared/services/user";
-import {AngularFireUploadTask} from "@angular/fire/storage";
-import {FileUploader} from "ng2-file-upload";
+import {FileUploader} from 'ng2-file-upload';
 
 @Component({
   selector: 'app-upload-images',

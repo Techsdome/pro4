@@ -3,7 +3,7 @@ import {AuthService} from '../../shared/services/auth.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {NewProjectService} from '../../shared/services/new-project.service';
-import {DataServiceService} from "../../shared/services/data-service.service";
+import {DataServiceService} from '../../shared/services/data-service.service';
 
 @Component({
   selector: 'app-add-tag',
@@ -39,6 +39,11 @@ export class AddTagComponent implements OnInit {
   sendToParent() {
     this.purposeMessage.emit(this.purpose);
     this.childMessage.emit(this.itemsList);
+  }
+
+  letFocus(){
+    document.getElementsByClassName('#itemInput');
+      // .trigger('focus');
   }
 
   editToggle() {

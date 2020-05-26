@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
+import {take} from 'rxjs/operators';
+import * as path from 'path';
 
 
 @Component({
