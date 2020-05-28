@@ -31,13 +31,21 @@ export class ProfileMenuComponent implements OnInit {
   user: User;
   @Input() links: any[];
 
+  activeMenu: string;
+
   constructor(private dataService: DataServiceService, private authService: AuthService, private pservice: NewProjectService) {
   }
 
   ngOnInit(): void {
+    this.activeMenu = this.links[0];
     this.authService.getCurrentUser().subscribe(user => {
       this.user = user;
     });
+  }
+
+  setActive(link) {
+    this.activeMenu = link;
+    console.log(link);
   }
 
 }
