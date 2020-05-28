@@ -19,6 +19,7 @@ export class GeneralPostComponent implements OnInit {
     @Input() postDisplayName: string;
     @Input() postPhotoUrl: string;
     @Input() postId: string;
+    @Input() postType: string;
     comment: string;
     allComments: {}[];
     showCommentSection = false;
@@ -31,7 +32,7 @@ export class GeneralPostComponent implements OnInit {
         this.authService.getCurrentUser().subscribe((result) => {
             this.authService.afs.collection('users').doc(result.uid).valueChanges()
                 .subscribe((val: any) => {
-                    this.authService.afs.doc(`generalPosts/allPosts/post/${this.postId}`).collection('comments').add({
+                    this.authService.afs.doc(`mainFeed/allPosts/post/${this.postId}`).collection('comments').add({
                         comment: this.comment,
                         commentName: val.firstname + val.lastname
                     });
@@ -49,7 +50,7 @@ export class GeneralPostComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authService.afs.doc(`generalPosts/allPosts/post/${this.postId}`).collection('comments').valueChanges()
+        this.authService.afs.doc(`mainFeed/allPosts/post/${this.postId}`).collection('comments').valueChanges()
             .subscribe((val) => {
                 this.allComments = [];
                 val.forEach((value) => {

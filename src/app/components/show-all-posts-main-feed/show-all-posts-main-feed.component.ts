@@ -20,10 +20,6 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
     }
 
 
-    /*openComment() {
-        this.edit = !this.edit;
-    }*/
-
     ngOnInit(): void {
         this.authservice.getCurrentUser().subscribe((result) => {
             this.user = result;
@@ -88,7 +84,8 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
                             postSecond: value.second,
                             photoURL: value.photoURL,
                             displayName: value.displayName,
-                            postId: value.postId
+                            postId: value.postId,
+                            postType: value.postType
                         };
                         this.posts.push(postObject);
                     });

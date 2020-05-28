@@ -216,16 +216,7 @@ mat-tab-label{
 }
 
 .itemInputButton{
-  padding-right: 25px;
-  border-radius: 100px;
-  border: none;
-  background-color: #0058ff;
-  color: #fff;
-  margin: 2px 3px;
-}
-
-.itemInputButton{
-  padding: 0;
+  /*padding-right: 25px;*/
   border-radius: 100px;
   border: none;
   background-color: #0058ff;
@@ -233,6 +224,7 @@ mat-tab-label{
   margin: 2px 0 2px 5px !important;
   width: auto;
   display: inline-block;
+  padding: 0 10px;
 }
 
 .itemInputButton p {
@@ -257,6 +249,13 @@ mat-tab-label{
   color: #fff;
   margin: 2px 3px;
   /*max-width: 30%;*/
+}
+
+.addPictureContainer {
+  display: inline-block;
+  height: 100px;
+  margin-top: -50px;
+  padding: 0 !important;
 }
 
 #item-container{

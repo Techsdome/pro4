@@ -5,8 +5,8 @@
     <input class="itemInputButton" type="button" [value]="item">
     <img class="itemDeleteButton" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="delete" (click)="deleteItemElement($event)">
   </li>
-  <input [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'"  [(ngModel)]="item" (keydown.enter)="editToggle(); saveItem(); sendToParent()" (keydown.space)="editToggle(); saveItem(); sendToParent()" class="itemInput" type="text" [placeholder]="placeholder">
-  <img [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="createItemButton boderButton smallButton button transition02s" (click)="editToggle()" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
+  <input [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'"  [(ngModel)]="item" (keydown.enter)="editToggle(); saveItem(); sendToParent()" (keydown.space)="editToggle(); saveItem(); sendToParent()" class="itemInput" type="text" [placeholder]="placeholder" #myinput> {{ myinput.focus() }}
+  <img [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="createItemButton boderButton smallButton button transition02s" (click)="editToggle(); letFocus()" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
   <br>
   <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle(); saveItem(); sendToParent()">Save</button>
   <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle();">Abort</button>
