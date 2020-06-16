@@ -1,29 +1,30 @@
 <form id="myForm" class="form-group modal-body" #myForm="ngForm">
-    <br>
-     <div id="create-post-header flex">
-        <h5>Create a new project</h5>
-    </div>
-    <input type="text" name="pname" id="pname" class="form-control" placeholder="New Project" #name required>
-    <label for="pdescription"><h6>Description</h6></label>
-    <quill-editor [styles]="editorStyle" id="pdescription" [modules]="config" placeholder="describe your project..." name="description" [(ngModel)]="description"></quill-editor>
-    <div id="photoUpload" class="row">
-        <app-upload-image class="col-6" [addButton]="'Add banner'"
-        (childMessage)="getBannerFile($event)"></app-upload-image>
-        <app-upload-images class="col-6" [addButton]="'Add images'"
-        (imagesMessage)="getImageFiles($event)"></app-upload-images>
-    </div>
-    <app-add-tag [purpose]="'tags'" [headline]="'Tags'" [placeholder]="'add tag'"
-    (purposeMessage)="getPurposeMessage($event)"
-    (childMessage)="getChildMessage($event)"></app-add-tag>
-    <app-add-tag [purpose]="'members'" [headline]="'Members'" [placeholder]="'member'"
-    (purposeMessage)="getPurposeMessage($event)"
-    (childMessage)="getChildMessage($event)"></app-add-tag>
-    <p id="fillCorrectly" style="display: none; color: red">Please fill out the required fields!</p>
+  <br>
+  <div id="create-post-header flex">
+    <h5>Create a new project</h5>
+  </div>
+  <input type="text" name="pname" id="pname" class="form-control" placeholder="New Project" #name required>
+  <label for="pdescription"><h6>Description</h6></label>
+  <quill-editor [styles]="editorStyle" id="pdescription" [modules]="config" placeholder="describe your project..."
+                name="description" [(ngModel)]="description"></quill-editor>
+  <div id="photoUpload" class="row">
+    <app-upload-image class="col-6" [addButton]="'Add banner'"
+                      (childMessage)="getBannerFile($event)"></app-upload-image>
+    <app-upload-images class="col-6" [addButton]="'Add images'"
+                       (imagesMessage)="getImageFiles($event)"></app-upload-images>
+  </div>
+  <app-add-tag [purpose]="'tags'" [headline]="'Tags'" [placeholder]="'add tag'"
+               (purposeMessage)="getPurposeMessage($event)"
+               (childMessage)="getChildMessage($event)"></app-add-tag>
+  <app-add-tag [purpose]="'members'" [headline]="'Members'" [placeholder]="'member'"
+               (purposeMessage)="getPurposeMessage($event)"
+               (childMessage)="getChildMessage($event)"></app-add-tag>
+  <p id="fillCorrectly" style="display: none; color: red">Please fill out the required fields!</p>
 
-    <button id="create" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s"
-        routerLink="/project-page" (click)="Submit(name.value)">Create
-    </button>
-    <br>
-    <br>
-    <br>
+  <button id="create" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s"
+          routerLink="/project-page" (click)="Submit(name.value)">Create
+  </button>
+  <br>
+  <br>
+  <br>
 </form>

@@ -4,9 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
-import {Router, NavigationStart, NavigationCancel, NavigationEnd} from '@angular/router';
-import {Observable} from 'rxjs';
-import {finalize, tap} from 'rxjs/operators';
+import {UploadTaskComponent} from "../uploader/upload-task/upload-task.component";
 
 @Component({
   selector: 'app-project-page',
@@ -26,15 +24,27 @@ export class ProjectPageComponent implements OnInit {
   projectPromise: Promise<any>;
   editMode = false;
 
+  tmpMemberName = '';
+  tmpAllContributors = [];
+  tmpAddedContributors = [];
+  tmpDeletedContributors = [];
+  memberChange = false;
+
   pictureChange = false;
   tmpChangedValues = [];
-  tmpimages: string[];
+
+  tmpAllImages: string[];
+  tmpAddedImages: File[];
+  tmpDeletedImages = [];
+
   tmpName = '';
   tmpDescription = '';
 
+  tmpTags = [];
+
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
-              public authService: AuthService) {
+              public authService: AuthService, public uploadTask: UploadTaskComponent) {
   }
 
   async ngOnInit() {
@@ -54,31 +64,73 @@ export class ProjectPageComponent implements OnInit {
     this.tmpChangedValues.push({key: mykey, value: myvalue});
   }
 
+  discardChanges() {
+    this.editMode = false;
+    this.loadProject();
+  }
+
   saveChanges() {
     this.editMode = false;
     const data = {};
     let i = 0;
-    this.tmpChangedValues.forEach( (item) => {
+    this.tmpChangedValues.forEach((item) => {
       if (item.value != null) {
         data[item.key] = item.value;
         i++;
       }
-   });
+    });
+
     if (this.pictureChange) {
-      data['projectImages'] = this.tmpimages;
+      this.tmpAddedImages.forEach(async (file) => {
+        this.uploadTask.projectID = this.projectID;
+        this.uploadTask.file = file;
+        await this.uploadTask.startUpload();
+        this.tmpAllImages.push(await this.uploadTask.downloadURL);
+      });
+
+      data['projectImages'] = this.tmpAllImages;
+
+      for (const img of this.tmpDeletedImages) {
+        this.storage.storage.refFromURL(img).delete();
+      }
+
+      this.storage.storage.ref(`project/${this.user.uid}/${this.projectID}/tmp`).delete();
     }
-    this.afs.doc(`project/${this.projectID}`).update(data).then( () => {
+
+    if (this.memberChange) {
+      data['projectMembers'] = this.tmpAllContributors;
+    }
+
+    this.afs.doc(`project/${this.projectID}`).update(data).then(() => {
       this.loadProject();
     });
   }
 
   removePicture(index) {
-    this.tmpimages.forEach((pic, i) => {
+    this.tmpAllImages.forEach((pic, i) => {
       if (i === index) {
-        this.tmpimages.splice(index, 1);
+        this.tmpAllImages.splice(index, 1);
+        this.tmpDeletedImages.push(pic);
         this.pictureChange = true;
       }
     });
+  }
+
+  removeMember(index) {
+    this.tmpAllImages.forEach((mem, i) => {
+      if (i === index) {
+        this.tmpAllContributors.splice(index, 1);
+        this.tmpDeletedContributors.push(mem);
+        this.memberChange = true;
+      }
+    });
+  }
+
+  addMember(value) {
+    this.tmpAddedContributors.push(value);
+    this.tmpAllContributors.push(value);
+    this.tmpMemberName = '';
+    this.memberChange = true;
   }
 
   isUserOwner() {
@@ -104,7 +156,8 @@ export class ProjectPageComponent implements OnInit {
       this.projectPromise = this.docRef.get().toPromise().then(doc => {
         if (doc.exists) {
           this.project = doc.data();
-          this.tmpimages = this.project.projectImages;
+          this.tmpAllImages = this.project.projectImages;
+          this.tmpAllContributors = this.project.projectMembers;
           this.isUserOwner();
         } else {
           console.log('No such document!');
@@ -131,7 +184,8 @@ export class ProjectPageComponent implements OnInit {
                 this.projectPromise = this.docRef.get().toPromise().then((doc) => {
                   if (doc.exists) {
                     this.project = doc.data();
-                    this.tmpimages = this.project.projectImages;
+                    this.tmpAllImages = this.project.projectImages;
+                    this.tmpAllContributors = this.project.projectMembers;
                     this.isUserOwner();
                   } else {
                     console.log('No such document!');

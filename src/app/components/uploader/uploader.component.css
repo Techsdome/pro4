@@ -21,6 +21,10 @@
   height: 100%;
 }
 
+.dropzone div {
+  padding: 0;
+}
+
 .addPicture {
   color: #8e908c;
 }

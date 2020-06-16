@@ -13,8 +13,8 @@ import {DataServiceService} from '../../shared/services/data-service.service';
 export class AddTagComponent implements OnInit {
 
   user: User;
-  @Input() items: string[];
-  itemsList = [];
+  @Input() itemsList = [];
+  @Input() show: boolean;
   @Output() childMessage = new EventEmitter<string[]>();
   @Output() purposeMessage = new EventEmitter<string>();
   @Input() headline: string;
@@ -30,10 +30,13 @@ export class AddTagComponent implements OnInit {
 
   ngOnInit(): void {
     this.htmlItemsElements = (document.getElementsByClassName('itemDeleteButton') as HTMLCollection);
-
     this.authService.getCurrentUser().subscribe(user => {
       this.user = user;
     });
+
+    if (this.show === undefined || this.show === null) {
+      this.show = true;
+    }
   }
 
   sendToParent() {
@@ -41,9 +44,9 @@ export class AddTagComponent implements OnInit {
     this.childMessage.emit(this.itemsList);
   }
 
-  letFocus(){
+  letFocus() {
     document.getElementsByClassName('#itemInput');
-      // .trigger('focus');
+    // .trigger('focus');
   }
 
   editToggle() {
@@ -52,16 +55,9 @@ export class AddTagComponent implements OnInit {
 
   saveItem() {
     if (this.item) {
-      if (this.items) {
-        this.items.push(this.item);
-        if (this.edit) {
-          this.edit = !this.edit;
-        }
-      } else {
-        this.itemsList.push(this.item);
-        if (this.edit) {
-          this.edit = !this.edit;
-        }
+      this.itemsList.push(this.item);
+      if (this.edit) {
+        this.edit = !this.edit;
       }
     }
     this.item = '';
@@ -69,11 +65,11 @@ export class AddTagComponent implements OnInit {
     // this.update();
   }
 
-  updateSkillsFirebase() {
-    this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
-      skills: [] = this.items ? this.items : this.itemsList
-    });
-  }
+  // updateSkillsFirebase() {
+  //   this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
+  //     skills: [] = this.items ? this.items : this.itemsList
+  //   });
+  // }
 
   updateTagsFirebase() {
     this.authService.afs.collection('project').doc(this.pservice.projectID).update({
@@ -85,27 +81,18 @@ export class AddTagComponent implements OnInit {
     if (this.purpose === 'tags') {
       this.updateTagsFirebase();
     } else if (this.purpose === 'skills') {
-      this.updateSkillsFirebase();
+      // this.updateSkillsFirebase();
     } else {
       console.log('No purpose found!');
     }
   }
 
   deleteItemElement(event) {
-    if (this.items) {
-      for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i] === event.target.previousElementSibling.value) {
-          this.items.splice(i, 1);
-        }
-      }
-    } else {
-      for (let i = 0; i < this.itemsList.length; i++) {
-        if (this.itemsList[i] === event.target.previousElementSibling.value) {
-          this.itemsList.splice(i, 1);
-        }
+    for (let i = 0; i < this.itemsList.length; i++) {
+      if (this.itemsList[i] === event.target.previousElementSibling.value) {
+        this.itemsList.splice(i, 1);
       }
     }
-
     this.update();
   }
 }

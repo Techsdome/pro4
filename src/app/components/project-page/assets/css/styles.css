@@ -165,10 +165,47 @@ p {
   transform: scale(1.1);
 }
 
+.editbg {
+  background-color: #f7f7f7;
+  border-radius: 20px;
+}
+
+.removeMemberButton {
+  border: none;
+  background: none;
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+
 #gallery img:hover {
   margin-left: -5px;
   width: 120%;
   height: 120%;
+}
+
+.addMember {
+  padding: 5px 5px;
+}
+
+.addMember svg {
+  margin-bottom: 12px;
+}
+
+.addMember h6 {
+  margin: 0;
+}
+
+.addTag {
+  margin-top: -5px;
+}
+
+.addMemberInput {
+  width: 80px;
+  height: 20px;
+  font-size: 8pt;
+  padding: 1px 5px 1px 5px;
+  margin-top: 82%;
 }
 
 #gallery img {
@@ -209,13 +246,24 @@ p {
   padding: 0 !important;
 }
 
+.addPictureContainer {
+  max-width: 120px;
+  margin: 2px 10px;
+}
+
 .SaveProjectButton {
   display: inline-block;
   width: 10%;
 }
 
 .saveProject {
-  margin: 0;
+  margin: 5px;
+  background-color: #ced7e5;
+}
+
+.discardProject {
+  margin: 5px;
+  padding: 5px;
 }
 
 .changeName {

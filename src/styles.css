@@ -216,7 +216,7 @@ mat-tab-label{
 }
 
 .itemInputButton{
-  /*padding-right: 25px;*/
+  padding: 0 25px 0 10px;
   border-radius: 100px;
   border: none;
   background-color: #0058ff;
@@ -224,7 +224,6 @@ mat-tab-label{
   margin: 2px 0 2px 5px !important;
   width: auto;
   display: inline-block;
-  padding: 0 10px;
 }
 
 .itemInputButton p {
@@ -240,15 +239,6 @@ mat-tab-label{
 .myTag {
   margin: 0 !important;
   padding: 0 !important;
-}
-
-#item-container input{
-  border-radius: 100px;
-  border: none;
-  background-color: #0058ff;
-  color: #fff;
-  margin: 2px 3px;
-  /*max-width: 30%;*/
 }
 
 .addPictureContainer {

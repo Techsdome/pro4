@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthService} from './shared/services/auth.service';
@@ -131,7 +131,7 @@ import { MatTabsModule } from '@angular/material/tabs';
         MatAutocompleteModule
     ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
-      NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal],
+      NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal, { provide: LOCALE_ID, useValue: 'de-AT' }],
     bootstrap: [AppComponent]
 })
 export class AppModule {

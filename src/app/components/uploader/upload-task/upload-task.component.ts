@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectorRef, Inject} from '@angular/core';
 import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
@@ -7,6 +7,8 @@ import {AuthService} from '../../../shared/services/auth.service';
 import {ProjectPageComponent} from '../../project-page/project-page.component';
 import FieldValue = firebase.firestore.FieldValue;
 import * as firebase from 'firebase';
+import {formatDate} from '@angular/common';
+import { LOCALE_ID} from '@angular/core';
 
 
 @Component({
@@ -19,13 +21,14 @@ export class UploadTaskComponent implements OnInit {
   file: File;
   task: AngularFireUploadTask;
   path: string;
+  projectID: string;
 
   percentage: Observable<number>;
   snapshot: Observable<any>;
   downloadURL: Promise<any>;
 
   constructor(private storage: AngularFireStorage, private afs: AngularFirestore,
-              public authService: AuthService, private project: ProjectPageComponent) {
+              public authService: AuthService) {
   }
 
   ngOnInit() {
@@ -34,18 +37,18 @@ export class UploadTaskComponent implements OnInit {
 
   async startUpload() {
     await this.upload();
-    this.afs.doc(`project/${this.project.projectID}`).update(  {
-      projectImages: FieldValue.arrayUnion(await this.downloadURL)
-    }).then((data) => {
-      this.project.loadProject();
-    });
+    // this.afs.doc(`project/${this.project.projectID}`).update(  {
+    //   projectImages: FieldValue.arrayUnion(await this.downloadURL)
+    // });
   }
 
   upload() {
     // The storage path
     if (this.file) {
       const uid = this.authService.userData.uid;
-      const URL = `project/${uid}/${this.project.projectID}/images/${this.file.name}`;
+      const date = new Date();
+      const today = `${date.getFullYear()}${date.getMonth()}${date.getDate()}|${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+      const URL = `project/${uid}/${this.projectID}/images/${today}_${this.file.name}`;
 
       // Reference to storage bucket
       const ref = this.storage.ref(URL);

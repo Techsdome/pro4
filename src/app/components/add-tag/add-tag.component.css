@@ -6,3 +6,7 @@ h6 {
 #item-container {
   margin-bottom: 20px;
 }
+
+.editTags {
+  display: inline;
+}
