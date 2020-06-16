@@ -59,14 +59,6 @@ export class CreatePostNewComponent implements OnInit {
         this.postType = 'post';
     }
 
-    changePostTypeQuestion() {
-        this.postType = 'question';
-    }
-
-    changePostTypeProject() {
-        this.postType = 'project';
-    }
-
     constructor(private dataService: DataServiceService, private authService: AuthService, public pservice: NewProjectService,
                 public form: FormsModule, public activeModal: NgbActiveModal, private modalService: NgbModal,
                 private storage: AngularFireStorage) {
@@ -169,17 +161,11 @@ export class CreatePostNewComponent implements OnInit {
         }
     }
 
-    savePost() {
-        this.updatePostsFirebase(this.post);
+    savePost(postType) {
+        this.updatePostsFirebase(this.post, postType);
     }
 
-    updatePostTypeInFirebase() {
-        this.authService.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').add({
-            type: this.postType
-        });
-    }
-
-    updatePostsFirebase(postParam) {
+    updatePostsFirebase(postParam, postType) {
         const date: Date = new Date();
         this.authService.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').add({
             post: this.post,
@@ -229,12 +215,12 @@ export class CreatePostNewComponent implements OnInit {
                         displayName: `${val.firstname} ${val.lastname}`
                     }).then(docRef => {
                         this.authService.afs.doc(`mainFeed/allPosts`).collection('post').doc(docRef.id).update({
-                            postId: docRef.id
+                            postId: docRef.id,
+                            postType: '' + postType
                         });
                     });
                 });
         });
-        this.updatePostTypeInFirebase();
     }
 
     toggleScreen() {

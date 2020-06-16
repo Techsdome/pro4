@@ -4,6 +4,7 @@
         <img [src]="postPhotoUrl" alt="profil picture" class="small-profile-picture image-shadow">
         <div class="post">
         <div>
+            <p>Type: {{postType}}</p>
             <h4>{{postDisplayName}} posted:</h4>
             <p><strong>{{postDate}}</strong> | {{postHour}}:{{postMinute}}, {{postSecond}} seconds</p>
             <p innerHTML = "{{ postMessage }}"></p>

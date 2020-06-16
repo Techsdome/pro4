@@ -1,25 +1,4 @@
-<!--<app-general-post *ngFor="let post of projects"-->
-<!--                  [postMessage] = 'post.postText'-->
-<!--                  [postDate] = 'post.postDate'-->
-<!--                  [postDisplayName] = 'post.displayName'-->
-<!--                  [postPhotoUrl] = 'post.photoURL'-->
-<!--                  [postId] = 'post.postId'></app-general-post>-->
 
-<!--<ul>-->
-<!--  <li *ngFor="let project of projects">-->
-<!--    <div class="post-container col">-->
-<!--      <img [src]="userPhotoURL" alt="profil picture" class="small-profile-picture image-shadow">-->
-<!--      <div class="post">-->
-<!--        <img [src]="project.projectBanner" alt="bannerpicture" class="smallbanner">-->
-<!--        <h4>{{project.projectName}}</h4>-->
-<!--        <p><strong>{{project.postDate}}</strong> | {{post.postHour}}:{{post.postMinutes}}, {{post.postSecond}} seconds-->
-<!--        </p>-->
-<!--        <p>{{project.projectDescription}}</p>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <app-parting-line></app-parting-line>-->
-<!--  </li>-->
-<!--</ul>-->
 <div class="post-container" *ngFor="let project of projects">
   <img [src]="project.userPhotoURL" alt="profil picture" class="small-profile-picture image-shadow">
   <div class="row projectpost">

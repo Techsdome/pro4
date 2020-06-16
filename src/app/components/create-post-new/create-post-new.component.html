@@ -3,31 +3,31 @@
         <div id="create-post-inner">
             <mat-tab-group >
                 <mat-tab label="Post">
-                <br>
-                 <div id="create-post-header flex">
-                    <h5>Create a new post</h5>
-                </div>
-                <quill-editor [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
-                <img src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png" alt="post" type="button" (click)="savePost(); toggleScreen(); changePostTypeNormalPost();" class="boderButton smallButton button transition02s opacity-05">
-                <br>
-                <br>
-                <br>
+                    <br>
+                     <div id="create-post-header flex">
+                        <h5>Create a new post</h5>
+                    </div>
+                    <quill-editor [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
+                    <img src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png" alt="post" type="button" (click)="savePost('post'); toggleScreen(); changePostTypeNormalPost();" class="boderButton smallButton button transition02s opacity-05">
+                    <br>
+                    <br>
+                    <br>
                 </mat-tab>
 
                 <mat-tab label="Question">
-                <br>
-                <div id="create-post-header flex">
-                <h5>Ask a question</h5>
-                </div>
-                <quill-editor action="" [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
-                <img src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png" alt="post" type="button" (click)="savePost(); toggleScreen(); changePostTypeNormalPost();" class="boderButton smallButton button transition02s opacity-05">
-                <br>
-                <br>
-                <br>
+                    <br>
+                    <div id="create-post-header flex">
+                        <h5>Ask a question</h5>
+                    </div>
+                    <quill-editor [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
+                    <img src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png" alt="post" type="button" (click)="savePost('question'); toggleScreen();" class="boderButton smallButton button transition02s opacity-05">
+                    <br>
+                    <br>
+                    <br>
                 </mat-tab>
 
                 <mat-tab label="Project">
-                <app-new-project></app-new-project>
+                    <app-new-project></app-new-project>
                 </mat-tab>
             </mat-tab-group>
 
