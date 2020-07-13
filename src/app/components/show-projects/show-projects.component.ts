@@ -20,14 +20,15 @@ export class ShowProjectsComponent implements OnInit {
     ngOnInit(): void {
         this.authservice.afs.collection('mainFeed').doc('allPosts').collection('post').valueChanges()
             .subscribe((val) => {
+                this.posts = [];
                 //const parray = val as Project[];
                 const parray = val;
                 parray.forEach((value) => {
-                    this.posts = [];
+
                     console.log(value);
                     let mytime = new Date();
                     let theuserid = value.uid;
-                    let username = '';
+                    let username = value.displayName;
                     let photoURL = '';
                     let postText = value.post;
                     let typeImage = "https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png";
