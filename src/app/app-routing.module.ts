@@ -32,8 +32,8 @@ const routes: Routes = [
     {path: 'app-settings', component: SettingsComponent},
     {path: 'app-settings-profile', component: SettingsProfileComponent},
     {path: 'app-settings-security', component: SettingsSecurityComponent},
-    {path: 'show-projects', component: ShowProjectsComponent},
-    {path: 'present-projects', component: PresentProjectsComponent},
+    {path: 'show-posts', component: ShowProjectsComponent},
+    {path: 'present-posts', component: PresentProjectsComponent},
     {path: 'show-project-post', component: ShowProjectsComponent},
 
 

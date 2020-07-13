@@ -1,6 +1,6 @@
 
-<div class="post-container" *ngFor="let project of projects">
-  <img [src]="project.userPhotoURL" alt="profil picture" class="small-profile-picture image-shadow">
+<div class="post-container" *ngFor="let post of posts">
+  <img [src]="post.userPhotoURL" alt="profil picture" class="small-profile-picture image-shadow">
   <div class="row projectpost">
     <div class="col-9 maininfo">
       <div class="col-12 smallbanner">
@@ -10,12 +10,13 @@
       <div class="row maindescription">
         <div class="col-12">
           <div class="col-4 pname">
-            <h4> {{ project ? project.projectName : 'Project Alpha' }} </h4>
+            <img style="width: 25px;" [src]="post.typeImage" alt="typeImage">
+            <h4> {{ post ? post.projectName : 'Project Alpha' }} </h4>
           </div>
         </div>
         <div class="row description">
           <div class="col-9">
-            <p> {{ project ? project.postText : 'This is my description, Im very happy to be here, welcome all, this is very exciting'}} </p>
+            <div [innerHTML] = "post ? post.postText : 'This is my description, Im very happy to be here, welcome all, this is very exciting'"> </div>
           </div>
         </div>
       </div>
@@ -56,8 +57,8 @@
       <div class="row myrow">
         <h6> Technology </h6>
         <div class="col-12">
-          <div class="itemInputButton d-inline-block" *ngFor="let tag of project.projectCategories">
-            <p> {{ project ? tag : 'MyTag'}} </p>
+          <div class="itemInputButton d-inline-block" *ngFor="let tag of post.projectCategories">
+            <p> {{ post ? tag : 'MyTag'}} </p>
           </div>
         </div>
       </div>
@@ -65,7 +66,7 @@
         <h6> Contributors </h6>
         <div class="col-12">
           <div class="border rounded-circle view overlay zoom contributors d-inline-block"
-               *ngFor="let member of project.projectMembers">
+               *ngFor="let member of post.projectMembers">
             <img class="contributor img-fluid" src="../../../assets/Project/Howto.JPG" alt="contributer" height="514"
                  width="913"/>
           </div>

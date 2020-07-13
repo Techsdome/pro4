@@ -12,7 +12,7 @@ import Timestamp = firebase.firestore.Timestamp;
 export class ShowProjectsComponent implements OnInit {
 
     user: any;
-    projects: any[] = [];
+    posts: any[] = [];
 
     constructor(public authservice: AuthService) {
     }
@@ -20,13 +20,30 @@ export class ShowProjectsComponent implements OnInit {
     ngOnInit(): void {
         this.authservice.afs.collection('mainFeed').doc('allPosts').collection('post').valueChanges()
             .subscribe((val) => {
-                console.log(val);
-                const parray = val as Project[];
+                //const parray = val as Project[];
+                const parray = val;
                 parray.forEach((value) => {
-                    const mytime = ((value.projectTimeStamp) as unknown as Timestamp).toDate();
-                    const theuserid = value.uid;
+                    this.posts = [];
+                    console.log(value);
+                    let mytime = new Date();
+                    let theuserid = value.uid;
                     let username = '';
                     let photoURL = '';
+                    let postText = value.post;
+                    let typeImage = "https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png";
+                    if (value.postType === "project") {
+                        console.log("ffffsssads");
+                        mytime = ((value.projectTimeStamp) as unknown as Timestamp).toDate();
+                        theuserid = value.uid;
+                        username = '';
+                        photoURL = '';
+                        postText = value.projectDescription;
+                        typeImage = "https://cdn.iconscout.com/icon/premium/png-512-thumb/project-management-2-536854.png";
+                    }
+                    if (value.postType === "question"){
+                        typeImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png";
+                    }
+
 
                     this.authservice.afs.collection('users').doc(theuserid).get().toPromise()
                         .then((userdoc) => {
@@ -38,8 +55,9 @@ export class ShowProjectsComponent implements OnInit {
                         })
                         .then(() => {
                             const projectObject = {
+                                typeImage: typeImage,
                                 postDate: mytime,
-                                postText: value.projectDescription,
+                                postText: postText,
                                 postId: value.projectId,
                                 displayName: username ? username : 'Anonym',
                                 projectName: value.projectName,
@@ -49,8 +67,8 @@ export class ShowProjectsComponent implements OnInit {
                                 projectMembers: value.projectMembers,
                                 userPhotoURL: photoURL
                             };
-                            this.projects.push(projectObject);
-                            console.log(this.projects);
+                            this.posts.push(projectObject);
+                            console.log(this.posts);
                         });
                 });
             });
