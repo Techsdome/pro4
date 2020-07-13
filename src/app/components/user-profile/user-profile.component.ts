@@ -13,7 +13,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  toggleProject(){
+  toggleProject() {
     this.newproject.toggleScreen();
   }
 }

@@ -4,7 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
-import {UploadTaskComponent} from "../uploader/upload-task/upload-task.component";
+import {UploadTaskComponent} from '../uploader/upload-task/upload-task.component';
 
 @Component({
   selector: 'app-project-page',
