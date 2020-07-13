@@ -10,6 +10,18 @@ li {
     vertical-align: middle;
 }
 
+button {
+  margin-left: auto;
+}
+
+.filter {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 100px;
+  border: solid 2px #a6b0bf;
+  padding: 2px 30px 0px 30px;
+  margin: 10px 10px;
+}
+
 a:hover, a:focus, a:active {
     color: #999;
     text-decoration: none;
