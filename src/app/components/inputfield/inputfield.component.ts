@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
@@ -14,6 +14,8 @@ export class InputfieldComponent implements OnInit {
     items: Item[];
     user: User;
     edit = false;
+
+  @Input() searchedUser: any;                          // The searched User of search bar
 
     constructor(private dataService: DataServiceService, private authService: AuthService) {
     }
@@ -40,14 +42,18 @@ export class InputfieldComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.dataService.getItems().subscribe(items => {
-            this.items = items;
-            this.getDescription(items);
-        });
-
+      if (this.searchedUser) {
+        this.user = this.searchedUser;
+      } else {
         this.dataService.getCurrentUser().subscribe(user => {
-            this.user = user;
+          this.user = user;
         });
+      }
+
+      this.dataService.getItems().subscribe(items => {
+        this.items = items;
+        this.getDescription(items);
+      });
     }
 
 }

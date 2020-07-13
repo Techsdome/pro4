@@ -11,7 +11,7 @@
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let offset of results | async" [value]="offset.displayName">
         <img class="example-option-img rounded" aria-hidden [src]="offset.photoURL" height="25">
-        <a [routerLink]="['/app-user-profile', offset.uid]"><small>   {{ offset.displayName }}</small></a>
+        <a [routerLink]="['/app-user-profile']" [state]="{data: offset}"><small>   {{ offset.displayName }}</small></a>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
