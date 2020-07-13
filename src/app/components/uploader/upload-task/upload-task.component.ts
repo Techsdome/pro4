@@ -60,7 +60,7 @@ export class UploadTaskComponent implements OnInit {
         finalize(() => {
           this.downloadURL = ref.getDownloadURL().toPromise();
 
-          // this.db.collection('projects').doc().update({ downloadURL: this.downloadURL, path });
+          // this.db.collection('posts').doc().update({ downloadURL: this.downloadURL, path });
           // this.authService.afs.collection('users').doc(this.user.uid).set({
           //
           // });
