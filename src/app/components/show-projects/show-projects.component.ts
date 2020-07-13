@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import * as firebase from 'firebase';
 import {Project} from '../../models/Project';
@@ -14,7 +14,35 @@ export class ShowProjectsComponent implements OnInit {
     user: any;
     posts: any[] = [];
 
+    edit = false;
+    comment: string;
+    allComments: {}[];
+    showCommentSection = false;
+    commentsLenght: number;
+    postId: string;
+
     constructor(public authservice: AuthService) {
+    }
+
+    openCommentSection() {
+        this.showCommentSection = !this.showCommentSection;
+    }
+
+    openComment() {
+        this.edit = !this.edit;
+    }
+
+    addComment() {
+        this.authservice.getCurrentUser().subscribe((result) => {
+            this.authservice.afs.collection('users').doc(result.uid).valueChanges()
+                .subscribe((val: any) => {
+                    this.authservice.afs.doc(`mainFeed/allPosts/post/${this.postId}`).collection('comments').add({
+                        comment: this.comment,
+                        commentName: val.firstname + val.lastname
+                    });
+                    this.comment = '';
+                });
+        });
     }
 
     ngOnInit(): void {
@@ -24,8 +52,8 @@ export class ShowProjectsComponent implements OnInit {
                 //const parray = val as Project[];
                 const parray = val;
                 parray.forEach((value) => {
-
-                    console.log(value);
+                    this.postId = value.postId;
+                    console.log(this.postId);
                     let mytime = new Date();
                     let theuserid = value.uid;
                     let username = value.displayName;
@@ -33,7 +61,6 @@ export class ShowProjectsComponent implements OnInit {
                     let postText = value.post;
                     let typeImage = "https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png";
                     if (value.postType === "project") {
-                        console.log("ffffsssads");
                         mytime = ((value.projectTimeStamp) as unknown as Timestamp).toDate();
                         theuserid = value.uid;
                         username = '';
