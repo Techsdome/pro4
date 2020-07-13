@@ -64,6 +64,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {CreatePostNewComponent} from './components/create-post-new/create-post-new.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -104,32 +106,34 @@ import { MatTabsModule } from '@angular/material/tabs';
         NewQuestionComponent,
         CreatePostNewComponent
     ],
-    imports: [
-        MatTabsModule,
-        BrowserModule,
-        AppRoutingModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        CoreModule,
-        SharedModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        AngularFireStorageModule,
-        AngularFireDatabaseModule,
-        NgbModule,
-        FileUploadModule,
-        FontAwesomeModule,
-        QuillModule.forRoot(),
-        ToastrModule.forRoot({
-            preventDuplicates: true,
-        }),
-        ScrollToModule.forRoot(),
-        MatFormFieldModule,
-        MatInputModule,
-        MatAutocompleteModule
-    ],
+  imports: [
+    MatTabsModule,
+    BrowserModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    CoreModule,
+    SharedModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    NgbModule,
+    FileUploadModule,
+    FontAwesomeModule,
+    QuillModule.forRoot(),
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+    }),
+    ScrollToModule.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    MatCardModule
+  ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
       NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal, { provide: LOCALE_ID, useValue: 'de-AT' }],
     bootstrap: [AppComponent]

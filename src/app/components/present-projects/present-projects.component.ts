@@ -4,7 +4,6 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AuthService} from '../../shared/services/auth.service';
 import {Project} from '../../models/Project';
-import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-present-projects',

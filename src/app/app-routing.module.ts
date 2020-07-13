@@ -15,8 +15,8 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
 import {SettingsComponent} from './components/settings/settings.component';
 import {SettingsProfileComponent} from './components/settings-profile/settings-profile.component';
 import {SettingsSecurityComponent} from './components/settings-security/settings-security.component';
-import {ShowProjectsComponent} from "./components/show-projects/show-projects.component";
-import {PresentProjectsComponent} from "./components/present-projects/present-projects.component";
+import {ShowProjectsComponent} from './components/show-projects/show-projects.component';
+import {PresentProjectsComponent} from './components/present-projects/present-projects.component';
 
 
 const routes: Routes = [

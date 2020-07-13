@@ -139,6 +139,7 @@
 }
 
 #searchBar {
+    /*
     background-image: url("https://img.favpng.com/10/4/11/computer-icons-search-box-button-clip-art-png-favpng-7TdWywgFBhJ2y81D9kE6nhjbT.jpg");
     padding-left: 30px;
     height: 65%;
@@ -146,7 +147,16 @@
     border-radius: 100px;
     border: none;
     margin-left: 200px;
-    max-width: 400px;
+    max-width: 400px;*/
+    grid-column: 2;
+}
+
+.mat-form-field-empty.mat-form-field-label {
+  color: #cacaca;
+}
+
+.mat-form-field-underline {
+  background-color: green;
 }
 
 .bar-button{
@@ -281,7 +291,7 @@
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(1, 1fr);
     z-index: 5;
-    height: 40px;
+    height: 55px;
 }
 
 #profilePicture{
@@ -291,7 +301,7 @@
 #round {
     z-index: -1;
     left: 64px;
-    top: 40px;
+    top: 55px;
     position: fixed;
     width: 50px;
     height: 50px;
