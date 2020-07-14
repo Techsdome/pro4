@@ -32,6 +32,7 @@ export class ProfileMenuComponent implements OnInit {
   @Input() links: any[];
 
   activeMenu: string;
+  filter: boolean;
 
   constructor(private dataService: DataServiceService, private authService: AuthService, private pservice: NewProjectService) {
   }
@@ -45,7 +46,11 @@ export class ProfileMenuComponent implements OnInit {
 
   setActive(link) {
     this.activeMenu = link;
-    console.log(link);
+    // console.log(link);
+  }
+
+  toggle() {
+    this.filter = !this.filter;
   }
 
 }

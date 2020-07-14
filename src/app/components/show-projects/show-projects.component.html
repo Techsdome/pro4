@@ -1,3 +1,16 @@
+<div id="profile-menu-bar" class="my-5">
+  <nav>
+    <ul>
+      <li class="item active" (click)="setActive('all')"><a href="./dashboard"><h5>ALL</h5></a></li>
+      <li class="item" (click)="setActive('projects')"><a href="./dashboard"><h5>PROJECTS</h5></a></li>
+      <li class="item" (click)="setActive('posts')"><a href="./dashboard"><h5>POSTS</h5></a></li>
+      <!--      <li *ngFor="let item of links" class="item" ><a href="{{ item.path }}" ng-click="setActive(item)"><h5> {{ item.name }} </h5></a></li>-->
+      <button class="filter" (click)="toggle()" *ngIf="!filter">Showing Popular</button>
+      <button class="filter" (click)="toggle()" *ngIf="filter">Showing Most Recent</button>
+    </ul>
+  </nav>
+</div>
+
 
 <div class="post-container" *ngFor="let post of posts">
   <img [src]="post.userPhotoURL" alt="profil picture" class="small-profile-picture image-shadow">
