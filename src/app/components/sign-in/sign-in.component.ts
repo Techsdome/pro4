@@ -51,7 +51,7 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
-    $(document).ready(function() {
+    $(document).ready(() => {
       // Transition effect for navbar
       $(window).scroll(function() {
         if ($(this).scrollTop() > 100) {
