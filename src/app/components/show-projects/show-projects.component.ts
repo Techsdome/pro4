@@ -51,7 +51,7 @@ export class ShowProjectsComponent implements OnInit {
 
   setActive(link) {
     this.activeMenu = link;
-    // this.posts = this.postService.getPosts(link);
+    this.posts = this.postService.getPosts(link);
   }
 
   toggle() {

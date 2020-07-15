@@ -12,8 +12,7 @@ export class PostsService {
   }
 
   getPosts(filter?: string) {
-    console.log(filter);
-    let posts = [];
+    const posts = [];
     this.authservice.afs.collection('mainFeed').doc('allPosts').collection('post').valueChanges()
       .subscribe((val) => {
         //const parray = val as Project[];
