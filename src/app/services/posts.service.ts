@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import Timestamp = firebase.firestore.Timestamp;
 import * as firebase from 'firebase';
 import {AuthService} from '../shared/services/auth.service';
@@ -12,7 +12,7 @@ export class PostsService {
   }
 
   getPosts(filter?: string) {
-    let posts = [];
+    const posts = [];
     this.authservice.afs.collection('mainFeed').doc('allPosts').collection('post').valueChanges()
       .subscribe((val) => {
         //const parray = val as Project[];

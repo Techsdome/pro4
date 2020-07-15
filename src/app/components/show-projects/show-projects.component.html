@@ -9,12 +9,12 @@
              width="1920" alt="projectbanner"/>
       </div>
       <div class="row name">
-              <div class="col-12">
-                <div class="col-10 pname">
-                  <h4> {{ post ? post.displayName : 'Jon Doe'}} posted: </h4>
-                </div>
-              </div>
-              </div>
+        <div class="col-12">
+          <div class="col-10 pname">
+            <h4> {{ post ? post.displayName : 'Jon Doe'}} posted: </h4>
+          </div>
+        </div>
+      </div>
       <div class="row maindescription">
         <div class="col-12">
           <div class="col-4 pname">
@@ -24,7 +24,8 @@
         </div>
         <div class="row description">
           <div class="col-9">
-            <div [innerHTML] = "post ? post.postText : 'This is my description, Im very happy to be here, welcome all, this is very exciting'"> </div>
+            <div
+              [innerHTML]="post ? post.postText : 'This is my description, Im very happy to be here, welcome all, this is very exciting'"></div>
           </div>
         </div>
       </div>
@@ -80,7 +81,7 @@
           </div>
         </div>
       </div>
-                      <button class="boderButton" (click)="addComment()">Save comment</button>
+      <button class="boderButton" (click)="addComment()">Save comment</button>
 
     </div>
   </div>
