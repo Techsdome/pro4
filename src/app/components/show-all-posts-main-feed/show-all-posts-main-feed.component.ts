@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {take} from 'rxjs/operators';
 import * as path from 'path';
+import * as firebase from 'firebase';
+import {Project} from '../../models/Project';
+import Timestamp = firebase.firestore.Timestamp;
+import {Posts} from '../../shared/services/posts';
 
 
 @Component({
@@ -11,86 +15,80 @@ import * as path from 'path';
 })
 export class ShowAllPostsMainFeedComponent implements OnInit {
     user: any;
-    posts: any[] = [];
+    posts: any[];
     photoURL: string;
     edit = false;
     postLenght: any;
+
+    postId: string;
+    projectObject: Posts;
+    commentObject = {
+        commentName: '',
+        comment: ''
+    };
 
     constructor(public authservice: AuthService) {
     }
 
 
     ngOnInit(): void {
-        this.authservice.getCurrentUser().subscribe((result) => {
-            this.user = result;
-            this.authservice.afs.collection('mainFeed').doc('allPosts')
-                .collection('post').valueChanges()
-                .subscribe((val) => {
-                    // console.log(val);
-                    this.posts = [];
-                    val.sort((t1, t2) => {
-                        const year1 = t1.year;
-                        const year2 = t2.year;
-                        const month1 = t1.month;
-                        const month2 = t2.month;
-                        const day1 = t1.day;
-                        const day2 = t2.day;
-                        const hour1 = t1.hour;
-                        const hour2 = t2.hour;
-                        const minutes1 = t1.minutes;
-                        const minutes2 = t2.minutes;
-                        const second1 = t1.second;
-                        const second2 = t2.second;
-                        if (year1 === year2
-                            && month1 === month2
-                            && day1 === day2
-                            && hour1 === hour2
-                            && minutes1 === minutes2) {
-                            return second2 - second1;
-                        } else if (year1 === year2
-                            && month1 === month2
-                            && day1 === day2
-                            && hour1 === hour2
-                            && minutes1 !== minutes2) {
-                            return minutes2 - minutes1;
-                        } else if (year1 === year2
-                            && month1 === month2
-                            && day1 === day2
-                            && hour1 !== hour2
-                            && minutes1 !== minutes2) {
-                            return hour2 - hour1;
-                        } else if (year1 === year2
-                            && month1 === month2
-                            && day1 !== day2
-                            && hour1 !== hour2
-                            && minutes1 !== minutes2) {
-                            return day2 - day1;
-                        } else if (year1 === year2
-                            && month1 !== month2
-                            && day1 !== day2
-                            && hour1 !== hour2
-                            && minutes1 !== minutes2) {
-                            return month2 - month1;
-                        } else {
-                            return year2 - year1;
-                        }
-                    });
-                    val.forEach((value) => {
-                        const postObject = {
-                            postDate: value.date,
-                            postText: value.post,
-                            postHour: value.hour,
-                            postMinutes: value.minutes,
-                            postSecond: value.second,
-                            photoURL: value.photoURL,
-                            displayName: value.displayName,
-                            postId: value.postId,
-                            postType: value.postType
-                        };
-                        this.posts.push(postObject);
-                    });
-                    this.postLenght = this.posts.length;
+        this.authservice.afs.collection('mainFeed').doc('allPosts').collection('post').valueChanges()
+            .subscribe((val) => {
+                this.posts = [];
+                val.forEach((value) => {
+                    this.postId = value.postId;
+                    let mytime = new Date();
+                    let theuserid = value.uid;
+                    let username = value.displayName;
+                    let photoURL = '';
+                    let postText = value.post;
+                    let type = value.postType;
+                    let typeImage = 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png';
+                    if (value.postType === 'project') {
+                        mytime = ((value.projectTimeStamp) as unknown as Timestamp).toDate();
+                        theuserid = value.uid;
+                        username = '';
+                        photoURL = '';
+                        postText = value.projectDescription;
+                        typeImage = 'https://cdn.iconscout.com/icon/premium/png-512-thumb/project-management-2-536854.png';
+                    }
+                    if (value.postType === 'question') {
+                        typeImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png';
+                    }
+
+
+                    this.authservice.afs.collection('users').doc(theuserid).get().toPromise()
+                        .then((userdoc) => {
+                            if (userdoc.data()) {
+                                const myuser = userdoc.data();
+                                photoURL = myuser.photoURL;
+                                username = myuser.displayName ? myuser.displayName : myuser.lastname + ' ' + myuser.firstname;
+                            }
+                        })
+                        .then(() => {
+                            this.projectObject = {
+                                type: type,
+                                typeImage: typeImage,
+                                postDate: mytime,
+                                postText: postText,
+                                postId: value.postId,
+                                displayName: username ? username : 'Anonym',
+                                projectName: value.projectName,
+                                projectBanner: value.projectBanner,
+                                projectId: value.projectId,
+                                projectCategories: value.projectCategories,
+                                projectMembers: value.projectMembers,
+                                userPhotoURL: photoURL,
+                                comments: [
+                                    {
+                                        commentName: '',
+                                        comment: ''
+                                    }
+                                ]
+                            };
+                            this.posts.push(this.projectObject);
+                        });
                 });
-        });
+            });
     }
 }
