@@ -12,7 +12,6 @@ export class PostsService {
   }
 
   getPosts(filter?: string) {
-    console.log(filter);
     let posts = [];
     this.authservice.afs.collection('mainFeed').doc('allPosts').collection('post').valueChanges()
       .subscribe((val) => {
@@ -20,7 +19,7 @@ export class PostsService {
         const parray = filter ? val.filter(value => value.postType === filter) : val;
         parray.forEach((value) => {
           const postId = value.postId;
-          console.log(postId);
+          //console.log(postId);
           let mytime = new Date();
           let theuserid = value.uid;
           let username = value.displayName;

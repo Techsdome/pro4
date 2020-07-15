@@ -155,8 +155,8 @@
   color: #cacaca;
 }
 
-.mat-form-field-underline {
-  background-color: green;
+.mat-form-field .mat-form-field-underline {
+  background-color: #cacaca;
 }
 
 .bar-button{
