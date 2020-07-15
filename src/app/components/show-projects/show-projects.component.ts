@@ -4,11 +4,12 @@ import * as firebase from 'firebase';
 import {Project} from '../../models/Project';
 import Timestamp = firebase.firestore.Timestamp;
 import {Posts} from '../../shared/services/posts';
+import {PostsService} from '../../services/posts.service';
 
 @Component({
-    selector: 'app-show-projects',
-    templateUrl: './show-projects.component.html',
-    styleUrls: ['./show-projects.component.css']
+  selector: 'app-show-projects',
+  templateUrl: './show-projects.component.html',
+  styleUrls: ['./show-projects.component.css']
 })
 export class ShowProjectsComponent implements OnInit {
 
@@ -21,8 +22,13 @@ export class ShowProjectsComponent implements OnInit {
     showCommentSection = false;
     commentsLenght: number;
     postId: string;
+    posts: any[] = [];
 
-    constructor(public authservice: AuthService) {
+    activeMenu: string;
+    filter: boolean;
+
+
+    constructor(public authservice: AuthService, private postService: PostsService) {
     }
 
     openCommentSection() {
@@ -31,8 +37,9 @@ export class ShowProjectsComponent implements OnInit {
 
     openComment() {
         this.edit = !this.edit;
+        this.showCommentSection = !this.showCommentSection;
     }
-
+/*
     addComment() {
         this.authservice.getCurrentUser().subscribe((result) => {
             this.authservice.afs.collection('users').doc(result.uid).valueChanges()
@@ -43,10 +50,32 @@ export class ShowProjectsComponent implements OnInit {
                     });
                     this.comments = [];
                 });
+        })
+    }*/
+
+    addComment() {
+        this.authservice.getCurrentUser().subscribe((result) => {
+            this.authservice.afs.collection('users').doc(result.uid).valueChanges()
+                .subscribe((val: any) => {
+                    this.authservice.afs.doc(`mainFeed/allPosts/post/${this.postId}`).collection('comments').add({
+                        comment: this.comment,
+                        commentName: val.firstname + val.lastname
+                    });
+                    this.comment = '';
+                });
         });
     }
 
+
+
+
+
+
+
+
     ngOnInit(): void {
+      this.activeMenu = '';
+            this.changeMenuItem(this.activeMenu);
         this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).valueChanges()
             .subscribe((comment) => {
                 this.commentsLenght = comment.length;
@@ -56,4 +85,12 @@ export class ShowProjectsComponent implements OnInit {
                 });
             });
     }
+  toggle() {
+    this.filter = !this.filter;
+  }
+
+
+  changeMenuItem(event) {
+    this.posts = this.postService.getPosts(event);
+  }
 }

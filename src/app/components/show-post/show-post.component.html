@@ -1,6 +1,5 @@
 <app-parting-line></app-parting-line>
-    <app-create-post></app-create-post>
-
+    <app-create-post *ngIf="!searchedUser"></app-create-post>
 <ul>
     <li *ngFor="let post of posts">
     <div class="post-container">

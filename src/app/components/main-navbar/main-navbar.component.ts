@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {User} from '../../shared/services/user';
 
@@ -39,8 +39,9 @@ export class MainNavbarComponent implements OnInit {
     items: Item[];
     photoURL: string;
     stat: string;
+    navigationSubscription;
 
-    myControl = new FormControl();
+  myControl = new FormControl();
     results: Observable<any[]>;
     offset = new Subject<string>();
 
