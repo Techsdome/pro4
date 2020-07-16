@@ -29,7 +29,6 @@ export class ProfileMenuComponent implements OnInit {
   setActive(link) {
     this.activeMenuItem = link;
     this.activeMenuItemChange.emit(link);
-
   }
 
   toggle() {
