@@ -1,9 +1,10 @@
 <div id="profile-menu-bar" class="my-5">
   <nav>
     <ul>
-      <li class="item active" (click)="setActive('')"><a><h5>ALL</h5></a></li>
-      <li class="item" (click)="setActive('project')"><a><h5>PROJECTS</h5></a></li>
-      <li class="item" (click)="setActive('question')"><a><h5>POSTS</h5></a></li>
+      <li class="item" (click)="setActive('')" [ngClass]="!activeMenuItem ? 'active' : ''"><a><h5>ALL</h5></a></li>
+      <li class="item" (click)="setActive('project')" [ngClass]="activeMenuItem === 'project' ? 'active' : ''"><a><h5>PROJECTS</h5></a></li>
+      <li class="item" (click)="setActive('post')" [ngClass]="activeMenuItem === 'post' ? 'active' : ''"><a><h5>POSTS</h5></a></li>
+      <li class="item" (click)="setActive('question')" [ngClass]="activeMenuItem === 'question' ? 'active' : ''"><a><h5>QUESTIONS</h5></a></li>
 <!--      <li *ngFor="let item of links" class="item" ><a href="{{ item.path }}" ng-click="setActive(item)"><h5> {{ item.name }} </h5></a></li>-->
       <button class="filter" (click)="toggle()" *ngIf="!filter">Showing Popular</button>
       <button class="filter" (click)="toggle()" *ngIf="filter">Showing Most Recent</button>
