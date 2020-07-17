@@ -1,12 +1,13 @@
 <div id="maindiv" class="standard-background-color">
   <div class="row">
-    <div id="noprojects" class="col-12 text-center" *ngIf="projects.length === 0" align="center">
+    <div *ngIf="loading"> <h3>Loading ... </h3></div>
+    <div id="noprojects" class="col-12 text-center" *ngIf="!loading && projects.length === 0" align="center">
       <h3 class="text-center"> No projects added </h3>
     </div>
     <div *ngIf="projects.length !== 0" class="col-4">
       <div class="col-4 center-block " *ngFor="let project of projects">
         <div class="theprojects rounded-circle circular" [routerLink]="['/project-page']"
-             [state]="{data: project.projectId}">
+             [state]="{data: project.postId}">
           <div class="overlay">
             <div class="text">{{ project.projectName }} </div>
           </div>

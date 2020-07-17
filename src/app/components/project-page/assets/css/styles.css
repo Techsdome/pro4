@@ -24,13 +24,13 @@ body {
 
 #banner-picture {
   padding: 0;
-  height: auto;
+  height: 190px;
 }
 
-#banner-picture img {
-  max-width: 100%;
-  height: auto;
-}
+/*#banner-picture img {*/
+/*  max-width: 100%;*/
+/*  height: auto*/
+/*}*/
 
 #content {
   padding: 40px;
@@ -69,6 +69,9 @@ body {
   margin-top: 15px;
 }
 
+.image {
+  background-size: cover;
+}
 
 #description h2 a {
   color: #808080;

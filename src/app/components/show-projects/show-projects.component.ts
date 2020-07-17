@@ -53,7 +53,7 @@ export class ShowProjectsComponent implements OnInit {
                 const parray = val;
                 parray.forEach((value) => {
                     this.postId = value.postId;
-                    console.log(this.postId);
+                    // console.log(this.postId);
                     let mytime = new Date();
                     let theuserid = value.uid;
                     let username = value.displayName;
@@ -96,7 +96,7 @@ export class ShowProjectsComponent implements OnInit {
                                 userPhotoURL: photoURL
                             };
                             this.posts.push(projectObject);
-                            console.log(this.posts);
+                            // console.log(this.posts);
                         });
                 });
             });

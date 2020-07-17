@@ -9,7 +9,6 @@ import {UploadTaskComponent} from '../uploader/upload-task/upload-task.component
 @Component({
   selector: 'app-project-page',
   templateUrl: './project-page-2.component.html',
-  // styleUrls: ['./project-page.component.css']
   styleUrls: ['./assets/css/styles.css']
 })
 export class ProjectPageComponent implements OnInit {
@@ -23,6 +22,8 @@ export class ProjectPageComponent implements OnInit {
   isOwner: boolean;
   projectPromise: Promise<any>;
   editMode = false;
+
+  bannerURL: string;
 
   tmpMemberName = '';
   tmpAllContributors = [];
@@ -42,22 +43,25 @@ export class ProjectPageComponent implements OnInit {
 
   tmpTags = [];
 
+  start_y: number;
+  mouseDown = false;
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
               public authService: AuthService, public uploadTask: UploadTaskComponent) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.getUser();
     if (this.myPID) {
-      await this.loadProject();
+      this.loadProject();
     } else {
-      await this.getProject();
+      this.getProject();
     }
   }
 
   editProject() {
     this.editMode = true;
+    this.adjustPicture();
   }
 
   pushValue(mykey, myvalue) {
@@ -138,6 +142,7 @@ export class ProjectPageComponent implements OnInit {
       this.user = user;
       await this.projectPromise;
       this.isOwner = this.user.uid === this.project.uid;
+      this.loadBannerPicture();
     });
   }
 
@@ -148,14 +153,13 @@ export class ProjectPageComponent implements OnInit {
   }
 
   loadProject() {
-    if (this.projectID) {
-      this.myPID = this.projectID;
-    }
-    this.docRef = this.afs.doc(`project/${this.myPID}`);
+    this.docRef = this.afs.doc(`mainFeed/allPosts/post/${this.myPID}`);
     if (this.docRef) {
       this.projectPromise = this.docRef.get().toPromise().then(doc => {
         if (doc.exists) {
           this.project = doc.data();
+          console.log(doc.data());
+
           this.tmpAllImages = this.project.projectImages;
           this.tmpAllContributors = this.project.projectMembers;
           this.isUserOwner();
@@ -168,7 +172,50 @@ export class ProjectPageComponent implements OnInit {
     }
   }
 
-  getProject() {
+  adjustPicture() {
+    // tslint:disable-next-line:variable-name
+
+    document.getElementById('banner-picture').onmousedown = () => {
+      this.mouseDown = true;
+    };
+
+    document.onmouseup = () => {
+      this.mouseDown = false;
+    };
+
+    document.getElementById('banner-picture').onmouseenter = (e) => {
+      this.start_y = e.clientY;
+    };
+
+    document.getElementById('banner-picture').onmousemove = (e) => {
+      const newPos = e.clientY - this.start_y;
+
+      if (this.mouseDown) {
+        // if (parseInt(document.getElementById('banner-picture').style.backgroundPositionY, 2) > parseInt(document.getElementById('banner-picture').style.height, 2)) {
+        let posY = document.getElementById('banner-picture').style.backgroundPositionY;
+        let temp;
+
+        if (posY) {
+          const reg = new RegExp('px');
+          temp = parseInt(posY.replace(reg, ''), 10);
+          const result = (temp + newPos).toString();
+          document.getElementById('banner-picture').style.backgroundPositionY = result + 'px';
+        } else {
+          const newPosString = newPos.toString();
+          document.getElementById('banner-picture').style.backgroundPositionY = newPosString + 'px';
+        }
+      }
+      this.start_y = e.clientY;
+    };
+  }
+
+  loadBannerPicture() {
+    if (this.project) {
+      document.getElementById('banner-picture').style.backgroundImage = `url(${this.bannerURL}`;
+    }
+  }
+
+  async getProject() {
     this.authService.getCurrentUser().subscribe(uval => {
       this.authService.afs.collection('users').doc(uval.uid)
         .valueChanges()
@@ -179,13 +226,14 @@ export class ProjectPageComponent implements OnInit {
               const i = us.pid.length;
               this.projectID = us.pid[i - 1];
 
-              this.docRef = this.afs.doc(`project/${this.projectID}`);
+              this.docRef = this.afs.doc(`mainFeed/allPosts/post/${this.projectID}`);
               if (this.docRef) {
                 this.projectPromise = this.docRef.get().toPromise().then((doc) => {
                   if (doc.exists) {
                     this.project = doc.data();
                     this.tmpAllImages = this.project.projectImages;
                     this.tmpAllContributors = this.project.projectMembers;
+                    this.bannerURL = this.project.projectBanner;
                     this.isUserOwner();
                   } else {
                     console.log('No such document!');

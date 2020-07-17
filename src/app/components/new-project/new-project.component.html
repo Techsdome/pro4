@@ -21,9 +21,13 @@
                (childMessage)="getChildMessage($event)"></app-add-tag>
   <p id="fillCorrectly" style="display: none; color: red">Please fill out the required fields!</p>
 
-    <button id="create" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s"
-        routerLink="/project-page" (click)="submit(name.value)">Create</button>
-    <br>
-    <br>
-    <br>
+  <div class="spinner-border float-right" role="status" style="display: none">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <button id="create" class="saveDataButton boderButton roundButton showBtnTechsdome transition02s float-right"
+          (click)="submit(name.value)">Create
+  </button>
+  <br>
+  <br>
+  <br>
 </form>

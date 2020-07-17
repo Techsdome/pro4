@@ -3,7 +3,6 @@ import {User} from '../../shared/services/user';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AuthService} from '../../shared/services/auth.service';
-import {Project} from '../../models/Project';
 
 @Component({
   selector: 'app-present-projects',
@@ -13,6 +12,7 @@ import {Project} from '../../models/Project';
 export class PresentProjectsComponent implements OnInit {
   projects: any[] = [];
   user: User;
+  loading = true;
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
               public authService: AuthService) {
@@ -23,21 +23,24 @@ export class PresentProjectsComponent implements OnInit {
       this.authService.afs.collection('users').doc(user.uid)
         .valueChanges()
         .subscribe((val) => {
-            const myuser = val as User;
-            if (myuser.pid) {
-              myuser.pid.forEach((p) => {
-                this.authService.afs.collection('project').doc(p).valueChanges()
-                  .subscribe(data => {
-                    const pdata = data as Project;
-                    const projectObject = {
-                      projectName: pdata.projectName,
-                      projectBanner: pdata.projectBanner,
-                      projectId: pdata.projectId
-                    };
-                    this.projects.push(projectObject);
-                  });
+          const myuser = val as User;
+          if (myuser.pid) {
+            myuser.pid.forEach((projectID) => {
+              this.authService.afs.collection('mainFeed').doc('allPosts').collection('post').valueChanges().subscribe((doc) => {
+                doc.forEach((posts) => {
+                  if (posts.postId === projectID) {
+                    this.projects.push({
+                      postText: posts.postText,
+                      postId: posts.postId,
+                      projectName: posts.projectName,
+                      projectBanner: posts.projectBanner
+                    });
+                  }
+                });
               });
-            }
+            });
+          }
+          this.loading = false;
         });
     });
   }
