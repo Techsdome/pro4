@@ -28,20 +28,36 @@ const routes: Routes = [
     {path: 'verify-email-address', component: VerifyEmailComponent},
     {path: 'project-page', component: ProjectPageComponent},
     {path: 'new-project', component: NewProjectComponent},
-    {path: 'app-user-profile', component: UserProfileComponent},
+    {path: 'app-user-profile', component: UserProfileComponent, runGuardsAndResolvers: 'always'},
     {path: 'app-settings', component: SettingsComponent},
     {path: 'app-settings-profile', component: SettingsProfileComponent},
     {path: 'app-settings-security', component: SettingsSecurityComponent},
     {path: 'show-posts', component: ShowProjectsComponent},
     {path: 'present-posts', component: PresentProjectsComponent},
     {path: 'show-project-post', component: ShowProjectsComponent},
-
-
+    {path: '**', component: DashboardComponent}
 ];
 
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, {
+      // In order to get anchor / fragment scrolling to work at all, we need to
+      // enable it on the router.
+      anchorScrolling: 'enabled',
+
+      // Once the above is enabled, the fragment link will only work on the
+      // first click. This is because, by default, the Router ignores requests
+      // to navigate to the SAME URL that is currently rendered. Unfortunately,
+      // the fragment scrolling is powered by Navigation Events. As such, we
+      // have to tell the Router to re-trigger the Navigation Events even if we
+      // are navigating to the same URL.
+      onSameUrlNavigation: 'reload',
+
+      // Let's enable tracing so that we can see the aforementioned Navigation
+      // Events when the fragment is clicked.
+      enableTracing: true,
+      scrollPositionRestoration: 'enabled'
+    })],
     exports: [RouterModule]
 })
 

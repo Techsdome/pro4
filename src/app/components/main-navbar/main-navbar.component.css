@@ -26,7 +26,8 @@
 }
 
 .cha:hover~.p_after {
-  top: 413px !important;
+  /*top: 413px !important;*/
+  top: 361px !important;
   transition: .5s ease;
 }
 
@@ -155,8 +156,8 @@
   color: #cacaca;
 }
 
-.mat-form-field-underline {
-  background-color: green;
+.mat-form-field .mat-form-field-underline {
+  background-color: #cacaca;
 }
 
 .bar-button{

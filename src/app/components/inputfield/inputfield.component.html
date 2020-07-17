@@ -1,7 +1,7 @@
 <div>
     <div id="header-input">
         <h4>About me</h4>
-        <img [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="editButton button" (click)="editToggle()" src="https://i.ya-webdesign.com/images/edit-icon-png-16x16-10.png" alt="edit text">
+        <img *ngIf="!this.searchedUser" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="editButton button" (click)="editToggle()" src="https://i.ya-webdesign.com/images/edit-icon-png-16x16-10.png" alt="edit text">
     </div>
     <p [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'">{{description}}</p>
     <textarea [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" id="description-textarea" oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'

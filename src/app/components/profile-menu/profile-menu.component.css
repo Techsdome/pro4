@@ -19,7 +19,7 @@ button {
   border-radius: 100px;
   border: solid 2px #a6b0bf;
   padding: 2px 30px 0px 30px;
-  margin: 10px 10px;
+  margin: 10px 0px 10px auto;
 }
 
 a:hover, a:focus, a:active {
@@ -62,12 +62,19 @@ a::before {
     transform: scale(0, 1);
     transition: color 0.1s,transform 0.2s ease-out;
 }
-a:active::before {
-    background-color: #000;
-}
+
+/*a:active::before {*/
+/*    background-color: #000;*/
+/*}*/
+
 a:hover::before, a:focus::before {
     transform-origin: left top;
     transform: scale(1, 1);
+}
+
+.active a::before {
+  transform-origin: left top;
+  transform: scale(1, 1);
 }
 
 @media only screen and (max-width: 630px){

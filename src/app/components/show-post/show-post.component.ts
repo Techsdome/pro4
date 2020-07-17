@@ -19,7 +19,6 @@ export class ShowPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //console.log(this.searchedUser);
     this.authservice.getCurrentUser().subscribe((result) => {
       if (this.searchedUser) {
         this.user = this.searchedUser;

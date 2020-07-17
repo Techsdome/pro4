@@ -1,5 +1,4 @@
-<app-profile-menu [links]="[{name: 'ALL', path: 'https://www.google.com/'}, {name: 'PROJECTS', path: 'https://www.google.com/'}, {name: 'POST', path: 'https://www.google.com/'},
-     {name: 'ABOUT', path: 'https://www.google.com/'}, {name: '...', path: 'https://www.google.com/'}]"></app-profile-menu>
+<app-profile-menu></app-profile-menu>
 
 <div *ngIf="user;" id="user-data-container" class="flex">
     <div id="image-container">
@@ -32,15 +31,15 @@
         <app-inputfield [searchedUser]="this.userCurrent"></app-inputfield>
     </div>
     <div class="vertical-line line"></div>
-    <div *ngIF="!userCurrent" id="skills-container">
+    <div id="skills-container">
         <h2>Skills</h2>
         <hr class="line">
         <li *ngFor="let skill of skills">
             <input class="skillInputButton" type="button" [value]="skill">
-            <img class="skillDeleteButton" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="delete" (click)="deleteSkillElement($event)">
+            <img *ngIf="!userCurrent" class="skillDeleteButton" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="delete" (click)="deleteSkillElement($event)">
         </li>
-        <input [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'"  [(ngModel)]="skill" class="skillInput" type="text" placeholder="e.g. Java ..">
-        <img [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="createSkillButton boderButton smallButton button transition02s" (click)="editToggle()" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
+        <input *ngIf="!userCurrent" [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'"  [(ngModel)]="skill" class="skillInput" type="text" placeholder="e.g. Java ..">
+        <img *ngIf="!userCurrent" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="createSkillButton boderButton smallButton button transition02s" (click)="editToggle()" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
         <br>
         <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle(); saveSkill();">Save</button>
         <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle();">Abort</button>
