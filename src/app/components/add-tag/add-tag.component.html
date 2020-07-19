@@ -9,6 +9,8 @@
   <div *ngIf="show" class="editTags">
     <input [ngClass]="edit?'showBtnTechsdome':'hideBtnTechsdome'" [(ngModel)]="item"
            (keydown.enter)="editToggle(); saveItem(); sendToParent()"
+           (mousedown)="editToggle(); saveItem(); sendToParent()"
+           (focusout)="editToggle(); saveItem(); sendToParent()"
            (keydown.space)="editToggle(); saveItem(); sendToParent()" class="itemInput" type="text"
            [placeholder]="placeholder" #myinput> {{ myinput.focus() }}
     <img [ngClass]="edit?'hideBtnTechsdome':'showBtnTechsdome'"

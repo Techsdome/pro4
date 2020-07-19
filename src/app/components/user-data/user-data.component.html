@@ -28,18 +28,26 @@
         <p>{{job}}</p>
 
         <br>
-        <app-inputfield [searchedUser]="this.userCurrent"></app-inputfield>
+        <app-inputfield [searchedUser]="this.searchedUser"></app-inputfield>
     </div>
     <div class="vertical-line line"></div>
     <div id="skills-container">
         <h2>Skills</h2>
         <hr class="line">
         <li *ngFor="let skill of skills">
+<!--
             <input *ngIf="!userCurrent" class="skillInputButton" type="button" [value]="skill">
             <img *ngIf="!userCurrent" class="skillDeleteButton" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="delete" (click)="deleteSkillElement($event)">
         </li>
         <input *ngIf="!userCurrent" [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'"  [(ngModel)]="skill" class="skillInput" type="text" placeholder="e.g. Java ..">
         <img *ngIf="!userCurrent" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="createSkillButton boderButton smallButton button transition02s" (click)="editToggle()" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
+
+-->
+            <input class="skillInputButton" type="button" [value]="skill">
+            <img *ngIf="!searchedUser" class="skillDeleteButton" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="delete" (click)="deleteSkillElement($event)">
+        </li>
+        <input *ngIf="!searchedUser" [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" [(ngModel)]="skill" class="skillInput" type="text" placeholder="e.g. Java ..">
+        <img *ngIf="!searchedUser" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="createSkillButton boderButton smallButton button transition02s" (click)="editToggle()" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
         <br>
         <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle(); saveSkill();">Save</button>
         <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle();">Abort</button>

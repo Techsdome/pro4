@@ -24,7 +24,7 @@ export class UserDataComponent implements OnInit {
   htmlSkillElements: HTMLCollection;
   displayName: string;
 
-  @Input() userCurrent: any;                          // The searched User of search bar
+  @Input() searchedUser: any;                          // The searched User of search bar
 
 
 //    this.afs.collection('users').doc(this.userData.uid).update({});
@@ -84,8 +84,8 @@ export class UserDataComponent implements OnInit {
   ngOnInit(): void {
     this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
 
-    if (this.userCurrent) {
-      this.user = this.userCurrent;
+    if (this.searchedUser) {
+      this.user = this.searchedUser;
     } else {
       this.dataService.getCurrentUser().subscribe(user => {
         this.user = user;
