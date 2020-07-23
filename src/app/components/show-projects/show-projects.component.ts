@@ -21,11 +21,11 @@ export class ShowProjectsComponent implements OnInit {
     allComments: {}[];
     showCommentSection = false;
     commentsLenght: number;
-    postId: string;
     posts: any[] = [];
 
     activeMenu: string;
     filter: boolean;
+    likes: number;
 
 
     constructor(public authservice: AuthService, private postService: PostsService) {
@@ -58,7 +58,7 @@ export class ShowProjectsComponent implements OnInit {
         this.authservice.getCurrentUser().subscribe((result) => {
             this.authservice.afs.collection('users').doc(result.uid).valueChanges()
                 .subscribe((val: any) => {
-                    this.authservice.afs.doc(`mainFeed/allPosts/post/${this.postId}`).collection('comments').add({
+                    this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
                         comment: this.comment,
                         commentName: val.firstname + val.lastname
                     });
@@ -67,16 +67,30 @@ export class ShowProjectsComponent implements OnInit {
         });
     }
 
+    updateLikes(): void {
+        this.likes++;
+        this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).update({
+            likes: this.likes
+        });
+    }
+
     ngOnInit(): void {
         this.activeMenu = '';
         this.changeMenuItem(this.activeMenu);
+
+
+        this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).valueChanges().subscribe((values: any) => {
+            this.likes = values.likes;
+            console.log(this.likes);
+
+        });
+
 
         this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).valueChanges()
             .subscribe((comment) => {
                 this.commentsLenght = comment.length;
                 comment.forEach(cmt => {
                     this.comments.push(cmt);
-                    console.log(cmt)
                 });
             });
     }
