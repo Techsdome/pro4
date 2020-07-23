@@ -44,13 +44,12 @@
                 <section id="comment-section" [ngClass]= "showCommentSection?'showBtnTechsdome':'hideBtnTechsdome'">
                   <hr>
                       <ul>
-
                           <li *ngFor="let comment of comments">
                               <p><strong>{{comment.commentName}}</strong>: {{comment.comment}}</p>
                           </li>
                       </ul>
                       <input class="roundInputField" id="comment" type="text" [(ngModel)]= "comment">
-                      <button class="boderButton" (click)="addComment()">Save comment</button>
+                      <button class="boderButton commentButton" (click)="addComment()">Save</button>
                 </section>
             </div>
       </div>
