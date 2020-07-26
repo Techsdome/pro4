@@ -28,7 +28,8 @@ const routes: Routes = [
     {path: 'verify-email-address', component: VerifyEmailComponent},
     {path: 'project-page', component: ProjectPageComponent},
     {path: 'new-project', component: NewProjectComponent},
-    {path: 'app-user-profile', component: UserProfileComponent, runGuardsAndResolvers: 'always'},
+    {path: 'app-user-profile/:user', component: UserProfileComponent},
+    //{path: 'app-user-profile/:user', component: UserProfileComponent, runGuardsAndResolvers: 'always'},
     {path: 'app-settings', component: SettingsComponent},
     {path: 'app-settings-profile', component: SettingsProfileComponent},
     {path: 'app-settings-security', component: SettingsSecurityComponent},
@@ -55,7 +56,7 @@ const routes: Routes = [
 
       // Let's enable tracing so that we can see the aforementioned Navigation
       // Events when the fragment is clicked.
-      enableTracing: true,
+      enableTracing: false,
       scrollPositionRestoration: 'enabled'
     })],
     exports: [RouterModule]
