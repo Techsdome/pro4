@@ -9,6 +9,10 @@
   width: 80%;
 }
 
+.commentButton{
+  padding: 0 10px !important;
+}
+
 .standardBackgroundColor {
   background-color: #f3f5f7;
 }

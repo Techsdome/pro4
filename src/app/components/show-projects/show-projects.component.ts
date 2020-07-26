@@ -7,85 +7,99 @@ import {Posts} from '../../shared/services/posts';
 import {PostsService} from '../../services/posts.service';
 
 @Component({
-  selector: 'app-show-projects',
-  templateUrl: './show-projects.component.html',
-  styleUrls: ['./show-projects.component.css']
+    selector: 'app-show-projects',
+    templateUrl: './show-projects.component.html',
+    styleUrls: ['./show-projects.component.css']
 })
 export class ShowProjectsComponent implements OnInit {
 
-  @Input() allPostsObject: Posts;
-  user: any;
-  comments: any[] = [];
-  edit = false;
-  comment: string;
-  allComments: {}[];
-  showCommentSection = false;
-  commentsLenght: number;
-  postId: string;
-  posts: any[] = [];
+    @Input() allPostsObject: Posts;
+    user: any;
+    comments: any[] = [];
+    edit = false;
+    comment: string;
+    allComments: {}[];
+    showCommentSection = false;
+    commentsLenght: number;
+    posts: any[] = [];
 
-  activeMenu: string;
-  filter: boolean;
+    activeMenu: string;
+    filter: boolean;
+    likes: number;
 
 
-  constructor(public authservice: AuthService, private postService: PostsService) {
-  }
+    constructor(public authservice: AuthService, private postService: PostsService) {
+    }
 
-  openCommentSection() {
-    this.showCommentSection = !this.showCommentSection;
-  }
+    openCommentSection() {
+        this.showCommentSection = !this.showCommentSection;
+    }
 
-  openComment() {
-    this.edit = !this.edit;
-    this.showCommentSection = !this.showCommentSection;
-  }
+    openComment() {
+        this.edit = !this.edit;
+        this.showCommentSection = !this.showCommentSection;
+    }
 
-  /*
-      addComment() {
-          this.authservice.getCurrentUser().subscribe((result) => {
-              this.authservice.afs.collection('users').doc(result.uid).valueChanges()
-                  .subscribe((val: any) => {
-                      this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
-                          comment: this.comment,
-                          commentName: val.firstname + val.lastname
-                      });
-                      this.comments = [];
-                  });
-          })
-      }*/
+    /*
+        addComment() {
+            this.authservice.getCurrentUser().subscribe((result) => {
+                this.authservice.afs.collection('users').doc(result.uid).valueChanges()
+                    .subscribe((val: any) => {
+                        this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
+                            comment: this.comment,
+                            commentName: val.firstname + val.lastname
+                        });
+                        this.comments = [];
+                    });
+            })
+        }*/
 
-  addComment() {
-    this.authservice.getCurrentUser().subscribe((result) => {
-      this.authservice.afs.collection('users').doc(result.uid).valueChanges()
-        .subscribe((val: any) => {
-          this.authservice.afs.doc(`mainFeed/allPosts/post/${this.postId}`).collection('comments').add({
-            comment: this.comment,
-            commentName: val.firstname + val.lastname
-          });
-          this.comment = '';
+    addComment() {
+        this.authservice.getCurrentUser().subscribe((result) => {
+            this.authservice.afs.collection('users').doc(result.uid).valueChanges()
+                .subscribe((val: any) => {
+                    this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
+                        comment: this.comment,
+                        commentName: val.firstname + val.lastname
+                    });
+                    this.comment = '';
+                });
         });
-    });
-  }
+    }
 
-  ngOnInit(): void {
-    this.activeMenu = '';
-    this.changeMenuItem(this.activeMenu);
-
-    this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).valueChanges()
-      .subscribe((comment) => {
-        this.commentsLenght = comment.length;
-        comment.forEach(cmt => {
-          this.comments.push(cmt);
-          console.log(cmt)
+    updateLikes(): void {
+        this.likes++;
+        this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).update({
+            likes: this.likes
         });
-      });
-  }
+    }
 
-  toggle() {
-    this.filter = !this.filter;
-  }
+    ngOnInit(): void {
+        this.activeMenu = '';
+        this.changeMenuItem(this.activeMenu);
 
-  changeMenuItem(event) {
-    this.posts = this.postService.getPosts(event);
-  }
+
+        this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).valueChanges().subscribe((values: any) => {
+            this.likes = values.likes;
+            console.log(this.likes);
+
+        });
+
+
+        this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).valueChanges()
+            .subscribe((comment) => {
+                this.commentsLenght = comment.length;
+                comment.forEach(cmt => {
+                    this.comments.push(cmt);
+                });
+            });
+    }
+
+    toggle() {
+        this.filter = !this.filter;
+    }
+
+    changeMenuItem(event) {
+        this.posts = this.postService.getPosts(event);
+    }
 }

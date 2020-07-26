@@ -2,6 +2,9 @@
 <div id="all-posts-container">
     <app-user-data [searchedUser]="userObject"></app-user-data>
     <div id="user-profile-posts-container">
-      <app-show-post [searchedUser]="this.userObject"></app-show-post>
+      <!--<app-show-post [searchedUser]="this.userObject"></app-show-post>-->
+
+      <app-show-projects *ngFor="let post of posts" [allPostsObject]="post"></app-show-projects>
+
     </div>
 </div>
