@@ -1,11 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
-import {take} from 'rxjs/operators';
-import * as path from 'path';
-import * as firebase from 'firebase';
-import {Project} from '../../models/Project';
-import Timestamp = firebase.firestore.Timestamp;
-import {Posts} from '../../shared/services/posts';
 import {PostsService} from '../../services/posts.service';
 
 
@@ -19,17 +13,8 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
   posts: any[];
   photoURL: string;
   edit = false;
-  postLenght: any;
-
   postId: string;
-  projectObject: Posts;
-
   activeMenu: string;
-
-  commentObject = {
-    commentName: '',
-    comment: ''
-  };
 
   constructor(public authservice: AuthService, private postService: PostsService) {
   }
@@ -41,6 +26,8 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
   }
 
   changeMenuItem(event) {
+    this.posts = [];
     this.posts = this.postService.getPosts(event);
+    console.log(this.posts);
   }
 }
