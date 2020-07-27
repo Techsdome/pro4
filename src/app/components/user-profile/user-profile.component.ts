@@ -92,7 +92,8 @@ export class UserProfileComponent implements OnInit {
                                         commentName: '',
                                         comment: ''
                                     }
-                                ]
+                                ],
+                                likes: value.likes
                             };
                             if (this.authservice.userData.uid === theuserid) {
                                 this.posts.push(this.projectObject);
