@@ -1,8 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
+import {ActivatedRoute, Route} from '@angular/router';
+import * as admin from 'firebase-admin';
+import * as firebase from 'firebase';
+import {AngularFirestore} from "angularfire2/firestore";
 
 
 @Component({
@@ -10,7 +14,7 @@ import {AuthService} from '../../shared/services/auth.service';
   templateUrl: './user-data.component.html',
   styleUrls: ['./user-data.component.css']
 })
-export class UserDataComponent implements OnInit {
+export class UserDataComponent implements OnInit, OnDestroy {
   items: Item[];
   user: User;
   job: string;
@@ -25,11 +29,16 @@ export class UserDataComponent implements OnInit {
   displayName: string;
 
   @Input() searchedUser: any;                          // The searched User of search bar
+  private sub: any;
+  searchedUserId;
 
+  constructor(private dataService: DataServiceService,
+              private authService: AuthService,
+              private route: ActivatedRoute,
+              private afs: AngularFirestore) {
+    const id: string = route.snapshot.params.user;
 
-//    this.afs.collection('users').doc(this.userData.uid).update({});
-
-  constructor(private dataService: DataServiceService, private authService: AuthService) {
+    //console.log(id);
   }
 
   editToggle() {
@@ -82,6 +91,14 @@ export class UserDataComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.sub = this.route.params.subscribe(params => {
+      this.searchedUserId = params.user;
+
+      this.authService.afs.collection('users').doc(this.searchedUserId).valueChanges().subscribe((val) => {
+        console.log(val);
+      });
+      });
+
     this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
 
     if (this.searchedUser) {
@@ -98,4 +115,9 @@ export class UserDataComponent implements OnInit {
     });
 
   }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }
+
