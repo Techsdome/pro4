@@ -62,6 +62,7 @@ export class UserDataComponent implements OnInit, OnDestroy {
     }
   }
 
+
   saveSkill() {
     if (this.skills === undefined) {
       this.skills = [];
@@ -97,7 +98,7 @@ export class UserDataComponent implements OnInit, OnDestroy {
       this.authService.afs.collection('users').doc(this.searchedUserId).valueChanges().subscribe((val) => {
         console.log(val);
       });
-      });
+    });
 
     this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
 
