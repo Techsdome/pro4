@@ -37,7 +37,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeMenu = '';
-   //this.changeMenuItem(this.activeMenu);
+    this.changeMenuItem(this.activeMenu);
 
     this.authservice.afs.collection('mainFeed').doc('allPosts').collection('post').valueChanges()
       .subscribe((val) => {
@@ -86,6 +86,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
                 projectCategories: value.projectCategories,
                 projectMembers: value.projectMembers,
                 userPhotoURL: photoURL,
+                likes: value.likes,
                 comments: [
                   {
                     commentName: '',

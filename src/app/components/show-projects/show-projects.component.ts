@@ -18,7 +18,6 @@ export class ShowProjectsComponent implements OnInit {
     comments: any[] = [];
     edit = false;
     comment: string;
-    allComments: {}[];
     showCommentSection = false;
     commentsLenght: number;
     posts: any[] = [];
@@ -40,27 +39,13 @@ export class ShowProjectsComponent implements OnInit {
         this.showCommentSection = !this.showCommentSection;
     }
 
-    /*
-        addComment() {
-            this.authservice.getCurrentUser().subscribe((result) => {
-                this.authservice.afs.collection('users').doc(result.uid).valueChanges()
-                    .subscribe((val: any) => {
-                        this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
-                            comment: this.comment,
-                            commentName: val.firstname + val.lastname
-                        });
-                        this.comments = [];
-                    });
-            })
-        }*/
-
     addComment() {
         this.authservice.getCurrentUser().subscribe((result) => {
             this.authservice.afs.collection('users').doc(result.uid).valueChanges()
                 .subscribe((val: any) => {
                     this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
                         comment: this.comment,
-                        commentName: val.firstname + val.lastname
+                        commentName: val.firstname + ' ' + val.lastname
                     });
                     this.comment = '';
                 });
@@ -75,14 +60,10 @@ export class ShowProjectsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.activeMenu = '';
-        this.changeMenuItem(this.activeMenu);
 
 
         this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).valueChanges().subscribe((values: any) => {
             this.likes = values.likes;
-            console.log(this.likes);
-
         });
 
 
@@ -93,6 +74,9 @@ export class ShowProjectsComponent implements OnInit {
                     this.comments.push(cmt);
                 });
             });
+
+        this.activeMenu = '';
+        this.changeMenuItem(this.activeMenu);
     }
 
     toggle() {

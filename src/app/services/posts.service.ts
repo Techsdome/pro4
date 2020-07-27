@@ -7,7 +7,6 @@ import {AuthService} from '../shared/services/auth.service';
   providedIn: 'root'
 })
 export class PostsService {
-  public a = 0;
 
   constructor(public authservice: AuthService) {
   }
@@ -35,7 +34,7 @@ export class PostsService {
             postText = value.projectDescription;
             typeImage = "https://cdn.iconscout.com/icon/premium/png-512-thumb/project-management-2-536854.png";
           }
-          if (value.postType === 'question') {
+          if (value.postType === "question") {
             typeImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png";
           }
 
@@ -63,9 +62,6 @@ export class PostsService {
                 userPhotoURL: photoURL,
                 likes: value.likes
               };
-              this.a++;
-              console.log(this.a);
-              console.log(value);
               posts.push(projectObject);
               // console.log(this.posts);
             });
