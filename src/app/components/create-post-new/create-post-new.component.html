@@ -1,10 +1,10 @@
 <div>
-     <div id="create-post-form"l>
+     <div id="create-post-form">
         <div id="create-post-inner">
             <mat-tab-group >
                 <mat-tab label="Post">
                     <br>
-                     <div id="create-post-header flex">
+                     <div class="create-post-header flex">
                         <h5>Create a new post</h5>
                     </div>
                     <quill-editor [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
@@ -16,7 +16,7 @@
 
                 <mat-tab label="Question">
                     <br>
-                    <div id="create-post-header flex">
+                    <div class="create-post-header flex">
                         <h5>Ask a question</h5>
                     </div>
                     <quill-editor [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)" [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>

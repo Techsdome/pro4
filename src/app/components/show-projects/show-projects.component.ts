@@ -72,16 +72,9 @@ export class ShowProjectsComponent implements OnInit {
           this.comments.push(cmt);
         });
       });
-
-    //this.activeMenu = '';
-    //this.changeMenuItem(this.activeMenu);
   }
 
   toggle() {
     this.filter = !this.filter;
-  }
-
-  changeMenuItem(event) {
-    //this.posts = this.postService.getPosts(event);
   }
 }

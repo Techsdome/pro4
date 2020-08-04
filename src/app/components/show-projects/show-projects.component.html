@@ -1,7 +1,3 @@
-<!--
-<app-profile-menu (activeMenuItemChange)="changeMenuItem($event)" [activeMenuItem]="this.activeMenu"></app-profile-menu>
--->
-
 <div class="post-container">
   <img [src]="allPostsObject.userPhotoURL" alt="profil picture" class="small-profile-picture image-shadow">
   <div class="row projectpost">
@@ -48,7 +44,7 @@
                               <p><strong>{{comment.commentName}}</strong>: {{comment.comment}}</p>
                           </li>
                       </ul>
-                      <input class="roundInputField" id="comment" type="text" [(ngModel)]= "comment">
+                      <input class="roundInputField" class="comment" type="text" [(ngModel)]= "comment">
                       <button class="boderButton commentButton" (click)="addComment()">Save</button>
                 </section>
             </div>

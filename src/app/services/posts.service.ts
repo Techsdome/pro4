@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import Timestamp = firebase.firestore.Timestamp;
 import * as firebase from 'firebase';
 import {AuthService} from '../shared/services/auth.service';
-import {Posts} from "../shared/services/posts";
 
 @Injectable({
   providedIn: 'root'
@@ -12,36 +11,31 @@ export class PostsService {
   constructor(public authservice: AuthService) {
   }
 
-
-  projectObject: Posts;
-  postId: string;
-
   getPosts(filter?: string) {
     const posts = [];
-
     this.authservice.afs.collection('mainFeed').doc('allPosts').collection('post').valueChanges()
       .subscribe((val) => {
+        //const parray = val as Project[];
         const parray = filter ? val.filter(value => value.postType === filter) : val;
-
         parray.forEach((value) => {
-          this.postId = value.postId;
+          const postId = value.postId;
+          //console.log(postId);
           let mytime = new Date();
           let theuserid = value.uid;
           let username = value.displayName;
           let photoURL = '';
           let postText = value.post;
-          let type = value.postType;
-          let typeImage = 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png';
-          if (value.postType === 'project') {
+          let typeImage = "https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png";
+          if (value.postType === "project") {
             mytime = ((value.projectTimeStamp) as unknown as Timestamp).toDate();
             theuserid = value.uid;
             username = '';
             photoURL = '';
             postText = value.projectDescription;
-            typeImage = 'https://cdn.iconscout.com/icon/premium/png-512-thumb/project-management-2-536854.png';
+            typeImage = "https://cdn.iconscout.com/icon/premium/png-512-thumb/project-management-2-536854.png";
           }
-          if (value.postType === 'question') {
-            typeImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png';
+          if (value.postType === "question") {
+            typeImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png";
           }
 
 
@@ -54,8 +48,8 @@ export class PostsService {
               }
             })
             .then(() => {
-              this.projectObject = {
-                type: type,
+              const projectObject = {
+                type: value.type,
                 typeImage: typeImage,
                 postDate: mytime,
                 postText: postText,
@@ -75,7 +69,7 @@ export class PostsService {
                   }
                 ]
               };
-              posts.push(this.projectObject);
+              posts.push(projectObject);
             });
         });
       });

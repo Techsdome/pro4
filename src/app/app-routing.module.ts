@@ -29,7 +29,6 @@ const routes: Routes = [
     {path: 'project-page', component: ProjectPageComponent},
     {path: 'new-project', component: NewProjectComponent},
     {path: 'app-user-profile/:user', component: UserProfileComponent},
-    //{path: 'app-user-profile/:user', component: UserProfileComponent, runGuardsAndResolvers: 'always'},
     {path: 'app-settings', component: SettingsComponent},
     {path: 'app-settings-profile', component: SettingsProfileComponent},
     {path: 'app-settings-security', component: SettingsSecurityComponent},

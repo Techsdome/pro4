@@ -22,6 +22,7 @@ export class UserDataComponent implements OnInit, OnDestroy {
   skills: string[];
   firstname: string;
   lastname: string;
+  email: string;
   photoURL = '';
   edit = false;
   skill: string;
@@ -55,11 +56,12 @@ export class UserDataComponent implements OnInit, OnDestroy {
         this.lastname = item[it].lastname;
         this.photoURL = item[it].photoURL;
         this.displayName = item[it].displayName;
+        this.email = item[it].email;
       }
     }
-    if (this.firstname) {
+    /*if (this.firstname) {
       this.displayName = this.firstname;
-    }
+    }*/
   }
 
 
@@ -96,9 +98,26 @@ export class UserDataComponent implements OnInit, OnDestroy {
       this.searchedUserId = params.user;
 
       this.authService.afs.collection('users').doc(this.searchedUserId).valueChanges().subscribe((val) => {
-        console.log(val);
+        // @ts-ignore
+        this.job = val.job;
+        // @ts-ignore
+        this.description = val.description;
+        // @ts-ignore
+        this.skills = val.skills;
+        // @ts-ignore
+        this.firstname = val.firstname;
+        // @ts-ignore
+        this.lastname = val.lastname;
+        // @ts-ignore
+        this.photoURL = val.photoURL;
+        // @ts-ignore
+        this.displayName = val.displayName;
+        // @ts-ignore
+        this.email = val.email;
       });
     });
+
+
 
     this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
 
