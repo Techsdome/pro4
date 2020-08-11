@@ -28,7 +28,7 @@ const routes: Routes = [
     {path: 'verify-email-address', component: VerifyEmailComponent},
     {path: 'project-page', component: ProjectPageComponent},
     {path: 'new-project', component: NewProjectComponent},
-    {path: 'app-user-profile', component: UserProfileComponent, runGuardsAndResolvers: 'always'},
+    {path: 'app-user-profile/:user', component: UserProfileComponent},
     {path: 'app-settings', component: SettingsComponent},
     {path: 'app-settings-profile', component: SettingsProfileComponent},
     {path: 'app-settings-security', component: SettingsSecurityComponent},

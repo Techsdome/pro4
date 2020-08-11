@@ -49,20 +49,27 @@ export class PostsService {
             })
             .then(() => {
               const projectObject = {
+                type: value.type,
                 typeImage: typeImage,
                 postDate: mytime,
                 postText: postText,
-                postId: value.projectId,
+                postId: value.postId,
                 displayName: username ? username : 'Anonym',
                 projectName: value.projectName,
                 projectBanner: value.projectBanner,
                 projectId: value.projectId,
                 projectCategories: value.projectCategories,
                 projectMembers: value.projectMembers,
-                userPhotoURL: photoURL
+                userPhotoURL: photoURL,
+                likes: value.likes,
+                comments: [
+                  {
+                    commentName: '',
+                    comment: ''
+                  }
+                ]
               };
               posts.push(projectObject);
-              // console.log(this.posts);
             });
         });
       });

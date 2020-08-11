@@ -10,8 +10,7 @@
          [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let offset of results | async" [value]="offset.displayName">
-        <img class="example-option-img rounded" aria-hidden [src]="offset.photoURL" height="25">
-        <a [routerLink]="['/app-user-profile']" [state]="{data: offset}"><small>   {{ offset.displayName }}</small></a>
+        <a [routerLink]="['/app-user-profile', offset.uid]" [state]="{data: offset}"><small><img class="example-option-img rounded" [src]="offset.photoURL" height="25" aria-hidden ="true" alt="profile_pic">   {{ offset.displayName }}</small></a>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
@@ -40,7 +39,7 @@
 
     <div id="sidebar-button-container">
       <img [src]="photoURL" class="background-image-settings sidebar-button pro" id="profileButtonSideBar"
-           [routerLink]="['/app-user-profile']" [routerLinkActive]="['active']">
+           [routerLink]="['/app-user-profile', this.userId]" [routerLinkActive]="['active']" alt="profile_pic">
       <span class="link-text prot"><strong>Profile</strong></span>
 
       <div id="plusButton-container" class="plus">

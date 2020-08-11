@@ -7,6 +7,10 @@ ol, ul {
   margin: 0;
 }
 
+#comment-section ul{
+    display: unset;
+}
+
 li {
   padding: 0;
   vertical-align: middle;

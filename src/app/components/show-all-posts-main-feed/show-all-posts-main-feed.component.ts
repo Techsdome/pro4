@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
 import {Project} from '../../models/Project';
 import Timestamp = firebase.firestore.Timestamp;
 import {Posts} from '../../shared/services/posts';
-import {PostsService} from "../../services/posts.service";
+import {PostsService} from '../../services/posts.service';
 
 
 @Component({
@@ -86,6 +86,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
                 projectCategories: value.projectCategories,
                 projectMembers: value.projectMembers,
                 userPhotoURL: photoURL,
+                likes: value.likes,
                 comments: [
                   {
                     commentName: '',
@@ -100,6 +101,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
   }
 
   changeMenuItem(event) {
+    this.posts = [];
     this.posts = this.postService.getPosts(event);
   }
 }

@@ -1,8 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
+import {ActivatedRoute, Route} from '@angular/router';
+import * as admin from 'firebase-admin';
+import * as firebase from 'firebase';
+import {AngularFirestore} from "angularfire2/firestore";
 
 
 @Component({
@@ -10,7 +14,7 @@ import {AuthService} from '../../shared/services/auth.service';
   templateUrl: './user-data.component.html',
   styleUrls: ['./user-data.component.css']
 })
-export class UserDataComponent implements OnInit {
+export class UserDataComponent implements OnInit, OnDestroy {
   items: Item[];
   user: User;
   job: string;
@@ -18,18 +22,24 @@ export class UserDataComponent implements OnInit {
   skills: string[];
   firstname: string;
   lastname: string;
+  email: string;
   photoURL = '';
   edit = false;
   skill: string;
   htmlSkillElements: HTMLCollection;
   displayName: string;
 
-  @Input() userCurrent: any;                          // The searched User of search bar
+  @Input() searchedUser: any;                          // The searched User of search bar
+  private sub: any;
+  searchedUserId;
 
+  constructor(private dataService: DataServiceService,
+              private authService: AuthService,
+              private route: ActivatedRoute,
+              private afs: AngularFirestore) {
+    const id: string = route.snapshot.params.user;
 
-//    this.afs.collection('users').doc(this.userData.uid).update({});
-
-  constructor(private dataService: DataServiceService, private authService: AuthService) {
+    //console.log(id);
   }
 
   editToggle() {
@@ -46,12 +56,14 @@ export class UserDataComponent implements OnInit {
         this.lastname = item[it].lastname;
         this.photoURL = item[it].photoURL;
         this.displayName = item[it].displayName;
+        this.email = item[it].email;
       }
     }
-    if (this.firstname) {
+    /*if (this.firstname) {
       this.displayName = this.firstname;
-    }
+    }*/
   }
+
 
   saveSkill() {
     if (this.skills === undefined) {
@@ -82,10 +94,35 @@ export class UserDataComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.sub = this.route.params.subscribe(params => {
+      this.searchedUserId = params.user;
+
+      this.authService.afs.collection('users').doc(this.searchedUserId).valueChanges().subscribe((val) => {
+        // @ts-ignore
+        this.job = val.job;
+        // @ts-ignore
+        this.description = val.description;
+        // @ts-ignore
+        this.skills = val.skills;
+        // @ts-ignore
+        this.firstname = val.firstname;
+        // @ts-ignore
+        this.lastname = val.lastname;
+        // @ts-ignore
+        this.photoURL = val.photoURL;
+        // @ts-ignore
+        this.displayName = val.displayName;
+        // @ts-ignore
+        this.email = val.email;
+      });
+    });
+
+
+
     this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
 
-    if (this.userCurrent) {
-      this.user = this.userCurrent;
+    if (this.searchedUser) {
+      this.user = this.searchedUser;
     } else {
       this.dataService.getCurrentUser().subscribe(user => {
         this.user = user;
@@ -98,4 +135,9 @@ export class UserDataComponent implements OnInit {
     });
 
   }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }
+

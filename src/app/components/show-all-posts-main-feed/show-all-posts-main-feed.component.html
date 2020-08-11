@@ -1,15 +1,3 @@
-<!--
-<app-general-post *ngFor="let post of posts"
-[postMessage] = 'post.postText'
-[postDate] = 'post.postDate'
-[postHour] = 'post.postHour'
-[postMinute] = 'post.postMinutes'
-[postSecond] = 'post.postSecond'
-[postDisplayName] = 'post.displayName'
-[postPhotoUrl] = 'post.photoURL'
-[postId] = 'post.postId'
-[postType] = 'post.postType'></app-general-post>
--->
 <app-profile-menu (activeMenuItemChange)="changeMenuItem($event)" [activeMenuItem]="this.activeMenu"></app-profile-menu>
 
 <app-show-projects *ngFor="let post of posts" [allPostsObject]="post"></app-show-projects>
