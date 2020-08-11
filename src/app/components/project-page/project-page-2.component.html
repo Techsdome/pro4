@@ -4,8 +4,20 @@
     <div class="container-fluid" id="project-container">
       <div class="row" id="banner">
         <div class="col image" id="banner-picture">
-<!--          <img id="banner-pic" [src]="project? project.projectBanner : '../../../assets/Project/20180726_Budapest_23.jpg'" height="359"-->
-<!--               alt="ProjectBanner" width="1920"/>-->
+          <div id="edit-banner-container" class="btn-group dropup">
+            <button *ngIf="editMode" type="button"
+                    class="boderButton standard-background-color edit-banner-button dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Edit banner picture
+            </button>
+            <ul id="edit-banner" class="dropdown-menu">
+              <li>
+                <app-upload-image class="col-6 photo-upload-comp" [addButton]="'Add banner'"
+                                  (childMessage)="getBannerFile($event)"></app-upload-image>
+              </li>
+              <li (click)="repositionBanner()"> Reposition</li>
+            </ul>
+          </div>
         </div>
       </div>
       <div id="content" class="row">
@@ -60,15 +72,7 @@
                         (change)="pushValue('projectDescription', tmpDescription)"> {{ project.projectDescription }} </textarea>
 
               <p *ngIf="!editMode"
-                 innerHTML="{{ project.projectDescription }}">{{ project ? project.projectDescription : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, " +
-                "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
-                "At vero eos et saccusam et justo duo dolores et ea rebum." +
-                "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet," +
-                "consetetur sadipscing elitr, sed df diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam" +
-                " erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata" +
-                "sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam" +
-                "nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et" +
-                "justo duo dolores et ea rebum.Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."}} </p>
+                 innerHTML="{{ project.projectDescription }}">{{ project.projectDescription}} </p>
             </div>
 
             <div class="shadow-sm align-self-end flex-nowrap col-4" id="info-panel">
@@ -95,16 +99,6 @@
                     </h6>
                   </div>
                   <div class="addMember align-content-end" *ngIf="editMode">
-                    <!--                    <svg class="bi bi-plus-circle addPicture align-self-center" width="1em" height="1em"-->
-                    <!--                         viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">-->
-                    <!--                      <path fill-rule="evenodd"-->
-                    <!--                            d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z"-->
-                    <!--                            clip-rule="evenodd"/>-->
-                    <!--                      <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z"-->
-                    <!--                            clip-rule="evenodd"/>-->
-                    <!--                      <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"-->
-                    <!--                            clip-rule="evenodd"/>-->
-                    <!--                    </svg>-->
                     <input type="text" name="pmember" id="pmember" class="form-control addMemberInput"
                            placeholder="Add member" [(ngModel)]="tmpMemberName" (change)="addMember(tmpMemberName)">
                   </div>
@@ -113,9 +107,6 @@
               <div id="tags" class="col-12">
                 <h3> Tags </h3>
                 <div class="row">
-                  <!--                  <div *ngFor="let tag of project.projectCategories" class="myTag">-->
-                  <!--                    <div class="itemInputButton"><p> {{ tag }} </p></div>-->
-                  <!--                  </div>-->
                   <app-add-tag class="addTag" [itemsList]="this.project.projectCategories"
                                (childMessage)="tmpTags.push($event)" [show]="editMode"></app-add-tag>
                 </div>
@@ -138,11 +129,12 @@
               </button>
               <div class="gallery-pictures col-12" [class]="editMode? 'editPictures' : '' ">
                 <img class="g-pictures" alt="project pic"
-                     [src]="picture">
+                     [src]="picture"
+                      (click)="openImage(picture)">
               </div>
             </div>
             <div *ngIf="editMode" class="col-2 addPictureContainer align-self-center">
-              <app-uploader class="uploader"></app-uploader>
+              <app-uploader (childMessage)="getImagesFiles($event)" class="uploader"></app-uploader>
             </div>
           </div>
           <div class="row SaveProjectButton text-right">

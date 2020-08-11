@@ -25,12 +25,8 @@ body {
 #banner-picture {
   padding: 0;
   height: 190px;
+  justify-content: end;
 }
-
-/*#banner-picture img {*/
-/*  max-width: 100%;*/
-/*  height: auto*/
-/*}*/
 
 #content {
   padding: 40px;
@@ -184,7 +180,7 @@ p {
 #gallery img:hover {
   margin-left: -5px;
   width: 120%;
-  height: 120%;
+  height: auto;
 }
 
 .addMember {
@@ -211,9 +207,48 @@ p {
   margin-top: 82%;
 }
 
+#edit-banner {
+  position: absolute;
+  top: -146px;
+  left: 12px;
+  background-color: #f3f5f7;
+  padding: 10px 20px;
+}
+
+#edit-banner-container {
+  position: relative;
+  height: 0;
+  width: 100%;
+}
+
+#edit-banner li {
+  padding: 5px 0 10px 0;
+  cursor: pointer;
+}
+
+#edit-banner li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#edit-banner li:last-child {
+  border-top: 1px solid #99797979;
+  padding: 10px 0 5px 0;;
+}
+
+.edit-banner-button {
+  background-color: #f3f5f7;
+  position: relative;
+  top: 130px;
+  left: 82.8%;
+  padding: 3px 15px;
+  z-index: 1;
+  height: max-content;
+}
+
 #gallery img {
   width: 110%;
-  height: 110%;
+  height: auto;
+
 }
 
 .gallery-pictures {

@@ -31,6 +31,18 @@ export class UploadTaskComponent implements OnInit {
               public authService: AuthService) {
   }
 
+  setPath(path: string) {
+    this.path = path;
+  }
+
+  setProjectID(id) {
+    this.projectID = id;
+  }
+
+  setFileToUpload(file) {
+    this.file = file;
+  }
+
   ngOnInit() {
     this.startUpload();
   }
@@ -48,22 +60,20 @@ export class UploadTaskComponent implements OnInit {
       const uid = this.authService.userData.uid;
       const date = new Date();
       const today = `${date.getFullYear()}${date.getMonth()}${date.getDate()}|${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-      const URL = `project/${uid}/${this.projectID}/images/${today}_${this.file.name}`;
+
+      if (!this.path) {
+        this.path = `project/${uid}/${this.projectID}/images/${today}_${this.file.name}`;
+      }
 
       // Reference to storage bucket
-      const ref = this.storage.ref(URL);
+      const ref = this.storage.ref(this.path);
 
       // The main task
-      this.task = this.storage.upload(URL, this.file);
+      this.task = this.storage.upload(this.path, this.file);
       return this.task.snapshotChanges().pipe(
         // The file's download URL
         finalize(() => {
           this.downloadURL = ref.getDownloadURL().toPromise();
-
-          // this.db.collection('posts').doc().update({ downloadURL: this.downloadURL, path });
-          // this.authService.afs.collection('users').doc(this.user.uid).set({
-          //
-          // });
         }),
       ).toPromise();
     }

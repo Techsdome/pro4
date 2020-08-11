@@ -1,0 +1,18 @@
+/* modal window */
+.modal-body, .modal-body #modal-body-div {
+  padding: 0;
+}
+
+.modal-body {
+  height: 800px;
+}
+
+.modal-body #modal-body-div{
+  height: 100%;
+  text-align: center;
+}
+
+img {
+  align-self: center;
+  justify-self: center;
+}

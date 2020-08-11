@@ -431,6 +431,7 @@ body::-webkit-scrollbar-thumb {
 }
 .photoResults p {
   font-size: 10pt;
+  margin: 0;
 }
 
 .myButtons {
@@ -441,6 +442,7 @@ body::-webkit-scrollbar-thumb {
   margin: 0;
   padding: 0;
   width: 100%;
+  align-items: center;
 }
 
 .filename:hover {
@@ -448,9 +450,32 @@ body::-webkit-scrollbar-thumb {
   white-space: normal;
 }
 
+.visible {
+  display: inline-block !important;
+}
 
-#newproject .photoRemove {
+.photoRemove {
   margin: 0;
+  padding: 0 4px;
+}
+
+#edit-banner li .photo-upload-comp .myImg .myButtons button {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+#edit-banner li .photo-upload-comp .myImg .myButtons button:hover {
+  background-color: unset;
+}
+
+#edit-banner li .photo-upload-comp, #edit-banner li .photo-upload-comp .myImg .myButtons {
+  padding: 0;
+  margin: 0 !important;
+}
+
+#edit-banner li .photo-upload-comp .myImg .photoResults {
+  display: none !important;
 }
 
 .hidden-file {
@@ -502,4 +527,15 @@ body::-webkit-scrollbar-thumb {
 #contributors {
   padding-left: 20px !important;
   margin-bottom: 10px !important;
+}
+
+
+/* custom modal window for displaying images */
+.modal-customclass .modal-dialog .modal-content {
+  background-color: transparent !important;
+  box-shadow: unset !important;
+}
+
+.modal-customclass .modal-dialog {
+  width: max-content;
 }

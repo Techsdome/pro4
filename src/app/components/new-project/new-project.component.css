@@ -1,19 +1,35 @@
-#newproject {
-
-}
 .photoResults {
   margin: 10px;
   padding: 0;
 }
 
 #photoUpload {
-  margin-bottom: 10px;
+  margin: 5px;
+}
+
+.photo-upload-comp {
+  padding: 0;
 }
 
 .mat-tab-label {
   min-width: 33% !important;
   padding: 5px;
   background-color: transparent;
+}
+
+.visible {
+  display: inline-block;
+}
+
+.save-project-container {
+  margin: 0;
+  padding: 0;
+  justify-content: end;
+}
+
+.saving-project {
+  margin-right: 10px;
+  display: none;
 }
 
 /* Styles for the active tab label */

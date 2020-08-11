@@ -66,6 +66,7 @@ import {CreatePostNewComponent} from './components/create-post-new/create-post-n
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from "@angular/material/card";
+import { ImageModalComponent } from './components/image-modal/image-modal.component';
 
 
 @NgModule({
@@ -104,7 +105,8 @@ import {MatCardModule} from "@angular/material/card";
         UploadImageComponent,
         UploadImagesComponent,
         NewQuestionComponent,
-        CreatePostNewComponent
+        CreatePostNewComponent,
+        ImageModalComponent
     ],
   imports: [
     MatTabsModule,

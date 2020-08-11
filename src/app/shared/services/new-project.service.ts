@@ -56,7 +56,7 @@ export class NewProjectService {
           username = val.displayName ? val.displayName : val.lastname + ' ' + val.firstname;
 
           this.authService.afs.doc('mainFeed/allPosts').collection('post').doc(this.projectID).set({
-            post: pdescription,
+            post: pdescription ? pdescription : '',
             date: date.toLocaleDateString(),
             day: date.getUTCDate(),
             month: (date.getUTCMonth() + 1),
@@ -68,9 +68,9 @@ export class NewProjectService {
             photoURL: tempPhotoUrl,
             displayName: username ? username : 'Anonym',
             projectName: pname ? pname : 'Project Alpha',
-            projectDescription: pdescription ? pdescription : 'This is my description',
-            projectCategories: pcategories ? pcategories : ['Default', 'Default2'],
-            projectMembers: members ? members : ['Markus', 'Damir', 'Andrea'],
+            projectDescription: pdescription ? pdescription : '',
+            projectCategories: pcategories ? pcategories : [],
+            projectMembers: members ? members : [],
             projectTimeStamp: firebase.firestore.Timestamp.now(),
             postId: docID,
             postType: 'project'
@@ -84,16 +84,18 @@ export class NewProjectService {
   }
 
   async uploadPictures(bannerURL: string, imageURL: string[]): Promise<any> {
-    // this.bannerURL = bannerURL;
-    // this.imageURL = imageURL;
-
     const photoData = {
-      projectBanner: bannerURL ? bannerURL : './assets/Project/20180726_Budapest_23.jpg',
+      projectBanner: bannerURL ? bannerURL : '',
       projectImages: imageURL ? imageURL : []
     };
 
-    return this.authService.afs.doc('mainFeed/allPosts').collection('post').doc(this.projectID)
-      .update(photoData);
+    const docRef = this.afs.doc(`mainFeed/allPosts/post/${this.projectID}`);
+
+    return docRef.get().toPromise().then((doc) => {
+      if (doc.exists) {
+        return docRef.update(photoData);
+      }
+    });
   }
 
   updateData(id: string, pname ?: string, pdescription ?: string, pcategories ?: string[], pmembers ?: string, photoURL ?: string) {

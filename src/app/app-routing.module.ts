@@ -55,7 +55,7 @@ const routes: Routes = [
 
       // Let's enable tracing so that we can see the aforementioned Navigation
       // Events when the fragment is clicked.
-      enableTracing: true,
+      enableTracing: false,
       scrollPositionRestoration: 'enabled'
     })],
     exports: [RouterModule]

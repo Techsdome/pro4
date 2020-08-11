@@ -43,12 +43,9 @@ export class UploadImageComponent implements OnInit {
 
   public onFileSelected(event: EventEmitter<File[]>) {
     const file: File = event[0];
-    // this.bannerURL = `project/${this.user.uid}/banner/${file.name}`;
-    // this.uploader.queue[0].url = this.bannerURL;
-    // this.URL = this.uploader.queue[0].url;
     this.bannerFile = file;
     this.sendFileToParent();
-    //
+
     // this.task = this.storage.upload(this.bannerURL, file);
     // this.task.snapshotChanges().pipe(
     //   finalize(() => {
@@ -59,7 +56,7 @@ export class UploadImageComponent implements OnInit {
     // ).subscribe();
   }
 
-  sendFileToParent(){
+  sendFileToParent() {
     this.childMessage.emit(this.bannerFile);
   }
 }
