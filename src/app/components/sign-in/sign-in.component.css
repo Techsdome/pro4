@@ -9,7 +9,7 @@ body body.page-top {
   font-family: Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
   position: relative;
   color: #fff;
-  background-color: #000;
+  background-color: #222;
 }
 
 .masthead {
@@ -35,12 +35,27 @@ p {
   font-family: Poppins, sans-serif;
 }
 
-#about_pic {
-  background: url('./assets/img/student.jpg') center no-repeat;
-  background-size: cover;
+#first_teaser {
+  font-weight: initial;
+  color: #fff;
+  background-color: #424242;
 }
 
-#about_pic > img {
+#people_teaser {
+  background-color: #222;
+  /*background: url('./assets/img/student.jpg') center no-repeat;*/
+  /*background-size: cover;*/
+}
+
+#bubbles {
+  margin-top: 20%;
+}
+
+#about {
+  background-color: #222;
+}
+
+#people_teaser > img {
   object-fit: cover;
 }
 
@@ -86,6 +101,10 @@ form > div > label {
 
 .bg-grey {
   background-color: #424242;
+}
+
+#team {
+  margin-top: 30%;
 }
 
 @media (min-width: 1024px) {
@@ -356,7 +375,7 @@ form > div > label {
 .social-icons a:active,.social-icons a:focus,.social-icons a:hover
 {
   color:#fff;
-  background-color:#29aafe
+  background-color:#6C63FF
 }
 .social-icons.size-sm a
 {
@@ -367,15 +386,15 @@ form > div > label {
 }
 .social-icons a.facebook:hover
 {
-  background-color:#3b5998
+  background-color:#6C63FF
 }
 .social-icons a.twitter:hover
 {
-  background-color:#00aced
+  background-color:#6C63FF
 }
 .social-icons a.linkedin:hover
 {
-  background-color:#007bb6
+  background-color:#6C63FF
 }
 
 @media (max-width:767px)
@@ -407,7 +426,7 @@ form > div > label {
 }
 
 .btn.md-btn:active {
-  background: #90b4fc;
+  background: #6C63FF;
   color: #fff;
   border: 0;
   border-radius: 0;
@@ -478,7 +497,7 @@ label.md-input-label {
 }
 
 .btn.md-btn:active {
-  background: #90b4fc;
+  background: #6C63FF;
   color: #fff;
   border: 0;
   border-radius: 0;
@@ -517,6 +536,10 @@ section form {
   /*color: #6C63FF;*/
   background-color: #6C63FF;
   border-color: #FFFFFF;
+}
+
+.navbar-brand {
+  /*margin-left: -7%;*/
 }
 
 #btn_login {
@@ -618,5 +641,86 @@ section form {
   }
   to {
     transform: scale(1) translateX(0%);
+  }
+}
+
+#wanda {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: focus_once 2s ease 1s infinite;
+}
+
+#sandy {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: focus_once 2s ease 2s infinite;
+}
+
+#george {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: focus_once 2s ease 1.5s infinite;
+}
+
+@keyframes focus_once {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.white {
+  color: #fff;
+}
+
+#mainNav {
+  opacity: 50%;
+  background-color: #222;
+}
+
+#lila, #e, #f {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: bubbly 10s linear 1.5s infinite;
+}
+
+#g, #a{
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: dark 10s linear 1.5s infinite;
+}
+
+#dark, #b, #c {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: sec 10s linear 1.5s infinite;
+}
+
+@keyframes bubbly {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes dark {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+}
+
+@keyframes sec {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(50%);
   }
 }
