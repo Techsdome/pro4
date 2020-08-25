@@ -98,7 +98,6 @@ export class NewProjectComponent implements OnInit {
 
         this.bannerRef = `project/${this.user.uid}/${this.projectID}/banner/${today}_${this.bannerFile.name}`;
 
-
         const reader = new FileReader();
         reader.readAsDataURL(this.bannerFile);
         reader.onload = () => {
@@ -130,7 +129,7 @@ export class NewProjectComponent implements OnInit {
         this.imageFiles.forEach((myFile) => {
           if (myFile) {
             const date = new Date();
-            const today = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}}`;
+            const today = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}`;
 
             const URL = `project/${this.user.uid}/${this.projectID}/images/${today}_${myFile.name}`;
             this.task = this.storage.upload(URL, myFile);

@@ -40,15 +40,10 @@
               Share
             </button>
           </div>
-        </div>
-        <div id="description" class="col">
           <div id="menu" class="row">
             <div class="col-6 menupoints">
-              <h2><a href="#">DISCUSSION</a></h2>
-              <h2><a href="#">DESCRIPTION</a></h2>
-              <h2><a href="#">DEVLOG</a></h2>
-              <h2><a href="#">ROADMAP</a></h2>
-              <h2><a href="#">WIKI</a></h2>
+              <h2><a (click)="openDisscusion()">DESCRIPTION</a></h2>
+              <h2><a (click)="openDiscription()">DISCUSSION</a></h2>
             </div>
             <div class="col-6 text-right">
               <button class="editProject boderButton" (click)="editProject()" [class]="isOwner? 'd-inline' : 'd-none'">
@@ -64,6 +59,8 @@
               </button>
             </div>
           </div>
+        </div>
+        <div id="description" class="col" *ngIf="switchComp">
           <div id="info" class="row">
             <div id="text-description" class="col-8">
               <textarea *ngIf="editMode" rows="6" name="pdescription" id="pdescription"
@@ -143,10 +140,22 @@
             </button>
           </div>
         </div>
+        <div id="discussion" class="col" *ngIf="!switchComp">
+          <section id="comment-section">
+            <ul>
+              <li *ngFor="let comment of comments">
+                <p><strong>{{comment.commentName}}</strong>: {{comment.comment}}</p>
+              </li>
+            </ul>
+            <input class="roundInputField comment" type="text" [(ngModel)]= "comment">
+            <button class="boderButton commentButton" (click)="addComment()">Send</button>
+          </section>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 <div *ngIf="!project">
   <h3> Loading... </h3>
 </div>

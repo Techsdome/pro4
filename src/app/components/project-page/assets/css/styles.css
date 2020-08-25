@@ -6,7 +6,7 @@
   background-color: #fff;
   margin: 0;
   padding: 0;
-  height: auto;
+  height: 815px;
   border-radius: 20px;
   width: 100%;
   font-family: 'Nunito Sans', sans-serif;
@@ -30,6 +30,7 @@ body {
 
 #content {
   padding: 40px;
+  height: 80%;
 }
 
 #project-name {
@@ -69,12 +70,12 @@ body {
   background-size: cover;
 }
 
-#description h2 a {
+#headline #menu .menupoints h2 a {
   color: #808080;
   margin: 10px;
 }
 
-#description h2 a:hover {
+#headline #menu .menupoints h2 a:hover {
   color: #afafaf;
   text-decoration: none;
 }
@@ -90,6 +91,7 @@ body {
 
 #menu svg {
   margin: 5px;
+  font-size: 12px;
 }
 
 #menu .menupoints {
@@ -109,7 +111,6 @@ body {
 #content > div {
   padding: 0 15px;
 }
-
 
 p {
   font-size: 16px;
@@ -354,6 +355,9 @@ input {
 
 a:hover {
   text-decoration: none;
-  background-color: #007bff;
+}
+
+#discussion {
+  height: 80%;
 }
 
