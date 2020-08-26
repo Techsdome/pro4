@@ -1,0 +1,11 @@
+.dash {
+  display: flex;
+}
+
+.posts {
+  width: 80%;
+}
+
+.stuff {
+  width: 20%;
+}
