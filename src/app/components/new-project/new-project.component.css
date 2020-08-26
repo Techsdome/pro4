@@ -88,7 +88,7 @@
   align-content: center;
 }
 
-label {
+#myForm .description-label {
   margin: 10px 0 3px 0;
   padding: 10px 0 3px 0;
 }

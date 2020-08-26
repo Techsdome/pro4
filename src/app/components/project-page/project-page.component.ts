@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit, Input} from '@angular/core';
 import {Project} from '../../models/Project';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
@@ -8,6 +8,7 @@ import {UploadTaskComponent} from '../uploader/upload-task/upload-task.component
 import {rejects} from 'assert';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ImageModalComponent} from "../image-modal/image-modal.component";
+import {Posts} from "../../shared/services/posts";
 
 @Component({
   selector: 'app-project-page',
@@ -65,7 +66,18 @@ export class ProjectPageComponent implements OnInit {
 
   currentBannerPosition: string;
 
-  ngOnInit() {
+  // switch between components
+  switchComp = true;
+
+  // discussion section
+  comments: any[] = [];
+  edit = false;
+  comment: string;
+  showCommentSection = false;
+  commentsLenght: number;
+  posts: any[] = [];
+
+  async ngOnInit() {
     this.getUser();
 
     if (this.projectID) {
@@ -75,8 +87,47 @@ export class ProjectPageComponent implements OnInit {
     } else {
       alert('No Project found!');
     }
+    await this.loadProject();
 
-    this.loadProject();
+    if (this.projectID) {
+      this.authService.afs.collection(`mainFeed/allPosts/post/${this.projectID}/comments`).valueChanges()
+        .subscribe((comment) => {
+          this.commentsLenght = comment.length;
+          comment.forEach(cmt => {
+            this.comments.push(cmt);
+          });
+        });
+    }
+  }
+
+  // adds comment
+  addComment() {
+    this.authService.getCurrentUser().subscribe((result) => {
+      this.authService.afs.collection('users').doc(result.uid).valueChanges()
+        .subscribe((val: any) => {
+          if (this.comment) {
+            this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).collection('comments').add({
+              comment: this.comment,
+              commentName: val.firstname + ' ' + val.lastname
+            });
+            this.comment = '';
+          }
+        });
+    });
+  }
+
+  // opens disscusion component
+  openDisscusion() {
+    if (!this.switchComp) {
+      this.switchComp = true;
+    }
+  }
+
+  // opens discription component
+  openDiscription() {
+    if (this.switchComp) {
+      this.switchComp = false;
+    }
   }
 
   // edit mode
@@ -314,7 +365,11 @@ export class ProjectPageComponent implements OnInit {
 
 //opens image viewer
   openImage(pictureURL) {
-    const modalRef = this.modalService.open(ImageModalComponent, {centered: true, size: 'lg', windowClass: 'modal-customclass'});
+    const modalRef = this.modalService.open(ImageModalComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'modal-customclass'
+    });
     modalRef.componentInstance.src = pictureURL;
   }
 
@@ -322,7 +377,7 @@ export class ProjectPageComponent implements OnInit {
   loadProject() {
     this.docRef = this.afs.doc(`mainFeed/allPosts/post/${this.projectID}`);
     if (this.docRef) {
-      this.projectPromise = this.docRef.get().toPromise().then(doc => {
+      return this.projectPromise = this.docRef.get().toPromise().then(doc => {
         if (doc.exists) {
           this.project = doc.data();
           this.tmpBannerPosition = doc.data().bannerPositionY;
