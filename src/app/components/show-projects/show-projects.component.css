@@ -21,7 +21,7 @@ button {
 }
 
 .filter {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #fff;
   border-radius: 100px;
   border: solid 2px #a6b0bf;
   padding: 2px 30px 0px 30px;
