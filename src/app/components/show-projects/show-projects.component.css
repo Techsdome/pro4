@@ -200,6 +200,10 @@ a:hover::before, a:focus::before {
     color: #cfd1cd;
 }
 
+.iconlist svg:hover {
+  color: #e31b23;
+}
+
 .viewButton {
     padding: 3px 8px !important;
 }
