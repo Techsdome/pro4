@@ -10,12 +10,15 @@ li {
     vertical-align: middle;
 }
 
+li a {
+  color: #b7b7b7;
+}
+
 button {
   margin-left: auto;
 }
 
 .filter {
-  background-color: #fff;
   /*border-radius: 100px;*/
   border: solid 2px rgba(0,0,0,0.1);
   padding: 5px 30px 5px 30px;
@@ -27,8 +30,13 @@ button {
 }
 
 a:hover, a:focus, a:active {
-    color: #999;
+    color: #222222;
     text-decoration: none;
+}
+
+
+.active > a{
+  color: #222222;
 }
 
 nav{
@@ -67,10 +75,6 @@ a::before {
     transition: color 0.1s,transform 0.2s ease-out;
 }
 
-/*a:active::before {*/
-/*    background-color: #000;*/
-/*}*/
-
 a:hover::before, a:focus::before {
     transform-origin: left top;
     transform: scale(1, 1);
@@ -80,6 +84,7 @@ a:hover::before, a:focus::before {
   transform-origin: left top;
   transform: scale(1, 1);
 }
+
 
 @media only screen and (max-width: 630px){
 
