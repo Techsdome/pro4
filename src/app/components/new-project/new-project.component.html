@@ -16,9 +16,37 @@
   <app-add-tag [purpose]="'tags'" [headline]="'Tags'" [placeholder]="'add tag'"
                (purposeMessage)="getPurposeMessage($event)"
                (childMessage)="getChildMessage($event)"></app-add-tag>
-  <app-add-tag [purpose]="'members'" [headline]="'Members'" [placeholder]="'member'"
+  <!--<app-add-tag [purpose]="'members'" [headline]="'Members'" [placeholder]="'member'"
                (purposeMessage)="getPurposeMessage($event)"
-               (childMessage)="getChildMessage($event)"></app-add-tag>
+               (childMessage)="getChildMessage($event)"></app-add-tag>-->
+
+  <h6>Contributors</h6>
+  <div class="btn-plus pointer" (click)="toggleDisplay()" [hidden]="isShow"></div>
+  <mat-form-field id="searchBar" class="text-black-50" floatLabel="never" [hidden]="!isShow">
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip
+        *ngFor="let contributor of contributors"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(contributor)">
+        {{contributor}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input (keyup)="onkeyup($event)" class="" type="text"
+             placeholder="Search members"
+             #contributorInput
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto"
+             [matChipInputFor]="chipList"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let offset of results | async" [value]="offset.displayName">
+       <small (click)="this.contributorUid = offset.uid"><img class="example-option-img rounded" [src]="offset.photoURL" height="25" aria-hidden ="true" alt="profile_pic">   {{ offset.displayName }}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
 
   <p id="fillCorrectly" style="display: none; color: red">Please fill out all the required fields!</p>
 

@@ -12,7 +12,7 @@ import {trigger, style, animate, transition} from '@angular/animations';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {FormControl} from '@angular/forms';
 import {CreatePostNewComponent} from '../create-post-new/create-post-new.component';
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-main-navbar',

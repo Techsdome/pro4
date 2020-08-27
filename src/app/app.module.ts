@@ -67,6 +67,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from "@angular/material/card";
 import { ImageModalComponent } from './components/image-modal/image-modal.component';
+import {MatChipsModule} from "@angular/material/chips";
 
 
 @NgModule({
@@ -134,7 +135,8 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
     MatInputModule,
     MatAutocompleteModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatChipsModule
   ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
       NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal, { provide: LOCALE_ID, useValue: 'de-AT' }],

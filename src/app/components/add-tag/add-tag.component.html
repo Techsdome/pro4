@@ -1,6 +1,5 @@
 <div id="item-container">
   <h6 *ngIf="headline">{{ headline }}</h6>
-  <!--    <hr class="line">-->
   <li *ngFor="let item of itemsList">
     <input class="itemInputButton" type="button" [value]="item">
     <img *ngIf="show" class="itemDeleteButton" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="delete"
@@ -18,6 +17,4 @@
          src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
     <br>
   </div>
-  <!--  <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle(); saveItem(); sendToParent()">Save</button>-->
-  <!--  <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle();">Abort</button>-->
 </div>
