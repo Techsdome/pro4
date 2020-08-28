@@ -1,9 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
-import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {NewProjectService} from '../../shared/services/new-project.service';
 import {DataServiceService} from '../../shared/services/data-service.service';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {ElementRef, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-tag',
@@ -24,6 +30,18 @@ export class AddTagComponent implements OnInit {
   edit = false;
   htmlItemsElements: HTMLCollection;
   path: string;
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  chipCtrl = new FormControl();
+  filteredChips: Observable<string[]>;
+  chipSelect: string[];
+  allChips: string[];
+
+  @ViewChild('chipInput') chipInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(private dataService: DataServiceService, private authService: AuthService, private pservice: NewProjectService) {
   }

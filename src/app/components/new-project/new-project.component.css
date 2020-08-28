@@ -174,4 +174,18 @@
   background: #bdbfbb;
 }
 
+.cdk-overlay-container{
+  z-index: 1051;
+}
+
+.btn-plus{
+  background-image: url("../../../assets/icons/plus.svg");
+  height: 30px;
+  width: 30px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 

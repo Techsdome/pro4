@@ -10,21 +10,33 @@ li {
     vertical-align: middle;
 }
 
+li a {
+  color: #b7b7b7;
+}
+
 button {
   margin-left: auto;
 }
 
 .filter {
-  background-color: rgba(0, 0, 0, 0);
-  border-radius: 100px;
-  border: solid 2px #a6b0bf;
-  padding: 2px 30px 0px 30px;
+  /*border-radius: 100px;*/
+  border: solid 2px rgba(0,0,0,0.1);
+  padding: 5px 30px 5px 30px;
   margin: 10px 0px 10px auto;
+  border-radius: 10px;
+  background: #F3F5F7;
+  /*box-shadow:  5px 5px 10px #e0e1e3,*/
+  /*-5px -5px 10px #ffffff;*/
 }
 
 a:hover, a:focus, a:active {
-    color: #999;
+    color: #222222;
     text-decoration: none;
+}
+
+
+.active > a{
+  color: #222222;
 }
 
 nav{
@@ -53,7 +65,7 @@ a::before {
     content: '';
     display: block;
     position: absolute;
-    bottom: -3px;
+    bottom: -9px;
     left: 0;
     height: 3px;
     width: 100%;
@@ -62,10 +74,6 @@ a::before {
     transform: scale(0, 1);
     transition: color 0.1s,transform 0.2s ease-out;
 }
-
-/*a:active::before {*/
-/*    background-color: #000;*/
-/*}*/
 
 a:hover::before, a:focus::before {
     transform-origin: left top;
@@ -76,6 +84,7 @@ a:hover::before, a:focus::before {
   transform-origin: left top;
   transform: scale(1, 1);
 }
+
 
 @media only screen and (max-width: 630px){
 
