@@ -1,3 +1,3 @@
-<app-profile-menu (activeMenuItemChange)="changeMenuItem($event)" [activeMenuItem]="this.activeMenu"></app-profile-menu>
+<app-profile-menu class="post-menu" (activeMenuItemChange)="changeMenuItem($event)" [activeMenuItem]="this.activeMenu"></app-profile-menu>
 
-<app-show-projects *ngFor="let post of posts" [allPostsObject]="post"></app-show-projects>
+<app-show-projects *ngFor="let post of posts" [allPostsObject]="post" class="posts"></app-show-projects>

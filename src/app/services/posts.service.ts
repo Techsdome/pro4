@@ -8,38 +8,37 @@ import {AuthService} from '../shared/services/auth.service';
 })
 export class PostsService {
 
-  constructor(public authservice: AuthService) {
+  constructor(public authService: AuthService) {
   }
 
-  getPosts(filter?: string) {
-    const posts = [];
-    this.authservice.afs.collection('mainFeed').doc('allPosts').collection('post').valueChanges()
-      .subscribe((val) => {
-        //const parray = val as Project[];
-        const parray = filter ? val.filter(value => value.postType === filter) : val;
-        parray.forEach((value) => {
-          const postId = value.postId;
-          //console.log(postId);
+  getPosts(filter: string): any[] {
+    const posts: any[] =  [];
+    this.authService.afs.collection(`mainFeed/allPosts/post`).get().toPromise().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+
+        if (doc.data().postType === filter) {
+          const postId = doc.data().postId;
           let mytime = new Date();
-          let theuserid = value.uid;
-          let username = value.displayName;
+          let theuserid = doc.data().uid;
+          let username = doc.data().displayName;
           let photoURL = '';
-          let postText = value.post;
-          let typeImage = "https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png";
-          if (value.postType === "project") {
-            mytime = ((value.projectTimeStamp) as unknown as Timestamp).toDate();
-            theuserid = value.uid;
+          let postText = doc.data().post;
+          let typeImage = 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png';
+          if (doc.data().postType === 'project') {
+            mytime = ((doc.data().projectTimeStamp) as unknown as Timestamp).toDate();
+            theuserid = doc.data().uid;
             username = '';
             photoURL = '';
-            postText = value.projectDescription;
-            typeImage = "https://cdn.iconscout.com/icon/premium/png-512-thumb/project-management-2-536854.png";
-          }
-          if (value.postType === "question") {
-            typeImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png";
+            postText = doc.data().projectDescription;
+            typeImage = 'https://cdn.iconscout.com/icon/premium/png-512-thumb/project-management-2-536854.png';
           }
 
+          if (doc.data().postType === 'question') {
+            // tslint:disable-next-line:max-line-length
+            typeImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png';
+          }
 
-          this.authservice.afs.collection('users').doc(theuserid).get().toPromise()
+          this.authService.afs.collection('users').doc(theuserid).get().toPromise()
             .then((userdoc) => {
               if (userdoc.data()) {
                 const myuser = userdoc.data();
@@ -49,19 +48,19 @@ export class PostsService {
             })
             .then(() => {
               const projectObject = {
-                type: value.type,
-                typeImage: typeImage,
+                type: doc.data().type,
+                typeImage,
                 postDate: mytime,
-                postText: postText,
-                postId: value.postId,
+                postText,
+                postId: doc.data().postId,
                 displayName: username ? username : 'Anonym',
-                projectName: value.projectName,
-                projectBanner: value.projectBanner,
-                projectId: value.projectId,
-                projectCategories: value.projectCategories,
-                projectMembers: value.projectMembers,
+                projectName: doc.data().projectName,
+                projectBanner: doc.data().projectBanner,
+                projectId: doc.data().projectId,
+                projectCategories: doc.data().projectCategories,
+                projectMembers: doc.data().projectMembers,
                 userPhotoURL: photoURL,
-                likes: value.likes,
+                likes: doc.data().likes,
                 comments: [
                   {
                     commentName: '',
@@ -71,9 +70,9 @@ export class PostsService {
               };
               posts.push(projectObject);
             });
-        });
+        }
       });
+    });
     return posts;
   }
 }
-

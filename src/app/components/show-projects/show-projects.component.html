@@ -42,9 +42,10 @@
                       <ul>
                           <li *ngFor="let comment of comments">
                               <p><strong>{{comment.commentName}}</strong>: {{comment.comment}}</p>
+                            <span> {{ formatDate(comment.date) }}</span>
                           </li>
                       </ul>
-                      <input class="roundInputField" class="comment" type="text" [(ngModel)]= "comment">
+                      <input id="comment-inputfield" class="roundInputField" class="comment" type="text" [(ngModel)]= "comment">
                       <button class="boderButton commentButton" (click)="addComment()">Save</button>
                 </section>
             </div>
