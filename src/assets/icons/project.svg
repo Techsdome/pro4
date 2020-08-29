@@ -8,8 +8,9 @@
 	.st2{fill:#FFFFFF;}
 	.st3{fill:#F3F5F7;}
 	.st4{fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-miterlimit:10;}
-	.st5{fill:none;stroke:#593CC0;stroke-width:28;stroke-linecap:round;stroke-miterlimit:10;}
-	.st6{fill:#593CC0;}
+	.st5{display:inline;fill:none;stroke:#000000;stroke-width:28;stroke-linecap:round;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#593CC0;stroke-width:12;stroke-miterlimit:10;}
+	.st7{fill:none;stroke:#593CC0;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 </style>
 <g id="Layer_1_1_" class="st0">
 	<g class="st1">
@@ -55,9 +56,20 @@
 		<line class="st4" x1="247.6" y1="218" x2="258.1" y2="218.1"/>
 	</g>
 </g>
-<g>
+<g id="Layer_2_1_" class="st0">
 	<path class="st5" d="M66,85.8c0.2-6.7,1.5-25.5,15.4-42.9c3.2-4.1,20.7-25.3,50.7-26.8c4.8-0.2,34-1.2,52.1,20.5
 		c16.9,20.5,12.5,47.3,12,50.6c-7.7,42.9-54,50.1-63.4,98.1c-1.9,9.6-1.7,17.8-1.4,23.1"/>
-	<circle class="st6" cx="131.4" cy="274.1" r="24.9"/>
+	<circle class="st1" cx="131.4" cy="274.1" r="24.9"/>
 </g>
+<path class="st6" d="M105.4,193.5c-28.5-17.6-47.5-49-47.5-84.9c0-55.1,44.6-99.7,99.7-99.7s99.7,44.6,99.7,99.7
+	c0,36.4-19.5,68.3-48.7,85.7"/>
+<rect x="106.6" y="219" class="st7" width="105.9" height="72.5"/>
+<line class="st7" x1="105.4" y1="193.5" x2="106.6" y2="291.4"/>
+<line class="st7" x1="211.9" y1="192.1" x2="213.1" y2="290.1"/>
+<line class="st7" x1="209.9" y1="249.9" x2="107.6" y2="249.9"/>
+<line class="st7" x1="141.7" y1="214.9" x2="141.7" y2="129.7"/>
+<line class="st7" x1="175.8" y1="219" x2="175.8" y2="129.5"/>
+<line class="st7" x1="197.3" y1="125.4" x2="117.9" y2="125.4"/>
+<circle class="st7" cx="122.6" cy="108.8" r="16.6"/>
+<circle class="st7" cx="192.4" cy="108.8" r="16.6"/>
 </svg>
