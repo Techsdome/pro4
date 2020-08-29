@@ -7,8 +7,8 @@ ol, ul {
   margin: 0;
 }
 
-#comment-section ul{
-    display: unset;
+#comment-section ul {
+  display: unset;
 }
 
 li {
@@ -33,12 +33,12 @@ a:hover, a:focus, a:active {
   text-decoration: none;
 }
 
-nav{
-  border-bottom: 3px solid rgba(0,0,0,0.1);
+nav {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   flex-direction: row;
 }
 
-h1,h2,h3,h4,h5{
+h1, h2, h3, h4, h5 {
   margin: 0;
   padding: 0;
 }
@@ -52,9 +52,10 @@ a {
   font-size: 12px;
   line-height: 16px;
   text-transform: uppercase;
-  transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
+  transition: color 0.1s, background-color 0.1s, padding 0.2s ease-in;
   color: #000;
 }
+
 a::before {
   content: '';
   display: block;
@@ -66,11 +67,13 @@ a::before {
   background-color: #000;
   transform-origin: right top;
   transform: scale(0, 1);
-  transition: color 0.1s,transform 0.2s ease-out;
+  transition: color 0.1s, transform 0.2s ease-out;
 }
+
 a:active::before {
   background-color: #000;
 }
+
 a:hover::before, a:focus::before {
   transform-origin: left top;
   transform: scale(1, 1);
@@ -79,38 +82,38 @@ a:hover::before, a:focus::before {
 /*now all*/
 
 .projectpost {
-    /*background-color: #fff;*/
-    /*margin: 30px;*/
-    /*border-radius: 20px;*/
-    border-radius: 20px;
-    background: #F3F5F7;
-  box-shadow:  5px 5px 10px #e0e1e3,
+  /*background-color: #fff;*/
+  /*margin: 30px;*/
+  /*border-radius: 20px;*/
+  border-radius: 20px;
+  background: #F3F5F7;
+  box-shadow: 5px 5px 10px #e0e1e3,
   -5px -5px 10px #ffffff;
 
 }
 
 .projectpost > .row {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .projectpost * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .maininfo {
-    padding: 30px !important;
+  padding: 30px !important;
 }
 
-.bi-chat{
-    opacity: 70%;
+.bi-chat {
+  opacity: 70%;
 }
 
-.maindescription{
-    margin: 20px 20px 20px -10px !important;
-    flex-wrap: inherit !important;
-    flex-direction: column;
+.maindescription {
+  margin: 20px 20px 20px -10px !important;
+  flex-wrap: inherit !important;
+  flex-direction: column;
 }
 
 /*.projectpost {
@@ -119,85 +122,85 @@ a:hover::before, a:focus::before {
 */
 
 .typeMark {
-    filter: grayscale(100%);
-    opacity: 15%;
-    margin: 7px !important;
+  filter: grayscale(100%);
+  opacity: 15%;
+  margin: 7px !important;
 }
 
 .pname {
-    display: contents;
+  display: contents;
 }
 
-.pname0{
-    display: contents;
+.pname0 {
+  display: contents;
 }
 
 .sideinfo {
-    height: 100%;
-    padding: 10px !important;
+  height: 100%;
+  padding: 10px !important;
 }
 
 .sideinfo h6 {
-    margin: 5px !important;
-    color: #8e908c;
+  margin: 5px !important;
+  color: #8e908c;
 }
 
 .smallbanner img {
-    margin: -30px 0 0 -30px;
-    width: 90%;
-    height: auto;
-    max-height: 100px;
-    border-radius: 20px;
+  margin: -30px 0 0 -30px;
+  width: 90%;
+  height: auto;
+  max-height: 100px;
+  border-radius: 20px;
 }
 
-.commentButtonArea{
-    margin-top: 30px;
-    margin-left: auto !important;
-    display: flex;
+.commentButtonArea {
+  margin-top: 30px;
+  margin-left: auto !important;
+  display: flex;
 }
 
-.commentButtonArea p{
-    align-self: center;
+.commentButtonArea p {
+  align-self: center;
 }
 
 .smallbanner {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .description div {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .description {
-    width: 100%;
-    margin: 8px !important;
+  width: 100%;
+  margin: 8px !important;
 }
 
 .icon {
-    margin: 10px !important;
-    margin-right: 15px !important;
+  margin: 10px !important;
+  margin-right: 15px !important;
 }
 
 .icon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .sideinfo .contributors {
-    width: 40px !important;
-    height: 40px !important;
-    max-height: 40px !important;
-    max-width: 40px !important;
-    margin: 2px !important;
+  width: 40px !important;
+  height: 40px !important;
+  max-height: 40px !important;
+  max-width: 40px !important;
+  margin: 2px !important;
 }
 
 .iconlist {
-    margin: 5px !important;
+  margin: 5px !important;
 }
 
 .iconlist svg {
-    color: #cfd1cd;
+  color: #cfd1cd;
 }
 
 .iconlist svg:hover {
@@ -205,22 +208,28 @@ a:hover::before, a:focus::before {
 }
 
 .viewButton {
-    padding: 3px 8px !important;
+  padding: 3px 8px !important;
 }
 
 .viewButton svg {
-    margin: 1px !important;
+  margin: 1px !important;
 }
 
 .myrow {
-    margin: 15px 2px !important;
+  margin: 15px 2px !important;
 }
 
-.sub-maindescription{
-    display: flex;
+.sub-maindescription {
+  display: flex;
 }
 
 .line {
-    border: 1px solid rgba(130, 130, 130, 0.1);
-    height: 200px;
+  border: 1px solid rgba(130, 130, 130, 0.1);
+  height: 200px;
+}
+
+.pname h5 {
+  display: inline-block;
+  width: max-content;
+  margin: 0 5px 0 0;
 }

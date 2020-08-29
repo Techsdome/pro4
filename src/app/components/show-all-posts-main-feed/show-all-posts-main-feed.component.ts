@@ -31,80 +31,29 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
   constructor(public authservice: AuthService, private postService: PostsService) {
   }
 
-  loadPosts() {
-    this.authservice.afs.collection(`mainFeed/allPosts/post`).get().toPromise().then((querySnapshot) => {
-      querySnapshot.forEach((value) => {
-        this.postId = value.data().postId;
-        let mytime = new Date();
-        let theuserid = value.data().uid;
-        let username = value.data().displayName;
-        let photoURL = '';
-        let postText = value.data().post;
-        const type = value.data().postType;
+  ngOnInit(): void {
+    this.activeMenu = '';
+    this.posts = [];
 
-        let typeImage = 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png';
-        if (value.data().postType === 'project') {
-          mytime = ((value.data().projectTimeStamp) as unknown as Timestamp).toDate();
-          theuserid = value.data().uid;
-          username = '';
-          photoURL = '';
-          postText = value.data().projectDescription;
-          typeImage = 'https://cdn.iconscout.com/icon/premium/png-512-thumb/project-management-2-536854.png';
-        }
-        if (value.data().postType === 'question') {
-          typeImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png';
-        }
-
-        this.authservice.afs.collection('users').doc(theuserid).get().toPromise()
-          .then((userdoc) => {
-            if (userdoc.data()) {
-              const myuser = userdoc.data();
-              photoURL = myuser.photoURL;
-              username = myuser.displayName ? myuser.displayName : myuser.lastname + ' ' + myuser.firstname;
-            }
-          })
-          .then(() => {
-            this.projectObject = {
-              type,
-              typeImage,
-              postDate: mytime,
-              postText,
-              postId: value.data().postId,
-              displayName: username ? username : 'Anonym',
-              projectName: value.data().projectName,
-              projectBanner: value.data().projectBanner,
-              projectId: value.data().projectId,
-              projectCategories: value.data().projectCategories,
-              projectMembers: value.data().projectMembers,
-              userPhotoURL: photoURL,
-              likes: value.data().likes,
-              comments: [
-                {
-                  commentName: '',
-                  comment: ''
-                }
-              ]
-            };
-            this.posts.push(this.projectObject);
-          });
-      });
+    this.postService.getPosts().then( posts => {
+      this.posts = posts;
     });
   }
 
-  ngOnInit(): void {
-    this.activeMenu = '';
-    this.changeMenuItem(this.activeMenu);
-    this.posts = [];
+  sortByRecentness() {
 
-    this.loadPosts();
   }
 
-  changeMenuItem(event) {
+  changeMenuItem(postType) {
     this.posts = [];
-    if (event === '') {
-      this.loadPosts();
+    if (postType === '') {
+       this.postService.getPosts().then( posts => {
+         this.posts = posts;
+      });
     } else {
-      this.posts = this.postService.getPosts(event);
+      this.postService.getPosts(postType).then( posts => {
+        this.posts = posts;
+      });
     }
   }
 }
