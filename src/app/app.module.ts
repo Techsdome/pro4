@@ -9,24 +9,20 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
-// Firebase services + enviorment module
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {environment} from '../environments/environment';
-
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SignInComponent} from './components/sign-in/sign-in.component';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {VerifyEmailComponent} from './components/verify-email/verify-email.component';
-
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {UserDataComponent} from './components/user-data/user-data.component';
-
 import { MainNavbarComponent } from './components/main-navbar/main-navbar.component';
 import { ProjectPageComponent } from './components/project-page/project-page.component';
 import { NewProjectComponent } from './components/new-project/new-project.component';
@@ -38,7 +34,6 @@ import { UploaderComponent } from './components/uploader/uploader.component';
 import { UploadTaskComponent } from './components/uploader/upload-task/upload-task.component';
 import { PartingLineComponent } from './components/parting-line/parting-line.component';
 import { ToastrModule } from 'ngx-toastr';
-// import {NgbdProgressbarShowvalue} from './components/uploader/upload-task/progressbar-showvalue';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { UserStatusComponent } from './components/user-status/user-status.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -57,7 +52,6 @@ import { ShowProjectsComponent } from './components/show-projects/show-projects.
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { UploadImagesComponent } from './components/upload-images/upload-images.component';
 import { QuillModule } from 'ngx-quill';
-import { QUILL_CONFIG_TOKEN } from 'ngx-quill';
 import { NewQuestionComponent } from './components/new-question/new-question.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -67,6 +61,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from "@angular/material/card";
 import { ImageModalComponent } from './components/image-modal/image-modal.component';
+import {MatChipsModule} from "@angular/material/chips";
 
 
 @NgModule({
@@ -134,7 +129,8 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
     MatInputModule,
     MatAutocompleteModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatChipsModule
   ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
       NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal, { provide: LOCALE_ID, useValue: 'de-AT' }],

@@ -1,15 +1,20 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {NewProjectService} from '../../shared/services/new-project.service';
 import {User} from '../../shared/services/user';
 import {FormControl, FormGroup, FormsModule} from '@angular/forms';
 import {AngularFireStorage} from 'angularfire2/storage';
 import {AngularFireUploadTask} from '@angular/fire/storage';
-import {finalize} from 'rxjs/operators';
+import {filter, finalize, switchMap} from 'rxjs/operators';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Item} from '../../models/Item';
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {Router} from '@angular/router';
+import {Observable, Subject} from 'rxjs';
+import {AngularFirestore} from 'angularfire2/firestore';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from "@angular/material/chips";
+import {MatAutocomplete, MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 
 @Component({
   selector: 'app-new-project',
@@ -48,6 +53,23 @@ export class NewProjectComponent implements OnInit {
 
   editorForm: FormGroup;
 
+  // contributor auto complete variables
+  myControl = new FormControl();
+  results: Observable<any[]>;
+  offset = new Subject<string>();
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  contributors = [];
+  contributorUid;
+  isShow = false;
+
+
+  @ViewChild('contributorInput') contributorInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
   editorStyle = {
     justifyContent: 'center',
     alignContent: 'center',
@@ -65,7 +87,8 @@ export class NewProjectComponent implements OnInit {
 
   constructor(private dataService: DataServiceService, private authService: AuthService, public pservice: NewProjectService,
               public form: FormsModule, public activeModal: NgbActiveModal, private modalService: NgbModal,
-              private storage: AngularFireStorage, private router: Router) {
+              private storage: AngularFireStorage, private router: Router,
+              private afs: AngularFirestore) {
   }
 
   getChildMessage(message: any) {
@@ -205,6 +228,8 @@ export class NewProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.results = this.search();
+
     this.dataService.getItems().subscribe(items => {
       this.items = items;
       this.getExtendedData(items);
@@ -223,4 +248,54 @@ export class NewProjectComponent implements OnInit {
       e.editor.deleteText(10, e.editor.getLength());
     }
   }
+
+  // contributor auto complete
+  onkeyup(e) {
+    this.offset.next(e.target.value.toLowerCase());
+  }
+
+  search() {
+    return this.offset.pipe(
+      filter(val => !!val),
+      switchMap(offset => {
+        return this.afs.collection('users', ref =>
+          ref.orderBy(`searchableIndex.${offset}`).limit(5)
+        ).valueChanges();
+      })
+    );
+  }
+
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+    this.myControl.setValue(null);
+  }
+
+  remove(contributor: string): void {
+    const index = this.contributors.indexOf(contributor);
+
+    if (index >= 0) {
+      this.contributors.splice(index, 1);
+    }
+
+    console.log(this.contributors);
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    if (!this.contributors.includes(event.option.value)) {
+      this.contributors.push(event.option.value);
+    }
+    this.contributorInput.nativeElement.value = '';
+    this.myControl.setValue(null);
+  }
+
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
+
 }
