@@ -4,6 +4,10 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+h5 {
+  font-weight: 400 !important;
+}
+
 .container-style {
   margin: 100px auto;
   width: 80%;

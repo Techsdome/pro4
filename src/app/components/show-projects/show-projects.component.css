@@ -82,14 +82,14 @@ a:hover::before, a:focus::before {
 /*now all*/
 
 .projectpost {
-  /*background-color: #fff;*/
-  /*margin: 30px;*/
-  /*border-radius: 20px;*/
-  border-radius: 20px;
-  background: #F3F5F7;
-  box-shadow: 5px 5px 10px #e0e1e3,
-  -5px -5px 10px #ffffff;
-
+    /*background-color: #fff;*/
+    /*margin: 30px;*/
+    /*border-radius: 20px;*/
+    border-radius: 20px;
+    background: #F3F5F7;
+    box-shadow:  5px 5px 10px #e0e1e3,
+    -5px -5px 10px #ffffff;
+    margin-bottom: 30px;
 }
 
 .projectpost > .row {
@@ -122,9 +122,11 @@ a:hover::before, a:focus::before {
 */
 
 .typeMark {
-  filter: grayscale(100%);
-  opacity: 15%;
-  margin: 7px !important;
+    filter: grayscale(100%);
+    opacity: 10%;
+    margin: 7px !important;
+    height: 80px !important;
+    width: 80px !important;
 }
 
 .pname {
