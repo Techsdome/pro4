@@ -7,7 +7,7 @@
       <li class="item" (click)="setActive('question')" [ngClass]="activeMenuItem === 'question' ? 'active' : ''"><a><h5>QUESTIONS</h5></a></li>
 <!--      <li *ngFor="let item of links" class="item" ><a href="{{ item.path }}" ng-click="setActive(item)"><h5> {{ item.name }} </h5></a></li>-->
       <button class="filter boderButton" (click)="toggle()" *ngIf="!filter">Showing Popular</button>
-      <button class="filter boderButton" (click)="toggle()" *ngIf="filter">Showing Most Recent</button>
+      <button class="filter boderButton" (click)="toggle()" *ngIf="filter">Showing Recent</button>
     </ul>
   </nav>
 </div>

@@ -54,57 +54,29 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
         if (value.data().postType === 'question') {
           typeImage = '../../../assets/icons/q2.svg';
         }
+  ngOnInit(): void {
+    this.activeMenu = '';
+    this.posts = [];
 
-        this.authservice.afs.collection('users').doc(theuserid).get().toPromise()
-          .then((userdoc) => {
-            if (userdoc.data()) {
-              const myuser = userdoc.data();
-              photoURL = myuser.photoURL;
-              username = myuser.displayName ? myuser.displayName : myuser.lastname + ' ' + myuser.firstname;
-            }
-          })
-          .then(() => {
-            this.projectObject = {
-              type,
-              typeImage,
-              postDate: mytime,
-              postText,
-              postId: value.data().postId,
-              displayName: username ? username : 'Anonym',
-              projectName: value.data().projectName,
-              projectBanner: value.data().projectBanner,
-              projectId: value.data().projectId,
-              projectCategories: value.data().projectCategories,
-              projectMembers: value.data().projectMembers,
-              userPhotoURL: photoURL,
-              likes: value.data().likes,
-              comments: [
-                {
-                  commentName: '',
-                  comment: ''
-                }
-              ]
-            };
-            this.posts.push(this.projectObject);
-          });
-      });
+    this.postService.getPosts().then( posts => {
+      this.posts = posts;
     });
   }
 
-  ngOnInit(): void {
-    this.activeMenu = '';
-    this.changeMenuItem(this.activeMenu);
-    this.posts = [];
+  sortByRecentness() {
 
-    this.loadPosts();
   }
 
-  changeMenuItem(event) {
+  changeMenuItem(postType) {
     this.posts = [];
-    if (event === '') {
-      this.loadPosts();
+    if (postType === '') {
+       this.postService.getPosts().then( posts => {
+         this.posts = posts;
+      });
     } else {
-      this.posts = this.postService.getPosts(event);
+      this.postService.getPosts(postType).then( posts => {
+        this.posts = posts;
+      });
     }
   }
 }
