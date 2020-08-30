@@ -22,7 +22,7 @@ export class PostsService {
         if (doc.data().postType === filter) {
           const postId = doc.data().postId;
           const date = doc.data().date;
-          const timestamp = doc.data().timeStamp ? ((doc.data().timeStamp) as unknown as Timestamp).toDate() : '' ;
+          const timestamp = ((doc.data().timeStamp) as unknown as Timestamp).toDate() ;
           let theuserid = doc.data().uid;
           let username = doc.data().displayName;
           let photoURL = '';
@@ -84,7 +84,7 @@ export class PostsService {
       } else {
         const postId = doc.data().postId;
         const date = doc.data().date;
-        const timestamp = doc.data().timeStamp ? ((doc.data().timeStamp) as unknown as Timestamp).toDate() : '' ;
+        const timestamp = ((doc.data().timeStamp) as unknown as Timestamp).toDate() ;
         let theuserid = doc.data().uid;
         let username = doc.data().displayName;
         let photoURL = '';
