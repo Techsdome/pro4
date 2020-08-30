@@ -28,6 +28,8 @@ export class ShowProjectsComponent implements OnInit {
   filter: boolean;
   likes: number;
 
+  headMessage: string;
+
   constructor(public authservice: AuthService, public afs: AngularFirestore, private postService: PostsService) {
   }
 
@@ -75,11 +77,31 @@ export class ShowProjectsComponent implements OnInit {
   }
 
   loadPost() {
+    let postType;
+
     this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).get().toPromise().then(doc => {
       if (doc.exists) {
         this.likes = doc.data().likes;
+        postType = doc.data().postType;
+      }
+
+    }).then(() => {
+      switch (postType) {
+        case 'project':
+          this.headMessage = 'created a Project';
+          break;
+        case 'question':
+          this.headMessage = 'asked a Question';
+          break;
+        case 'post':
+          this.headMessage = 'posted';
+          break;
+        default:
+          this.headMessage = 'posted';
+          break;
       }
     });
+
 
     this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).get().toPromise().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
