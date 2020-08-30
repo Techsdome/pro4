@@ -42,17 +42,17 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
         let postText = value.data().post;
         const type = value.data().postType;
 
-        let typeImage = '../../../assets/icons/em.svg';
+        let typeImage = 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png';
         if (value.data().postType === 'project') {
           mytime = ((value.data().projectTimeStamp) as unknown as Timestamp).toDate();
           theuserid = value.data().uid;
           username = '';
           photoURL = '';
           postText = value.data().projectDescription;
-          typeImage = '../../../assets/icons/project.svg';
+          typeImage = 'https://cdn.iconscout.com/icon/premium/png-512-thumb/project-management-2-536854.png';
         }
         if (value.data().postType === 'question') {
-          typeImage = '../../../assets/icons/q2.svg';
+          typeImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png';
         }
 
         this.authservice.afs.collection('users').doc(theuserid).get().toPromise()
