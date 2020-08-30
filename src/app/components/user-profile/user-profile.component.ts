@@ -28,7 +28,7 @@ export class UserProfileComponent implements OnInit {
   private navigationSubscription: any;
 
   // posts
-  activeMenu: string;
+  // activeMenu: string;
 
   constructor(
     public newproject: NewProjectComponent,

@@ -52,20 +52,41 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
       if (this.activeMenu === '') {
         this.postService.getPosts().then(posts => {
           this.posts = posts.sort(this.sortAfterDate);
+          this.posts.forEach((post) => {
+            console.log(post.postDate);
+          });
         });
       } else {
         this.postService.getPosts(this.activeMenu).then(posts => {
           this.posts = posts.sort(this.sortAfterDate);
+          this.posts.forEach((post) => {
+            console.log(post.postDate);
+          });
         });
       }
     } else if (type === 'popular') {
       if (this.activeMenu === '') {
         this.postService.getPosts().then(posts => {
-          this.posts = posts.sort(this.sortByPopularity);
+          let tmpPost = posts;
+          tmpPost.forEach((post) => {
+            console.log(post.likes);
+          });
+          tmpPost = tmpPost.sort(this.sortByPopularity);
+          console.log('tmp ' + tmpPost[0].likes);
+
+          this.posts = this.moveZeros(tmpPost);
+          this.posts.forEach((post) => {
+            console.log(post.likes);
+          });
         });
       } else {
         this.postService.getPosts(this.activeMenu).then(posts => {
-          this.posts = posts.sort(this.sortByPopularity);
+          const tmpPost = posts.sort(this.sortByPopularity);
+          console.log('tmp ' + tmpPost[0].likes);
+          this.posts = this.moveZeros(tmpPost);
+          this.posts.forEach((post) => {
+            console.log(post.likes);
+          });
         });
       }
     }
@@ -93,20 +114,19 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
   }
 
   sortAfterDate(a, b) {
-    let date1 = a.timestamp ? a.timestamp : a.date;
-    let date2 = b.timestamp ? b.timestamp : b.date;
+    const date1 = a.postDate;
+    const date2 = b.postDate;
 
     if (date1 && date2) {
-      date1 = Date.parse(date1);
-      date2 = Date.parse(date2);
-
-      if (date1 > date2) {
-        return -1;
+      if (date1 && date2) {
+        if (date1 > date2) {
+          return -1;
+        }
+        if (date1 < date2) {
+          return 1;
+        }
+        return 0;
       }
-      if (date1 < date2) {
-        return 1;
-      }
-      return 0;
     }
   }
 
@@ -114,13 +134,15 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
     const like1 = a.likes;
     const like2 = b.likes;
 
-    if (like1 > like2) {
-      return -1;
+    if (like1 && like2) {
+      if (like1 > like2) {
+        return -1;
+      }
+      if (like1 < like2) {
+        return 1;
+      }
+      return 0;
     }
-    if (like1 < like2) {
-      return 1;
-    }
-    return 0;
   }
 
 
