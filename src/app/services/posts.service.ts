@@ -64,6 +64,7 @@ export class PostsService {
             projectCategories: doc.data().projectCategories,
             projectMembers: doc.data().projectMembers,
             userPhotoURL: photoURL,
+            uid: doc.data().uid,
             likes: doc.data().likes,
             comments: [
               {
@@ -125,6 +126,7 @@ export class PostsService {
           projectCategories: doc.data().projectCategories,
           projectMembers: doc.data().projectMembers,
           userPhotoURL: photoURL,
+          uid: doc.data().uid,
           likes: doc.data().likes,
           comments: [
             {

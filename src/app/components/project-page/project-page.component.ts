@@ -5,10 +5,9 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
 import {UploadTaskComponent} from '../uploader/upload-task/upload-task.component';
-import {rejects} from 'assert';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ImageModalComponent} from "../image-modal/image-modal.component";
-import {Posts} from "../../shared/services/posts";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ImageModalComponent} from '../image-modal/image-modal.component';
+import {DataServiceService} from '../../shared/services/data-service.service';
 
 @Component({
   selector: 'app-project-page',
@@ -18,7 +17,8 @@ import {Posts} from "../../shared/services/posts";
 export class ProjectPageComponent implements OnInit {
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
-              public authService: AuthService, public uploadTask: UploadTaskComponent, private modalService: NgbModal) {
+              public authService: AuthService, public uploadTask: UploadTaskComponent, private modalService: NgbModal,
+              public userSerive: DataServiceService) {
   }
 
   // general stuff
@@ -46,7 +46,9 @@ export class ProjectPageComponent implements OnInit {
 
   // member stuff
   tmpMemberName = '';
-  tmpAllContributors = [];
+  tmpAllContributors: User[] = [];
+
+  tmpAllContributorsUid = [];
   tmpAddedContributors = [];
   tmpDeletedContributors = [];
   memberChange = false;
@@ -188,7 +190,7 @@ export class ProjectPageComponent implements OnInit {
   // tmp uploaded images are displayed
   getImagesFiles(message: any) {
     message.forEach(async (file) => {
-      console.log(file);
+      //console.log(file);
       const fileURL = await this.readFilesURL(file);
       this.tmpAllImages.push((fileURL) as string);
       this.tmpAddedImages.push(file);
@@ -273,7 +275,7 @@ export class ProjectPageComponent implements OnInit {
             this.uploadTask.startUpload().then(async () => { // uploads file
               url = await this.uploadTask.downloadURL;
               this.originalImages.push(url);
-              console.log(url);
+              //console.log(url);
             }).then(() => {
               if (url) {
                 resolve(url);
@@ -303,7 +305,7 @@ export class ProjectPageComponent implements OnInit {
     }
 
     if (this.memberChange) {
-      data['projectMembers'] = this.tmpAllContributors;
+      data['projectMembers'] = this.tmpAllContributorsUid;
     }
 
     this.afs.doc('mainFeed/allPosts').collection('post').doc(this.projectID).update(data).then(() => {
@@ -332,8 +334,10 @@ export class ProjectPageComponent implements OnInit {
     this.tmpAllContributors.forEach((mem, i) => {
       if (i === index) {
         this.tmpAllContributors.splice(index, 1);
-        this.tmpDeletedContributors.push(mem);
+        this.tmpAllContributorsUid.splice(index, 1);
+        this.tmpDeletedContributors.push(mem.displayName);
         this.memberChange = true;
+        console.log(this.tmpAllContributorsUid);
       }
     });
   }
@@ -344,6 +348,10 @@ export class ProjectPageComponent implements OnInit {
     this.tmpAllContributors.push(value);
     this.tmpMemberName = '';
     this.memberChange = true;
+    console.log('tmpAllCon: ' + this.tmpAddedContributors);
+    console.log('tmpAllConUid: ' + this.tmpAllContributorsUid);
+    console.log('deletedCon: ' + this.tmpDeletedContributors);
+
   }
 
 // checks if the user viewing the page is the owner
@@ -363,7 +371,7 @@ export class ProjectPageComponent implements OnInit {
     });
   }
 
-//opens image viewer
+// opens image viewer
   openImage(pictureURL) {
     const modalRef = this.modalService.open(ImageModalComponent, {
       centered: true,
@@ -377,7 +385,7 @@ export class ProjectPageComponent implements OnInit {
   loadProject() {
     this.docRef = this.afs.doc(`mainFeed/allPosts/post/${this.projectID}`);
     if (this.docRef) {
-      return this.projectPromise = this.docRef.get().toPromise().then(doc => {
+      return this.projectPromise = this.docRef.get().toPromise().then(async doc => {
         if (doc.exists) {
           this.project = doc.data();
           this.tmpBannerPosition = doc.data().bannerPositionY;
@@ -388,7 +396,12 @@ export class ProjectPageComponent implements OnInit {
           });
 
           this.tmpDescription = this.project.projectDescription;
-          this.tmpAllContributors = this.project.projectMembers;
+          this.tmpAllContributorsUid = this.project.projectMembers;
+
+          for (const userId of this.tmpAllContributorsUid) {
+            const user = await this.userSerive.getUserWithUid(userId);
+            this.tmpAllContributors.push(user);
+          }
 
           if (this.project.projectBanner) {
             this.bannerURL = this.project.projectBanner;

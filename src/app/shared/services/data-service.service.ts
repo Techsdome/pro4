@@ -9,38 +9,44 @@ import {User} from './user';
     providedIn: 'root'
 })
 export class DataServiceService {
-    public items: Observable<Item[]>;
+  public items: Observable<Item[]>;
 
-    userscollection: AngularFirestoreCollection<User>;
-    users: Observable<User[]>;
+  users: Observable<User[]>;
+  docRef: any;
+  userPromise: Promise<any>;
 
-    constructor(public afs: AngularFirestore, public authService: AuthService) {
-        this.items = this.afs.collection('users').valueChanges();
+  constructor(public afs: AngularFirestore, public authService: AuthService) {
+    this.items = this.afs.collection('users').valueChanges();
+  }
+
+  getItems() {
+    return this.items;
+  }
+
+  getCurrentUser() {
+    return this.authService.getCurrentUser();
+  }
+
+  getUserWithUid(uid) {
+    this.docRef = this.afs.doc(`users/${uid}`);
+    if (this.docRef) {
+      return this.userPromise = this.docRef.get().toPromise().then(doc => {
+        if (doc.exists) {
+          return doc.data();
+        }
+      });
     }
+  }
 
-    getItems() {
-        return this.items;
+  /*getUserNamesWithUids(uidList) {
+    this.docRef = this.afs.doc(`users/`);
+    if (this.docRef) {
+      return this.userPromise = this.docRef.get().toPromise().then(doc => {
+        if (doc.exists) {
+          console.log(doc.data());
+        }
+      });
     }
-
-    getCurrentUser() {
-        return this.authService.getCurrentUser();
-    }
-
-    /*getUserWithUid(uid) {
-      this.users = this.userscollection.snapshotChanges().map(
-        changes => {
-          return changes.map(
-            a => {
-              const data = a.payload.doc.data() as User;
-              data.id = a.payload.doc.id;
-              return data;
-            });
-
-        });
-
-      return this.users;
-    }*/
+  }*/
 }
-
-
 

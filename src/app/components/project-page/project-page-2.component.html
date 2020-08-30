@@ -79,11 +79,11 @@
                   <div *ngFor="let mem of this.tmpAllContributors; let mindex = index"
                        [ngClass]="editMode ? 'editbg' : ''">
                     <div class="col-3 border rounded-circle view overlay zoom contributors">
-                      <img class="contributor img-fluid" src="../../../assets/Project/Howto.JPG" alt="contributer"
+                      <img class="contributor img-fluid" src="{{mem.photoURL}}" alt="contributer"
                            height="514"
                            width="913"/>
                     </div>
-                    <h6 class="username text-center"> {{ mem }}
+                    <h6 class="username text-center"> {{ mem.displayName }}
                       <button *ngIf="editMode" class="removeMemberButton" (click)="removeMember(mindex)">
                         <svg class="bi bi-x" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
@@ -104,8 +104,9 @@
               <div id="tags" class="col-12">
                 <h3> Tags </h3>
                 <div class="row">
-                  <app-add-tag class="addTag" [itemsList]="this.project.projectCategories"
-                               (childMessage)="tmpTags.push($event)" [show]="editMode"></app-add-tag>
+                  <!--<app-add-tag class="addTag" [itemsList]="this.project.projectCategories"
+                               (childMessage)="tmpTags.push($event)" [show]="editMode"></app-add-tag>-->
+                  <app-tag-view [projectID]="projectID"></app-tag-view>
                 </div>
               </div>
             </div>
