@@ -57,7 +57,7 @@ export class NewProjectService {
 
                     this.authService.afs.doc('mainFeed/allPosts').collection('post').doc(this.projectID).set({
                         post: pdescription,
-                        date: date.toLocaleDateString(),
+                        date: date.toLocaleString('en-GB'),
                         day: date.getUTCDate(),
                         month: (date.getUTCMonth() + 1),
                         year: date.getUTCFullYear(),

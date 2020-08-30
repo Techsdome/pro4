@@ -73,6 +73,7 @@ export class ShowProjectsComponent implements OnInit {
     this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).update({
       likes: firebase.firestore.FieldValue.increment(1)
     }).then(() => {
+      this.loadPost();
     });
   }
 
@@ -101,7 +102,6 @@ export class ShowProjectsComponent implements OnInit {
           break;
       }
     });
-
 
     this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).get().toPromise().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
