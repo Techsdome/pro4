@@ -4,8 +4,12 @@
 
 /* You can add global styles to this file, and also import other style files */
 
-h5 {
+h5, h2, h3, h4 {
   font-weight: 400 !important;
+}
+
+button:focus {
+  outline: 0px !important;
 }
 
 .container-style {
@@ -37,6 +41,7 @@ html, body {
 body {
   margin: 0;
   font-family: Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
+  color: #222 !important;
 }
 
 .btn.btn-rounded {

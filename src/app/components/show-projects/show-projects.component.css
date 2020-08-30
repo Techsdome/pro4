@@ -86,7 +86,7 @@ a:hover::before, a:focus::before {
     /*background-color: #fff;*/
     /*margin: 30px;*/
     /*border-radius: 20px;*/
-    padding: 35px 35px 0px 35px;
+    padding: 35px 35px 35px 35px;
     border-radius: 20px;
     background: #F3F5F7;
     box-shadow:  5px 5px 10px #e0e1e3,
@@ -221,10 +221,14 @@ a:hover::before, a:focus::before {
 
 .viewButton {
     padding: 3px 8px !important;
-    margin-left: auto !important;
+    /*margin-left: auto !important;*/
     height: 40px;
     width: 150px;
     border-color: rgba(108, 99, 255, .5);
+}
+
+.projectcase {
+  margin-left: auto !important;
 }
 
 .viewButton svg {

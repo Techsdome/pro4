@@ -86,6 +86,7 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
 
 #text-content{
     width: 100%;
+    color: #222;
 }
 
 #user-header{
@@ -98,8 +99,21 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
 }
 
 .email{
+  background-image: url("../../../assets/icons/email.svg");
+  width: 35px;
+  height: 35px;
     justify-self: end;
     align-self: end;
+  filter: grayscale(100%);
+  opacity: 50%;
+  border: none;
+  transition: 0.3s;
+}
+
+.email:hover {
+  filter: grayscale(0%);
+  opacity: 100%;
+  cursor: pointer;
 }
 
 .profile-picutre{

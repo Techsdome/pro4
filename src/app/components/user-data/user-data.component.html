@@ -7,7 +7,7 @@
     <div id="text-content">
         <div id="user-header">
             <h2 *ngIf="displayName;" style="display: inline-block">{{ displayName }}</h2>
-            <p class="email" style="display: inline">{{ email}}</p>
+          <a href="mailto:{{email}}" class="email" alt="{{email}}"></a>
         </div>
         <hr class="line">
         <p>{{job}}</p>
@@ -23,11 +23,11 @@
             <input class="skillInputButton" type="button" [value]="skill">
             <img *ngIf="!searchedUser" class="skillDeleteButton" src="../../../assets/icons/delete.svg" alt="delete" (click)="deleteSkillElement($event)">
         </li>
-        <input *ngIf="!searchedUser" [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" [(ngModel)]="skill" class="skillInput" type="text" placeholder="e.g. Java ..">
+        <input *ngIf="!searchedUser" [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" [(ngModel)]="skill" class="skillInput" type="text" placeholder="e.g. Cooking ..">
         <img *ngIf="!searchedUser" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="createSkillButton boderButton smallButton button transition02s" (click)="editToggle()" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
         <br>
-        <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle(); saveSkill();">Save</button>
-        <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton roundButton transition02s" (click)="editToggle();">Abort</button>
+        <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s" (click)="editToggle(); saveSkill();">Save</button>
+        <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s" (click)="editToggle();">Abort</button>
     </div>
 </div>
 
