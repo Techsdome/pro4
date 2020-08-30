@@ -63,7 +63,7 @@ export class NewProjectComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
   contributors = [];
-  contributorUid;
+  contributorUid = [];
   isShow = false;
 
 
@@ -95,9 +95,9 @@ export class NewProjectComponent implements OnInit {
     if (this.isPurpose === 'tags') {
       this.selectedCategories = message;
     }
-    if (this.isPurpose === 'members') {
+    /*if (this.isPurpose === 'members') {
       this.selectedMembers = message;
-    }
+    }*/
   }
 
   getPurposeMessage(message: string) {
@@ -175,7 +175,7 @@ export class NewProjectComponent implements OnInit {
     if (name && this.user) {
       document.getElementsByClassName('saving-project').item(0).className += ' visible';
 
-      await this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories, this.selectedMembers);
+      await this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories, this.contributorUid);
 
       (document.getElementById('myForm') as HTMLFormElement).reset();
       document.getElementById('fillCorrectly').style.display = 'none';
@@ -281,9 +281,8 @@ export class NewProjectComponent implements OnInit {
 
     if (index >= 0) {
       this.contributors.splice(index, 1);
+      this.contributorUid.splice(index, 1);
     }
-
-    console.log(this.contributors);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
@@ -298,4 +297,9 @@ export class NewProjectComponent implements OnInit {
     this.isShow = !this.isShow;
   }
 
+  addContributorUid(uid: string) {
+    if (!this.contributorUid.includes(uid)){
+      this.contributorUid.push(uid);
+    }
+  }
 }

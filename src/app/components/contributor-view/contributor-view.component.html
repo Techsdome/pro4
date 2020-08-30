@@ -1,0 +1,10 @@
+  <div class="row">
+    <div *ngFor="let mem of this.tmpAllContributors">
+      <div class="col-3 border rounded-circle view overlay zoom contributors">
+        <img class="contributor img-fluid" src="{{mem.photoURL}}" alt="contributer"
+             height="514"
+             width="913"/>
+      </div>
+      <h6 class="username text-center"> {{ mem.displayName }}</h6>
+    </div>
+  </div>
