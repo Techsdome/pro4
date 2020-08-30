@@ -13,8 +13,10 @@ export class ProfileMenuComponent implements OnInit {
 
   user: User;
   @Input() activeMenuItem: string;
+  activeFilter: boolean;
+
   @Output() activeMenuItemChange: EventEmitter<string> = new EventEmitter<string>();
-  filter = false;
+  @Output() activeFilterChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private dataService: DataServiceService, private authService: AuthService, private pservice: NewProjectService) {
   }
@@ -30,8 +32,14 @@ export class ProfileMenuComponent implements OnInit {
     this.activeMenuItemChange.emit(link);
   }
 
-  toggle() {
-    this.filter = !this.filter;
+  toggleFilter() {
+    if (!this.activeFilter) {
+      this.activeFilterChange.emit('popular');
+    } else {
+      this.activeFilterChange.emit('recent');
+    }
+
+    this.activeFilter = !this.activeFilter;
   }
 
 }

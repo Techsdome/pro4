@@ -53,13 +53,13 @@ export class ShowProjectsComponent implements OnInit {
             this.comments.push({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              date: date.toUTCString()
+              date: date.toLocaleString('en-GB'),
             });
 
             this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              date: date.toUTCString()
+              date: date.toLocaleString('en-GB'),
             });
           });
       });
@@ -73,6 +73,7 @@ export class ShowProjectsComponent implements OnInit {
     this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).update({
       likes: firebase.firestore.FieldValue.increment(1)
     }).then(() => {
+      this.loadPost();
     });
   }
 

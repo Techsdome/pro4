@@ -55,7 +55,7 @@ export class CreatePostComponent implements OnInit {
         const date: Date = new Date();
         this.authService.afs.doc(`users/${this.authService.afAuth.auth.currentUser.uid}`).collection('posts').add({
             post: this.post,
-            date: date.toLocaleDateString(),
+            date: date.toUTCString(),
             day: date.getUTCDate(),
             month: (date.getUTCMonth() + 1),
             year: date.getUTCFullYear(),
@@ -89,7 +89,7 @@ export class CreatePostComponent implements OnInit {
 
                     this.authService.afs.doc(`generalPosts/allPosts`).collection('post').add({
                         post: postParam,
-                        date: date.toLocaleDateString(),
+                        date: date.toUTCString(),
                         day: date.getUTCDate(),
                         month: (date.getUTCMonth() + 1),
                         year: date.getUTCFullYear(),

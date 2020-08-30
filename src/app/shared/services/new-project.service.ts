@@ -57,7 +57,7 @@ export class NewProjectService {
 
                     this.authService.afs.doc('mainFeed/allPosts').collection('post').doc(this.projectID).set({
                         post: pdescription,
-                        date: date.toLocaleDateString(),
+                        date: date.toLocaleString('en-GB'),
                         day: date.getUTCDate(),
                         month: (date.getUTCMonth() + 1),
                         year: date.getUTCFullYear(),
@@ -72,7 +72,7 @@ export class NewProjectService {
                         projectDescription: pdescription ? pdescription : 'This is my description',
                         projectCategories: pcategories ? pcategories : ['Default', 'Default2'],
                         projectMembers: members ? members : ['Markus', 'Damir', 'Andrea'],
-                        projectTimeStamp: firebase.firestore.Timestamp.now(),
+                        timeStamp: firebase.firestore.Timestamp.now(),
                         postId: docID,
                         postType: 'project'
                     }).then(() => {
