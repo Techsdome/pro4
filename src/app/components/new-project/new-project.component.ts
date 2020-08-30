@@ -13,8 +13,8 @@ import {Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from "@angular/material/chips";
-import {MatAutocomplete, MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
+import {MatChipInputEvent} from '@angular/material/chips';
+import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-new-project',
@@ -46,7 +46,7 @@ export class NewProjectComponent implements OnInit {
   imagesRef: string;
 
   projectID: string;
-  selectedCategories: string[];
+  selectedCategories = [];
   selectedMembers: string[];
   isPurpose: string;
   failed = false;
@@ -57,10 +57,8 @@ export class NewProjectComponent implements OnInit {
   myControl = new FormControl();
   results: Observable<any[]>;
   offset = new Subject<string>();
-  visible = true;
   selectable = true;
   removable = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
 
   contributors = [];
   contributorUid = [];
@@ -69,6 +67,12 @@ export class NewProjectComponent implements OnInit {
 
   @ViewChild('contributorInput') contributorInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
+  // tags variables
+  selectableTag = true;
+  removableTag = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   editorStyle = {
     justifyContent: 'center',
@@ -92,12 +96,10 @@ export class NewProjectComponent implements OnInit {
   }
 
   getChildMessage(message: any) {
-    if (this.isPurpose === 'tags') {
+ /*   if (this.isPurpose === 'tags') {
       this.selectedCategories = message;
-    }
-    /*if (this.isPurpose === 'members') {
-      this.selectedMembers = message;
     }*/
+
   }
 
   getPurposeMessage(message: string) {
@@ -249,11 +251,19 @@ export class NewProjectComponent implements OnInit {
     }
   }
 
+
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
+
   // contributor auto complete
   onkeyup(e) {
     this.offset.next(e.target.value.toLowerCase());
   }
 
+  /**
+   * Search member in database field 'searchableIndex' - returns 5 entries
+   */
   search() {
     return this.offset.pipe(
       filter(val => !!val),
@@ -266,6 +276,10 @@ export class NewProjectComponent implements OnInit {
   }
 
 
+  /**
+   * Add contributor
+   * @param event - added contributor value of input
+   */
   add(event: MatChipInputEvent): void {
     const input = event.input;
 
@@ -276,6 +290,10 @@ export class NewProjectComponent implements OnInit {
     this.myControl.setValue(null);
   }
 
+  /**
+   * Remove contributor of arrays
+   * @param contributor - name of contributor to remove
+   */
   remove(contributor: string): void {
     const index = this.contributors.indexOf(contributor);
 
@@ -293,13 +311,34 @@ export class NewProjectComponent implements OnInit {
     this.myControl.setValue(null);
   }
 
-  toggleDisplay() {
-    this.isShow = !this.isShow;
-  }
-
   addContributorUid(uid: string) {
-    if (!this.contributorUid.includes(uid)){
+    if (!this.contributorUid.includes(uid)) {
       this.contributorUid.push(uid);
     }
   }
+
+  addTag(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our tag
+    if ((value || '').trim()) {
+      this.selectedCategories.push(value);
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  removeTag(tag: string): void {
+    const index = this.selectedCategories.indexOf(tag);
+
+    if (index >= 0) {
+      this.selectedCategories.splice(index, 1);
+    }
+  }
+
+
 }

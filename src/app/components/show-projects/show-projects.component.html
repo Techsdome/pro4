@@ -3,7 +3,7 @@
   <div class="row projectpost">
     <div class="col-9 maininfo">
       <div *ngIf="allPostsObject.type == 'project'" class="col-12 smallbanner">
-        <img src="{{ allPostsObject.projectBanner }}" class="img-responsive fit-image"  alt="projectbanner"/>
+        <img src="{{ allPostsObject ? allPostsObject.projectBanner : '../../../assets/Project/20180726_Budapest_23.jpg' }}" class="img-responsive fit-image"  alt="projectbanner"/>
       </div>
       <div class="row name">
         <div class="col-12">
@@ -78,16 +78,13 @@
         </button>
       </div>
       <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
-        <h6> Technology </h6>
+        <h6>Tags</h6>
         <div class="col-12">
-          <!--
-            <div class="itemInputButton d-inline-block" *ngFor="let tag of allPostsObject.projectCategories">
-              <p> {{ allPostsObject ? tag : 'MyTag'}} </p>
-            </div>-->
+          <app-tag-view [projectID]="this.allPostsObject.postId"></app-tag-view>
         </div>
       </div>
       <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
-        <h6> Contributors </h6>
+        <h6>Contributors</h6>
         <div class="col-12">
           <app-contributor-view [projectID]="this.allPostsObject.postId"></app-contributor-view>
         </div>

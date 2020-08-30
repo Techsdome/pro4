@@ -104,8 +104,9 @@
               <div id="tags" class="col-12">
                 <h3> Tags </h3>
                 <div class="row">
-                  <app-add-tag class="addTag" [itemsList]="this.project.projectCategories"
-                               (childMessage)="tmpTags.push($event)" [show]="editMode"></app-add-tag>
+                  <!--<app-add-tag class="addTag" [itemsList]="this.project.projectCategories"
+                               (childMessage)="tmpTags.push($event)" [show]="editMode"></app-add-tag>-->
+                  <app-tag-view [projectID]="projectID"></app-tag-view>
                 </div>
               </div>
             </div>
