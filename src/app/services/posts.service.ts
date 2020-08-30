@@ -27,7 +27,6 @@ export class PostsService {
           let photoURL = '';
           let postText = doc.data().post;
           let typeImage = 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png';
-
           if (doc.data().postType === 'project') {
             date = ((doc.data().projectTimeStamp) as unknown as Timestamp).toDate();
             theuserid = doc.data().uid;
@@ -41,6 +40,7 @@ export class PostsService {
             // tslint:disable-next-line:max-line-length
             typeImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png';
           }
+
           const userDoc = await this.authService.afs.collection('users').doc(theuserid).get().toPromise();
 
           if (userDoc.data()) {
@@ -68,7 +68,7 @@ export class PostsService {
                 commentName: '',
                 comment: ''
               }
-            ]
+              ]
           };
 
           if (userid) {
