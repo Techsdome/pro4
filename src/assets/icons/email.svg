@@ -9,8 +9,8 @@
 	.st3{fill:#222222;}
 	.st4{fill:#F3F5F7;}
 	.st5{display:inline;fill:none;stroke:#FFFFFF;stroke-width:7;stroke-linecap:round;stroke-miterlimit:10;}
-	.st6{fill:#593CC0;}
-	.st7{fill:none;stroke:#FFFFFF;stroke-width:21;stroke-miterlimit:10;}
+	.st6{fill:#6C63FF;}
+	.st7{fill:#6C63FF;stroke:#FFFFFF;stroke-width:21;stroke-miterlimit:10;}
 </style>
 <g class="st0">
 	<line class="st1" x1="149.5" y1="23.7" x2="151.4" y2="278.6"/>

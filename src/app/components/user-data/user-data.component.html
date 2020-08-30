@@ -27,7 +27,7 @@
         <img *ngIf="!searchedUser" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="createSkillButton boderButton smallButton button transition02s" (click)="editToggle()" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
         <br>
         <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s" (click)="editToggle(); saveSkill();">Save</button>
-        <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s" (click)="editToggle();">Abort</button>
+        <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s" (click)="editToggle();">Dismiss</button>
     </div>
 </div>
 

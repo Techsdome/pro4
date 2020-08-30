@@ -96,7 +96,7 @@ a:hover::before, a:focus::before {
 
 .projectpost:hover .typeMark {
   filter: grayscale(0%);
-  opacity: 50%;
+  opacity: 70%;
 }
 
 .projectpost:hover {

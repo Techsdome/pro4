@@ -121,6 +121,7 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
     background-color: #eee;
     width: 150px;
     height: 150px;
+    border: solid 2px #6C63FF;
 }
 
 #text-content p{
