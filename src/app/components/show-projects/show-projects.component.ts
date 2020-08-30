@@ -51,13 +51,13 @@ export class ShowProjectsComponent implements OnInit {
             this.comments.push({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              date: date.toUTCString()
+              date: date.toLocaleString('en-GB'),
             });
 
             this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              date: date.toUTCString()
+              date: date.toLocaleString('en-GB'),
             });
           });
       });

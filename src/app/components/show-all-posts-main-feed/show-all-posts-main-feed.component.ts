@@ -114,19 +114,26 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
   }
 
   sortAfterDate(a, b) {
-    const date1 = a.postDate;
-    const date2 = b.postDate;
-
+    let date1 = a.timestamp ? a.timestamp : a.date;
+    let date2 = b.timestamp ? b.timestamp : b.date;
+    
     if (date1 && date2) {
-      if (date1 && date2) {
-        if (date1 > date2) {
-          return -1;
-        }
-        if (date1 < date2) {
-          return 1;
-        }
-        return 0;
+      console.log(date1);
+      console.log(date2);
+
+      date1 = Date.parse(date1);
+      date2 = Date.parse(date2);
+
+      console.log(date1);
+      console.log(date2);
+
+      if (date1 > date2) {
+        return -1;
       }
+      if (date1 < date2) {
+        return 1;
+      }
+      return 0;
     }
   }
 

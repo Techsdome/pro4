@@ -21,14 +21,15 @@ export class PostsService {
       if (filter) {
         if (doc.data().postType === filter) {
           const postId = doc.data().postId;
-          let date = doc.data().date;
+          const date = doc.data().date;
+          const timestamp = doc.data().timeStamp ? ((doc.data().timeStamp) as unknown as Timestamp).toDate() : '' ;
           let theuserid = doc.data().uid;
           let username = doc.data().displayName;
           let photoURL = '';
           let postText = doc.data().post;
           let typeImage = 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png';
+
           if (doc.data().postType === 'project') {
-            date = ((doc.data().projectTimeStamp) as unknown as Timestamp).toDate();
             theuserid = doc.data().uid;
             username = '';
             photoURL = '';
@@ -53,6 +54,7 @@ export class PostsService {
             type: doc.data().postType,
             typeImage,
             postDate: date,
+            timestamp,
             postText,
             postId: doc.data().postId,
             displayName: username ? username : 'Anonym',
@@ -81,7 +83,8 @@ export class PostsService {
         }
       } else {
         const postId = doc.data().postId;
-        let date = doc.data().date;
+        const date = doc.data().date;
+        const timestamp = doc.data().timeStamp ? ((doc.data().timeStamp) as unknown as Timestamp).toDate() : '' ;
         let theuserid = doc.data().uid;
         let username = doc.data().displayName;
         let photoURL = '';
@@ -89,7 +92,6 @@ export class PostsService {
         let typeImage = 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png';
 
         if (doc.data().postType === 'project') {
-          date = ((doc.data().projectTimeStamp) as unknown as Timestamp).toDate();
           theuserid = doc.data().uid;
           username = '';
           photoURL = '';
@@ -114,6 +116,7 @@ export class PostsService {
           typeImage,
           postDate: date,
           postText,
+          timestamp,
           postId: doc.data().postId,
           displayName: username ? username : 'Anonym',
           projectName: doc.data().projectName,

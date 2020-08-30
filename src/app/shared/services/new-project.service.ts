@@ -72,7 +72,7 @@ export class NewProjectService {
                         projectDescription: pdescription ? pdescription : 'This is my description',
                         projectCategories: pcategories ? pcategories : ['Default', 'Default2'],
                         projectMembers: members ? members : ['Markus', 'Damir', 'Andrea'],
-                        projectTimeStamp: firebase.firestore.Timestamp.now(),
+                        timeStamp: firebase.firestore.Timestamp.now(),
                         postId: docID,
                         postType: 'project'
                     }).then(() => {
