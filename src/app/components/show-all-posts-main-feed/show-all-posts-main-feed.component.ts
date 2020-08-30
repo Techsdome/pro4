@@ -22,6 +22,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
   projectObject: Posts;
 
   activeMenu: string;
+  activeFilter: string;
 
   commentObject = {
     commentName: '',
@@ -31,51 +32,133 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
   constructor(public authservice: AuthService, private postService: PostsService) {
   }
 
-  loadPosts() {
-    this.authservice.afs.collection(`mainFeed/allPosts/post`).get().toPromise().then((querySnapshot) => {
-      querySnapshot.forEach((value) => {
-        this.postId = value.data().postId;
-        let mytime = new Date();
-        let theuserid = value.data().uid;
-        let username = value.data().displayName;
-        let photoURL = '';
-        let postText = value.data().post;
-        const type = value.data().postType;
-
-        let typeImage = '../../../assets/icons/em.svg';
-        if (value.data().postType === 'project') {
-          mytime = ((value.data().projectTimeStamp) as unknown as Timestamp).toDate();
-          theuserid = value.data().uid;
-          username = '';
-          photoURL = '';
-          postText = value.data().projectDescription;
-          typeImage = '../../../assets/icons/project.svg';
-        }
-        if (value.data().postType === 'question') {
-          typeImage = '../../../assets/icons/q2.svg';
-        }
   ngOnInit(): void {
     this.activeMenu = '';
+    this.activeFilter = 'recent';
     this.posts = [];
 
-    this.postService.getPosts().then( posts => {
+    this.postService.getPosts().then(posts => {
       this.posts = posts;
+
+      this.changeFilterType(this.activeFilter);
     });
   }
 
-  sortByRecentness() {
+  changeFilterType(type: string) {
+    this.posts = [];
+    this.activeFilter = type;
 
+    if (type === 'recent') {
+      if (this.activeMenu === '') {
+        this.postService.getPosts().then(posts => {
+          this.posts = posts.sort(this.sortAfterDate);
+          this.posts.forEach((post) => {
+            console.log(post.postDate);
+          });
+        });
+      } else {
+        this.postService.getPosts(this.activeMenu).then(posts => {
+          this.posts = posts.sort(this.sortAfterDate);
+          this.posts.forEach((post) => {
+            console.log(post.postDate);
+          });
+        });
+      }
+    } else if (type === 'popular') {
+      if (this.activeMenu === '') {
+        this.postService.getPosts().then(posts => {
+          let tmpPost = posts;
+          tmpPost.forEach((post) => {
+            console.log(post.likes);
+          });
+          tmpPost = tmpPost.sort(this.sortByPopularity);
+          console.log('tmp ' + tmpPost[0].likes);
+
+          this.posts = this.moveZeros(tmpPost);
+          this.posts.forEach((post) => {
+            console.log(post.likes);
+          });
+        });
+      } else {
+        this.postService.getPosts(this.activeMenu).then(posts => {
+          const tmpPost = posts.sort(this.sortByPopularity);
+          console.log('tmp ' + tmpPost[0].likes);
+          this.posts = this.moveZeros(tmpPost);
+          this.posts.forEach((post) => {
+            console.log(post.likes);
+          });
+        });
+      }
+    }
   }
+
+  moveZeros(postArray) {
+    const tmpArray = [];
+    const zeroCounter = [];
+
+    for (const index in postArray) {
+      if (postArray[index].likes === 0) {
+        zeroCounter.push(postArray[index]);
+      } else {
+        tmpArray.push(postArray[index]);
+      }
+    }
+
+    if (zeroCounter.length > 0) {
+      for (let i = 0; i < zeroCounter.length; i++) {
+        tmpArray.push(zeroCounter[i]);
+      }
+    }
+
+    return tmpArray;
+  }
+
+  sortAfterDate(a, b) {
+    const date1 = a.postDate;
+    const date2 = b.postDate;
+
+    if (date1 && date2) {
+      if (date1 && date2) {
+        if (date1 > date2) {
+          return -1;
+        }
+        if (date1 < date2) {
+          return 1;
+        }
+        return 0;
+      }
+    }
+  }
+
+  sortByPopularity(a, b) {
+    const like1 = a.likes;
+    const like2 = b.likes;
+
+    if (like1 && like2) {
+      if (like1 > like2) {
+        return -1;
+      }
+      if (like1 < like2) {
+        return 1;
+      }
+      return 0;
+    }
+  }
+
 
   changeMenuItem(postType) {
     this.posts = [];
+    this.activeMenu = postType;
+
     if (postType === '') {
-       this.postService.getPosts().then( posts => {
-         this.posts = posts;
+      this.postService.getPosts().then(posts => {
+        this.posts = posts;
+        this.changeFilterType(this.activeFilter);
       });
     } else {
-      this.postService.getPosts(postType).then( posts => {
+      this.postService.getPosts(postType).then(posts => {
         this.posts = posts;
+        this.changeFilterType(this.activeFilter);
       });
     }
   }
