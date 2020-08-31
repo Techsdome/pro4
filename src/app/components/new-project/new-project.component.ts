@@ -44,6 +44,7 @@ export class NewProjectComponent implements OnInit {
   imagesURLPromises = [];
   imageFiles: File[];
   imagesRef: string;
+  imagesMetadata: any;
 
   projectID: string;
   selectedCategories: string[];
@@ -155,6 +156,22 @@ export class NewProjectComponent implements OnInit {
             const today = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}`;
 
             const URL = `project/${this.user.uid}/${this.projectID}/images/${today}_${myFile.name}`;
+            let imageWidth;
+            let imageHeight;
+
+            const reader = new FileReader();
+            reader.readAsDataURL(myFile);
+            reader.onload = () => {
+              const img = new Image();
+              img.onload = () => {
+                this.imagesMetadata.push({
+                  imageWidth: img.width,
+                  imageHeight: img.height
+                });
+              };
+              img.src = (reader.result) as string;
+            };
+
             this.task = this.storage.upload(URL, myFile);
 
             this.taskPromises.push(this.task.snapshotChanges().pipe(
@@ -201,9 +218,12 @@ export class NewProjectComponent implements OnInit {
         imagesURLs.push(await URL);
       }
 
-      await this.pservice.uploadPictures(bannerURL, imagesURLs).then(() => {
-        document.getElementsByClassName('saving-project').item(0).className = 'saving-project';
-      });
+      for (const img of imagesURLs) {
+        await this.storage.storage.ref(this.bannerRef).updateMetadata(this.imagesMetadata[0]);
+      }
+
+      await this.pservice.uploadPictures(bannerURL, imagesURLs);
+      document.getElementsByClassName('saving-project').item(0).className = 'saving-project';
 
       if (!this.failed) {
         this.activeModal.close();

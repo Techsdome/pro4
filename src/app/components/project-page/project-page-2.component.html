@@ -124,7 +124,7 @@
                         clip-rule="evenodd"/>
                 </svg>
               </button>
-              <div class="gallery-pictures col-12" [class]="editMode? 'editPictures' : '' ">
+              <div class="gallery-pictures col-12 thumbnail" [class]="editMode? 'editPictures' : '' ">
                 <img class="g-pictures" alt="project pic"
                      [src]="picture"
                       (click)="openImage(picture)">
@@ -138,6 +138,12 @@
             <button *ngIf="editMode" class="saveProject boderButton" (click)="saveChanges()"> Save Changes</button>
             <button *ngIf="editMode" class="discardProject boderButton" (click)="discardChanges()"> Discard Changes
             </button>
+            <div class="saving-project" *ngIf="loading">
+              <span> Saving ... </span>
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
           </div>
         </div>
         <div id="discussion" class="col" *ngIf="!switchComp">

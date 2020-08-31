@@ -30,6 +30,7 @@ export class ProjectPageComponent implements OnInit {
   isOwner: boolean;
   projectPromise: Promise<any>;
   editMode = false;
+  loading = false;
 
   // banner stuff
   bannerChange = false; // has banner been changed?
@@ -215,6 +216,7 @@ export class ProjectPageComponent implements OnInit {
   // saves all changes
   async saveChanges() {
     this.editMode = false;
+    this.loading = true;
     this.removeListener();
     const data = {};
     let i = 0;
@@ -307,6 +309,8 @@ export class ProjectPageComponent implements OnInit {
     }
 
     this.afs.doc('mainFeed/allPosts').collection('post').doc(this.projectID).update(data).then(() => {
+      this.loading = false;
+
       this.loadProject();
     });
   }
@@ -390,6 +394,7 @@ export class ProjectPageComponent implements OnInit {
           this.tmpDescription = this.project.projectDescription;
           this.tmpAllContributors = this.project.projectMembers;
 
+          console.log(this.project.projectBanner);
           if (this.project.projectBanner) {
             this.bannerURL = this.project.projectBanner;
             this.loadBannerPicture();
