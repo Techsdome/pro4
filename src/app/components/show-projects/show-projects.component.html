@@ -27,9 +27,9 @@
                 </div>
               </div>
               </div>
-
               <div class="projectcase">
-              <button *ngIf="allPostsObject.type == 'project'" class="boderButton viewButton"> View Project
+              <button *ngIf="allPostsObject.type == 'project'" class="boderButton viewButton" [routerLink]="['/project-page']"
+                      [state]="{data: allPostsObject.postId}"> View Project
                 <svg class="bi bi-chevron-right icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
                      xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"

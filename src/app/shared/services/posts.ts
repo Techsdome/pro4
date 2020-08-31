@@ -13,4 +13,5 @@ export interface Posts {
     userPhotoURL: string;
     comments: [{ commentName: string, comment: string }];
     likes: number;
+    uid: string;
 }

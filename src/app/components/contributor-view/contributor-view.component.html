@@ -5,6 +5,6 @@
              height="514"
              width="913"/>
       </div>
-      <h6 class="username text-center"> {{ mem.displayName }}</h6>
+      <a [routerLink]="['/app-user-profile', mem.uid]" [state]="{data: mem}"><h6 class="username text-center"> {{ mem.displayName }}</h6></a>
     </div>
   </div>
