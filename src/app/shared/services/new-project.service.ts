@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {AuthService} from './auth.service';
-import {Observable, Subscription} from 'rxjs';
-import {Project} from '../../models/Project';
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from './auth.service';
+import { Observable, Subscription } from 'rxjs';
+import { Project } from '../../models/Project';
 import * as firebase from 'firebase';
 import FieldValue = firebase.firestore.FieldValue;
-import {AngularFireStorage} from 'angularfire2/storage';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Injectable({
   providedIn: 'root'   // available to dependency injection, register to a provider
@@ -20,7 +20,6 @@ export class NewProjectService {
   constructor(public afs: AngularFirestore, public authService: AuthService, private storage: AngularFireStorage) {
     // this.projectItem = this.afs.collection('project').valueChanges();
   }
-
 
   getProjectID() {
     return this.projectID;
@@ -57,7 +56,7 @@ export class NewProjectService {
           username = val.displayName ? val.displayName : val.lastname + ' ' + val.firstname;
 
           this.authService.afs.doc('mainFeed/allPosts').collection('post').doc(this.projectID).set({
-            post: pdescription ? pdescription : '',
+            post: pdescription,
             date: date.toLocaleString('en-GB'),
             day: date.getUTCDate(),
             month: (date.getUTCMonth() + 1),
@@ -70,11 +69,9 @@ export class NewProjectService {
             photoURL: tempPhotoUrl,
             displayName: username ? username : 'Anonym',
             projectName: pname ? pname : 'Project Alpha',
-            projectBanner: '',
-            projectImages: [],
-            projectDescription: pdescription ? pdescription : '',
-            projectCategories: pcategories ? pcategories : [],
-            projectMembers: members ? members : [],
+            projectDescription: pdescription ? pdescription : 'This is my description',
+            projectCategories: pcategories ? pcategories : ['Default', 'Default2'],
+            projectMembers: members ? members : ['Markus', 'Damir', 'Andrea'],
             timeStamp: firebase.firestore.Timestamp.now(),
             postId: docID,
             postType: 'project'
@@ -108,7 +105,7 @@ export class NewProjectService {
     });
   }
 
-  updateData(id: string, pname ?: string, pdescription ?: string, pcategories ?: string[], pmembers ?: string, photoURL ?: string) {
+  updateData(id: string, pname?: string, pdescription?: string, pcategories?: string[], pmembers?: string, photoURL?: string) {
     this.afs.collection(`project/${id}`).doc().update({
       projectName: pname ? pname : ' ',
       projectDescription: pdescription ? pdescription : ' ',

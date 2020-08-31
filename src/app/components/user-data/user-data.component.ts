@@ -4,9 +4,7 @@ import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
 import {ActivatedRoute, Route} from '@angular/router';
-import * as admin from 'firebase-admin';
-import * as firebase from 'firebase';
-import {AngularFirestore} from "angularfire2/firestore";
+import {AngularFirestore} from 'angularfire2/firestore';
 
 
 @Component({

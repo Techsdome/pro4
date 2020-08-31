@@ -1,11 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import * as firebase from 'firebase';
-import {Project} from '../../models/Project';
-import Timestamp = firebase.firestore.Timestamp;
 import {Posts} from '../../shared/services/posts';
-import {PostsService} from '../../services/posts.service';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {ReactionsService} from '../../services/reactions.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-show-projects',
@@ -23,13 +22,19 @@ export class ShowProjectsComponent implements OnInit {
   showCommentSection = false;
   commentsLenght: number;
   posts: any[] = [];
-
-  activeMenu: string;
   filter: boolean;
-  likes: number;
 
-  constructor(public authservice: AuthService, public afs: AngularFirestore, private postService: PostsService) {
-  }
+  emojiList: string[];
+  reactionCount: any;
+  userReaction: any;
+  subscription: Posts;
+
+  headMessage: string;
+
+  constructor(public authservice: AuthService,
+              public afs: AngularFirestore,
+              private reactionSvc: ReactionsService
+             ) { }
 
   openCommentSection() {
     document.getElementById('comment-inputfield').focus();
@@ -65,7 +70,7 @@ export class ShowProjectsComponent implements OnInit {
     }
   }
 
-  updateLikes(): void {
+/*  updateLikes(): void {
     this.likes++;
 
     this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).update({
@@ -73,14 +78,34 @@ export class ShowProjectsComponent implements OnInit {
     }).then(() => {
       this.loadPost();
     });
-  }
+  }*/
 
   loadPost() {
+    let postType;
+
     this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).get().toPromise().then(doc => {
       if (doc.exists) {
-        this.likes = doc.data().likes;
+        postType = doc.data().postType;
+        this.loadReactions().then(r => { });
+      }
+
+    }).then(() => {
+      switch (postType) {
+        case 'project':
+          this.headMessage = 'created a Project';
+          break;
+        case 'question':
+          this.headMessage = 'asked a Question';
+          break;
+        case 'post':
+          this.headMessage = 'posted';
+          break;
+        default:
+          this.headMessage = 'posted';
+          break;
       }
     });
+
 
     this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).get().toPromise().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -126,6 +151,25 @@ export class ShowProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPost();
+  }
+
+  async loadReactions() {
+    this.emojiList = this.reactionSvc.emojiList;
+    this.subscription = await this.reactionSvc.getReactions(this.allPostsObject.postId);
+    this.reactionCount = this.reactionSvc.countRactions(this.subscription.likes);
+    this.userReaction = this.reactionSvc.userReaction(this.subscription.likes);
+  }
+
+  hasReactions(index) {
+    return _.get(this.reactionCount, index.toString());
+  }
+
+  react(val) {
+    if (this.userReaction === val) {
+      this.reactionSvc.removeReaction(this.allPostsObject.postId);
+    } else {
+      this.reactionSvc.updateReactions(this.allPostsObject.postId, val);
+    }
   }
 
   toggle() {

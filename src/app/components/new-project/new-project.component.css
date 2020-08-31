@@ -188,4 +188,8 @@
   cursor: pointer;
 }
 
+.mat-form-field-inputs {
+  width: 100%;
+}
+
 

@@ -4,6 +4,7 @@ import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {ActivatedRoute} from "@angular/router";
+import {FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'app-inputfield',
@@ -15,6 +16,23 @@ export class InputfieldComponent implements OnInit {
     items: Item[];
     user: User;
     edit = false;
+
+  editorForm: FormGroup;
+
+  editorStyle = {
+    justifyContent: 'center',
+    alignContent: 'center',
+    height: '200px',
+    width: '50vw',
+    backgroundColor: 'white',
+  };
+
+  config = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'size'],
+      ['blockquote', 'code-block', 'link'],
+    ]
+  };
 
   @Input() searchedUser: any;                          // The searched User of search bar
   private searchedUserId: any;

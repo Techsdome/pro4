@@ -4,8 +4,12 @@
 
 /* You can add global styles to this file, and also import other style files */
 
-h5 {
+h5, h2, h3, h4 {
   font-weight: 400 !important;
+}
+
+button:focus {
+  outline: 0px !important;
 }
 
 .container-style {
@@ -37,6 +41,7 @@ html, body {
 body {
   margin: 0;
   font-family: Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
+  color: #222 !important;
 }
 
 .btn.btn-rounded {
@@ -153,9 +158,11 @@ mat-tab-label{
 
 .boderButton {
   background-color: rgba(0, 0, 0, 0);
-  border-radius: 100px;
-  border: solid 2px #a6b0bf;
+  border-radius: 10px;
+  border: solid 2px;
+  border-color: rgba(108, 99, 255, .5);
   margin: 3px 3px;
+  transition: 0.1s;
 }
 
 .roundInputField{
@@ -165,7 +172,8 @@ mat-tab-label{
 }
 
 .boderButton:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(108, 99, 255, 1);
+  color: white;
 }
 
 .itemInput, .skillInput {

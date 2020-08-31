@@ -62,6 +62,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from "@angular/material/card";
 import { ImageModalComponent } from './components/image-modal/image-modal.component';
 import {MatChipsModule} from "@angular/material/chips";
+import { ContributorViewComponent } from './components/contributor-view/contributor-view.component';
+import { TagViewComponent } from './components/tag-view/tag-view.component';
 
 
 @NgModule({
@@ -101,7 +103,9 @@ import {MatChipsModule} from "@angular/material/chips";
         UploadImagesComponent,
         NewQuestionComponent,
         CreatePostNewComponent,
-        ImageModalComponent
+        ImageModalComponent,
+        ContributorViewComponent,
+        TagViewComponent
     ],
   imports: [
     MatTabsModule,

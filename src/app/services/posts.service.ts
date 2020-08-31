@@ -64,6 +64,7 @@ export class PostsService {
             projectCategories: doc.data().projectCategories,
             projectMembers: doc.data().projectMembers,
             userPhotoURL: photoURL,
+            uid: doc.data().uid,
             likes: doc.data().likes,
             comments: [
               {
@@ -89,19 +90,19 @@ export class PostsService {
         let username = doc.data().displayName;
         let photoURL = '';
         let postText = doc.data().post;
-        let typeImage = 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Exclamation_mark.png';
+        let typeImage = '../../../assets/icons/em.svg';
 
         if (doc.data().postType === 'project') {
           theuserid = doc.data().uid;
           username = '';
           photoURL = '';
           postText = doc.data().projectDescription;
-          typeImage = 'https://cdn.iconscout.com/icon/premium/png-512-thumb/project-management-2-536854.png';
+          typeImage = '../../../assets/icons/project.svg';
         }
 
         if (doc.data().postType === 'question') {
           // tslint:disable-next-line:max-line-length
-          typeImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png';
+          typeImage = '../../../assets/icons/q2.svg';
         }
         const userDoc = await this.authService.afs.collection('users').doc(theuserid).get().toPromise();
 
@@ -125,6 +126,7 @@ export class PostsService {
           projectCategories: doc.data().projectCategories,
           projectMembers: doc.data().projectMembers,
           userPhotoURL: photoURL,
+          uid: doc.data().uid,
           likes: doc.data().likes,
           comments: [
             {

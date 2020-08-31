@@ -27,6 +27,9 @@ export class UserProfileComponent implements OnInit {
 
   private navigationSubscription: any;
 
+  // posts
+  // activeMenu: string;
+
   constructor(
     public newproject: NewProjectComponent,
     private route: ActivatedRoute,
@@ -123,5 +126,4 @@ export class UserProfileComponent implements OnInit {
   toggleProject() {
     this.newproject.toggleScreen();
   }
-
 }
