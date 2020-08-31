@@ -81,7 +81,7 @@ export class NewProjectService {
                         });
                     });
                 });
-        });
+          });
     }
 
     async uploadPictures(bannerURL: string, imageURL: string[]): Promise<any> {

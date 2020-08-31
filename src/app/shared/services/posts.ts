@@ -12,6 +12,6 @@ export interface Posts {
     projectMembers: string;
     userPhotoURL: string;
     comments: [{ commentName: string, comment: string }];
-    likes: number;
+    likes: any;
     uid: string;
 }

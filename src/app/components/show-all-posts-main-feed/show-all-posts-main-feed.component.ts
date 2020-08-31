@@ -53,14 +53,18 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
         this.postService.getPosts().then(posts => {
           this.posts = posts.sort(this.sortAfterDate);
           this.posts.forEach((post) => {
+/*
             console.log(post.postDate);
+*/
           });
         });
       } else {
         this.postService.getPosts(this.activeMenu).then(posts => {
           this.posts = posts.sort(this.sortAfterDate);
           this.posts.forEach((post) => {
+/*
             console.log(post.postDate);
+*/
           });
         });
       }

@@ -214,8 +214,7 @@ export class CreatePostNewComponent implements OnInit {
             second: date.getSeconds(),
             uid: this.authService.afAuth.auth.currentUser.uid,
             photoURL: tempPhotoUrl,
-            displayName: val.lastname == 'Last Name' ? `${val.firstname}` : `${val.firstname} ${val.lastname}`,
-            likes: 0
+            displayName: val.lastname === 'Last Name' ? `${val.firstname}` : `${val.firstname} ${val.lastname}`,
           }).then(docRef => {
             this.authService.afs.doc(`mainFeed/allPosts`).collection('post').doc(docRef.id).update({
               postId: docRef.id,
