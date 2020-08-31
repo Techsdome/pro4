@@ -163,10 +163,11 @@ a:hover::before, a:focus::before {
 
 .smallbanner img {
     margin: -30px 0 35px -30px;
-    width: 105%;
-    height: auto;
     max-height: 100px;
     border-radius: 20px;
+    width: 105%;
+    object-fit: cover;
+    height: 300px;
 }
 
 .commentButtonArea {
