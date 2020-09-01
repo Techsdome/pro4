@@ -97,9 +97,9 @@ export class NewProjectComponent implements OnInit {
   }
 
   getChildMessage(message: any) {
- /*   if (this.isPurpose === 'tags') {
-      this.selectedCategories = message;
-    }*/
+    /*   if (this.isPurpose === 'tags') {
+         this.selectedCategories = message;
+       }*/
 
   }
 
@@ -158,21 +158,19 @@ export class NewProjectComponent implements OnInit {
             const today = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}`;
 
             const URL = `project/${this.user.uid}/${this.projectID}/images/${today}_${myFile.name}`;
-            let imageWidth;
-            let imageHeight;
 
-            const reader = new FileReader();
-            reader.readAsDataURL(myFile);
-            reader.onload = () => {
-              const img = new Image();
-              img.onload = () => {
-                this.imagesMetadata.push({
-                  imageWidth: img.width,
-                  imageHeight: img.height
-                });
-              };
-              img.src = (reader.result) as string;
-            };
+            // const reader = new FileReader();
+            // reader.readAsDataURL(myFile);
+            // reader.onload = () => {
+            //   const img = new Image();
+            //   img.onload = () => {
+            //     this.imagesMetadata.push({
+            //       imageWidth: img.width,
+            //       imageHeight: img.height
+            //     });
+            //   };
+            //   img.src = (reader.result) as string;
+            // };
 
             this.task = this.storage.upload(URL, myFile);
 
@@ -200,7 +198,7 @@ export class NewProjectComponent implements OnInit {
       document.getElementById('fillCorrectly').style.display = 'none';
 
       await this.uploadBannerImage();
-      const bannerURL = await this.bannerURLPromise;
+      let bannerURL = await this.bannerURLPromise;
 
       if (this.bannerRef) {
         this.bannerMetadata = {
@@ -220,8 +218,17 @@ export class NewProjectComponent implements OnInit {
         imagesURLs.push(await URL);
       }
 
-      for (const img of imagesURLs) {
-        await this.storage.storage.ref(this.bannerRef).updateMetadata(this.imagesMetadata[0]);
+      // for (const img of imagesURLs) {
+      //   await this.storage.storage.ref(this.bannerRef).updateMetadata(this.imagesMetadata[0]);
+      // }
+
+      const defaultBanner = await this.storage.ref('project/Default_Banner/Default2.jpg').getDownloadURL().toPromise();
+      if (!bannerURL) {
+        bannerURL = defaultBanner;
+      }
+
+      if (imagesURLs.length === 0) {
+        imagesURLs.push(defaultBanner);
       }
 
       await this.pservice.uploadPictures(bannerURL, imagesURLs);

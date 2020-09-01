@@ -85,17 +85,12 @@ export class NewProjectService {
   }
 
   async uploadPictures(bannerURL: string, imageURL: string[]): Promise<any> {
-    const URL = await this.storage.ref('project/Default_Banner/Default.jpg').getDownloadURL().toPromise();
-
-    const tmpImages = [];
-    tmpImages.push(URL);
-
-    const bannerPicture = bannerURL ? bannerURL : URL;
-    const imagePictures = imageURL.length > 0 ? imageURL : tmpImages;
+    console.log(bannerURL);
+    console.log(imageURL[0]);
 
     return this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).update({
-      projectBanner: bannerPicture,
-      projectImages: imagePictures
+      projectBanner: bannerURL,
+      projectImages: imageURL
     }).then(() => {
       this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).get().toPromise().then((doc) => {
         if (doc.exists) {
