@@ -36,6 +36,7 @@ body {
 #project-name {
   margin: 0;
   padding: 0;
+  height: max-content;
 }
 
 .h1, h1 {
@@ -45,6 +46,7 @@ body {
 #interact-button {
   margin: 0;
   padding: 0;
+  height: max-content;
 }
 
 .i-btn:hover {
@@ -83,6 +85,7 @@ body {
 #menu {
   width: 100%;
   margin-bottom: 10px;
+  height: max-content;
 }
 
 #menu div {
@@ -179,9 +182,8 @@ p {
 }
 
 #gallery img:hover {
-  margin-left: -5px;
-  width: 120%;
-  height: auto;
+  margin: -5px 0 0 -5px;
+  width: 110%;
 }
 
 .addMember {
@@ -247,26 +249,13 @@ p {
 }
 
 .gallery-pictures img {
-  /*width: 110%;*/
-  /*height: auto;*/
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  width: auto;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  width: 100%;
+  object-fit: cover;
 }
 
-.gallery-pictures .portrait {
-  width: 100%;
-  height: auto;
-}
 
 .gallery-pictures {
   display: inline-block;
-  position: relative;
   width: 120px;
   height: 120px;
   overflow: hidden;
@@ -351,7 +340,7 @@ input {
 }
 
 .pname {
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 #interact-button .btn-primary.focus, .btn-primary:focus {
