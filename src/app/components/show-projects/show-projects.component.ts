@@ -158,6 +158,7 @@ export class ShowProjectsComponent implements OnInit {
     this.subscription = await this.reactionSvc.getReactions(this.allPostsObject.postId);
     this.reactionCount = this.reactionSvc.countRactions(this.subscription.likes);
     this.userReaction = this.reactionSvc.userReaction(this.subscription.likes);
+    console.log(this.reactionCount + ' ' + this.userReaction);
   }
 
   hasReactions(index) {

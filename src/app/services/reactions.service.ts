@@ -13,7 +13,7 @@ export class ReactionsService {
   reactionPromise: any;
   userId: string;
   emojiList = ['like'];
-  likeList;
+  likeList = [];
 
   constructor( private db: AngularFireDatabase,
                private afAuth: AngularFireAuth,
@@ -38,12 +38,11 @@ export class ReactionsService {
 
   updateReactions(itemId, reaction = 0) {
     const data = { [this.userId]: reaction};
-    this.afs.collection('mainFeed/allPosts/post/').doc(itemId).update({
+    this.afs.collection('mainFeed/allPosts/post/').doc(itemId).set({
       likes: data,
-    }).then(r => {
+    }, {merge: true}).then(r => {
 
     });
-
   }
 
   removeReaction(itemId) {

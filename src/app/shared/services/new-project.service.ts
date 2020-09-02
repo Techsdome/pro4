@@ -33,7 +33,8 @@ export class NewProjectService {
     return this.authService.getCurrentUser();
   }
 
-  async addData(id, pname, pdescription, pcategories, members): Promise<void> {
+  async addData(id, pname, pdescription, pcategories, members, bannerDefault): Promise<void> {
+    console.log('1');
     let myuser: any;
     let username: string;
 
@@ -51,6 +52,7 @@ export class NewProjectService {
 
     this.authService.getCurrentUser().subscribe((user) => {
       myuser = user;
+
       this.authService.afs.collection('users').doc(user.uid).valueChanges()
         .subscribe((val: any) => {
           username = val.displayName ? val.displayName : val.lastname + ' ' + val.firstname;
@@ -69,6 +71,8 @@ export class NewProjectService {
             photoURL: tempPhotoUrl,
             displayName: username ? username : 'Anonym',
             projectName: pname ? pname : 'Project Alpha',
+            projectBanner: bannerDefault,
+            projectImages: '',
             projectDescription: pdescription ? pdescription : 'This is my description',
             projectCategories: pcategories ? pcategories : ['Default', 'Default2'],
             projectMembers: members ? members : ['Markus', 'Damir', 'Andrea'],
@@ -84,19 +88,23 @@ export class NewProjectService {
     });
   }
 
-  async uploadPictures(bannerURL: string, imageURL: string[]): Promise<any> {
-    console.log(bannerURL);
-    console.log(imageURL[0]);
 
-    return this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).update({
-      projectBanner: bannerURL,
-      projectImages: imageURL
-    }).then(() => {
-      this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).get().toPromise().then((doc) => {
-        if (doc.exists) {
-          console.log(doc.data());
-        }
-      });
+  async getBannerDefault(): Promise<any> {
+    console.log('4 - default holen');
+    return await this.storage.ref('project/Default_Banner/Default2.jpg').getDownloadURL().toPromise();
+  }
+
+  async uploadPictures(bannerURL: string, imageURL: string[]): Promise<any> {
+    console.log('8');
+    console.log('uploadPictures: ' + bannerURL + ' ' + imageURL);
+    console.log('project ID: ' + this.projectID);
+    return this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).get().toPromise().then((doc) => {
+      if (doc.exists) {
+        return this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).update({
+          projectBanner: bannerURL,
+          projectImages: imageURL
+        });
+      }
     });
   }
 
