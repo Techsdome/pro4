@@ -90,7 +90,10 @@ export class ProjectPageComponent implements OnInit {
     } else {
       alert('No Project found!');
     }
+
     await this.loadProject();
+
+
 
     if (this.projectID) {
       this.authService.afs.collection(`mainFeed/allPosts/post/${this.projectID}/comments`).valueChanges()
@@ -392,6 +395,7 @@ export class ProjectPageComponent implements OnInit {
       return this.projectPromise = this.docRef.get().toPromise().then(async doc => {
         if (doc.exists) {
           this.project = doc.data();
+          console.log(this.project);
           this.tmpBannerPosition = doc.data().bannerPositionY;
           this.originalImages = this.project.projectImages ? this.project.projectImages : [];
 
@@ -410,7 +414,7 @@ export class ProjectPageComponent implements OnInit {
           console.log(this.project.projectBanner);
           if (this.project.projectBanner) {
             this.bannerURL = this.project.projectBanner;
-            this.loadBannerPicture();
+            await this.loadBannerPicture();
           }
 
           this.isUserOwner();
@@ -472,6 +476,7 @@ export class ProjectPageComponent implements OnInit {
 
 // sets the background image for the banner div
   async loadBannerPicture() {
+    console.log('10 - inLoadBannerPicture: ' + this.bannerURL);
     if (this.bannerURL) {
       if (document.getElementById('banner-picture')) {
         document.getElementById('banner-picture').style.backgroundImage = `url(${this.bannerURL}`;

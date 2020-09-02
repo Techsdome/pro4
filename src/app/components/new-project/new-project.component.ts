@@ -5,7 +5,7 @@ import {User} from '../../shared/services/user';
 import {FormControl, FormGroup, FormsModule} from '@angular/forms';
 import {AngularFireStorage} from 'angularfire2/storage';
 import {AngularFireUploadTask} from '@angular/fire/storage';
-import {filter, finalize, switchMap} from 'rxjs/operators';
+import {catchError, filter, finalize, switchMap} from 'rxjs/operators';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Item} from '../../models/Item';
 import {DataServiceService} from '../../shared/services/data-service.service';
@@ -35,6 +35,8 @@ export class NewProjectComponent implements OnInit {
   taskPromises = [];
 
   bannerURLPromise: Promise<any>;
+  bannerDefault: string;
+  bannerURL: string;
   bannerRef: string;
   bannerFile: File;
   bannerMetadata: any;
@@ -96,13 +98,6 @@ export class NewProjectComponent implements OnInit {
               private afs: AngularFirestore) {
   }
 
-  getChildMessage(message: any) {
-    /*   if (this.isPurpose === 'tags') {
-         this.selectedCategories = message;
-       }*/
-
-  }
-
   getPurposeMessage(message: string) {
     this.isPurpose = message;
   }
@@ -116,32 +111,34 @@ export class NewProjectComponent implements OnInit {
   }
 
   async uploadBannerImage(): Promise<any> {
+    console.log('6 - Bild hochladen');
     if (this.pservice.getProjectID()) {
       this.projectID = this.pservice.getProjectID();
-      if (this.bannerFile) {
-        const date = new Date();
-        const today = `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}${date.getHours()}${date.getMinutes()}`;
+    }
+    console.log('bannerFIle: ' + this.bannerFile.name);
+    if (this.bannerFile) {
+      const date = new Date();
+      const today = `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}${date.getHours()}${date.getMinutes()}`;
 
-        this.bannerRef = `project/${this.user.uid}/${this.projectID}/banner/${today}_${this.bannerFile.name}`;
+      this.bannerRef = `project/${this.user.uid}/${this.projectID}/banner/${today}_${this.bannerFile.name}`;
 
-        const reader = new FileReader();
-        reader.readAsDataURL(this.bannerFile);
-        reader.onload = () => {
-          const img = new Image();
-          img.onload = () => {
-            this.bannerWidth = img.width;
-            this.bannerHeight = img.height;
-          };
-          img.src = (reader.result) as string;
+      const reader = new FileReader();
+      reader.readAsDataURL(this.bannerFile);
+      reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+          this.bannerWidth = img.width;
+          this.bannerHeight = img.height;
         };
+        img.src = (reader.result) as string;
+      };
 
-        this.task = this.storage.upload(this.bannerRef, this.bannerFile);
-        return this.task.snapshotChanges().pipe(
-          finalize(() => {
-            this.bannerURLPromise = this.storage.ref(this.bannerRef).getDownloadURL().toPromise();
-          }),
-        ).toPromise();
-      }
+      this.task = this.storage.upload(this.bannerRef, this.bannerFile);
+      return this.task.snapshotChanges().pipe(
+        finalize(() => {
+          this.bannerURLPromise = this.storage.ref(this.bannerRef).getDownloadURL().toPromise();
+        }),
+      ).toPromise();
     } else {
       alert('Could not upload banner');
       this.failed = true;
@@ -191,56 +188,82 @@ export class NewProjectComponent implements OnInit {
   async submit(name: string) {
     if (name && this.user) {
       document.getElementsByClassName('saving-project').item(0).className += ' visible';
+      this.bannerDefault = await this.pservice.getBannerDefault();
 
-      await this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories, this.contributorUid);
+      try {
+        console.log('1');
+        await this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories,
+          this.contributorUid, this.bannerDefault);
+        console.log('2');
+        await this.pictureManager();
+        console.log('nach pCM');
 
-      (document.getElementById('myForm') as HTMLFormElement).reset();
-      document.getElementById('fillCorrectly').style.display = 'none';
+        (document.getElementById('myForm') as HTMLFormElement).reset();
+        document.getElementById('fillCorrectly').style.display = 'none';
+        document.getElementsByClassName('saving-project').item(0).className = 'saving-project';
 
-      await this.uploadBannerImage();
-      let bannerURL = await this.bannerURLPromise;
-
-      if (this.bannerRef) {
-        this.bannerMetadata = {
-          customMetadata: {
-            width: this.bannerWidth,
-            height: this.bannerHeight
-          }
-        };
-
-        await this.storage.storage.ref(this.bannerRef).updateMetadata(this.bannerMetadata);
+        console.log('Submit Ende!!!!!!!!!!!!!!!');
+        if (!this.failed) {
+          this.activeModal.close();
+          this.router.navigate(['/project-page'], {state: {data: this.projectID}}).then();
+        }
+      } catch (e) {
+        console.log(e);
       }
 
-      const imagesURLs = [];
-      await this.uploadImages();
-      await Promise.all(this.taskPromises);
-      for (const URL of this.imagesURLPromises) {
-        imagesURLs.push(await URL);
-      }
-
-      // for (const img of imagesURLs) {
-      //   await this.storage.storage.ref(this.bannerRef).updateMetadata(this.imagesMetadata[0]);
-      // }
-
-      const defaultBanner = await this.storage.ref('project/Default_Banner/Default2.jpg').getDownloadURL().toPromise();
-      if (!bannerURL) {
-        bannerURL = defaultBanner;
-      }
-
-      if (imagesURLs.length === 0) {
-        imagesURLs.push(defaultBanner);
-      }
-
-      await this.pservice.uploadPictures(bannerURL, imagesURLs);
-      document.getElementsByClassName('saving-project').item(0).className = 'saving-project';
-
-      if (!this.failed) {
-        this.activeModal.close();
-        this.router.navigate(['/project-page'], {state: {data: this.projectID}}).then();
-      }
     } else {
       document.getElementById('fillCorrectly').style.display = 'block';
     }
+  }
+
+  async pictureManager(): Promise<any> {
+    console.log('anfang pcm: ' + this.bannerFile);
+    if (!this.bannerFile) {
+      console.log('3 kein Bild');
+      this.bannerURL = this.bannerDefault;
+      console.log('Default Bild geholt: ' + this.bannerURL);
+    } else {
+      console.log('5 - Bild gesetzt');
+      const e = await this.uploadBannerImage();
+
+      console.log('Banner File gesetzt: ' + this.bannerFile.name);
+
+      this.bannerURL = await this.bannerURLPromise;
+      this.bannerMetadata = {
+        customMetadata: {
+          width: this.bannerWidth,
+          height: this.bannerHeight
+        }
+      };
+      await this.storage.storage.ref(this.bannerRef).updateMetadata(this.bannerMetadata);
+    }
+    /*    if (this.bannerRef) {
+          this.bannerMetadata = {
+            customMetadata: {
+              width: this.bannerWidth,
+              height: this.bannerHeight
+            }
+          };*/
+
+    const imagesURLs = [];
+    await this.uploadImages();
+    await Promise.all(this.taskPromises);
+    for (const URL of this.imagesURLPromises) {
+      imagesURLs.push(await URL);
+    }
+
+    // for (const img of imagesURLs) {
+    //   await this.storage.storage.ref(this.bannerRef).updateMetadata(this.imagesMetadata[0]);
+    // }
+
+    console.log('images Lenght: ' + imagesURLs.length);
+    if (imagesURLs.length === 0) {
+      imagesURLs.push(this.bannerDefault);
+    }
+
+    console.log('7 - Bilder updaten Banner: ' + this.bannerURL + ' ImagesURL: ' + imagesURLs);
+    await this.pservice.uploadPictures(this.bannerURL, imagesURLs);
+    console.log('9');
   }
 
   getExtendedData(item) {
@@ -264,6 +287,7 @@ export class NewProjectComponent implements OnInit {
       this.getExtendedData(items);
     });
 
+
     this.dataService.getCurrentUser().subscribe(user => {
       this.user = user;
     });
@@ -271,6 +295,7 @@ export class NewProjectComponent implements OnInit {
       editor: new FormControl(null)
     });
   }
+
 
   maxLength(e) {
     if (e.editor.getLength() > 1000) {
