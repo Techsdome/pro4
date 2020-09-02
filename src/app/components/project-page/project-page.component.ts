@@ -93,8 +93,6 @@ export class ProjectPageComponent implements OnInit {
 
     await this.loadProject();
 
-
-
     if (this.projectID) {
       this.authService.afs.collection(`mainFeed/allPosts/post/${this.projectID}/comments`).valueChanges()
         .subscribe((comment) => {
@@ -395,7 +393,6 @@ export class ProjectPageComponent implements OnInit {
       return this.projectPromise = this.docRef.get().toPromise().then(async doc => {
         if (doc.exists) {
           this.project = doc.data();
-          console.log(this.project);
           this.tmpBannerPosition = doc.data().bannerPositionY;
           this.originalImages = this.project.projectImages ? this.project.projectImages : [];
 
@@ -411,7 +408,6 @@ export class ProjectPageComponent implements OnInit {
             this.tmpAllContributors.push(user);
           }
 
-          console.log(this.project.projectBanner);
           if (this.project.projectBanner) {
             this.bannerURL = this.project.projectBanner;
             await this.loadBannerPicture();
