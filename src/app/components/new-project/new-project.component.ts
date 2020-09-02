@@ -217,16 +217,10 @@ export class NewProjectComponent implements OnInit {
   }
 
   async pictureManager(): Promise<any> {
-    console.log('anfang pcm: ' + this.bannerFile);
     if (!this.bannerFile) {
-      console.log('3 kein Bild');
       this.bannerURL = this.bannerDefault;
-      console.log('Default Bild geholt: ' + this.bannerURL);
     } else {
-      console.log('5 - Bild gesetzt');
       const e = await this.uploadBannerImage();
-
-      console.log('Banner File gesetzt: ' + this.bannerFile.name);
 
       this.bannerURL = await this.bannerURLPromise;
       this.bannerMetadata = {
@@ -237,13 +231,6 @@ export class NewProjectComponent implements OnInit {
       };
       await this.storage.storage.ref(this.bannerRef).updateMetadata(this.bannerMetadata);
     }
-    /*    if (this.bannerRef) {
-          this.bannerMetadata = {
-            customMetadata: {
-              width: this.bannerWidth,
-              height: this.bannerHeight
-            }
-          };*/
 
     const imagesURLs = [];
     await this.uploadImages();
@@ -256,14 +243,10 @@ export class NewProjectComponent implements OnInit {
     //   await this.storage.storage.ref(this.bannerRef).updateMetadata(this.imagesMetadata[0]);
     // }
 
-    console.log('images Lenght: ' + imagesURLs.length);
     if (imagesURLs.length === 0) {
       imagesURLs.push(this.bannerDefault);
     }
-
-    console.log('7 - Bilder updaten Banner: ' + this.bannerURL + ' ImagesURL: ' + imagesURLs);
     await this.pservice.uploadPictures(this.bannerURL, imagesURLs);
-    console.log('9');
   }
 
   getExtendedData(item) {
