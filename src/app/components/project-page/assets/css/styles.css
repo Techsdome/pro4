@@ -182,8 +182,8 @@ p {
 }
 
 #gallery img:hover {
-  margin: -5px 0 0 -5px;
   width: 110%;
+  height: 110%;
 }
 
 .addMember {
@@ -250,6 +250,7 @@ p {
 
 .gallery-pictures img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 

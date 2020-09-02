@@ -67,7 +67,6 @@ export class NewProjectComponent implements OnInit {
   contributorUid = [];
   isShow = false;
 
-
   @ViewChild('contributorInput') contributorInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 

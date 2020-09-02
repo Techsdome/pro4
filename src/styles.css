@@ -320,6 +320,7 @@ ul > * {
   border-radius: 50px;
   margin-left: -70px;
   float: left;
+  object-fit: cover;
 }
 
 .image-shadow {
