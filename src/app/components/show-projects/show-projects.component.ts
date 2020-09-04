@@ -36,49 +36,12 @@ export class ShowProjectsComponent implements OnInit {
               private reactionSvc: ReactionsService
              ) { }
 
-  openCommentSection() {
-    document.getElementById('comment-inputfield').focus();
-    this.showCommentSection = !this.showCommentSection;
+  ngOnInit(): void {
+    this.loadPost();
   }
 
-  openComment() {
-    this.edit = !this.edit;
-    this.showCommentSection = !this.showCommentSection;
+    this.filter = !this.filter;
   }
-
-  addComment() {
-    if (this.comment) {
-      const date: Date = new Date();
-
-      this.authservice.getCurrentUser().subscribe((result) => {
-        this.authservice.afs.collection('users').doc(result.uid).valueChanges()
-          .subscribe((val: any) => {
-            this.comments.push({
-              comment: this.comment,
-              commentName: val.firstname + ' ' + val.lastname,
-              date: date.toLocaleString('en-GB'),
-            });
-
-            this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
-              comment: this.comment,
-              commentName: val.firstname + ' ' + val.lastname,
-              date: date.toLocaleString('en-GB'),
-            });
-          });
-      });
-      this.comment = '';
-    }
-  }
-
-/*  updateLikes(): void {
-    this.likes++;
-
-    this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).update({
-      likes: firebase.firestore.FieldValue.increment(1)
-    }).then(() => {
-      this.loadPost();
-    });
-  }*/
 
   loadPost() {
     let postType;
@@ -106,12 +69,12 @@ export class ShowProjectsComponent implements OnInit {
       }
     });
 
-
-    this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).get().toPromise().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        this.comments.push(doc.data());
-      });
-    }).then(() => {
+    this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).get().toPromise()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.comments.push(doc.data());
+        });
+      }).then(() => {
       const array = this.comments.sort(this.sortAfterDate);
     });
   }
@@ -148,11 +111,53 @@ export class ShowProjectsComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   *  ----------- COMMENT SECTION -----------
+   */
 
-  ngOnInit(): void {
-    this.loadPost();
+  openCommentSection() {
+    document.getElementById('comment-inputfield').focus();
+    this.showCommentSection = !this.showCommentSection;
   }
 
+  openComment() {
+    this.edit = !this.edit;
+    this.showCommentSection = !this.showCommentSection;
+  }
+
+  addComment() {
+    if (this.comment) {
+      const date: Date = new Date();
+
+      this.authservice.getCurrentUser().subscribe((result) => {
+        this.authservice.afs.collection('users').doc(result.uid).valueChanges()
+          .subscribe((val: any) => {
+            this.comments.push({
+              comment: this.comment,
+              commentName: val.firstname + ' ' + val.lastname,
+              date: date.toLocaleString('en-GB'),
+            });
+
+            this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
+              comment: this.comment,
+              commentName: val.firstname + ' ' + val.lastname,
+              date: date.toLocaleString('en-GB'),
+            });
+          });
+      });
+      this.comment = '';
+    }
+  }
+
+  /**
+   *
+   *  ----------- REACTION SECTION -----------
+   */
+
+  /**
+   * Get reaction list of database
+   */
   async loadReactions() {
     this.emojiList = this.reactionSvc.emojiList;
     this.subscription = await this.reactionSvc.getReactions(this.allPostsObject.postId);
@@ -160,10 +165,20 @@ export class ShowProjectsComponent implements OnInit {
     this.userReaction = this.reactionSvc.userReaction(this.subscription.likes);
   }
 
+  /**
+   *
+   * @param index - return the string of the reaction
+   * Currently not in use.
+   */
   hasReactions(index) {
     return _.get(this.reactionCount, index.toString());
   }
 
+  /**
+   *
+   * @param val - reaction of the user
+   * Currently only likes possible.
+   */
   react(val) {
     if (this.userReaction === val) {
       this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
@@ -172,7 +187,5 @@ export class ShowProjectsComponent implements OnInit {
     }
   }
 
-  toggle() {
-    this.filter = !this.filter;
-  }
+
 }
