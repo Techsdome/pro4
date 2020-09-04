@@ -6,7 +6,7 @@
   background-color: #fff;
   margin: 0;
   padding: 0;
-  height: 815px;
+  min-height: 815px;
   border-radius: 20px;
   width: 100%;
   font-family: 'Nunito Sans', sans-serif;
@@ -52,6 +52,10 @@ body {
 .i-btn:hover {
   background-color: #d7d7d7;
   color: #5e5d5d;
+}
+
+#headline {
+  height: max-content;
 }
 
 #headline #interact-button .i-btn {
@@ -111,8 +115,12 @@ body {
   padding-right: 15px;
 }
 
-#content > div {
+#content .headlines {
   padding: 0 15px;
+}
+
+#content #description {
+  height: 80%;
 }
 
 p {
@@ -122,6 +130,7 @@ p {
 
 #text-description {
   margin-top: 20px;
+  min-height: 200px;
 }
 
 #contributors .h3, h3 {
@@ -136,6 +145,7 @@ p {
 #info-panel {
   padding: 20px 5px;
   border-radius: 20px;
+  height: 100%;
 }
 
 #hashtags {
@@ -184,6 +194,11 @@ p {
 #gallery img:hover {
   width: 110%;
   height: 110%;
+}
+
+#gallery h2 {
+  height: max-content;
+  display: block;
 }
 
 .addMember {
@@ -278,7 +293,6 @@ p {
 #gallery {
   margin-top: 10px;
   width: 90%;
-  display: inline-block;
 }
 
 .pictures-container {
@@ -298,10 +312,28 @@ p {
   display: inline-block;
   width: 10%;
 }
+#contributors .contri-container {
+  min-height: 50px;
+}
+
+#tags .tags-container {
+  min-height: 50px;
+}
+
+.bottom-container {
+  min-height: 80px;
+}
 
 .saveProject {
   margin: 5px;
-  background-color: #ced7e5;
+  background-color: #dcdcdc;
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+}
+
+.saveProject:hover {
+  background-color: #eaeaea;
 }
 
 .discardProject {

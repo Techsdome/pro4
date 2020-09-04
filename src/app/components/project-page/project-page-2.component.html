@@ -72,10 +72,10 @@
                  innerHTML="{{ project.projectDescription }}">{{ project.projectDescription}} </p>
             </div>
 
-            <div class="shadow-sm align-self-end flex-nowrap col-4" id="info-panel">
+            <div class="shadow-sm align-self-start flex-nowrap col-4" id="info-panel">
               <div id="contributors" class="col-12" *ngIf="this.tmpAllContributors != []">
                 <h3>Contributors</h3>
-                <div class="row">
+                <div class="row contri-container">
                   <div *ngFor="let mem of this.tmpAllContributors; let mindex = index"
                        [ngClass]="editMode ? 'editbg' : ''">
                     <div class="col-3 border rounded-circle view overlay zoom contributors">
@@ -103,7 +103,7 @@
               </div>
               <div id="tags" class="col-12">
                 <h3> Tags </h3>
-                <div class="row">
+                <div class="row tags-container">
                   <!--<app-add-tag class="addTag" [itemsList]="this.project.projectCategories"
                                (childMessage)="tmpTags.push($event)" [show]="editMode"></app-add-tag>-->
                   <app-tag-view [projectID]="projectID"></app-tag-view>
@@ -112,37 +112,43 @@
             </div>
           </div>
 
-          <div id="gallery" class="pictures row">
-            <div id="gallery-heading" class="row">
+          <div class="bottom-container row align-self-end align-items-end">
+            <div id="gallery" class="pictures col-8 align-self-start">
+              <!--              <div id="gallery-heading" class="row">-->
               <h2>Gallery</h2>
-            </div>
-            <div class="pictures-container col-4" *ngFor="let picture of tmpAllImages; let pindex = index">
-              <button *ngIf="editMode" class="removePictureButton" (click)="removePicture(pindex)">
-                <svg class="bi bi-x-circle-fill removePicture" width="1.5em" height="1.5em" viewBox="0 0 16 16"
-                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                        d="M16 8A8 8 0 110 8a8 8 0 0116 0zm-4.146-3.146a.5.5 0 00-.708-.708L8 7.293 4.854 4.146a.5.5 0 10-.708.708L7.293 8l-3.147 3.146a.5.5 0 00.708.708L8 8.707l3.146 3.147a.5.5 0 00.708-.708L8.707 8l3.147-3.146z"
-                        clip-rule="evenodd"/>
-                </svg>
-              </button>
-              <div class="gallery-pictures col-12 thumbnail" [class]="editMode? 'editPictures' : '' ">
-                <img class="g-pictures" alt="project pic"
-                     [src]="picture"
-                      (click)="openImage(picture)">
+              <!--              </div>-->
+              <div class="pictures-container" *ngFor="let picture of tmpAllImages; let pindex = index">
+                <button *ngIf="editMode" class="removePictureButton" (click)="removePicture(pindex)">
+                  <svg class="bi bi-x-circle-fill removePicture" width="1.5em" height="1.5em" viewBox="0 0 16 16"
+                       fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M16 8A8 8 0 110 8a8 8 0 0116 0zm-4.146-3.146a.5.5 0 00-.708-.708L8 7.293 4.854 4.146a.5.5 0 10-.708.708L7.293 8l-3.147 3.146a.5.5 0 00.708.708L8 8.707l3.146 3.147a.5.5 0 00.708-.708L8.707 8l3.147-3.146z"
+                          clip-rule="evenodd"/>
+                  </svg>
+                </button>
+                <div class="gallery-pictures col-12 thumbnail" [class]="editMode? 'editPictures' : '' ">
+                  <img class="g-pictures" alt="project pic"
+                       [src]="picture"
+                       (click)="openImage(picture)">
+                </div>
+              </div>
+              <div *ngIf="editMode" class="addPictureContainer align-self-center">
+                <app-uploader (childMessage)="getImagesFiles($event)" class="uploader"></app-uploader>
               </div>
             </div>
-            <div *ngIf="editMode" class="col-2 addPictureContainer align-self-center">
-              <app-uploader (childMessage)="getImagesFiles($event)" class="uploader"></app-uploader>
-            </div>
-          </div>
-          <div class="row SaveProjectButton text-right">
-            <button *ngIf="editMode" class="saveProject boderButton" (click)="saveChanges()"> Save Changes</button>
-            <button *ngIf="editMode" class="discardProject boderButton" (click)="discardChanges()"> Discard Changes
-            </button>
-            <div class="saving-project" *ngIf="loading">
-              <span> Saving ... </span>
-              <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
+            <div class="col-4 SaveProjectButton text-right align-items-end">
+
+              <button *ngIf="editMode" class="discardProject boderButton align-self-end" (click)="discardChanges()">
+                Discard Changes
+              </button>
+              <button *ngIf="editMode" class="saveProject  align-self-end" (click)="saveChanges()"> Save
+                Changes
+              </button>
+              <div class="saving-project" *ngIf="loading">
+                <span> Saving ... </span>
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
               </div>
             </div>
           </div>
@@ -154,7 +160,7 @@
                 <p><strong>{{comment.commentName}}</strong>: {{comment.comment}}</p>
               </li>
             </ul>
-            <input class="roundInputField comment" type="text" [(ngModel)]= "comment">
+            <input class="roundInputField comment" type="text" [(ngModel)]="comment">
             <button class="boderButton commentButton" (click)="addComment()">Send</button>
           </section>
         </div>
