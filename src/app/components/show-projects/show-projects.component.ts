@@ -25,7 +25,7 @@ export class ShowProjectsComponent implements OnInit {
   filter: boolean;
 
   emojiList: string[];
-  reactionCount: any;
+  reactionCount = {};
   userReaction: any;
   subscription: Posts;
 
@@ -158,7 +158,6 @@ export class ShowProjectsComponent implements OnInit {
     this.subscription = await this.reactionSvc.getReactions(this.allPostsObject.postId);
     this.reactionCount = this.reactionSvc.countRactions(this.subscription.likes);
     this.userReaction = this.reactionSvc.userReaction(this.subscription.likes);
-    console.log(this.reactionCount + ' ' + this.userReaction);
   }
 
   hasReactions(index) {
@@ -167,7 +166,7 @@ export class ShowProjectsComponent implements OnInit {
 
   react(val) {
     if (this.userReaction === val) {
-      this.reactionSvc.removeReaction(this.allPostsObject.postId);
+      this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
     } else {
       this.reactionSvc.updateReactions(this.allPostsObject.postId, val);
     }

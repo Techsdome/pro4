@@ -45,14 +45,17 @@ export class ReactionsService {
     });
   }
 
-  removeReaction(itemId) {
-    console.log(itemId);
-    console.log(this.likeList);
-    const index = this.likeList.findIndex(x => x === itemId);
-    console.log(index);
+  removeReaction(itemId, uid) {
+    const index = Object.keys(this.likeList).indexOf(uid);
     if (index >= 0) {
-      this.likeList.splice(index, 1);
+      delete this.likeList[uid];
     }
+
+    this.afs.collection('mainFeed/allPosts/post/').doc(itemId).set({
+      likes: this.likeList,
+    }, {merge: true}).then(r => {
+
+    });
   }
 
   countRactions(reactions) {
@@ -60,6 +63,8 @@ export class ReactionsService {
   }
 
   userReaction(reactions) {
+    console.log(reactions + ' ' + this.userId);
+    console.log('hier: ' + _.get(reactions, this.userId));
     return _.get(reactions, this.userId);
   }
 }
