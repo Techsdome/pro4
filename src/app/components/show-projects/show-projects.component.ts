@@ -88,7 +88,6 @@ export class ShowProjectsComponent implements OnInit {
       hour: '2-digit',
       minute: '2-digit'
     });
-
   }
 
   sortAfterDate(a, b) {

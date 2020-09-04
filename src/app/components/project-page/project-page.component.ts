@@ -93,30 +93,76 @@ export class ProjectPageComponent implements OnInit {
 
     await this.loadProject();
 
+    this.fetchComments();
+
+  }
+
+  fetchComments() {
+    this.comments = [];
     if (this.projectID) {
-      this.authService.afs.collection(`mainFeed/allPosts/post/${this.projectID}/comments`).valueChanges()
-        .subscribe((comment) => {
-          this.commentsLenght = comment.length;
-          comment.forEach(cmt => {
-            this.comments.push(cmt);
+      this.authService.afs.collection(`mainFeed/allPosts/post/${this.projectID}/comments`).get().toPromise()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.comments.push(doc.data());
           });
-        });
+        }).then(() => {
+        const array = this.comments.sort(this.sortAfterDate);
+      });
+    }
+  }
+
+  sortAfterDate(a, b) {
+    let date1;
+    let date2;
+
+    if (a.date && b.date) {
+
+      date1 = Date.parse(a.date);
+      date2 = Date.parse(b.date);
+
+      if (date1 && date2) {
+        if (date1 > date2) {
+          return -1;
+        }
+        if (date1 < date2) {
+          return 1;
+        }
+        return 0;
+      }
     }
   }
 
   // adds comment
   addComment() {
-    this.authService.getCurrentUser().subscribe((result) => {
-      this.authService.afs.collection('users').doc(result.uid).valueChanges()
-        .subscribe((val: any) => {
-          if (this.comment) {
+    if (this.comment) {
+      const date: Date = new Date();
+      this.authService.getCurrentUser().subscribe((result) => {
+        this.authService.afs.collection('users').doc(result.uid).valueChanges()
+          .subscribe((val: any) => {
+
             this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).collection('comments').add({
               comment: this.comment,
-              commentName: val.firstname + ' ' + val.lastname
+              commentName: val.firstname + ' ' + val.lastname,
+              date: date.toLocaleString('en-GB'),
+            });
+            this.comments.unshift({
+              comment: this.comment,
+              commentName: val.firstname + ' ' + val.lastname,
+              date: date.toLocaleString('en-GB'),
             });
             this.comment = '';
-          }
-        });
+          });
+      });
+    }
+  }
+
+  formatDate(date) {
+    return new Date(Date.parse(date)).toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
     });
   }
 
@@ -192,7 +238,6 @@ export class ProjectPageComponent implements OnInit {
   // tmp uploaded images are displayed
   getImagesFiles(message: any) {
     message.forEach(async (file) => {
-      //console.log(file);
       const fileURL = await this.readFilesURL(file);
       this.tmpAllImages.push((fileURL) as string);
       this.tmpAddedImages.push(file);

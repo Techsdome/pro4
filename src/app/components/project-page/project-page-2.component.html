@@ -153,16 +153,19 @@
             </div>
           </div>
         </div>
-        <div id="discussion" class="col" *ngIf="!switchComp">
+        <div id="project-discussion" class="row align-items-end align-content-end" *ngIf="!switchComp">
           <section id="comment-section">
             <ul>
               <li *ngFor="let comment of comments">
                 <p><strong>{{comment.commentName}}</strong>: {{comment.comment}}</p>
+                <span class="comment-date"> {{ formatDate(comment.date) }}</span>
               </li>
             </ul>
+          </section>
+          <div class="row add-comment align-self-end">
             <input class="roundInputField comment" type="text" [(ngModel)]="comment">
             <button class="boderButton commentButton" (click)="addComment()">Send</button>
-          </section>
+          </div>
         </div>
       </div>
     </div>

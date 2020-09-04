@@ -312,6 +312,7 @@ p {
   display: inline-block;
   width: 10%;
 }
+
 #contributors .contri-container {
   min-height: 50px;
 }
@@ -393,7 +394,26 @@ a:hover {
   text-decoration: none;
 }
 
-#discussion {
+#project-discussion {
+  min-height: 400px;
+}
+
+#project-discussion #comment-section p {
+  margin: 10px 0 0 10px;
+}
+
+#project-discussion #comment-section .comment-date {
+  font-size: 12px;
+  margin: 0 0 5px 10px;
+}
+
+#project-discussion #comment-section {
+  width: 100%;
+  overflow-y: scroll;
   height: 80%;
+}
+
+.add-comment {
+  margin: 10px 0;
 }
 
