@@ -40,6 +40,7 @@ export class ShowProjectsComponent implements OnInit {
     this.loadPost();
   }
 
+  toggle() {
     this.filter = !this.filter;
   }
 
