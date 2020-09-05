@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AngularFireStorage} from "@angular/fire/storage";
-import {AngularFirestore} from "@angular/fire/firestore";
-import {AuthService} from "../../shared/services/auth.service";
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-tag-view',
@@ -16,8 +14,7 @@ export class TagViewComponent implements OnInit {
   project: any;
   tags = [];
 
-  constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
-              public authService: AuthService) { }
+  constructor(private afs: AngularFirestore) { }
 
   ngOnInit(): void {
     this.docRef = this.afs.doc(`mainFeed/allPosts/post/${this.projectID}`);

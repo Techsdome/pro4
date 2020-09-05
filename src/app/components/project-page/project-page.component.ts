@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, Input} from '@angular/core';
+import {Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef} from '@angular/core';
 import {Project} from '../../models/Project';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
@@ -8,6 +8,12 @@ import {UploadTaskComponent} from '../uploader/upload-task/upload-task.component
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ImageModalComponent} from '../image-modal/image-modal.component';
 import {DataServiceService} from '../../shared/services/data-service.service';
+import {Observable, Subject} from 'rxjs';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {filter, switchMap} from 'rxjs/operators';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
 
 @Component({
   selector: 'app-project-page',
@@ -30,6 +36,7 @@ export class ProjectPageComponent implements OnInit {
   isOwner: boolean;
   projectPromise: Promise<any>;
   editMode = false;
+  loading = false;
 
   // banner stuff
   bannerChange = false; // has banner been changed?
@@ -44,20 +51,30 @@ export class ProjectPageComponent implements OnInit {
   bannerWidth: number;
   tmpBannerWidth: number;
 
-  // member stuff
-  tmpMemberName = '';
-  tmpAllContributors: User[] = [];
+  // tag stuff
+  selectableTag = true;
+  removableTag = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  tags = [];
+  tagChange = false;
 
+
+  // member stuff
+  @ViewChild('contributorInput') contributorInput: ElementRef<HTMLInputElement>;
+
+  tmpAllContributors: User[] = [];
   tmpAllContributorsUid = [];
-  tmpAddedContributors = [];
   tmpDeletedContributors = [];
   memberChange = false;
+  myControl = new FormControl();
+  results: Observable<any[]>;
+  offset = new Subject<string>();
 
   // title and description
   tmpChangedValues = [];
   tmpName = '';
   tmpDescription = '';
-  tmpTags = [];
 
   // picture stuff
   pictureChange = false; // has pictures been changed?
@@ -81,6 +98,7 @@ export class ProjectPageComponent implements OnInit {
 
   async ngOnInit() {
     this.getUser();
+    this.results = this.search();
 
     if (this.projectID) {
       localStorage.setItem('projectID', this.projectID);
@@ -89,32 +107,79 @@ export class ProjectPageComponent implements OnInit {
     } else {
       alert('No Project found!');
     }
+
     await this.loadProject();
 
+    this.fetchComments();
+
+  }
+
+  fetchComments() {
+    this.comments = [];
     if (this.projectID) {
-      this.authService.afs.collection(`mainFeed/allPosts/post/${this.projectID}/comments`).valueChanges()
-        .subscribe((comment) => {
-          this.commentsLenght = comment.length;
-          comment.forEach(cmt => {
-            this.comments.push(cmt);
+      this.authService.afs.collection(`mainFeed/allPosts/post/${this.projectID}/comments`).get().toPromise()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.comments.push(doc.data());
           });
-        });
+        }).then(() => {
+        const array = this.comments.sort(this.sortAfterDate);
+      });
+    }
+  }
+
+  sortAfterDate(a, b) {
+    let date1;
+    let date2;
+
+    if (a.date && b.date) {
+
+      date1 = Date.parse(a.date);
+      date2 = Date.parse(b.date);
+
+      if (date1 && date2) {
+        if (date1 > date2) {
+          return -1;
+        }
+        if (date1 < date2) {
+          return 1;
+        }
+        return 0;
+      }
     }
   }
 
   // adds comment
   addComment() {
-    this.authService.getCurrentUser().subscribe((result) => {
-      this.authService.afs.collection('users').doc(result.uid).valueChanges()
-        .subscribe((val: any) => {
-          if (this.comment) {
+    if (this.comment) {
+      const date: Date = new Date();
+      this.authService.getCurrentUser().subscribe((result) => {
+        this.authService.afs.collection('users').doc(result.uid).valueChanges()
+          .subscribe((val: any) => {
+
             this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).collection('comments').add({
               comment: this.comment,
-              commentName: val.firstname + ' ' + val.lastname
+              commentName: val.firstname + ' ' + val.lastname,
+              date: date.toLocaleString('en-GB'),
+            });
+            this.comments.unshift({
+              comment: this.comment,
+              commentName: val.firstname + ' ' + val.lastname,
+              date: date.toLocaleString('en-GB'),
             });
             this.comment = '';
-          }
-        });
+          });
+      });
+    }
+  }
+
+  formatDate(date) {
+    return new Date(Date.parse(date)).toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
     });
   }
 
@@ -146,7 +211,7 @@ export class ProjectPageComponent implements OnInit {
   discardChanges() {
     this.editMode = false;
     this.removeListener();
-    this.loadProject();
+    //this.loadProject();
   }
 
   // tmp banner picture is displayed
@@ -190,7 +255,6 @@ export class ProjectPageComponent implements OnInit {
   // tmp uploaded images are displayed
   getImagesFiles(message: any) {
     message.forEach(async (file) => {
-      //console.log(file);
       const fileURL = await this.readFilesURL(file);
       this.tmpAllImages.push((fileURL) as string);
       this.tmpAddedImages.push(file);
@@ -217,6 +281,7 @@ export class ProjectPageComponent implements OnInit {
   // saves all changes
   async saveChanges() {
     this.editMode = false;
+    this.loading = true;
     this.removeListener();
     const data = {};
     let i = 0;
@@ -275,7 +340,6 @@ export class ProjectPageComponent implements OnInit {
             this.uploadTask.startUpload().then(async () => { // uploads file
               url = await this.uploadTask.downloadURL;
               this.originalImages.push(url);
-              //console.log(url);
             }).then(() => {
               if (url) {
                 resolve(url);
@@ -308,7 +372,13 @@ export class ProjectPageComponent implements OnInit {
       data['projectMembers'] = this.tmpAllContributorsUid;
     }
 
+    if (this.tagChange) {
+      data['projectCategories'] = this.tags;
+    }
+
     this.afs.doc('mainFeed/allPosts').collection('post').doc(this.projectID).update(data).then(() => {
+      this.loading = false;
+
       this.loadProject();
     });
   }
@@ -337,21 +407,8 @@ export class ProjectPageComponent implements OnInit {
         this.tmpAllContributorsUid.splice(index, 1);
         this.tmpDeletedContributors.push(mem.displayName);
         this.memberChange = true;
-        console.log(this.tmpAllContributorsUid);
       }
     });
-  }
-
-// adds a member
-  addMember(value) {
-    this.tmpAddedContributors.push(value);
-    this.tmpAllContributors.push(value);
-    this.tmpMemberName = '';
-    this.memberChange = true;
-    console.log('tmpAllCon: ' + this.tmpAddedContributors);
-    console.log('tmpAllConUid: ' + this.tmpAllContributorsUid);
-    console.log('deletedCon: ' + this.tmpDeletedContributors);
-
   }
 
 // checks if the user viewing the page is the owner
@@ -397,6 +454,7 @@ export class ProjectPageComponent implements OnInit {
 
           this.tmpDescription = this.project.projectDescription;
           this.tmpAllContributorsUid = this.project.projectMembers;
+          this.tags = this.project.projectCategories;
 
           for (const userId of this.tmpAllContributorsUid) {
             const user = await this.userSerive.getUserWithUid(userId);
@@ -405,7 +463,7 @@ export class ProjectPageComponent implements OnInit {
 
           if (this.project.projectBanner) {
             this.bannerURL = this.project.projectBanner;
-            this.loadBannerPicture();
+            await this.loadBannerPicture();
           }
 
           this.isUserOwner();
@@ -492,6 +550,76 @@ export class ProjectPageComponent implements OnInit {
           }, 2000
         );
       }
+    }
+  }
+
+  /**
+   *
+   * -------------- CONTRIBUTOR EDIT --------------
+   *
+   */
+  onkeyup(e) {
+    this.offset.next(e.target.value.toLowerCase());
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.contributorInput.nativeElement.value = '';
+    this.myControl.setValue(null);
+  }
+
+  async addContributorUid(uid: string) {
+    if (!this.tmpAllContributorsUid.includes(uid)) {
+      this.tmpAllContributorsUid.push(uid);
+      const user = await this.userSerive.getUserWithUid(uid);
+      this.tmpAllContributors.push(user);
+      this.memberChange = true;
+    }
+  }
+
+  /**
+   * Search member in database field 'searchableIndex' - returns 5 entries
+   */
+  search() {
+    return this.offset.pipe(
+      filter(val => !!val),
+      switchMap(offset => {
+        return this.afs.collection('users', ref =>
+          ref.orderBy(`searchableIndex.${offset}`).limit(5)
+        ).valueChanges();
+      })
+    );
+  }
+
+  /**
+   *
+   * -------------- TAG EDIT --------------
+   *
+   */
+
+  addTag(event: MatChipInputEvent): void {
+    this.tagChange = true;
+    const input = event.input;
+    const value = event.value;
+
+    // Add our tag
+    if ((value || '').trim()) {
+      this.tags.push(value);
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+
+  }
+
+  removeTag(tag: string): void {
+    this.tagChange = true;
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
     }
   }
 }

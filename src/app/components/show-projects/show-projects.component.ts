@@ -5,6 +5,8 @@ import {Posts} from '../../shared/services/posts';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {ReactionsService} from '../../services/reactions.service';
 import * as _ from 'lodash';
+import {AngularFireDatabase} from "@angular/fire/database";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-show-projects',
@@ -25,16 +27,99 @@ export class ShowProjectsComponent implements OnInit {
   filter: boolean;
 
   emojiList: string[];
-  reactionCount: any;
+  reactionCount = {};
   userReaction: any;
-  subscription: Posts;
 
   headMessage: string;
 
-  constructor(public authservice: AuthService,
-              public afs: AngularFirestore,
+  constructor(private authservice: AuthService,
+              private afs: AngularFirestore,
               private reactionSvc: ReactionsService
              ) { }
+
+  ngOnInit(): void {
+    this.emojiList = this.reactionSvc.emojiList;
+    this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).valueChanges().subscribe((reactions: Posts) => {
+      this.reactionCount = this.reactionSvc.countRactions(reactions.likes);
+      this.userReaction = this.reactionSvc.userReaction(reactions.likes);
+    });
+
+    this.loadPost();
+  }
+
+  toggle() {
+    this.filter = !this.filter;
+  }
+
+  loadPost() {
+    let postType;
+
+    this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).get().toPromise().then(doc => {
+      if (doc.exists) {
+        postType = doc.data().postType;
+      }
+    }).then(() => {
+      switch (postType) {
+        case 'project':
+          this.headMessage = 'created a Project';
+          break;
+        case 'question':
+          this.headMessage = 'asked a Question';
+          break;
+        case 'post':
+          this.headMessage = 'posted';
+          break;
+        default:
+          this.headMessage = 'posted';
+          break;
+      }
+    });
+
+    this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).get().toPromise()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.comments.push(doc.data());
+        });
+      }).then(() => {
+      const array = this.comments.sort(this.sortAfterDate);
+    });
+  }
+
+  formatDate(date) {
+    return new Date(Date.parse(date)).toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  sortAfterDate(a, b) {
+    let date1;
+    let date2;
+
+    if (a.date && b.date) {
+
+      date1 = Date.parse(a.date);
+      date2 = Date.parse(b.date);
+
+      if (date1 && date2) {
+        if (date1 > date2) {
+          return 1;
+        }
+        if (date1 < date2) {
+          return -1;
+        }
+        return 0;
+      }
+    }
+  }
+
+  /**
+   *
+   *  ----------- COMMENT SECTION -----------
+   */
 
   openCommentSection() {
     document.getElementById('comment-inputfield').focus();
@@ -70,109 +155,42 @@ export class ShowProjectsComponent implements OnInit {
     }
   }
 
-/*  updateLikes(): void {
-    this.likes++;
+  /**
+   *
+   *  ----------- REACTION SECTION -----------
+   */
 
-    this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).update({
-      likes: firebase.firestore.FieldValue.increment(1)
-    }).then(() => {
-      this.loadPost();
-    });
-  }*/
-
-  loadPost() {
-    let postType;
-
-    this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).get().toPromise().then(doc => {
-      if (doc.exists) {
-        postType = doc.data().postType;
-        this.loadReactions().then(r => { });
-      }
-
-    }).then(() => {
-      switch (postType) {
-        case 'project':
-          this.headMessage = 'created a Project';
-          break;
-        case 'question':
-          this.headMessage = 'asked a Question';
-          break;
-        case 'post':
-          this.headMessage = 'posted';
-          break;
-        default:
-          this.headMessage = 'posted';
-          break;
-      }
-    });
-
-
-    this.authservice.afs.collection(`mainFeed/allPosts/post/${this.allPostsObject.postId}/comments`).get().toPromise().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        this.comments.push(doc.data());
-      });
-    }).then(() => {
-      const array = this.comments.sort(this.sortAfterDate);
-    });
-  }
-
-  formatDate(date) {
-    return new Date(Date.parse(date)).toLocaleDateString('de-DE', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-
-  }
-
-  sortAfterDate(a, b) {
-    let date1;
-    let date2;
-
-    if (a.date && b.date) {
-
-      date1 = Date.parse(a.date);
-      date2 = Date.parse(b.date);
-
-      if (date1 && date2) {
-        if (date1 > date2) {
-          return 1;
-        }
-        if (date1 < date2) {
-          return -1;
-        }
-        return 0;
-      }
-    }
-  }
-
-
-  ngOnInit(): void {
-    this.loadPost();
-  }
-
+  /**
+   * Get reaction list of database
+   */
   async loadReactions() {
-    this.emojiList = this.reactionSvc.emojiList;
-    this.subscription = await this.reactionSvc.getReactions(this.allPostsObject.postId);
-    this.reactionCount = this.reactionSvc.countRactions(this.subscription.likes);
-    this.userReaction = this.reactionSvc.userReaction(this.subscription.likes);
+
   }
 
+  /**
+   *
+   * @param index - return the string of the reaction
+   * Currently not in use.
+   */
   hasReactions(index) {
     return _.get(this.reactionCount, index.toString());
   }
 
+  /**
+   *
+   * @param val - reaction of the user
+   * Currently only likes possible.
+   */
   react(val) {
+    this.reactionSvc.getReactions(this.allPostsObject.postId);
+
+    console.log('userReaction: ' + this.userReaction + ' val: ' + val);
     if (this.userReaction === val) {
-      this.reactionSvc.removeReaction(this.allPostsObject.postId);
+        this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
     } else {
-      this.reactionSvc.updateReactions(this.allPostsObject.postId, val);
+        this.reactionSvc.updateReactions(this.allPostsObject.postId, val);
     }
   }
 
-  toggle() {
-    this.filter = !this.filter;
-  }
+
 }
