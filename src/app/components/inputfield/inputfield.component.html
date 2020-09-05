@@ -1,9 +1,9 @@
 <div>
     <div id="header-input">
-        <h4>About me</h4>
+        <h6 style="color: #8e908c">About me:</h6>
         <img *ngIf="!this.searchedUser" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="editButton button" (click)="editToggle()" src="../../../assets/icons/about.svg" alt="edit text">
     </div>
-    <p [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" [innerHTML]="description"></p>
+    <p style="color: #8e908c" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" [innerHTML]="description"></p>
 
     <quill-editor [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" [styles]="editorStyle" [modules]="config"
                   [(ngModel)]="description" name="post" placeholder="Write something about yourself..." oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'></quill-editor>
