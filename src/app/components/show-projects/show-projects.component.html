@@ -6,9 +6,13 @@
         <img src="{{ allPostsObject.projectBanner }}" class="img-responsive"  alt="projectbanner"/>
       </div>
       <div class="row name">
-        <div class="col-12">
+        <h3 *ngIf="allPostsObject.type == 'project'"> {{ allPostsObject ? allPostsObject.projectName : 'Project Alpha' }} <span style="font-size: 16px">by {{ allPostsObject ? allPostsObject.displayName : 'Jon Doe'}}</span></h3>
+<!--        <h4 *ngIf="allPostsObject.type !== 'project'"><span {{ headMessage }} style="font-size: 16px">by {{ allPostsObject ? allPostsObject.displayName : 'Jon Doe'}}</span></h4>-->
+
+                <div *ngIf="allPostsObject.type !== 'project'" class="col-12">
           <div class="col-10 pname">
-            <h5> {{ allPostsObject ? allPostsObject.displayName : 'Jon Doe'}}</h5><span>{{ headMessage }} </span>
+
+            <h5><span>{{ allPostsObject ? allPostsObject.displayName : 'Jon Doe'}}</span><span style="font-size: 16px"> {{ headMessage }} </span></h5>
           </div>
         </div>
       </div>
@@ -17,10 +21,10 @@
           <div class="col-12 pname0">
             <div class="col-4 pname">
               <div class="projectcontent">
-              <img class="typeMark" style="width: 25px; height: 25px;" [src]="allPostsObject.typeImage" alt="typeImage">
+              <img *ngIf="allPostsObject.type !== 'project'" class="typeMark" style="width: 25px; height: 25px;" [src]="allPostsObject.typeImage" alt="typeImage">
               </div>
               <div>
-              <h4> {{ allPostsObject ? allPostsObject.projectName : 'Project Alpha' }} </h4>
+
               <div class="row description">
                 <div class="">
                   <div [innerHTML] = "allPostsObject ? allPostsObject.postText : 'This is my description, Im very happy to be here, welcome all, this is very exciting'"> </div>
@@ -29,7 +33,7 @@
               </div>
               <div class="projectcase">
               <button *ngIf="allPostsObject.type == 'project'" class="boderButton viewButton" [routerLink]="['/project-page']"
-                      [state]="{data: allPostsObject.postId}"> View Project
+                      [state]="{data: allPostsObject.postId}"> View
                 <svg class="bi bi-chevron-right icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
                      xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
@@ -87,13 +91,6 @@
               <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
                     clip-rule="evenodd"/>
             </svg>
-            <div class="reactions">
-              <div *ngFor="let emoji of emojiList; let indexElement = index;" class="reaction-counts">
-                <span style="color: #6C63FF">
-                  <strong style="color: #6C63FF">{{ reactionCount[indexElement] }}</strong> Creators liked
-                </span>
-              </div>
-            </div>
             <!--          <svg class="bi bi-bookmark-fill icon" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"-->
             <!--               xmlns="http://www.w3.org/2000/svg">-->
             <!--            <path fill-rule="evenodd" d="M3 3a2 2 0 012-2h6a2 2 0 012 2v12l-5-3-5 3V3z" clip-rule="evenodd"/>-->
@@ -127,6 +124,18 @@
 
 
       </div>
+        <div class="reactions">
+          <div *ngFor="let emoji of emojiList; let indexElement = index;" class="reaction-counts">
+                <span *ngIf="reactionCount[indexElement] === 1">
+                  <strong style="color: #8e908c;">{{ reactionCount[indexElement] }} Creator liked</strong>
+                </span>
+                <span *ngIf="reactionCount[indexElement] > 1">
+                  <strong style="color: #8e908c;">{{ reactionCount[indexElement] }} Creators liked</strong>
+                </span>
+          </div>
+
+        </div>
+
 
 
 

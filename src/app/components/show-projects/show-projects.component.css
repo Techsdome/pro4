@@ -95,11 +95,12 @@ a:hover::before, a:focus::before {
 }
 
 .projectpost:hover .typeMark {
-  filter: grayscale(0%);
-  opacity: 70%;
+  filter: grayscale(50%);
+  opacity: 40%;
 }
 
 .projectpost:hover {
+  /*cursor: pointer;*/
   background-color: white;
 }
 
@@ -137,8 +138,8 @@ a:hover::before, a:focus::before {
     filter: grayscale(100%);
     opacity: 10%;
     margin: 7px !important;
-    height: 80px !important;
-    width: 80px !important;
+    height: 50px !important;
+    width: 50px !important;
     transition: .3s;
 }
 
@@ -151,7 +152,6 @@ a:hover::before, a:focus::before {
 }
 
 .sideinfo {
-    display: flex;
     height: 100%;
     padding: 10px !important;
 }
@@ -165,14 +165,14 @@ a:hover::before, a:focus::before {
     margin: -30px 0 35px -30px;
     max-height: 100px;
     border-radius: 20px;
-    width: 105%;
+    width: 105.5%;
     object-fit: cover;
     height: 300px;
 }
 
 .commentButtonArea {
   margin-top: 30px;
-  margin-left: auto !important;
+  /*margin-left: auto !important;*/
   display: flex;
 }
 

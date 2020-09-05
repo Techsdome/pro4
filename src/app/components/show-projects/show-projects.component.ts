@@ -61,16 +61,16 @@ export class ShowProjectsComponent implements OnInit {
     }).then(() => {
       switch (postType) {
         case 'project':
-          this.headMessage = 'created a Project';
+          this.headMessage = 'created a Project:';
           break;
         case 'question':
-          this.headMessage = 'asked a Question';
+          this.headMessage = 'asked a Question:';
           break;
         case 'post':
-          this.headMessage = 'posted';
+          this.headMessage = 'posted:';
           break;
         default:
-          this.headMessage = 'posted';
+          this.headMessage = 'posted:';
           break;
       }
     });
