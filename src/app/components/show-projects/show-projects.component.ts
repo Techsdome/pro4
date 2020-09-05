@@ -39,13 +39,9 @@ export class ShowProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.emojiList = this.reactionSvc.emojiList;
-    this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).valueChanges().subscribe(reactions => {
-      console.log(reactions.likes);
+    this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).valueChanges().subscribe((reactions: Posts) => {
       this.reactionCount = this.reactionSvc.countRactions(reactions.likes);
       this.userReaction = this.reactionSvc.userReaction(reactions.likes);
-
-      console.log('reactionCount: ' + this.reactionCount[0]);
-      console.log('userReaction: ' + this.userReaction);
     });
 
     this.loadPost();
