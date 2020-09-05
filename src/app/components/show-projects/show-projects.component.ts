@@ -5,6 +5,8 @@ import {Posts} from '../../shared/services/posts';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {ReactionsService} from '../../services/reactions.service';
 import * as _ from 'lodash';
+import {AngularFireDatabase} from "@angular/fire/database";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-show-projects',
@@ -27,16 +29,25 @@ export class ShowProjectsComponent implements OnInit {
   emojiList: string[];
   reactionCount = {};
   userReaction: any;
-  subscription: Posts;
 
   headMessage: string;
 
-  constructor(public authservice: AuthService,
-              public afs: AngularFirestore,
+  constructor(private authservice: AuthService,
+              private afs: AngularFirestore,
               private reactionSvc: ReactionsService
              ) { }
 
   ngOnInit(): void {
+    this.emojiList = this.reactionSvc.emojiList;
+    this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).valueChanges().subscribe(reactions => {
+      console.log(reactions.likes);
+      this.reactionCount = this.reactionSvc.countRactions(reactions.likes);
+      this.userReaction = this.reactionSvc.userReaction(reactions.likes);
+
+      console.log('reactionCount: ' + this.reactionCount[0]);
+      console.log('userReaction: ' + this.userReaction);
+    });
+
     this.loadPost();
   }
 
@@ -50,9 +61,7 @@ export class ShowProjectsComponent implements OnInit {
     this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).get().toPromise().then(doc => {
       if (doc.exists) {
         postType = doc.data().postType;
-        this.loadReactions().then(r => { });
       }
-
     }).then(() => {
       switch (postType) {
         case 'project':
@@ -159,10 +168,7 @@ export class ShowProjectsComponent implements OnInit {
    * Get reaction list of database
    */
   async loadReactions() {
-    this.emojiList = this.reactionSvc.emojiList;
-    this.subscription = await this.reactionSvc.getReactions(this.allPostsObject.postId);
-    this.reactionCount = this.reactionSvc.countRactions(this.subscription.likes);
-    this.userReaction = this.reactionSvc.userReaction(this.subscription.likes);
+
   }
 
   /**
@@ -180,10 +186,13 @@ export class ShowProjectsComponent implements OnInit {
    * Currently only likes possible.
    */
   react(val) {
+    this.reactionSvc.getReactions(this.allPostsObject.postId);
+
+    console.log('userReaction: ' + this.userReaction + ' val: ' + val);
     if (this.userReaction === val) {
-      this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
+        this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
     } else {
-      this.reactionSvc.updateReactions(this.allPostsObject.postId, val);
+        this.reactionSvc.updateReactions(this.allPostsObject.postId, val);
     }
   }
 

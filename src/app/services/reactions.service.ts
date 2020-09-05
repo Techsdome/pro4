@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase} from '@angular/fire/database';
+import {AngularFireDatabase, AngularFireObject} from '@angular/fire/database';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import * as _ from 'lodash';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +25,12 @@ export class ReactionsService {
     });
   }
 
-  async getReactions(itemId) {
+  getReactions(itemId) {
     this.docRef = this.afs.doc(`mainFeed/allPosts/post/${itemId}`);
     if (this.docRef) {
       return this.reactionPromise = this.docRef.get().toPromise().then(doc => {
         if (doc.exists) {
           this.likeList = doc.data().likes;
-          return doc.data();
         }
       });
     }
@@ -47,13 +47,18 @@ export class ReactionsService {
 
   removeReaction(itemId, uid) {
     const index = Object.keys(this.likeList).indexOf(uid);
+    console.log(index + ' uid: ' + uid);
+
+    console.log(this.likeList);
     if (index >= 0) {
       delete this.likeList[uid];
     }
 
-    this.afs.collection('mainFeed/allPosts/post/').doc(itemId).set({
+    console.log(this.likeList);
+
+    this.afs.collection('mainFeed/allPosts/post/').doc(itemId).update({
       likes: this.likeList,
-    }, {merge: true}).then(r => {
+    }).then(r => {
 
     });
   }
