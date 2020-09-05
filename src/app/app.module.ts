@@ -64,6 +64,8 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
 import {MatChipsModule} from "@angular/material/chips";
 import { ContributorViewComponent } from './components/contributor-view/contributor-view.component';
 import { TagViewComponent } from './components/tag-view/tag-view.component';
+import { ContributorInputComponent } from './components/contributor-input/contributor-input.component';
+import { TagInputComponent } from './components/tag-input/tag-input.component';
 
 
 @NgModule({
@@ -105,7 +107,9 @@ import { TagViewComponent } from './components/tag-view/tag-view.component';
         CreatePostNewComponent,
         ImageModalComponent,
         ContributorViewComponent,
-        TagViewComponent
+        TagViewComponent,
+        ContributorInputComponent,
+        TagInputComponent
     ],
   imports: [
     MatTabsModule,

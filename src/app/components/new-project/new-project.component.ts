@@ -110,11 +110,9 @@ export class NewProjectComponent implements OnInit {
   }
 
   async uploadBannerImage(): Promise<any> {
-    console.log('6 - Bild hochladen');
     if (this.pservice.getProjectID()) {
       this.projectID = this.pservice.getProjectID();
     }
-    console.log('bannerFIle: ' + this.bannerFile.name);
     if (this.bannerFile) {
       const date = new Date();
       const today = `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}${date.getHours()}${date.getMinutes()}`;
@@ -190,18 +188,14 @@ export class NewProjectComponent implements OnInit {
       this.bannerDefault = await this.pservice.getBannerDefault();
 
       try {
-        console.log('1');
         await this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories,
           this.contributorUid, this.bannerDefault);
-        console.log('2');
         await this.pictureManager();
-        console.log('nach pCM');
 
         (document.getElementById('myForm') as HTMLFormElement).reset();
         document.getElementById('fillCorrectly').style.display = 'none';
         document.getElementsByClassName('saving-project').item(0).className = 'saving-project';
 
-        console.log('Submit Ende!!!!!!!!!!!!!!!');
         if (!this.failed) {
           this.activeModal.close();
           this.router.navigate(['/project-page'], {state: {data: this.projectID}}).then();
@@ -237,10 +231,6 @@ export class NewProjectComponent implements OnInit {
     for (const URL of this.imagesURLPromises) {
       imagesURLs.push(await URL);
     }
-
-    // for (const img of imagesURLs) {
-    //   await this.storage.storage.ref(this.bannerRef).updateMetadata(this.imagesMetadata[0]);
-    // }
 
     if (imagesURLs.length === 0) {
       imagesURLs.push(this.bannerDefault);
@@ -373,6 +363,4 @@ export class NewProjectComponent implements OnInit {
       this.selectedCategories.splice(index, 1);
     }
   }
-
-
 }

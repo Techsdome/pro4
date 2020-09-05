@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, Input} from '@angular/core';
+import {Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef} from '@angular/core';
 import {Project} from '../../models/Project';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
@@ -8,6 +8,12 @@ import {UploadTaskComponent} from '../uploader/upload-task/upload-task.component
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ImageModalComponent} from '../image-modal/image-modal.component';
 import {DataServiceService} from '../../shared/services/data-service.service';
+import {Observable, Subject} from 'rxjs';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {filter, switchMap} from 'rxjs/operators';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
 
 @Component({
   selector: 'app-project-page',
@@ -45,20 +51,30 @@ export class ProjectPageComponent implements OnInit {
   bannerWidth: number;
   tmpBannerWidth: number;
 
-  // member stuff
-  tmpMemberName = '';
-  tmpAllContributors: User[] = [];
+  // tag stuff
+  selectableTag = true;
+  removableTag = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  tags = [];
+  tagChange = false;
 
+
+  // member stuff
+  @ViewChild('contributorInput') contributorInput: ElementRef<HTMLInputElement>;
+
+  tmpAllContributors: User[] = [];
   tmpAllContributorsUid = [];
-  tmpAddedContributors = [];
   tmpDeletedContributors = [];
   memberChange = false;
+  myControl = new FormControl();
+  results: Observable<any[]>;
+  offset = new Subject<string>();
 
   // title and description
   tmpChangedValues = [];
   tmpName = '';
   tmpDescription = '';
-  tmpTags = [];
 
   // picture stuff
   pictureChange = false; // has pictures been changed?
@@ -82,6 +98,7 @@ export class ProjectPageComponent implements OnInit {
 
   async ngOnInit() {
     this.getUser();
+    this.results = this.search();
 
     if (this.projectID) {
       localStorage.setItem('projectID', this.projectID);
@@ -194,7 +211,7 @@ export class ProjectPageComponent implements OnInit {
   discardChanges() {
     this.editMode = false;
     this.removeListener();
-    this.loadProject();
+    //this.loadProject();
   }
 
   // tmp banner picture is displayed
@@ -323,7 +340,6 @@ export class ProjectPageComponent implements OnInit {
             this.uploadTask.startUpload().then(async () => { // uploads file
               url = await this.uploadTask.downloadURL;
               this.originalImages.push(url);
-              //console.log(url);
             }).then(() => {
               if (url) {
                 resolve(url);
@@ -354,6 +370,10 @@ export class ProjectPageComponent implements OnInit {
 
     if (this.memberChange) {
       data['projectMembers'] = this.tmpAllContributorsUid;
+    }
+
+    if (this.tagChange) {
+      data['projectCategories'] = this.tags;
     }
 
     this.afs.doc('mainFeed/allPosts').collection('post').doc(this.projectID).update(data).then(() => {
@@ -387,21 +407,8 @@ export class ProjectPageComponent implements OnInit {
         this.tmpAllContributorsUid.splice(index, 1);
         this.tmpDeletedContributors.push(mem.displayName);
         this.memberChange = true;
-        console.log(this.tmpAllContributorsUid);
       }
     });
-  }
-
-// adds a member
-  addMember(value) {
-    this.tmpAddedContributors.push(value);
-    this.tmpAllContributors.push(value);
-    this.tmpMemberName = '';
-    this.memberChange = true;
-    console.log('tmpAllCon: ' + this.tmpAddedContributors);
-    console.log('tmpAllConUid: ' + this.tmpAllContributorsUid);
-    console.log('deletedCon: ' + this.tmpDeletedContributors);
-
   }
 
 // checks if the user viewing the page is the owner
@@ -447,6 +454,7 @@ export class ProjectPageComponent implements OnInit {
 
           this.tmpDescription = this.project.projectDescription;
           this.tmpAllContributorsUid = this.project.projectMembers;
+          this.tags = this.project.projectCategories;
 
           for (const userId of this.tmpAllContributorsUid) {
             const user = await this.userSerive.getUserWithUid(userId);
@@ -517,7 +525,6 @@ export class ProjectPageComponent implements OnInit {
 
 // sets the background image for the banner div
   async loadBannerPicture() {
-    console.log('10 - inLoadBannerPicture: ' + this.bannerURL);
     if (this.bannerURL) {
       if (document.getElementById('banner-picture')) {
         document.getElementById('banner-picture').style.backgroundImage = `url(${this.bannerURL}`;
@@ -543,6 +550,74 @@ export class ProjectPageComponent implements OnInit {
           }, 2000
         );
       }
+    }
+  }
+
+  /**
+   *
+   * -------------- CONTRIBUTOR EDIT --------------
+   *
+   */
+  onkeyup(e) {
+    this.offset.next(e.target.value.toLowerCase());
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.contributorInput.nativeElement.value = '';
+    this.myControl.setValue(null);
+  }
+
+  addContributorUid(uid: string) {
+    if (!this.tmpAllContributorsUid.includes(uid)) {
+      this.tmpAllContributorsUid.push(uid);
+      this.memberChange = true;
+    }
+  }
+
+  /**
+   * Search member in database field 'searchableIndex' - returns 5 entries
+   */
+  search() {
+    return this.offset.pipe(
+      filter(val => !!val),
+      switchMap(offset => {
+        return this.afs.collection('users', ref =>
+          ref.orderBy(`searchableIndex.${offset}`).limit(5)
+        ).valueChanges();
+      })
+    );
+  }
+
+  /**
+   *
+   * -------------- TAG EDIT --------------
+   *
+   */
+
+  addTag(event: MatChipInputEvent): void {
+    this.tagChange = true;
+    const input = event.input;
+    const value = event.value;
+
+    // Add our tag
+    if ((value || '').trim()) {
+      this.tags.push(value);
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+
+  }
+
+  removeTag(tag: string): void {
+    this.tagChange = true;
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
     }
   }
 }

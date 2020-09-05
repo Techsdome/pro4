@@ -63,8 +63,6 @@ export class ReactionsService {
   }
 
   userReaction(reactions) {
-    console.log(reactions + ' ' + this.userId);
-    console.log('hier: ' + _.get(reactions, this.userId));
     return _.get(reactions, this.userId);
   }
 }
