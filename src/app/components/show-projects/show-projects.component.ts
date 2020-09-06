@@ -148,9 +148,9 @@ export class ShowProjectsComponent implements OnInit {
               commentName: val.firstname + ' ' + val.lastname,
               date: date.toLocaleString('en-GB'),
             });
+            this.comment = '';
           });
       });
-      this.comment = '';
     }
   }
 
