@@ -7,6 +7,25 @@ ol, ul {
   margin: 0;
 }
 
+.comment {
+  border: none;
+  border-radius: 8px;
+  height: 35px;
+  padding-left: 10px;
+  color: white;
+  background-color: #d9d9d9;
+}
+
+.comment:hover {
+  border: solid 2px #8e908c;
+  background-color: white;
+  color: #222;
+}
+
+#comment-section {
+  margin-top: 10px;
+}
+
 #comment-section ul {
   display: unset;
 }
@@ -171,7 +190,7 @@ a:hover::before, a:focus::before {
 }
 
 .commentButtonArea {
-  margin-top: 30px;
+  margin-top: 35px;
   /*margin-left: auto !important;*/
   display: flex;
 }
@@ -182,6 +201,11 @@ a:hover::before, a:focus::before {
 
 .commentButtonArea p {
   align-self: center;
+}
+
+.commentButton {
+  height: 35px;
+  margin-left: 10px !important;
 }
 
 .smallbanner {

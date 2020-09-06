@@ -84,22 +84,26 @@
         </div>
         <br>
 
-          <div class="likes-area">
-            <svg (click)= "react(0)" class="bi bi-heart-fill icon color" width="1.5em" height="1.5em" viewBox="0 0 16 16"
-                 xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                    clip-rule="evenodd"/>
-            </svg>
-            <!--          <svg class="bi bi-bookmark-fill icon" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"-->
-            <!--               xmlns="http://www.w3.org/2000/svg">-->
-            <!--            <path fill-rule="evenodd" d="M3 3a2 2 0 012-2h6a2 2 0 012 2v12l-5-3-5 3V3z" clip-rule="evenodd"/>-->
-            <!--          </svg>-->
-            <!--          <svg class="bi bi-reply-fill icon" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"-->
-            <!--               xmlns="http://www.w3.org/2000/svg">-->
-            <!--            <path-->
-            <!--              d="M9.079 11.9l4.568-3.281a.719.719 0 000-1.238L9.079 4.1A.716.716 0 008 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>-->
-            <!--          </svg>-->
-          </div>
+
+          <!--          <svg class="bi bi-bookmark-fill icon" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"-->
+          <!--               xmlns="http://www.w3.org/2000/svg">-->
+          <!--            <path fill-rule="evenodd" d="M3 3a2 2 0 012-2h6a2 2 0 012 2v12l-5-3-5 3V3z" clip-rule="evenodd"/>-->
+          <!--          </svg>-->
+          <!--          <svg class="bi bi-reply-fill icon" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"-->
+          <!--               xmlns="http://www.w3.org/2000/svg">-->
+          <!--            <path-->
+          <!--              d="M9.079 11.9l4.568-3.281a.719.719 0 000-1.238L9.079 4.1A.716.716 0 008 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>-->
+          <!--          </svg>-->
+        </div>
+
+
+        <div class="interaction">
+        <div class="likes-area">
+          <svg (click)= "react(0)" class="bi bi-heart-fill icon color" width="1.5em" height="1.5em" viewBox="0 0 16 16"
+               xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                  clip-rule="evenodd"/>
+          </svg>
           <!--          <svg class="bi bi-bookmark-fill icon" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"-->
           <!--               xmlns="http://www.w3.org/2000/svg">-->
           <!--            <path fill-rule="evenodd" d="M3 3a2 2 0 012-2h6a2 2 0 012 2v12l-5-3-5 3V3z" clip-rule="evenodd"/>-->
@@ -134,16 +138,18 @@
 
         </div>
         <section id="comment-section" *ngIf="showCommentSection">
-        <hr>
         <ul>
-          <li *ngFor="let comment of comments">
-            <p><strong>{{comment.commentName}}</strong>: {{comment.comment}}</p>
-            <span> {{ comment.date }}</span>
+          <li style="padding-bottom: 10px" *ngFor="let comment of comments">
+            <p style="line-height: 1;"><span style="font-weight: 500;">{{comment.commentName}}</span> {{comment.comment}}</p>
+            <span style="font-size: 11px; color: #8e908c; line-height: 2px"> {{ comment.date }}</span>
           </li>
         </ul>
-        <input id="class-inputfield" class="roundInputField comment" type="text" [(ngModel)]="comment">
+            <div style="margin-top: 10px">
+        <input id="class-inputfield" class="comment" type="text" [(ngModel)]="comment" [placeholder]="'    add a comment'">
         <button class="boderButton commentButton" (click)="addComment()">Save</button>
+            </div>
       </section>
+      </div>
 
 
     </div>
