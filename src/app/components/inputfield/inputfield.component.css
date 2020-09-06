@@ -14,8 +14,8 @@ textarea {
 }
 
 .editButton:hover{
-    width:17px;
-    height:17px;
+    width:27px;
+    height:27px;
     cursor: pointer;
 }
 
@@ -25,4 +25,12 @@ textarea {
 
 h4{
     display: inline;
+}
+
+.saveDataButton {
+  color: #8e908c;
+}
+
+.saveDataButton:hover {
+  color: white;
 }

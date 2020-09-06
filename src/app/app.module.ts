@@ -66,6 +66,7 @@ import { ContributorViewComponent } from './components/contributor-view/contribu
 import { TagViewComponent } from './components/tag-view/tag-view.component';
 import { ContributorInputComponent } from './components/contributor-input/contributor-input.component';
 import { TagInputComponent } from './components/tag-input/tag-input.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -111,35 +112,36 @@ import { TagInputComponent } from './components/tag-input/tag-input.component';
         ContributorInputComponent,
         TagInputComponent
     ],
-  imports: [
-    MatTabsModule,
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    CoreModule,
-    SharedModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
-    NgbModule,
-    FileUploadModule,
-    FontAwesomeModule,
-    QuillModule.forRoot(),
-    ToastrModule.forRoot({
-      preventDuplicates: true,
-    }),
-    ScrollToModule.forRoot(),
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatIconModule,
-    MatCardModule,
-    MatChipsModule
-  ],
+    imports: [
+        MatTabsModule,
+        BrowserModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        CoreModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AngularFireStorageModule,
+        AngularFireDatabaseModule,
+        NgbModule,
+        FileUploadModule,
+        FontAwesomeModule,
+        QuillModule.forRoot(),
+        ToastrModule.forRoot({
+            preventDuplicates: true,
+        }),
+        ScrollToModule.forRoot(),
+        MatFormFieldModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatIconModule,
+        MatCardModule,
+        MatChipsModule,
+        MatDividerModule
+    ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
       NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal, { provide: LOCALE_ID, useValue: 'de-AT' }],
     bootstrap: [AppComponent]

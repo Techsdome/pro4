@@ -23,6 +23,7 @@
               <div class="projectcontent">
               <img *ngIf="allPostsObject.type !== 'project'" class="typeMark" style="width: 25px; height: 25px;" [src]="allPostsObject.typeImage" alt="typeImage">
               </div>
+              <mat-divider *ngIf="allPostsObject.type !== 'project'" [vertical]="true" style="opacity: 40%"></mat-divider>
               <div>
 
               <div class="row description">

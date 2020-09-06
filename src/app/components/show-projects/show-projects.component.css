@@ -188,6 +188,7 @@ a:hover::before, a:focus::before {
 .description div {
   margin: 0;
   padding: 0;
+  margin-left: 4px !important;
 }
 
 .description {
@@ -285,4 +286,8 @@ a:hover::before, a:focus::before {
 
 .small-profile-picture {
   border: solid 2px #6C63FF;
+}
+
+.mat-divider.mat-divider-vertical {
+  border-width: 2px;
 }
