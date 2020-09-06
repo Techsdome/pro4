@@ -65,13 +65,13 @@
 
                 </div>
                 <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
-                  <h6>Tags</h6>
+                  <h6 style="font-size: 13px">Tags</h6>
                   <div class="col-12">
                     <app-tag-view [projectID]="this.allPostsObject.postId"></app-tag-view>
                   </div>
                 </div>
                 <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
-                  <h6>Contributors</h6>
+                  <h6 style="font-size: 13px">Contributors</h6>
                   <div class="col-12">
                     <app-contributor-view [projectID]="this.allPostsObject.postId"></app-contributor-view>
                   </div>
