@@ -17,6 +17,7 @@ import {SettingsProfileComponent} from './components/settings-profile/settings-p
 import {SettingsSecurityComponent} from './components/settings-security/settings-security.component';
 import {ShowProjectsComponent} from './components/show-projects/show-projects.component';
 import {PresentProjectsComponent} from './components/present-projects/present-projects.component';
+import {InfoPageComponent} from './components/info-page/info-page.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
     {path: 'show-posts', component: ShowProjectsComponent},
     {path: 'present-posts', component: PresentProjectsComponent},
     {path: 'show-project-post', component: ShowProjectsComponent},
+    {path: 'info-page', component: InfoPageComponent},
     {path: '**', component: DashboardComponent}
 ];
 
