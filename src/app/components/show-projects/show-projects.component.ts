@@ -40,12 +40,12 @@ export class ShowProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.emojiList = this.reactionSvc.emojiList;
     this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).valueChanges().subscribe(reactions => {
-      console.log(reactions.likes);
-      this.reactionCount = this.reactionSvc.countRactions(reactions.likes);
-      this.userReaction = this.reactionSvc.userReaction(reactions.likes);
-
-      console.log('reactionCount: ' + this.reactionCount[0]);
-      console.log('userReaction: ' + this.userReaction);
+      // console.log(reactions);
+      // this.reactionCount = this.reactionSvc.countRactions(reactions.likes);
+      // this.userReaction = this.reactionSvc.userReaction(reactions.likes);
+      //
+      // console.log('reactionCount: ' + this.reactionCount[0]);
+      // console.log('userReaction: ' + this.userReaction);
     });
 
     this.loadPost();
@@ -126,7 +126,6 @@ export class ShowProjectsComponent implements OnInit {
    */
 
   openCommentSection() {
-    document.getElementById('comment-inputfield').focus();
     this.showCommentSection = !this.showCommentSection;
   }
 

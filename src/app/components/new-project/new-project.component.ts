@@ -198,7 +198,7 @@ export class NewProjectComponent implements OnInit {
 
         if (!this.failed) {
           this.activeModal.close();
-          this.router.navigate(['/project-page'], {state: {data: this.projectID}}).then();
+          this.router.navigate(['/project-page', `${this.projectID}`], {state: {data: this.projectID}}).then();
         }
       } catch (e) {
         console.log(e);

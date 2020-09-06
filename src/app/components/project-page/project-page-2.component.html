@@ -75,26 +75,24 @@
               <div id="contributors" class="col-12" *ngIf="this.tmpAllContributors != []">
                 <h3>Contributors</h3>
                 <div class="row contri-container">
-                  <div *ngFor="let mem of this.tmpAllContributors; let mindex = index"
+                  <div class="col single-contributor" *ngFor="let mem of this.tmpAllContributors; let mindex = index"
                        [ngClass]="editMode ? 'editbg' : ''">
-                    <div class="col-3 border rounded-circle view overlay zoom contributors">
+                    <button *ngIf="editMode" class="removeMemberButton" (click)="removeMember(mindex)">
+                      <svg class="bi bi-x-circle-fill removePicture" width="1.5em" height="1.5em" viewBox="0 0 16 16"
+                           fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M16 8A8 8 0 110 8a8 8 0 0116 0zm-4.146-3.146a.5.5 0 00-.708-.708L8 7.293 4.854 4.146a.5.5 0 10-.708.708L7.293 8l-3.147 3.146a.5.5 0 00.708.708L8 8.707l3.146 3.147a.5.5 0 00.708-.708L8.707 8l3.147-3.146z"
+                              clip-rule="evenodd"/>
+                      </svg>
+                    </button>
+                    <div class="col border rounded-circle view overlay zoom contributors">
                       <img class="contributor img-fluid" src="{{mem.photoURL}}" alt="contributer"
                            height="514"
                            width="913"/>
                     </div>
-                    <h6 class="username text-center"> {{ mem.displayName }}
-                      <button *ngIf="editMode" class="removeMemberButton" (click)="removeMember(mindex)">
-                        <svg class="bi bi-x" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                             xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd"
-                                d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                          <path fill-rule="evenodd"
-                                d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                        </svg>
-                      </button>
-                    </h6>
+                    <h6 class="username text-center"> {{ mem.displayName }} </h6>
                   </div>
-                  <div class="addMember align-content-end" *ngIf="editMode">
+                  <div class="addMember row align-content-end" *ngIf="editMode">
                     <mat-form-field class="text-black-50 mat-form-field-inputs" floatLabel="never">
                       <input (keyup)="onkeyup($event)" type="text"
                              placeholder="Search members..."
@@ -104,7 +102,11 @@
                              [matAutocomplete]="auto">
                       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                         <mat-option *ngFor="let offset of results | async" [value]="offset.displayName">
-                          <small (click)="addContributorUid(offset.uid)"><img class="example-option-img rounded" [src]="offset.photoURL" height="25" aria-hidden ="true" alt="profile_pic">   {{ offset.displayName }}</small>
+                          <small (click)="addContributorUid(offset.uid)"><img class="example-option-img rounded"
+                                                                              [src]="offset.photoURL" height="25"
+                                                                              aria-hidden="true"
+                                                                              alt="profile_pic">   {{ offset.displayName }}
+                          </small>
                         </mat-option>
                       </mat-autocomplete>
                     </mat-form-field>

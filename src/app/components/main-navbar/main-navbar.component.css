@@ -137,6 +137,7 @@
 
 #profileButtonSideBar{
   filter: invert(0%) !important;
+  object-fit: cover;
 }
 
 #searchBar {

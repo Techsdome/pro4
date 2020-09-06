@@ -26,7 +26,7 @@ const routes: Routes = [
     {path: 'dashboard', component: DashboardComponent},
     {path: 'forgot-password', component: ForgotPasswordComponent},
     {path: 'verify-email-address', component: VerifyEmailComponent},
-    {path: 'project-page', component: ProjectPageComponent},
+    {path: 'project-page/:project', component: ProjectPageComponent},
     {path: 'new-project', component: NewProjectComponent},
     {path: 'app-user-profile/:user', component: UserProfileComponent},
     {path: 'app-settings', component: SettingsComponent},

@@ -6,7 +6,7 @@
     </div>
     <div *ngIf="projects.length !== 0" class="col-4">
       <div class="col-4 center-block " *ngFor="let project of projects">
-        <div class="theprojects rounded-circle circular" [routerLink]="['/project-page']"
+        <div class="theprojects rounded-circle circular" [routerLink]="['/project-page', project.postId]"
              [state]="{data: project.postId}">
           <div class="overlay">
             <div class="text">{{ project.projectName }} </div>
