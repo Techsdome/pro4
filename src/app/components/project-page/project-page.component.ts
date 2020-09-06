@@ -14,6 +14,7 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {filter, switchMap} from 'rxjs/operators';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-project-page',
@@ -24,7 +25,7 @@ export class ProjectPageComponent implements OnInit {
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
               public authService: AuthService, public uploadTask: UploadTaskComponent, private modalService: NgbModal,
-              public userSerive: DataServiceService) {
+              public userSerive: DataServiceService, private route: ActivatedRoute) {
   }
 
   // general stuff
@@ -100,18 +101,20 @@ export class ProjectPageComponent implements OnInit {
     this.getUser();
     this.results = this.search();
 
-    if (this.projectID) {
-      localStorage.setItem('projectID', this.projectID);
-    } else if (localStorage.getItem('projectID')) {
-      this.projectID = localStorage.getItem('projectID');
-    } else {
-      alert('No Project found!');
-    }
+    this.route.params.subscribe(async params => {
+      this.projectID = params.project;
+      console.log(params.project);
+      await this.loadProject();
+      this.fetchComments();
+    });
 
-    await this.loadProject();
-
-    this.fetchComments();
-
+    // if (this.projectID) {
+    //   localStorage.setItem('projectID', this.projectID);
+    // } else if (localStorage.getItem('projectID')) {
+    //   this.projectID = localStorage.getItem('projectID');
+    // } else {
+    //   alert('No Project found!');
+    // }
   }
 
   fetchComments() {
@@ -441,6 +444,7 @@ export class ProjectPageComponent implements OnInit {
 // loads project with an id
   loadProject() {
     this.docRef = this.afs.doc(`mainFeed/allPosts/post/${this.projectID}`);
+    console.log('load: ' + this.projectID);
     if (this.docRef) {
       return this.projectPromise = this.docRef.get().toPromise().then(async doc => {
         if (doc.exists) {

@@ -54,7 +54,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  async ngOnInit() {
+   ngOnInit() {
     this.activeMenu = '';
     this.activeFilter = 'recent';
     this.posts = [];

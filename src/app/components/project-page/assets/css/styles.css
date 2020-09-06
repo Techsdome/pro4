@@ -140,6 +140,15 @@ p {
 
 .username {
   color: #8e908c;
+  /*text-overflow: ellipsis;*/
+  /*overflow: hidden;*/
+  /*max-height: 50px;*/
+  white-space: break-spaces;
+}
+
+.username:hover {
+  text-overflow: unset;
+  overflow: visible;
 }
 
 #info-panel {
@@ -178,10 +187,10 @@ p {
   transform: scale(1.1);
 }
 
-.editbg {
-  background-color: #f7f7f7;
-  border-radius: 20px;
-}
+/*.editbg {*/
+/*  background-color: #f7f7f7;*/
+/*  border-radius: 20px;*/
+/*}*/
 
 .removeMemberButton {
   border: none;
@@ -189,6 +198,10 @@ p {
   display: inline;
   padding: 0;
   margin: 0;
+  position: absolute;
+  top: -6px;
+  right: -5px;
+  font-size: 11px;
 }
 
 #gallery img:hover {
@@ -315,6 +328,7 @@ p {
 
 #contributors .contri-container {
   min-height: 50px;
+  justify-items: center;
 }
 
 #tags .tags-container {
@@ -395,7 +409,7 @@ a:hover {
 }
 
 #project-discussion {
-  min-height: 400px;
+ height: 400px;
 }
 
 #project-discussion #comment-section p {
@@ -415,5 +429,16 @@ a:hover {
 
 .add-comment {
   margin: 10px 0;
+}
+
+.contributors {
+  margin: 5px auto !important;
+}
+
+.single-contributor {
+  padding: 0;
+  margin: 0 5px;
+  max-width: 90px;
+  position: relative;
 }
 

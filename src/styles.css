@@ -557,3 +557,19 @@ body::-webkit-scrollbar-thumb {
 .modal-customclass .modal-dialog {
   width: max-content;
 }
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 0 !important;
+}
+
+.mat-form-field .mat-form-field-underline {
+  background-color: unset !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: unset !important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  opacity: 0 !important;
+}

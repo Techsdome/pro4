@@ -83,15 +83,15 @@ a:hover::before, a:focus::before {
 /*now all*/
 
 .projectpost {
-    /*background-color: #fff;*/
-    /*margin: 30px;*/
-    /*border-radius: 20px;*/
-    padding: 35px 35px 35px 35px;
-    border-radius: 20px;
-    background: #F3F5F7;
-    box-shadow:  5px 5px 10px #e0e1e3,
-    -5px -5px 10px #ffffff;
-    margin-bottom: 30px;
+  /*background-color: #fff;*/
+  /*margin: 30px;*/
+  /*border-radius: 20px;*/
+  padding: 35px 35px 35px 35px;
+  border-radius: 20px;
+  background: #F3F5F7;
+  box-shadow: 5px 5px 10px #e0e1e3,
+  -5px -5px 10px #ffffff;
+  margin-bottom: 30px;
 }
 
 .projectpost:hover .typeMark {
@@ -123,10 +123,10 @@ a:hover::before, a:focus::before {
   opacity: 70%;
 }
 
-.maindescription{
-    margin: 20px 20px 0px -10px !important;
-    flex-wrap: inherit !important;
-    flex-direction: column;
+.maindescription {
+  margin: 20px 20px 0px -10px !important;
+  flex-wrap: inherit !important;
+  flex-direction: column;
 }
 
 /*.projectpost {
@@ -176,6 +176,10 @@ a:hover::before, a:focus::before {
   display: flex;
 }
 
+.interaction #comment-section {
+  display: block;
+}
+
 .commentButtonArea p {
   align-self: center;
 }
@@ -192,7 +196,7 @@ a:hover::before, a:focus::before {
 }
 
 .description {
-  width: 100%;
+  max-height: 200px;
   margin: 8px !important;
 }
 
@@ -222,11 +226,11 @@ a:hover::before, a:focus::before {
 }
 
 .viewButton {
-    padding: 3px 8px !important;
-    /*margin-left: auto !important;*/
-    height: 40px;
-    width: 150px;
-    border-color: rgba(108, 99, 255, .5);
+  padding: 3px 8px !important;
+  /*margin-left: auto !important;*/
+  height: 40px;
+  width: 150px;
+  border-color: rgba(108, 99, 255, .5);
 }
 
 .projectcase {
@@ -290,4 +294,16 @@ a:hover::before, a:focus::before {
 
 .mat-divider.mat-divider-vertical {
   border-width: 2px;
+}
+
+.description-container {
+  height: 100%;
+}
+
+.description-container p {
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }

@@ -122,7 +122,6 @@ export class ShowProjectsComponent implements OnInit {
    */
 
   openCommentSection() {
-    document.getElementById('comment-inputfield').focus();
     this.showCommentSection = !this.showCommentSection;
   }
 
