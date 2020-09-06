@@ -39,13 +39,9 @@ export class ShowProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.emojiList = this.reactionSvc.emojiList;
-    this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).valueChanges().subscribe(reactions => {
-      // console.log(reactions);
-      // this.reactionCount = this.reactionSvc.countRactions(reactions.likes);
-      // this.userReaction = this.reactionSvc.userReaction(reactions.likes);
-      //
-      // console.log('reactionCount: ' + this.reactionCount[0]);
-      // console.log('userReaction: ' + this.userReaction);
+    this.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).valueChanges().subscribe((reactions: Posts) => {
+      this.reactionCount = this.reactionSvc.countRactions(reactions.likes);
+      this.userReaction = this.reactionSvc.userReaction(reactions.likes);
     });
 
     this.loadPost();
@@ -65,16 +61,16 @@ export class ShowProjectsComponent implements OnInit {
     }).then(() => {
       switch (postType) {
         case 'project':
-          this.headMessage = 'created a Project';
+          this.headMessage = 'created a Project:';
           break;
         case 'question':
-          this.headMessage = 'asked a Question';
+          this.headMessage = 'asked a Question:';
           break;
         case 'post':
-          this.headMessage = 'posted';
+          this.headMessage = 'posted:';
           break;
         default:
-          this.headMessage = 'posted';
+          this.headMessage = 'posted:';
           break;
       }
     });

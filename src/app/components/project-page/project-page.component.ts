@@ -571,9 +571,11 @@ export class ProjectPageComponent implements OnInit {
     this.myControl.setValue(null);
   }
 
-  addContributorUid(uid: string) {
+  async addContributorUid(uid: string) {
     if (!this.tmpAllContributorsUid.includes(uid)) {
       this.tmpAllContributorsUid.push(uid);
+      const user = await this.userSerive.getUserWithUid(uid);
+      this.tmpAllContributors.push(user);
       this.memberChange = true;
     }
   }

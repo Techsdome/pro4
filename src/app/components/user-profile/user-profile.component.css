@@ -3,7 +3,12 @@
 }
 
 #user-profile-posts-container {
-    margin-left: 175px;
+    /*margin-left: 175px;*/
+  width: 80%;
+}
+
+.stuff {
+  width: 20%;
 }
 
 #all-posts-container{

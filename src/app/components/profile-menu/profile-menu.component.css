@@ -22,8 +22,13 @@ button {
   /*border-radius: 100px;*/
   padding: 5px 30px 5px 30px;
   margin: 10px 0px 10px auto;
+  color: #8e908c;
   /*box-shadow:  5px 5px 10px #e0e1e3,*/
   /*-5px -5px 10px #ffffff;*/
+}
+
+.filter:hover {
+  color: white;
 }
 
 a:hover, a:focus, a:active {
