@@ -8,7 +8,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
 })
 export class TagViewComponent implements OnInit {
 
-  @Input() projectID;
+  @Input() mode;
+  @Input() projectOrUserID;
   docRef: any;
   projectPromise: any;
   project: any;
@@ -17,19 +18,36 @@ export class TagViewComponent implements OnInit {
   constructor(private afs: AngularFirestore) { }
 
   ngOnInit(): void {
-    this.docRef = this.afs.doc(`mainFeed/allPosts/post/${this.projectID}`);
-    if (this.docRef) {
-      return this.projectPromise = this.docRef.get().toPromise().then(async doc => {
-        if (doc.exists) {
-          this.project = doc.data();
-          this.tags = this.project.projectCategories;
-        } else {
-          console.log('No such document!');
+    if ( this.mode === 'user') {
+      this.docRef = this.afs.doc(`users/${this.projectOrUserID}`);
+      if (this.docRef) {
+        return this.projectPromise = this.docRef.get().toPromise().then(async doc => {
+          if (doc.exists) {
+            this.tags = doc.data().skills;
+          } else {
+            console.log('No such document!');
+          }
+        }).catch(error => {
+          console.log('Error getting document:', error);
+        });
+      }
+    } else {
+      this.docRef = this.afs.doc(`mainFeed/allPosts/post/${this.projectOrUserID}`);
 
-        }
-      }).catch(error => {
-        console.log('Error getting document:', error);
-      });
+      if (this.docRef) {
+        return this.projectPromise = this.docRef.get().toPromise().then(async doc => {
+          if (doc.exists) {
+            this.project = doc.data();
+            this.tags = this.project.projectCategories;
+          } else {
+            console.log('No such document!');
+
+          }
+        }).catch(error => {
+          console.log('Error getting document:', error);
+        });
+      }
     }
+
   }
 }

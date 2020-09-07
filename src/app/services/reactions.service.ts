@@ -47,14 +47,9 @@ export class ReactionsService {
 
   removeReaction(itemId, uid) {
     const index = Object.keys(this.likeList).indexOf(uid);
-    console.log(index + ' uid: ' + uid);
-
-    console.log(this.likeList);
     if (index >= 0) {
       delete this.likeList[uid];
     }
-
-    console.log(this.likeList);
 
     this.afs.collection('mainFeed/allPosts/post/').doc(itemId).update({
       likes: this.likeList,

@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {DataServiceService} from '../../shared/services/data-service.service';
 
 @Component({
   selector: 'app-tag-input',
@@ -15,29 +16,24 @@ export class TagInputComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   selectedCategories = [];
-  @Input() projectID;
   project: any;
   docRef: any;
-  projectPromise: any;
+  userPromise: Promise<any>;
 
+  @Input() userID;
+  @Output() tagsOut = new EventEmitter<string[]>();
 
-  constructor(public afs: AngularFirestore) { }
+  constructor(public afs: AngularFirestore, private userData: DataServiceService) { }
 
   ngOnInit(): void {
-   /* this.docRef = this.afs.doc(`mainFeed/allPosts/post/${this.projectID}`);
+    this.docRef = this.afs.doc(`users/${this.userID}`);
     if (this.docRef) {
-      return this.projectPromise = this.docRef.get().toPromise().then(async doc => {
+      this.userPromise = this.docRef.get().toPromise().then(doc => {
         if (doc.exists) {
-          this.project = doc.data();
-          this.selectedCategories = this.project.projectCategories;
-        } else {
-          console.log('No such document!');
-
+          this.selectedCategories = doc.data().skills;
         }
-      }).catch(error => {
-        console.log('Error getting document:', error);
       });
-    }*/
+    }
   }
 
   addTag(event: MatChipInputEvent): void {
@@ -47,12 +43,14 @@ export class TagInputComponent implements OnInit {
     // Add our tag
     if ((value || '').trim()) {
       this.selectedCategories.push(value);
+      this.tagsOut.emit(this.selectedCategories);
     }
 
     // Reset the input value
     if (input) {
       input.value = '';
     }
+
   }
 
   removeTag(tag: string): void {
@@ -61,6 +59,7 @@ export class TagInputComponent implements OnInit {
     if (index >= 0) {
       this.selectedCategories.splice(index, 1);
     }
+    this.tagsOut.emit(this.selectedCategories);
   }
 
 }

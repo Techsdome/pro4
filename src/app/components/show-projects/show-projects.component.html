@@ -73,7 +73,7 @@
                 <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
                   <h6 style="font-size: 13px">Tags</h6>
                   <div class="col-12">
-                    <app-tag-view [projectID]="this.allPostsObject.postId"></app-tag-view>
+                    <app-tag-view [projectOrUserID]="this.allPostsObject.postId" [mode]="'project'"></app-tag-view>
                   </div>
                 </div>
                 <div *ngIf="allPostsObject.type == 'project'" class="row myrow">

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from 'firebase';
+import {DataServiceService} from '../../../shared/services/data-service.service';
+import {AngularFirestore} from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-people-page',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PeoplePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userSerive: DataServiceService, private afs: AngularFirestore) { }
+
+  allUsers: User;
 
   ngOnInit(): void {
+    
   }
+
+
 
 }

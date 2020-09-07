@@ -34,7 +34,6 @@ export class NewProjectService {
   }
 
   async addData(id, pname, pdescription, pcategories, members, bannerDefault): Promise<void> {
-    console.log('1');
     let myuser: any;
     let username: string;
 
@@ -90,14 +89,10 @@ export class NewProjectService {
 
 
   async getBannerDefault(): Promise<any> {
-    console.log('4 - default holen');
     return await this.storage.ref('project/Default_Banner/Default2.jpg').getDownloadURL().toPromise();
   }
 
   async uploadPictures(bannerURL: string, imageURL: string[]): Promise<any> {
-    console.log('8');
-    console.log('uploadPictures: ' + bannerURL + ' ' + imageURL);
-    console.log('project ID: ' + this.projectID);
     return this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).get().toPromise().then((doc) => {
       if (doc.exists) {
         return this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).update({

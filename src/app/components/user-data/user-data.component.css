@@ -202,3 +202,10 @@ li{
     border: 1px solid rgba(130, 130, 130, 0.1);
 }
 
+#plusButton {
+  background-image: url("../../../assets/icons/plus.svg");
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+

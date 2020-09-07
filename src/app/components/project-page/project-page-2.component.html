@@ -119,7 +119,7 @@
               <div id="tags" class="col-12">
                 <h3> Tags </h3>
                 <div class="row tags-container">
-                  <app-tag-view [projectID]="projectID" *ngIf="!editMode"></app-tag-view>
+                  <app-tag-view [projectOrUserID]="projectID" [mode]="'project'" *ngIf="!editMode"></app-tag-view>
                   <mat-form-field *ngIf="editMode" class="text-black-50 mat-form-field-inputs">
                     <mat-chip-list class="mat-form-field-inputs" #chipListTag aria-label="Tag selection">
                       <mat-chip *ngFor="let tag of tags" [selectable]="selectableTag"
