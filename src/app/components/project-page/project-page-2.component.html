@@ -41,8 +41,8 @@
           </div>
           <div id="menu" class="row">
             <div class="col-6 menupoints">
-              <h2><a (click)="openDisscusion()">DESCRIPTION</a></h2>
-              <h2><a (click)="openDiscription()">DISCUSSION</a></h2>
+              <h2><a [ngClass]="switchComp ? 'active' : ''" (click)="openDisscusion()">DESCRIPTION</a></h2>
+              <h2><a [ngClass]="!switchComp ? 'active' : ''" (click)="openDiscription()">DISCUSSION</a></h2>
             </div>
             <div class="col-6 text-right">
               <button class="editProject boderButton" (click)="editProject()" [class]="isOwner? 'd-inline' : 'd-none'">

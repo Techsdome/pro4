@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Project} from '../../models/Project';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
@@ -14,7 +14,7 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {filter, switchMap} from 'rxjs/operators';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-project-page',

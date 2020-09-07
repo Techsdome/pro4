@@ -442,3 +442,13 @@ a:hover {
   position: relative;
 }
 
+/**
+*
+*   MENU ACTIVE ITEMS
+*
+ */
+
+.active {
+  color: #222222 !important;
+}
+
