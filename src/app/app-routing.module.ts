@@ -17,7 +17,8 @@ import {SettingsProfileComponent} from './components/settings-profile/settings-p
 import {SettingsSecurityComponent} from './components/settings-security/settings-security.component';
 import {ShowProjectsComponent} from './components/show-projects/show-projects.component';
 import {PresentProjectsComponent} from './components/present-projects/present-projects.component';
-import {InfoPageComponent} from './components/info-page/info-page.component';
+import {InfoPageComponent} from './components/MenuItems/info-page/info-page.component';
+import {PeoplePageComponent} from './components/MenuItems/people-page/people-page.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
     {path: 'present-posts', component: PresentProjectsComponent},
     {path: 'show-project-post', component: ShowProjectsComponent},
     {path: 'info-page', component: InfoPageComponent},
+    {path: 'people-page', component: PeoplePageComponent},
     {path: '**', component: DashboardComponent}
 ];
 
