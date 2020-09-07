@@ -460,7 +460,6 @@ export class ProjectPageComponent implements OnInit {
 // loads project with an id
   loadProject() {
     this.docRef = this.afs.doc(`mainFeed/allPosts/post/${this.projectID}`);
-    console.log('load: ' + this.projectID);
     if (this.docRef) {
       return this.projectPromise = this.docRef.get().toPromise().then(async doc => {
         if (doc.exists) {
