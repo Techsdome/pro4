@@ -22,7 +22,6 @@ export class ShowProjectsComponent implements OnInit {
   edit = false;
   comment: string;
   showCommentSection = false;
-  commentsLenght: number;
   posts: any[] = [];
   filter: boolean;
 
@@ -142,6 +141,9 @@ export class ShowProjectsComponent implements OnInit {
               commentName: val.firstname + ' ' + val.lastname,
               date: date.toLocaleString('en-GB'),
             });
+
+            console.log(this.comments.length);
+            console.log(_.mapValues(_.groupBy(this.comments), 'length'));
 
             this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
               comment: this.comment,

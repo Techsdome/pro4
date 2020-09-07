@@ -331,3 +331,7 @@ a:hover::before, a:focus::before {
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
 }
+
+#commentsSize {
+  font-size: 9px;
+}
