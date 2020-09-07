@@ -23,17 +23,18 @@
       <div class="sub-maindescription">
         <div class="col-12 pname0">
           <div class="col-4 pname">
-            <div class="projectcontent">
+            <div *ngIf="allPostsObject.type !== 'project'" class="projectcontent">
               <img *ngIf="allPostsObject.type !== 'project'" class="typeMark" style="width: 25px; height: 25px;"
                    [src]="allPostsObject.typeImage" alt="typeImage">
             </div>
             <mat-divider *ngIf="allPostsObject.type !== 'project'" [vertical]="true" style="opacity: 40%"></mat-divider>
             <div>
 
-              <div class="row description">
-                <div class="description-container">
+              <div class="container description">
+                <div class="row description-container">
                   <p
-                    innerHTML="{{ allPostsObject ? allPostsObject.postText : 'This is my description, Im very happy to be here, welcome all, this is very exciting'}}"></p>
+                    innerHTML="{{ allPostsObject ? allPostsObject.postText : 'This is my description, Im very happy to be here, welcome all, this is very exciting'}}">
+                  </p>
                 </div>
               </div>
             </div>

@@ -62,10 +62,13 @@
         <div id="description" class="col" *ngIf="switchComp">
           <div id="info" class="row">
             <div id="text-description" class="col-8">
-              <textarea *ngIf="editMode" rows="6" name="pdescription" id="pdescription"
+              <!--  Ersetzt durch quill component -->
+              <!--<textarea *ngIf="editMode" rows="6" name="pdescription" id="pdescription"
                         class="form-control changeDescription"
                         [(ngModel)]="tmpDescription"
-                        (change)="pushValue('projectDescription', tmpDescription)"> {{ project.projectDescription }} </textarea>
+                        (change)="pushValue('projectDescription', tmpDescription)"> {{ project.projectDescription }} </textarea>-->
+              <quill-editor *ngIf="editMode" [styles]="editorStyle" id="pdescription" [modules]="config"
+                            name="description" [(ngModel)]="tmpDescription"></quill-editor>
 
               <p *ngIf="!editMode"
                  innerHTML="{{ project.projectDescription }}">{{ project.projectDescription}} </p>

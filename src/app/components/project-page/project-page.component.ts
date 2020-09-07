@@ -97,13 +97,27 @@ export class ProjectPageComponent implements OnInit {
   commentsLenght: number;
   posts: any[] = [];
 
+  editorStyle = {
+    justifyContent: 'center',
+    alignContent: 'center',
+    height: '200px',
+    width: '100%',
+    backgroundColor: 'white',
+  };
+
+  config = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'size'],
+      ['blockquote', 'code-block', 'link'],
+    ]
+  };
+
   async ngOnInit() {
     this.getUser();
     this.results = this.search();
 
     this.route.params.subscribe(async params => {
       this.projectID = params.project;
-      console.log(params.project);
       await this.loadProject();
       this.fetchComments();
     });
@@ -331,6 +345,8 @@ export class ProjectPageComponent implements OnInit {
         });
       }
     }
+
+    data['projectDescription'] = this.tmpDescription;
 
     if (this.pictureChange) {
       if (this.tmpAddedImages.length > 0) { // if images were added
