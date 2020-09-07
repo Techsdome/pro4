@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {NewProjectComponent} from '../new-project/new-project.component';
+import {NewProjectComponent} from '../../new-project/new-project.component';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {Posts} from '../../shared/services/posts';
-import {AuthService} from '../../shared/services/auth.service';
-import {PostsService} from '../../services/posts.service';
+import {Posts} from '../../../shared/services/posts';
+import {AuthService} from '../../../shared/services/auth.service';
+import {PostsService} from '../../../services/posts.service';
 import * as firebase from 'firebase';
 import Timestamp = firebase.firestore.Timestamp;
 

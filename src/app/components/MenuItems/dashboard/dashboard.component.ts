@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NewProjectComponent} from '../new-project/new-project.component';
+import {NewProjectComponent} from '../../new-project/new-project.component';
 
 @Component({
   selector: 'app-dashboard',
