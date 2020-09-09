@@ -1,8 +1,15 @@
 <div *ngIf="user;" id="user-data-container" class="flex">
-    <div id="image-container">
-        <li>
-            <img class="profile-picutre image-shadow" [src]="photoURL?photoURL:'https://api-magazin.single.de/uploads/media/blog/0001/01/thumb_423_blog_big.jpeg'" alt="">
-        </li>
+  <div id="image-container">
+    <li>
+      <img class="profile-picutre image-shadow"
+           [src]="photoURL"
+           alt="">
+    </li>
+  </div>
+  <div id="text-content">
+    <div id="user-header">
+      <h2 *ngIf="displayName;" style="display: inline-block">{{ displayName }}</h2>
+      <a href="mailto:{{email}}" class="email"></a>
     </div>
     <div id="text-content">
         <div id="user-header">
@@ -34,5 +41,26 @@
         <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s" (click)="editToggle(); saveSkill();">Save</button>
         <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s" (click)="editToggle();">Dismiss</button>
     </div>
+    <hr class="line">
+    <p style="text-transform: uppercase; color: #8e908c; font-weight: 300">{{job}}</p>
+    <br>
+    <app-inputfield [searchedUser]="this.searchedUser"></app-inputfield>
+  </div>
+  <div class="vertical-line line"></div>
+  <div id="skills-container">
+    <h2>Skills</h2>
+    <hr class="line">
+    <div id="plusButton" (click)="editToggle()"></div>
+
+    <app-tag-view *ngIf="!edit" [mode]="'user'" [projectOrUserID]="this.user.uid"></app-tag-view>
+    <app-tag-input [userID]="this.user.uid" (tagsOut)="updateSkillArray($event)" *ngIf="edit"></app-tag-input>
+    <br>
+    <button [ngClass]="edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s"
+            (click)="editToggle(); saveSkill();">Save
+    </button>
+    <button [ngClass]="edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s"
+            (click)="editToggle();">Dismiss
+    </button>
+  </div>
 </div>
 

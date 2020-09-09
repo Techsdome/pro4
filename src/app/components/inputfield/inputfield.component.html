@@ -1,15 +1,12 @@
 <div>
     <div id="header-input">
-        <h4>About me</h4>
+        <h6 style="color: #8e908c">About me:</h6>
         <img *ngIf="!this.searchedUser" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="editButton button" (click)="editToggle()" src="../../../assets/icons/about.svg" alt="edit text">
     </div>
-    <p [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" [innerHTML]="description"></p>
+    <p style="color: #8e908c; font-weight: 300" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" [innerHTML]="description"></p>
 
     <quill-editor [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" [styles]="editorStyle" [modules]="config"
                   [(ngModel)]="description" name="post" placeholder="Write something about yourself..." oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'></quill-editor>
-
-<!--    <textarea [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" id="description-textarea" oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'-->
-<!--    [(ngModel)]="description">{{description}}</textarea>-->
 
     <div id="edit-container">
         <button [ngClass] = "edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s" (click)="saveData()">Save changes</button>

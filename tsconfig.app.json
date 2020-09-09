@@ -7,7 +7,11 @@
   "files": [
     "src/main.ts",
     "src/polyfills.ts"
+<<<<<<< HEAD
     ],
+=======
+  ],
+>>>>>>> 5dcdb007c9a5eeb97a0e7f1a051d76aecf7c27ec
   "include": [
     "src/**/*.d.ts"
   ],

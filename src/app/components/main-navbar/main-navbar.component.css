@@ -36,7 +36,7 @@
 }
 
 #chatButton.active  ~ .p_after {
-  top: 413px;
+  top: 361px;
 }
 
 .plus:hover~.p_after {
@@ -122,7 +122,7 @@
     background-image: url("../../../assets/icons/info.svg");
 }
 
-#chatButton:hover {
+#chatButton:hover,  #chatButton.active {
   filter: invert(0%);
 }
 
@@ -141,6 +141,7 @@
 
 #profileButtonSideBar{
   filter: invert(0%) !important;
+  object-fit: cover;
 }
 
 #searchBar {

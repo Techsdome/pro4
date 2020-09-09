@@ -1,0 +1,25 @@
+<mat-form-field class="text-black-50 mat-form-field-inputs" floatLabel="never">
+  <mat-chip-list #chipList aria-label="Contributor selection">
+    <mat-chip
+      *ngFor="let contributor of contributors"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(contributor)">
+      {{contributor}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input (keyup)="onkeyup($event)" type="text"
+           placeholder="Search members..."
+           #contributorInput
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           [matChipInputFor]="chipList"
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let offset of results | async" [value]="offset.displayName">
+      <small (click)="addContributorUid(offset.uid)"><img class="example-option-img rounded" [src]="offset.photoURL" height="25" aria-hidden ="true" alt="profile_pic">   {{ offset.displayName }}</small>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

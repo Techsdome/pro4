@@ -6,17 +6,19 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {SignInComponent} from './components/sign-in/sign-in.component';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {DashboardComponent} from './components/MenuItems/dashboard/dashboard.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {VerifyEmailComponent} from './components/verify-email/verify-email.component';
 import {ProjectPageComponent} from './components/project-page/project-page.component';
 import {NewProjectComponent} from './components/new-project/new-project.component';
-import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {UserProfileComponent} from './components/MenuItems/user-profile/user-profile.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {SettingsProfileComponent} from './components/settings-profile/settings-profile.component';
 import {SettingsSecurityComponent} from './components/settings-security/settings-security.component';
 import {ShowProjectsComponent} from './components/show-projects/show-projects.component';
-import {PresentProjectsComponent} from './components/present-projects/present-projects.component';
+import {PresentProjectsComponent} from './components/MenuItems/present-projects/present-projects.component';
+import {InfoPageComponent} from './components/MenuItems/info-page/info-page.component';
+import {PeoplePageComponent} from './components/MenuItems/people-page/people-page.component';
 
 
 const routes: Routes = [
@@ -26,7 +28,7 @@ const routes: Routes = [
     {path: 'dashboard', component: DashboardComponent},
     {path: 'forgot-password', component: ForgotPasswordComponent},
     {path: 'verify-email-address', component: VerifyEmailComponent},
-    {path: 'project-page', component: ProjectPageComponent},
+    {path: 'project-page/:project', component: ProjectPageComponent},
     {path: 'new-project', component: NewProjectComponent},
     {path: 'app-user-profile/:user', component: UserProfileComponent},
     {path: 'app-settings', component: SettingsComponent},
@@ -35,6 +37,8 @@ const routes: Routes = [
     {path: 'show-posts', component: ShowProjectsComponent},
     {path: 'present-posts', component: PresentProjectsComponent},
     {path: 'show-project-post', component: ShowProjectsComponent},
+    {path: 'info-page', component: InfoPageComponent},
+    {path: 'people-page', component: PeoplePageComponent},
     {path: '**', component: DashboardComponent}
 ];
 

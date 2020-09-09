@@ -7,6 +7,25 @@ ol, ul {
   margin: 0;
 }
 
+.comment {
+  border: none;
+  border-radius: 8px;
+  height: 35px;
+  padding-left: 10px;
+  color: white;
+  background-color: #d9d9d9;
+}
+
+.comment:hover {
+  border: solid 2px #8e908c;
+  background-color: white;
+  color: #222;
+}
+
+#comment-section {
+  margin-top: 10px;
+}
+
 #comment-section ul {
   display: unset;
 }
@@ -83,23 +102,24 @@ a:hover::before, a:focus::before {
 /*now all*/
 
 .projectpost {
-    /*background-color: #fff;*/
-    /*margin: 30px;*/
-    /*border-radius: 20px;*/
-    padding: 35px 35px 35px 35px;
-    border-radius: 20px;
-    background: #F3F5F7;
-    box-shadow:  5px 5px 10px #e0e1e3,
-    -5px -5px 10px #ffffff;
-    margin-bottom: 30px;
+  /*background-color: #fff;*/
+  /*margin: 30px;*/
+  /*border-radius: 20px;*/
+  padding: 35px 35px 35px 35px;
+  border-radius: 20px;
+  background: #F3F5F7;
+  box-shadow: 5px 5px 10px #e0e1e3,
+  -5px -5px 10px #ffffff;
+  margin-bottom: 30px;
 }
 
 .projectpost:hover .typeMark {
-  filter: grayscale(0%);
-  opacity: 70%;
+  filter: grayscale(50%);
+  opacity: 40%;
 }
 
 .projectpost:hover {
+  /*cursor: pointer;*/
   background-color: white;
 }
 
@@ -122,10 +142,10 @@ a:hover::before, a:focus::before {
   opacity: 70%;
 }
 
-.maindescription{
-    margin: 20px 20px 0px -10px !important;
-    flex-wrap: inherit !important;
-    flex-direction: column;
+.maindescription {
+  margin: 20px 20px 0px -10px !important;
+  flex-wrap: inherit !important;
+  flex-direction: column;
 }
 
 /*.projectpost {
@@ -137,8 +157,8 @@ a:hover::before, a:focus::before {
     filter: grayscale(100%);
     opacity: 10%;
     margin: 7px !important;
-    height: 80px !important;
-    width: 80px !important;
+    height: 50px !important;
+    width: 50px !important;
     transition: .3s;
 }
 
@@ -151,7 +171,6 @@ a:hover::before, a:focus::before {
 }
 
 .sideinfo {
-    display: flex;
     height: 100%;
     padding: 10px !important;
 }
@@ -165,19 +184,28 @@ a:hover::before, a:focus::before {
     margin: -30px 0 35px -30px;
     max-height: 100px;
     border-radius: 20px;
-    width: 105%;
+    width: 105.5%;
     object-fit: cover;
     height: 300px;
 }
 
 .commentButtonArea {
-  margin-top: 30px;
-  margin-left: auto !important;
+  margin-top: 35px;
+  /*margin-left: auto !important;*/
   display: flex;
+}
+
+.interaction #comment-section {
+  display: block;
 }
 
 .commentButtonArea p {
   align-self: center;
+}
+
+.commentButton {
+  height: 35px;
+  margin-left: 10px !important;
 }
 
 .smallbanner {
@@ -188,10 +216,11 @@ a:hover::before, a:focus::before {
 .description div {
   margin: 0;
   padding: 0;
+  margin-left: 4px !important;
 }
 
 .description {
-  width: 100%;
+  max-height: 200px;
   margin: 8px !important;
 }
 
@@ -221,11 +250,11 @@ a:hover::before, a:focus::before {
 }
 
 .viewButton {
-    padding: 3px 8px !important;
-    /*margin-left: auto !important;*/
-    height: 40px;
-    width: 150px;
-    border-color: rgba(108, 99, 255, .5);
+  padding: 3px 8px !important;
+  /*margin-left: auto !important;*/
+  height: 40px;
+  width: 150px;
+  border-color: rgba(108, 99, 255, .5);
 }
 
 .projectcase {
@@ -285,4 +314,24 @@ a:hover::before, a:focus::before {
 
 .small-profile-picture {
   border: solid 2px #6C63FF;
+}
+
+.mat-divider.mat-divider-vertical {
+  border-width: 2px;
+}
+
+.description-container {
+  height: 100%;
+}
+
+.description-container p {
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+#commentsSize {
+  font-size: 9px;
 }

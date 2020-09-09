@@ -13,7 +13,7 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {environment} from '../environments/environment';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {DashboardComponent} from './components/MenuItems/dashboard/dashboard.component';
 import {SignInComponent} from './components/sign-in/sign-in.component';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
@@ -21,7 +21,7 @@ import {VerifyEmailComponent} from './components/verify-email/verify-email.compo
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {UserProfileComponent} from './components/MenuItems/user-profile/user-profile.component';
 import {UserDataComponent} from './components/user-data/user-data.component';
 import { MainNavbarComponent } from './components/main-navbar/main-navbar.component';
 import { ProjectPageComponent } from './components/project-page/project-page.component';
@@ -42,7 +42,7 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
 import { AddTagComponent } from './components/add-tag/add-tag.component';
-import { PresentProjectsComponent } from './components/present-projects/present-projects.component';
+import { PresentProjectsComponent } from './components/MenuItems/present-projects/present-projects.component';
 import { SettingsProfileComponent } from './components/settings-profile/settings-profile.component';
 import { SettingsSecurityComponent } from './components/settings-security/settings-security.component';
 import { ShowPostComponent } from './components/show-post/show-post.component';
@@ -64,6 +64,11 @@ import { ImageModalComponent } from './components/image-modal/image-modal.compon
 import {MatChipsModule} from "@angular/material/chips";
 import { ContributorViewComponent } from './components/contributor-view/contributor-view.component';
 import { TagViewComponent } from './components/tag-view/tag-view.component';
+import { ContributorInputComponent } from './components/contributor-input/contributor-input.component';
+import { TagInputComponent } from './components/tag-input/tag-input.component';
+import {MatDividerModule} from '@angular/material/divider';
+import { InfoPageComponent } from './components/MenuItems/info-page/info-page.component';
+import { PeoplePageComponent } from './components/MenuItems/people-page/people-page.component';
 
 
 @NgModule({
@@ -105,37 +110,42 @@ import { TagViewComponent } from './components/tag-view/tag-view.component';
         CreatePostNewComponent,
         ImageModalComponent,
         ContributorViewComponent,
-        TagViewComponent
+        TagViewComponent,
+        ContributorInputComponent,
+        TagInputComponent,
+        InfoPageComponent,
+        PeoplePageComponent
     ],
-  imports: [
-    MatTabsModule,
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    CoreModule,
-    SharedModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
-    NgbModule,
-    FileUploadModule,
-    FontAwesomeModule,
-    QuillModule.forRoot(),
-    ToastrModule.forRoot({
-      preventDuplicates: true,
-    }),
-    ScrollToModule.forRoot(),
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatIconModule,
-    MatCardModule,
-    MatChipsModule
-  ],
+    imports: [
+        MatTabsModule,
+        BrowserModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        CoreModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AngularFireStorageModule,
+        AngularFireDatabaseModule,
+        NgbModule,
+        FileUploadModule,
+        FontAwesomeModule,
+        QuillModule.forRoot(),
+        ToastrModule.forRoot({
+            preventDuplicates: true,
+        }),
+        ScrollToModule.forRoot(),
+        MatFormFieldModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatIconModule,
+        MatCardModule,
+        MatChipsModule,
+        MatDividerModule
+    ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
       NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal, { provide: LOCALE_ID, useValue: 'de-AT' }],
     bootstrap: [AppComponent]

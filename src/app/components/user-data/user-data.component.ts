@@ -3,7 +3,7 @@ import {DataServiceService} from '../../shared/services/data-service.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
-import {ActivatedRoute, Route} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {AngularFirestore} from 'angularfire2/firestore';
 
 
@@ -23,7 +23,6 @@ export class UserDataComponent implements OnInit, OnDestroy {
   email: string;
   photoURL = '';
   edit = false;
-  skill: string;
   htmlSkillElements: HTMLCollection;
   displayName: string;
   editJob = false;
@@ -37,8 +36,6 @@ export class UserDataComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private afs: AngularFirestore) {
     const id: string = route.snapshot.params.user;
-
-    //console.log(id);
   }
 
   config = {
@@ -69,9 +66,6 @@ export class UserDataComponent implements OnInit, OnDestroy {
         this.email = item[it].email;
       }
     }
-    /*if (this.firstname) {
-      this.displayName = this.firstname;
-    }*/
   }
 
   saveDataJob() {
@@ -85,32 +79,21 @@ export class UserDataComponent implements OnInit, OnDestroy {
 
 
   saveSkill() {
-    if (this.skills === undefined) {
-      this.skills = [];
-    }
-    this.skills.push(this.skill);
     if (this.edit) {
       this.edit = !this.edit;
     }
     this.updateSkillsFirebase();
-    this.skill = '';
+  }
+
+  updateSkillArray(params) {
+    this.skills = params;
   }
 
   updateSkillsFirebase() {
     this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
       skills: [] = this.skills
-    });
+    }).then(r => {});
   }
-
-  deleteSkillElement(event) {
-    for (let i = 0; i < this.skills.length; i++) {
-      if (this.skills[i] === event.target.previousElementSibling.value) {
-        this.skills.splice(i, 1);
-      }
-    }
-    this.updateSkillsFirebase();
-  }
-
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
@@ -136,8 +119,6 @@ export class UserDataComponent implements OnInit, OnDestroy {
       });
     });
 
-
-
     this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
 
     if (this.searchedUser) {
@@ -152,7 +133,6 @@ export class UserDataComponent implements OnInit, OnDestroy {
       this.items = items;
       this.getExtendedData(items);
     });
-
   }
 
   ngOnDestroy(): void {

@@ -5,10 +5,19 @@ textarea {
     height: 95px;
 }
 
+
 #header-input{
     display: flex;
 }
 
 h4{
     display: inline;
+}
+
+.saveDataButton {
+  color: #8e908c;
+}
+
+.saveDataButton:hover {
+  color: white;
 }
