@@ -1,12 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
-import * as firebase from 'firebase';
 import {Posts} from '../../shared/services/posts';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {ReactionsService} from '../../services/reactions.service';
 import * as _ from 'lodash';
-import {AngularFireDatabase} from "@angular/fire/database";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-show-projects',
