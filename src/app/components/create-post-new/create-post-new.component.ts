@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {AuthService} from '../../shared/services/auth.service';
 import {Item} from '../../models/Item';
@@ -9,6 +9,8 @@ import {finalize} from 'rxjs/operators';
 import {NewProjectService} from '../../shared/services/new-project.service';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as firebase from "firebase";
+import { MatTabGroup } from "@angular/material/tabs";
+
 
 
 @Component({
@@ -38,6 +40,10 @@ export class CreatePostNewComponent implements OnInit {
   selectedCategories: string[];
   selectedMembers: string[];
   isPurpose: string;
+  public type: string;
+  public tabIndex = 0;
+
+  clickElement: string;
 
   editorForm: FormGroup;
 
@@ -62,8 +68,7 @@ export class CreatePostNewComponent implements OnInit {
 
   constructor(private dataService: DataServiceService, private authService: AuthService, public pservice: NewProjectService,
               public form: FormsModule, public activeModal: NgbActiveModal, private modalService: NgbModal,
-              private storage: AngularFireStorage) {
-  }
+              private storage: AngularFireStorage) {}
 
   getChildMessage(message: any) {
     if (this.isPurpose === 'tags') {
@@ -230,7 +235,22 @@ export class CreatePostNewComponent implements OnInit {
     this.post = '';
   }
 
+
+
   ngOnInit(): void {
+
+    if (this.type === "post") {
+      this.tabIndex = 0;
+    }
+    else if (this.type === "question") {
+      this.tabIndex = 1;
+    }
+    else if (this.type === "project") {
+      this.tabIndex = 2;
+    }
+
+    (<HTMLInputElement>document.getElementById('create-post-form')).click();
+
     this.dataService.getItems().subscribe(items => {
       this.items = items;
       this.getExtendedData(items);

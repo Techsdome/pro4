@@ -26,6 +26,7 @@ export class UserDataComponent implements OnInit, OnDestroy {
   skill: string;
   htmlSkillElements: HTMLCollection;
   displayName: string;
+  editJob = false;
 
   @Input() searchedUser: any;                          // The searched User of search bar
   private sub: any;
@@ -40,8 +41,19 @@ export class UserDataComponent implements OnInit, OnDestroy {
     //console.log(id);
   }
 
+  config = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'size'],
+      ['blockquote', 'code-block', 'link'],
+    ]
+  };
+
   editToggle() {
     this.edit = !this.edit;
+  }
+
+  editToggleJob() {
+    this.editJob = !this.editJob;
   }
 
   getExtendedData(item) {
@@ -61,6 +73,15 @@ export class UserDataComponent implements OnInit, OnDestroy {
       this.displayName = this.firstname;
     }*/
   }
+
+  saveDataJob() {
+    if (this.editJob) {
+        this.editJob = !this.editJob;
+    }
+    this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
+      job: this.job
+    });
+}
 
 
   saveSkill() {

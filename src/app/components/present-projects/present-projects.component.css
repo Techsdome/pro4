@@ -3,6 +3,22 @@
   width: 100px;
 }
 
+canvas{
+  left:-50%; 
+  top:-75%;
+  position: fixed;
+}
+
+.regler{
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 20px;
+  width: 250px;
+}
+
 .theprojects img {
   width: 100%;
   height: 100%;

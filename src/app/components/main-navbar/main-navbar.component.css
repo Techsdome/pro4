@@ -12,6 +12,10 @@
   transition: .5s ease;
 }
 
+#profileButtonSideBar:hover{
+  cursor: pointer;
+}
+
 #peopleButton.active  ~ .p_after {
   top: 313px;
 }

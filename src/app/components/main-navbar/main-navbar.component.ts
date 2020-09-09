@@ -43,7 +43,8 @@ export class MainNavbarComponent implements OnInit {
   constructor(@Inject(AuthService) public authService: AuthService,
               @Inject(DataServiceService) private dataService: DataServiceService,
               private utilitiesService: UtilitiesService,
-              private modalService: NgbModal, private afs: AngularFirestore) {
+              private modalService: NgbModal, 
+              private afs: AngularFirestore) {
   }
 
   onkeyup(e) {
@@ -70,11 +71,12 @@ export class MainNavbarComponent implements OnInit {
     this.menuClicked = !this.menuClicked;
   }
 
-  createNewPost() {
+  createNewPost(type:string) {
     const openPost = this.modalService.open(CreatePostNewComponent,
       {
         scrollable: true
       });
+      openPost.componentInstance.type = type;
   }
 
   slideIt(dat) {

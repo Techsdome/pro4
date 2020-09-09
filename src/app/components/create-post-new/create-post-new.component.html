@@ -1,7 +1,7 @@
 <div class="modal-content">
   <div id="create-post-form">
     <div id="create-post-inner">
-      <mat-tab-group dynamicHeight>
+      <mat-tab-group [(selectedIndex)]="tabIndex" dynamicHeight>
         <mat-tab label="Post">
           <br>
           <div class="create-post-header flex">

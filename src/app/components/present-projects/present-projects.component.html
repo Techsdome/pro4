@@ -1,20 +1,34 @@
+<div class="canvas-container">
+  <canvas #canvas width="600" height="300"></canvas>
+</div>
+<!--
 <div id="maindiv" class="standard-background-color">
   <div class="row">
     <div *ngIf="loading"> <h3>Loading ... </h3></div>
     <div id="noprojects" class="col-12 text-center" *ngIf="!loading && projects.length === 0" align="center">
       <h3 class="text-center"> No projects added </h3>
     </div>
+
     <div *ngIf="projects.length !== 0" class="col-4">
       <div class="col-4 center-block " *ngFor="let project of projects">
         <div class="theprojects rounded-circle circular" [routerLink]="['/project-page']"
              [state]="{data: project.postId}">
           <div class="overlay">
-            <div class="text">{{ project.projectName }} </div>
+            <div *ngIf="project.projectName" class="text">{{ project.projectName }} </div>
+
           </div>
           <img class="rounded-circle" [src]="project.projectBanner" alt="projectBanner">
         </div>
       </div>
     </div>
+
   </div>
 </div>
+
+
+-->
+<div class="regler">
+  <input #regler type="range" max="100" min="10" value="100" name="auswertung">  
+</div>
 <app-main-navbar></app-main-navbar>
+

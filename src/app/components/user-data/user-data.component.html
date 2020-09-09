@@ -10,8 +10,13 @@
           <a href="mailto:{{email}}" class="email"></a>
         </div>
         <hr class="line">
-        <p>{{job}}</p>
-
+        <p [ngClass] = "editJob?'hideBtnTechsdome':'showBtnTechsdome'" [innerHTML]="job"></p>
+        <input type="text" [ngClass] = "editJob?'showBtnTechsdome':'hideBtnTechsdome'"
+        [(ngModel)]="job" name="job" placeholder="Write something about yourself..." oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'/>
+        <img *ngIf="!this.searchedUser" [ngClass] = "editJob?'hideBtnTechsdome':'showBtnTechsdome'" class="editButton button" (click)="editToggleJob()" src="../../../assets/icons/about.svg" alt="edit text">
+        <div id="edit-container">
+            <button [ngClass] = "editJob?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s" (click)="saveDataJob()">Save changes</button>
+        </div>
         <br>
         <app-inputfield [searchedUser]="this.searchedUser"></app-inputfield>
     </div>

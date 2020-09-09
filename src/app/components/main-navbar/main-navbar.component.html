@@ -45,17 +45,17 @@
       <div id="plusButton-container" class="plus">
         <div [class]="status ? 'translateProject' : 'hide'">
           <input type="button" class="background-image-settings bar-button opacity-05"
-                 id="projectButton"  (click)="animateOn(); createNewPost();">
+                 id="projectButton"  (click)="animateOn(); createNewPost('post');">
           <p class="detail_info"><strong>create post</strong></p>
         </div>
         <div [class]="status ? 'translateQuestion' : 'hide'">
           <input type="button" class="background-image-settings bar-button"
-                 id="questionButton"  (click)="animateOn(); createNewPost();">
+                 id="questionButton"  (click)="animateOn(); createNewPost('question');">
           <p class="detail_info"><strong>ask question</strong></p>
         </div>
         <div [class]="status ? 'translateMessage' : 'hide'">
           <input type="button" class="background-image-settings bar-button opacity-05"
-                 id="messageButton" (click)="animateOn(); createNewPost();">
+                 id="messageButton" (click)="animateOn(); createNewPost('project');">
           <p class="detail_info"><strong>create project</strong></p>
         </div>
 

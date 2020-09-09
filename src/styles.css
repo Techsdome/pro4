@@ -12,6 +12,41 @@ button:focus {
   outline: 0px !important;
 }
 
+#menuBar_top{
+  min-width: 100%;
+}
+
+#round_below{
+  left:64px !important;
+}
+
+
+app-main-navbar{
+  position: absolute;
+  left: 0;
+}
+
+app-root{
+  display: block;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+
+.editButton{
+  width:15px;
+  height:15px;
+  align-self: center;
+  margin-left: 10px;
+  transition: 0.2s;
+}
+
+.editButton:hover{
+  width:17px;
+  height:17px;
+  cursor: pointer;
+}
+
 .container-style {
   margin: 100px auto;
   width: 80%;
