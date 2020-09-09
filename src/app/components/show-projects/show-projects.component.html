@@ -1,169 +1,137 @@
 <div class="post-container">
   <a [routerLink]="['/app-user-profile', allPostsObject.uid]" [state]="{data: allPostsObject}"><img
     [src]="allPostsObject.userPhotoURL" alt="profil picture" class="small-profile-picture image-shadow"></a>
-  <div class="row projectpost">
-    <!--    <div class="col-9 maininfo">-->
-    <div *ngIf="allPostsObject.type == 'project'" class="col-12 smallbanner">
-      <img src="{{ allPostsObject.projectBanner }}" class="img-responsive" alt="projectbanner"/>
-    </div>
-    <div class="row name">
-      <h3 *ngIf="allPostsObject.type == 'project'"> {{ allPostsObject ? allPostsObject.projectName : 'Project Alpha' }}
-        <span style="font-size: 16px">by {{ allPostsObject ? allPostsObject.displayName : 'Jon Doe'}}</span></h3>
-      <!--        <h4 *ngIf="allPostsObject.type !== 'project'"><span {{ headMessage }} style="font-size: 16px">by {{ allPostsObject ? allPostsObject.displayName : 'Jon Doe'}}</span></h4>-->
+    <div class="row projectpost">
+      <div class="post-sub-container">
 
-      <div *ngIf="allPostsObject.type !== 'project'" class="col-12">
-        <div class="col-10 pname">
-
-          <h5><span>{{ allPostsObject ? allPostsObject.displayName : 'Jon Doe'}}</span><span
-            style="font-size: 16px"> {{ headMessage }} </span></h5>
-        </div>
+    <div class="left_side_post">
+      <div *ngIf="allPostsObject.type == 'project'" class="col-12 smallbanner">
+        <img src="{{ allPostsObject.projectBanner }}" class="img-responsive" alt="projectbanner"/>
       </div>
-    </div>
-    <div class="row maindescription">
-      <div class="sub-maindescription">
-        <div class="col-12 pname0">
-          <div class="col-4 pname">
-            <div *ngIf="allPostsObject.type !== 'project'" class="projectcontent">
-              <img *ngIf="allPostsObject.type !== 'project'" class="typeMark" style="width: 25px; height: 25px;"
-                   [src]="allPostsObject.typeImage" alt="typeImage">
-            </div>
-            <mat-divider *ngIf="allPostsObject.type !== 'project'" [vertical]="true" style="opacity: 40%"></mat-divider>
-            <div>
+      <div class="row name">
+        <h4 *ngIf="allPostsObject.type == 'project'"> {{ allPostsObject ? allPostsObject.projectName : 'Project Alpha' }}</h4>
+          <!--<span style="font-size: 16px">by {{ allPostsObject ? allPostsObject.displayName : 'Jon Doe'}}</span>-->
+        <div *ngIf="allPostsObject.type !== 'project'" class="col-12">
+          <div class="col-10 pname">
 
-              <div class="container description">
-                <div class="row description-container">
-                  <p
-                    innerHTML="{{ allPostsObject ? allPostsObject.postText : 'This is my description, Im very happy to be here, welcome all, this is very exciting'}}">
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="projectcase">
-              <button *ngIf="allPostsObject.type == 'project'" class="boderButton viewButton"
-                      [routerLink]="['/project-page', allPostsObject.postId]"
-                      [state]="{data: allPostsObject.postId}"> View
-                <svg class="bi bi-chevron-right icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                     xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                        d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
-                        clip-rule="evenodd"/>
-                </svg>
-              </button>
-              <div class="sideinfo">
-                <div class="row justify-content-center">
-                  <!--        <div class="col-12 text-center iconlist align-content-center">-->
-                  <!--          <p>{{likes}} likes</p>-->
-                  <!--          <svg (click)= "updateLikes()" class="bi bi-heart-fill icon" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"-->
-                  <!--               xmlns="http://www.w3.org/2000/svg">-->
-                  <!--            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"-->
-                  <!--                  clip-rule="evenodd"/>-->
-                  <!--          </svg>-->
-                  <!--          &lt;!&ndash;          <svg class="bi bi-bookmark-fill icon" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"&ndash;&gt;-->
-                  <!--          &lt;!&ndash;               xmlns="http://www.w3.org/2000/svg">&ndash;&gt;-->
-                  <!--          &lt;!&ndash;            <path fill-rule="evenodd" d="M3 3a2 2 0 012-2h6a2 2 0 012 2v12l-5-3-5 3V3z" clip-rule="evenodd"/>&ndash;&gt;-->
-                  <!--          &lt;!&ndash;          </svg>&ndash;&gt;-->
-                  <!--          &lt;!&ndash;          <svg class="bi bi-reply-fill icon" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"&ndash;&gt;-->
-                  <!--          &lt;!&ndash;               xmlns="http://www.w3.org/2000/svg">&ndash;&gt;-->
-                  <!--          &lt;!&ndash;            <path&ndash;&gt;-->
-                  <!--          &lt;!&ndash;              d="M9.079 11.9l4.568-3.281a.719.719 0 000-1.238L9.079 4.1A.716.716 0 008 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>&ndash;&gt;-->
-                  <!--          &lt;!&ndash;          </svg>&ndash;&gt;-->
-                  <!--        </div>-->
-
-                </div>
-                <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
-                  <h6 style="font-size: 13px">Tags</h6>
-                  <div class="col-12">
-                    <app-tag-view [projectOrUserID]="this.allPostsObject.postId" [mode]="'project'"></app-tag-view>
-                  </div>
-                </div>
-                <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
-                  <h6 style="font-size: 13px">Contributors</h6>
-                  <div class="col-12">
-                    <app-contributor-view [projectID]="this.allPostsObject.postId"></app-contributor-view>
-                  </div>
-                </div>
-                <!--    </div>-->
-              </div>
-            </div>
-
+            <h5><span>{{ allPostsObject ? allPostsObject.displayName : 'Jon Doe'}}</span><span
+              style="font-size: 16px"> {{ headMessage }} </span></h5>
           </div>
         </div>
-        <br>
-
-
-        <!--          <svg class="bi bi-bookmark-fill icon" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"-->
-        <!--               xmlns="http://www.w3.org/2000/svg">-->
-        <!--            <path fill-rule="evenodd" d="M3 3a2 2 0 012-2h6a2 2 0 012 2v12l-5-3-5 3V3z" clip-rule="evenodd"/>-->
-        <!--          </svg>-->
-        <!--          <svg class="bi bi-reply-fill icon" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"-->
-        <!--               xmlns="http://www.w3.org/2000/svg">-->
-        <!--            <path-->
-        <!--              d="M9.079 11.9l4.568-3.281a.719.719 0 000-1.238L9.079 4.1A.716.716 0 008 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>-->
-        <!--          </svg>-->
       </div>
+      <div class="row maindescription" id="maindescription">
+        <div class="sub-maindescription">
+          <div class="col-12 pname0">
+            <div class="col-4 pname">
+              <div *ngIf="allPostsObject.type !== 'project'" class="projectcontent">
+                <img *ngIf="allPostsObject.type !== 'project'" class="typeMark" style="width: 25px; height: 25px;"
+                    [src]="allPostsObject.typeImage" alt="typeImage">
+              </div>
+              <mat-divider *ngIf="allPostsObject.type !== 'project'" [vertical]="true" style="opacity: 40%"></mat-divider>
+              <div>
 
-
-      <div class="interaction">
-        <div class="likes-area">
-          <svg (click)="react(0)" class="bi bi-heart-fill icon color" width="1.6em" height="1.6em" viewBox="0 0 16 16"
-               xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                  clip-rule="evenodd"/>
-          </svg>
-          <!--          <svg class="bi bi-bookmark-fill icon" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"-->
-          <!--               xmlns="http://www.w3.org/2000/svg">-->
-          <!--            <path fill-rule="evenodd" d="M3 3a2 2 0 012-2h6a2 2 0 012 2v12l-5-3-5 3V3z" clip-rule="evenodd"/>-->
-          <!--          </svg>-->
-          <!--          <svg class="bi bi-reply-fill icon" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"-->
-          <!--               xmlns="http://www.w3.org/2000/svg">-->
-          <!--            <path-->
-          <!--              d="M9.079 11.9l4.568-3.281a.719.719 0 000-1.238L9.079 4.1A.716.716 0 008 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>-->
-          <!--          </svg>-->
+                <div class="container description">
+                  <div class="row description-container">
+                    <span
+                      innerHTML="{{ allPostsObject ? allPostsObject.postText : 'This is my description, Im very happy to be here, welcome all, this is very exciting'}}">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
         </div>
 
-        <div class="commentButtonArea">
-          <svg class="bi bi-chat icon commentary color" width="1.8em" height="1.8em" viewBox="0 0 16 16"
-               xmlns="http://www.w3.org/2000/svg" (click)="openCommentSection()">
-            <path fill-rule="evenodd"
-                  d="M2.678 11.894a1 1 0 01.287.801 10.97 10.97 0 01-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 01.71-.074A8.06 8.06 0 008 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 01-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 00.244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 01-2.347-.306c-.52.263-1.639.742-3.468 1.105z"
-                  clip-rule="evenodd"/>
-            <text id="commentsSize" text-anchor="middle" x="50%" y="70%">{{ this.comments.length }}</text>
-          </svg>
-          <!--<span *ngIf="this.comments.length === 1">
-            <strong style="color: #8e908c;">{{ this.comments.length }} comment</strong>
-          </span>
-          <span *ngIf="this.comments.length > 1">
-            <strong style="color: #8e908c;">{{ this.comments.length }} comments</strong>
-          </span>-->
+
+
+        <div class="reactions">
+          <div *ngFor="let emoji of emojiList; let indexElement = index;" class="reaction-counts">
+            <span *ngIf="reactionCount[indexElement] === 1">
+              <strong style="color: #8e908c;">{{ reactionCount[indexElement] }} Creator liked</strong>
+            </span>
+            <span *ngIf="reactionCount[indexElement] > 1">
+              <strong style="color: #8e908c;">{{ reactionCount[indexElement] }} Creators liked</strong>
+            </span>
+          </div>
+
         </div>
+        <section id="comment-section" *ngIf="showCommentSection">
+          <ul>
+            <li style="padding-bottom: 10px" *ngFor="let comment of comments">
+              <p style="line-height: 1;"><span
+                style="font-weight: 500;">{{comment.commentName}}</span> {{comment.comment}}</p>
+              <span style="font-size: 11px; color: #8e908c; line-height: 2px"> {{ comment.date }}</span>
+            </li>
+          </ul>
+          <div style="margin-top: 10px">
+            <input id="class-inputfield" class="comment" type="text" [(ngModel)]="comment"
+                  [placeholder]="'    add a comment'">
+            <button class="boderButton commentButton" (click)="addComment()">Save</button>
+          </div>
+        </section>
       </div>
-      <!--        <section id="comment-section" [ngClass]="showCommentSection ? 'showBtnTechsdome':'hideBtnTechsdome'">-->
-      <div class="reactions">
-        <div *ngFor="let emoji of emojiList; let indexElement = index;" class="reaction-counts">
-          <span *ngIf="reactionCount[indexElement] === 1">
-            <strong style="color: #8e908c;">{{ reactionCount[indexElement] }} Creator liked</strong>
-          </span>
-          <span *ngIf="reactionCount[indexElement] > 1">
-            <strong style="color: #8e908c;">{{ reactionCount[indexElement] }} Creators liked</strong>
-          </span>
-        </div>
-
-      </div>
-      <section id="comment-section" *ngIf="showCommentSection">
-        <ul>
-          <li style="padding-bottom: 10px" *ngFor="let comment of comments">
-            <p style="line-height: 1;"><span
-              style="font-weight: 500;">{{comment.commentName}}</span> {{comment.comment}}</p>
-            <span style="font-size: 11px; color: #8e908c; line-height: 2px"> {{ comment.date }}</span>
-          </li>
-        </ul>
-        <div style="margin-top: 10px">
-          <input id="class-inputfield" class="comment" type="text" [(ngModel)]="comment"
-                 [placeholder]="'    add a comment'">
-          <button class="boderButton commentButton" (click)="addComment()">Save</button>
-        </div>
-      </section>
     </div>
 
 
+
+    <div class="interaction">
+      <div class="likes-area">
+        <svg (click)="react(0)" class="bi bi-heart-fill icon color" width="1.8em" height="1.6em" viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                clip-rule="evenodd"/>
+        </svg>
+      </div>
+
+      <div class="commentButtonArea">
+        <svg class="bi bi-chat icon commentary color" width="1.9em" height="1.8em" viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg" (click)="openCommentSection()">
+          <path fill-rule="evenodd"
+                d="M2.678 11.894a1 1 0 01.287.801 10.97 10.97 0 01-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 01.71-.074A8.06 8.06 0 008 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 01-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 00.244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 01-2.347-.306c-.52.263-1.639.742-3.468 1.105z"
+                clip-rule="evenodd"/>
+          <text id="commentsSize" text-anchor="middle" x="50%" y="70%">{{ this.comments.length }}</text>
+        </svg>
+      </div>
+
+      <div class="parting_line" style="height: 100%;width: 3px;background-color: rgba(200,200,200,0.2);margin-right: 10px;"></div>
+    </div>
+
+
+
+
+      <div class="projectcase">
+        <button *ngIf="allPostsObject.type == 'project'" class="boderButton viewButton"
+                [routerLink]="['/project-page', allPostsObject.postId]"
+                [state]="{data: allPostsObject.postId}"> View
+          <svg class="bi bi-chevron-right icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
+                  clip-rule="evenodd"/>
+          </svg>
+        </button>
+        <div class="sideinfo">
+          <div class="row justify-content-center">
+          </div>
+          <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
+            <h6 style="font-size: 13px" class="block">Tags</h6>
+            <div class="col-12" class="justifyCenter">
+              <app-tag-view [projectOrUserID]="this.allPostsObject.postId" [mode]="'project'"></app-tag-view>
+            </div>
+          </div>
+          <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
+            <h6 style="font-size: 13px">Contributors</h6>
+            <div id="contributors-image-container" class="col-12" style="margin-left: 15px;">
+              <app-contributor-view [projectID]="this.allPostsObject.postId"></app-contributor-view>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
   </div>
+

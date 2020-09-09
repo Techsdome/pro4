@@ -62,54 +62,17 @@ h1, h2, h3, h4, h5 {
   padding: 0;
 }
 
-/* Anmerkung: hat keine Änderungen ausgelöst */
-/*a {
-  padding: 14px 12px;
-  text-decoration: none;
-  position: relative;
-  display: block;
-  letter-spacing: 1px;
-  font-size: 12px;
-  line-height: 16px;
-  text-transform: uppercase;
-  transition: color 0.1s, background-color 0.1s, padding 0.2s ease-in;
-  color: #000;
-}
 
-a::before {
-  content: '';
-  display: block;
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  height: 3px;
-  width: 100%;
-  background-color: #000;
-  transform-origin: right top;
-  transform: scale(0, 1);
-  transition: color 0.1s, transform 0.2s ease-out;
-}
-
-a:active::before {
-  background-color: #000;
-}
-
-a:hover::before, a:focus::before {
-  transform-origin: left top;
-  transform: scale(1, 1);
-}*/
 
 /*now all*/
 
 .projectpost {
-  /*background-color: #fff;*/
-  /*margin: 30px;*/
-  /*border-radius: 20px;*/
-  padding: 35px 35px 35px 35px;
+  position: relative;
+  padding: 35px 10px 20px 35px;
   border-radius: 20px;
-  background: #F3F5F7;
-  box-shadow: 5px 5px 10px #e0e1e3,
-  -5px -5px 10px #ffffff;
+  background: #fff;
+  /*box-shadow: 5px 5px 10px #e0e1e3,
+  -5px -5px 10px #ffffff;*/
   margin-bottom: 30px;
 }
 
@@ -119,7 +82,6 @@ a:hover::before, a:focus::before {
 }
 
 .projectpost:hover {
-  /*cursor: pointer;*/
   background-color: white;
 }
 
@@ -138,8 +100,13 @@ a:hover::before, a:focus::before {
   padding: 30px !important;
 }
 
+
 .bi-chat {
   opacity: 70%;
+}
+
+#contributors-image-container > * > * > * {
+  width: 45px !important;
 }
 
 .maindescription {
@@ -148,10 +115,6 @@ a:hover::before, a:focus::before {
   flex-direction: column;
 }
 
-/*.projectpost {
-  height: 300px;
-}
-*/
 
 .typeMark {
     filter: grayscale(100%);
@@ -175,18 +138,27 @@ a:hover::before, a:focus::before {
     padding: 10px !important;
 }
 
+.post-sub-container{
+  display: flex;
+  width: 100%;
+}
+
 .sideinfo h6 {
   margin: 5px !important;
   color: #8e908c;
 }
 
+.contributors{
+  width: 55px !important;
+  height: 55px !important;
+}
+
 .smallbanner img {
-    margin: -30px 0 35px -30px;
-    max-height: 100px;
+    margin: -34px 0 35px -35px;
+    max-height: 140px;
     border-radius: 20px;
-    width: 105.5%;
+    width: 109%;
     object-fit: cover;
-    height: 300px;
 }
 
 .commentButtonArea {
@@ -208,6 +180,17 @@ a:hover::before, a:focus::before {
   margin-left: 10px !important;
 }
 
+.justifyCenter{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.block{
+  display: block;
+  width: 100%;
+}
+
 .smallbanner {
   margin: 0;
   padding: 0;
@@ -220,6 +203,7 @@ a:hover::before, a:focus::before {
 }
 
 .description {
+  overflow: auto;
   max-height: 200px;
   margin: 8px !important;
 }
@@ -250,6 +234,8 @@ a:hover::before, a:focus::before {
 }
 
 .viewButton {
+  display: block !important;
+  margin: 0 auto !important;
   padding: 3px 8px !important;
   /*margin-left: auto !important;*/
   height: 40px;
@@ -258,7 +244,11 @@ a:hover::before, a:focus::before {
 }
 
 .projectcase {
-  margin-left: auto !important;
+ flex-basis: 35%; 
+}
+
+.left_side_post{
+  flex-basis: 65%;
 }
 
 .viewButton svg {
@@ -287,7 +277,7 @@ a:hover::before, a:focus::before {
 .interaction {
   display: flex;
   align-items: flex-end;
-  margin-top: 3% !important;
+  flex-basis: 10%;
 }
 
 .likes-area {

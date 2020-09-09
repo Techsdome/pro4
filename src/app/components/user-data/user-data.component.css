@@ -80,7 +80,6 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
 
 
 #user-data-container{
-    //background-color: rgba(0,0,0,0.3);
     display: flex;
 }
 
@@ -92,10 +91,6 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
 #user-header{
     display: grid;
     grid-auto-flow: column;
-}
-
-
-.vertical-line{
 }
 
 .email{
@@ -150,11 +145,6 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
 .skillInputButton{
     position: relative;
     padding-right: 25px;
-}
-
-
-#text-content {
-    margin-left: 20px;
 }
 
 
