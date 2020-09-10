@@ -62,7 +62,6 @@ export class AuthService {
       /* Call the SendVerificaitonMail() function when new user sign
       up and returns promise */
       this.SendVerificationMail();
-      this.countUsers ++;
       this.SetUserData(result.user);
     }).catch((error) => {
       window.alert(error.message);
@@ -177,12 +176,14 @@ GoogleAuth() {
 
 
   SetUserData(user) {
+    this.countUsers++;
     const countRef: AngularFirestoreDocument<any> = this.afs.doc(`users/userCount`);
     const countData: any = {
       numberUsers: this.countUsers
     };
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: any = {
+      countId: this.countUsers,
       uid: user.uid,
       email: user.email,
       displayName: user.displayName ? user.displayName : this.firstname + ' ' + this.lastname,
@@ -197,7 +198,7 @@ GoogleAuth() {
 
     countRef.set(countData, {
       merge: true
-    }).then(r => {console.log(this.countUsers); });
+    }).then(r => {});
 
     return userRef.set(userData, {
       merge: true

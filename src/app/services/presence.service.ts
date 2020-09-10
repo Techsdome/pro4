@@ -11,7 +11,6 @@ import { of } from 'rxjs';
 export class PresenceService {
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
-    console.log('presence');
     this.updateOnUser().subscribe();
     this.updateOnDisconnect().subscribe();
     this.updateOnAway();
@@ -66,11 +65,11 @@ export class PresenceService {
     return this.afAuth.authState.pipe(
       tap(user => {
         if (user) {
-          this.db.object('status/${user.uid}').query.ref.onDisconnect()
+          this.db.object(`status/${user.uid}`).query.ref.onDisconnect()
             .update({
               status: 'offline',
               timestamp: this.timestamp
-            });
+            }).then(r => {});
         }
       })
     );

@@ -139,9 +139,6 @@ export class ShowProjectsComponent implements OnInit {
               date: date.toLocaleString('en-GB'),
             });
 
-            console.log(this.comments.length);
-            console.log(_.mapValues(_.groupBy(this.comments), 'length'));
-
             this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
@@ -181,8 +178,6 @@ export class ShowProjectsComponent implements OnInit {
    */
   react(val) {
     this.reactionSvc.getReactions(this.allPostsObject.postId);
-
-    console.log('userReaction: ' + this.userReaction + ' val: ' + val);
     if (this.userReaction === val) {
         this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
     } else {

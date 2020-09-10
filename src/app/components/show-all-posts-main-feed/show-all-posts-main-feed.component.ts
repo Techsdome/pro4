@@ -1,7 +1,5 @@
-import {Component, OnInit, TrackByFunction} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
-import * as firebase from 'firebase';
-import Timestamp = firebase.firestore.Timestamp;
 import {Posts} from '../../shared/services/posts';
 import {PostsService} from '../../services/posts.service';
 

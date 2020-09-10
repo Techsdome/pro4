@@ -87,3 +87,11 @@
 .team-boxed .social a:hover {
   opacity: 1;
 }
+
+.profile-picture {
+  background-color: #eee;
+  width: 150px;
+  height: 150px;
+  border: solid 2px #6C63FF;
+  object-fit: cover;
+}
