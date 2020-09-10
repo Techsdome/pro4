@@ -31,7 +31,7 @@ import * as firebase from 'firebase';
 export class MainNavbarComponent implements OnInit {
   public status = false;
   public menuClicked = false;
-  user: firebase.User;
+  user: User;
   items: Item[];
   photoURL: string;
   stat: string;
@@ -43,7 +43,7 @@ export class MainNavbarComponent implements OnInit {
   constructor(@Inject(AuthService) public authService: AuthService,
               @Inject(DataServiceService) private dataService: DataServiceService,
               private utilitiesService: UtilitiesService,
-              private modalService: NgbModal, 
+              private modalService: NgbModal,
               private afs: AngularFirestore) {
   }
 

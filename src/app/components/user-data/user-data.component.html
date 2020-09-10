@@ -6,29 +6,35 @@
            alt="">
     </li>
   </div>
-  <div id="text-content">
+  <div class="text-content">
     <div id="user-header">
       <h2 *ngIf="displayName;" style="display: inline-block">{{ displayName }}</h2>
       <a href="mailto:{{email}}" class="email"></a>
     </div>
-    <div id="text-content">
-        <hr class="line">
-        <p [ngClass] = "editJob?'hideBtnTechsdome':'showBtnTechsdome'" [innerHTML]="job"></p>
-        <input type="text" [ngClass] = "editJob?'showBtnTechsdome':'hideBtnTechsdome'"
-        [(ngModel)]="job" name="job" placeholder="Write something about yourself..." oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'/>
-        <img *ngIf="!this.searchedUser" [ngClass] = "editJob?'hideBtnTechsdome':'showBtnTechsdome'" class="editButton button" (click)="editToggleJob()" src="../../../assets/icons/about.svg" alt="edit text">
-        <div id="edit-container">
-            <button [ngClass] = "editJob?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s" (click)="saveDataJob()">Save changes</button>
-        </div>
-        <br>
-        <app-inputfield [searchedUser]="this.searchedUser"></app-inputfield>
+    <div class="text-content">
+      <hr class="line">
+      <p [ngClass]="editJob?'hideBtnTechsdome':'showBtnTechsdome'" [innerHTML]="job" style="font-weight: 300"></p>
+      <label>
+        <input type="text" [ngClass]="editJob?'showBtnTechsdome':'hideBtnTechsdome'"
+               [(ngModel)]="job" name="job" placeholder="Write something about yourself..."
+               oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'/>
+      </label>
+      <img *ngIf="!this.searchedUser" [ngClass]="editJob?'hideBtnTechsdome':'showBtnTechsdome'"
+           class="editButton button" (click)="editToggleJob()" src="../../../assets/icons/about.svg" alt="edit text">
+      <div id="edit-container">
+        <button [ngClass]="editJob?'showBtnTechsdome':'hideBtnTechsdome'"
+                class="saveDataButton boderButton transition02s" (click)="saveDataJob()">Save changes
+        </button>
+      </div>
+      <br>
+      <app-inputfield [searchedUser]="this.searchedUser"></app-inputfield>
     </div>
   </div>
   <div class="vertical-line line"></div>
   <div id="skills-container">
     <h2>Skills</h2>
     <hr class="line">
-    <div id="plusButton" *ngIf="!edit" (click)="editToggle()"></div>
+    <div id="plusButton" *ngIf="profileOwner && !edit" (click)="editToggle()"></div>
     <app-tag-view *ngIf="!edit" [mode]="'user'" [projectOrUserID]="this.user.uid"></app-tag-view>
     <app-tag-input [userID]="this.user.uid" (tagsOut)="updateSkillArray($event)" *ngIf="edit"></app-tag-input>
 

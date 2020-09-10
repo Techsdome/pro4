@@ -26,6 +26,7 @@ export class UserDataComponent implements OnInit, OnDestroy {
   htmlSkillElements: HTMLCollection;
   displayName: string;
   editJob = false;
+  profileOwner = false;                                // True if profileViewer is profileOwner
 
   @Input() searchedUser: any;                          // The searched User of search bar
   private sub: any;
@@ -121,13 +122,15 @@ export class UserDataComponent implements OnInit, OnDestroy {
 
     this.htmlSkillElements = (document.getElementsByClassName('skillDeleteButton') as HTMLCollection);
 
-    if (this.searchedUser) {
-      this.user = this.searchedUser;
-    } else {
-      this.dataService.getCurrentUser().subscribe(user => {
-        this.user = user;
-      });
-    }
+    this.dataService.getCurrentUser().subscribe(user => {
+      this.user = user;
+      if (this.searchedUserId === this.user.uid) {
+        this.profileOwner = true;
+      }
+      if (this.searchedUser) {
+        this.user = this.searchedUser;
+      }
+    });
 
     this.dataService.getItems().subscribe(items => {
       this.items = items;

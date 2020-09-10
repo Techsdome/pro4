@@ -42,9 +42,6 @@
           </div>
           <br>
         </div>
-
-
-
         <div class="reactions">
           <div *ngFor="let emoji of emojiList; let indexElement = index;" class="reaction-counts">
             <span *ngIf="reactionCount[indexElement] === 1">
@@ -54,7 +51,6 @@
               <strong style="color: #8e908c;">{{ reactionCount[indexElement] }} Creators liked</strong>
             </span>
           </div>
-
         </div>
         <section id="comment-section" *ngIf="showCommentSection">
           <ul>
@@ -72,9 +68,6 @@
         </section>
       </div>
     </div>
-
-
-
     <div class="interaction">
       <div class="likes-area">
         <svg (click)="react(0)" class="bi bi-heart-fill icon color" width="1.8em" height="1.6em" viewBox="0 0 16 16"
@@ -96,10 +89,6 @@
 
       <div class="parting_line" style="height: 100%;width: 3px;background-color: rgba(200,200,200,0.2);margin-right: 10px;"></div>
     </div>
-
-
-
-
       <div class="projectcase">
         <button *ngIf="allPostsObject.type == 'project'" class="boderButton viewButton"
                 [routerLink]="['/project-page', allPostsObject.postId]"
@@ -128,10 +117,6 @@
           </div>
         </div>
       </div>
-
-
-
-
     </div>
   </div>
 
