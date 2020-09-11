@@ -12,7 +12,7 @@ import {trigger, style, animate, transition} from '@angular/animations';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {FormControl} from '@angular/forms';
 import {CreatePostNewComponent} from '../create-post-new/create-post-new.component';
-import * as firebase from 'firebase';
+import {PresenceService} from '../../services/presence.service';
 
 @Component({
   selector: 'app-main-navbar',
@@ -40,11 +40,27 @@ export class MainNavbarComponent implements OnInit {
   offset = new Subject<string>();
   userId: string;
 
+  presence$;
+
   constructor(@Inject(AuthService) public authService: AuthService,
               @Inject(DataServiceService) private dataService: DataServiceService,
               private utilitiesService: UtilitiesService,
               private modalService: NgbModal,
-              private afs: AngularFirestore) {
+              private afs: AngularFirestore,
+              private presence: PresenceService) {
+  }
+
+  ngOnInit() {
+    this.results = this.search();
+    this.authService.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.user = user;
+        this.photoURL = user.photoURL;
+        this.userId = user.uid;
+        this.presence$ = this.presence.getPresence(this.userId);
+        //console.log(this.presence.getPresence(this.userId));
+      }
+    });
   }
 
   onkeyup(e) {
@@ -71,27 +87,17 @@ export class MainNavbarComponent implements OnInit {
     this.menuClicked = !this.menuClicked;
   }
 
-  createNewPost(type:string) {
+  createNewPost(type: string) {
     const openPost = this.modalService.open(CreatePostNewComponent,
       {
         scrollable: true
       });
-      openPost.componentInstance.type = type;
+    openPost.componentInstance.type = type;
   }
 
   slideIt(dat) {
     this.stat = dat;
   }
 
-  ngOnInit() {
-    this.results = this.search();
-    this.authService.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.user = user;
-        this.photoURL = user.photoURL;
-        this.userId = user.uid;
-      }
-    });
 
-  }
 }

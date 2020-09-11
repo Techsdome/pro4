@@ -15,6 +15,15 @@
     </mat-autocomplete>
   </mat-form-field>
 
+  <div *ngIf="presence$ | async as presence" class="tag is-large text-white"
+       [ngClass]="{
+          'is-success':  presence.status  === 'online',
+          'is-warning': presence.status  === 'away',
+          'is-danger':  presence.status  === 'offline'
+      }">
+    {{ presence.status }}
+  </div>
+
   <div id="round_right"></div>
   <div id="settingsButton" class="dropdown text-white">
     <button type="button" class="btn m-0 shadow-none" id="dropdownMenu" data-toggle="dropdown"
@@ -36,6 +45,7 @@
     <div id="round"></div>
     <div id="round_below"></div>
     <div id="round_r_b"></div>
+
 
     <div id="sidebar-button-container">
       <img [src]="photoURL" class="background-image-settings sidebar-button pro" id="profileButtonSideBar"
