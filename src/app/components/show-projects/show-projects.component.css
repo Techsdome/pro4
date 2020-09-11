@@ -314,12 +314,12 @@ h1, h2, h3, h4, h5 {
   height: 100%;
 }
 
-.description-container p {
-  /*overflow : hidden;*/
-  /*text-overflow: ellipsis;*/
-  /*display: -webkit-box;*/
-  /*-webkit-line-clamp: 5;*/
-  /*-webkit-box-orient: vertical;*/
+.description-container span {
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 #commentsSize {

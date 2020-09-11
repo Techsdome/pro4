@@ -572,6 +572,10 @@ export class ProjectPageComponent implements OnInit {
     }
   }
 
+  onContentChanged(content) {
+    this.tmpDescription = content.editor.container.textContent;
+  }
+
   /**
    *
    * -------------- CONTRIBUTOR EDIT --------------

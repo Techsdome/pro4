@@ -6,7 +6,7 @@
   <input type="text" name="pname" id="pname" class="form-control" placeholder="Project name" #name required>
   <label class="description-label" for="pdescription"><h6>Description</h6></label>
   <quill-editor [styles]="editorStyle" id="pdescription" [modules]="config" placeholder="describe your project..."
-                name="description" [(ngModel)]="description"></quill-editor>
+                name="description" (onContentChanged)="onContentChanged($event)"></quill-editor>
   <div id="photoUpload" class="row">
     <app-upload-image class="col-6 photo-upload-comp" [addButton]="'Add banner'"
                       (childMessage)="getBannerFile($event)"></app-upload-image>

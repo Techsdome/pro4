@@ -276,6 +276,9 @@ export class NewProjectComponent implements OnInit {
     }
   }
 
+  onContentChanged(content) {
+   this.description = content.editor.container.textContent;
+  }
 
   toggleDisplay() {
     this.isShow = !this.isShow;

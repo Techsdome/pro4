@@ -68,7 +68,7 @@
                         [(ngModel)]="tmpDescription"
                         (change)="pushValue('projectDescription', tmpDescription)"> {{ project.projectDescription }} </textarea>-->
               <quill-editor *ngIf="editMode" [styles]="editorStyle" id="pdescription" [modules]="config"
-                            name="description" [(ngModel)]="tmpDescription"></quill-editor>
+                            name="description" (onContentChanged)="onContentChanged($event)"></quill-editor>
 
               <p *ngIf="!editMode"
                  innerHTML="{{ project.projectDescription }}">{{ project.projectDescription}} </p>
