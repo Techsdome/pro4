@@ -35,7 +35,7 @@
       <a class="dropdown-item" [routerLink]="['/app-settings-profile']">Profile Settings</a>
       <a class="dropdown-item" [routerLink]="['/app-settings-security']">Security Settings</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" (click)="authService.SignOut()" [routerLink]="['/sign-in']">Logout</a>
+      <a class="dropdown-item" (click)="presence.signOut()" [routerLink]="['/sign-in']">Logout</a>
     </div>
   </div>
 
