@@ -137,6 +137,10 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
 
 }
 
+#skills-container #plusButton {
+  margin: 0 0 10px 0;
+}
+
 #job-input {
   border: 1px solid #ccc;
   border-radius: 30px;

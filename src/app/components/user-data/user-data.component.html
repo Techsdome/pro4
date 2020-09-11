@@ -32,11 +32,11 @@
   <div id="skills-container">
     <h2>Skills</h2>
     <hr class="line">
-    <div id="plusButton" *ngIf="profileOwner && !edit" (click)="editToggle()"></div>
+
     <app-tag-view *ngIf="!edit" [mode]="'user'" [projectOrUserID]="this.user.uid"></app-tag-view>
     <app-tag-input [userID]="this.user.uid" (tagsOut)="updateSkillArray($event)" *ngIf="edit"></app-tag-input>
 
-    <br>
+    <div id="plusButton" *ngIf="profileOwner && !edit" (click)="editToggle()"></div>
     <button [ngClass]="edit?'showBtnTechsdome':'hideBtnTechsdome'" class="saveDataButton boderButton transition02s"
             (click)="editToggle(); saveSkill();">Save
     </button>

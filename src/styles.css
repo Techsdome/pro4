@@ -680,6 +680,13 @@ body::-webkit-scrollbar-thumb {
   border-radius: 30px;
 }
 
+/* Skills Chips Profile */
+
+#skills-container .mat-chip-list {
+  margin: 10px 0;
+  display: block;
+}
+
 /* Modal Dialog */
 
 .modal-dialog .mat-tab-body-wrapper {
