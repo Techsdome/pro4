@@ -30,7 +30,9 @@ export class TagInputComponent implements OnInit {
     if (this.docRef) {
       this.userPromise = this.docRef.get().toPromise().then(doc => {
         if (doc.exists) {
-          this.selectedCategories = doc.data().skills;
+          if (doc.data().hasOwnProperty('skills')) {
+            this.selectedCategories = doc.data().skills;
+          }
         }
       });
     }
