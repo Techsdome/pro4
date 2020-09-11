@@ -9,13 +9,12 @@
           </div>
           <quill-editor [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)"
                         [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
-          <img
-            src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png"
-            alt="post" type="button" (click)="savePost('post'); toggleScreen(); changePostTypeNormalPost();"
-            class="boderButton smallButton button transition02s opacity-05">
-          <br>
-          <br>
-          <br>
+<!--          <img-->
+<!--            src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png"-->
+<!--            alt="post" type="button" (click)="savePost('post'); toggleScreen(); changePostTypeNormalPost();"-->
+<!--            class="boderButton smallButton button transition02s opacity-05">-->
+          <button type="button" (click)="savePost('post'); toggleScreen(); changePostTypeNormalPost();"
+                  class="boderButton roundButton button transition02s opacity-05 create-button">Create</button>
         </mat-tab>
 
         <mat-tab label="Question">
@@ -25,13 +24,12 @@
           </div>
           <quill-editor [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)"
                         [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
-          <img
-            src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png"
-            alt="post" type="button" (click)="savePost('question'); toggleScreen();"
-            class="boderButton smallButton button transition02s opacity-05">
-          <br>
-          <br>
-          <br>
+<!--          <img-->
+<!--            src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png"-->
+<!--            alt="post" type="button" (click)="savePost('question'); toggleScreen();"-->
+<!--            class="boderButton smallButton button transition02s opacity-05">-->
+          <button type="button" (click)="savePost('question'); toggleScreen()"
+                  class="boderButton roundButton button transition02s opacity-05 create-button">Create</button>
         </mat-tab>
 
         <mat-tab label="Project">

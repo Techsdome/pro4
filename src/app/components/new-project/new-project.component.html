@@ -13,10 +13,6 @@
     <app-upload-images class="col-6 photo-upload-comp" [addButton]="'Add images'"
                        (imagesMessage)="getImageFiles($event)"></app-upload-images>
   </div>
-<!--  <app-add-tag [purpose]="'tags'" [headline]="'Tags'" [placeholder]="'add tag'"
-               (purposeMessage)="getPurposeMessage($event)"
-               (childMessage)="getChildMessage($event)">
-  </app-add-tag>-->
   <h6>Tags</h6>
   <div class="btn-plus pointer" (click)="toggleDisplay()" [hidden]="isShow"></div>
   <mat-form-field class="text-black-50 mat-form-field-inputs" [hidden]="!isShow">
@@ -75,5 +71,4 @@
             (click)="submit(name.value)">Create
     </button>
   </div>
-  <br><br><br>
 </form>

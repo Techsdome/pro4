@@ -116,7 +116,7 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
     background-color: #eee;
     width: 150px;
     height: 150px;
-    border: solid 2px #6C63FF;
+    /*border: solid 2px #6C63FF;*/
   object-fit: cover;
 }
 
@@ -124,6 +124,12 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
     margin: 0;
 }
 
+#job-input {
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 3px 10px;
+  color: #aaaaaa;
+}
 
 .skillDeleteButton{
     padding: 5px;
@@ -169,7 +175,7 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
     margin: 0 10px;
 }
 
-#image-container p{
+#image-container p {
     text-align: center;
 }
 

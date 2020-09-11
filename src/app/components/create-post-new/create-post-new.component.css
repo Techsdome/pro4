@@ -22,3 +22,8 @@
 .editButton {
   fill: #721c24;
 }
+
+.create-button {
+  float: right;
+  margin: 25px 0 0 0;
+}

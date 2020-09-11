@@ -15,7 +15,7 @@
       <hr class="line">
       <p [ngClass]="editJob?'hideBtnTechsdome':'showBtnTechsdome'" [innerHTML]="job" style="font-weight: 300"></p>
       <label>
-        <input type="text" [ngClass]="editJob?'showBtnTechsdome':'hideBtnTechsdome'"
+        <input type="text" id="job-input" [ngClass]="editJob?'showBtnTechsdome':'hideBtnTechsdome'"
                [(ngModel)]="job" name="job" placeholder="Write something about yourself..."
                oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'/>
       </label>

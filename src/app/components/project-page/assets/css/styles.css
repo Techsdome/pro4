@@ -215,7 +215,7 @@ p {
 }
 
 .addMember {
-  padding: 5px 5px;
+  padding: 0;
 }
 
 .addMember svg {
@@ -329,6 +329,7 @@ p {
 #contributors .contri-container {
   min-height: 50px;
   justify-items: center;
+
 }
 
 #tags .tags-container {

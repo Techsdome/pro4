@@ -303,7 +303,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .small-profile-picture {
-  border: solid 2px #6C63FF;
+  /*border: solid 2px #6C63FF;*/
 }
 
 .mat-divider.mat-divider-vertical {

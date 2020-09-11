@@ -134,8 +134,9 @@
 #newproject #create-post-form {
   height: 590px;
   top: -250px;
-  max-height: calc(100vw - 100px);
-  overflow: hidden;
+  max-height: calc(100vw - 200px);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #newproject #create-post-form form {
