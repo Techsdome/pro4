@@ -34,8 +34,8 @@
     </mat-chip-list>
   </mat-form-field>
   <h6>Contributors</h6>
-  <div class="btn-plus pointer" (click)="toggleDisplay()" [hidden]="isShow"></div>
-  <mat-form-field class="text-black-50 mat-form-field-inputs" floatLabel="never" [hidden]="!isShow">
+  <div class="btn-plus pointer" (click)="toggleDisplay2()" [hidden]="isShow2"></div>
+  <mat-form-field class="text-black-50 mat-form-field-inputs" floatLabel="never" [hidden]="!isShow2">
     <mat-chip-list #chipList aria-label="Contributor selection">
       <mat-chip
         *ngFor="let contributor of contributors"

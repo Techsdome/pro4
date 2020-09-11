@@ -619,21 +619,66 @@ body::-webkit-scrollbar-thumb {
   width: max-content;
 }
 
-.mat-form-field-appearance-legacy .mat-form-field-underline {
+/* Material Auto Input Project Page*/
+
+#info-panel .mat-form-field-appearance-legacy .mat-form-field-underline {
   height: 0 !important;
 }
 
-.mat-form-field .mat-form-field-underline {
+#info-panel .mat-form-field .mat-form-field-underline {
   background-color: unset !important;
 }
 
-
-.mat-form-field-appearance-legacy .mat-form-field-underline {
+#info-panel .mat-form-field-appearance-legacy .mat-form-field-underline {
   background-color: unset !important;
 }
 
-.mat-form-field.mat-focused .mat-form-field-ripple {
+#info-panel .mat-form-field.mat-focused .mat-form-field-ripple {
   opacity: 0 !important;
+}
+
+#info-panel .mat-form-field-label {
+  padding: 5px 8px;
+}
+
+#info-panel .mat-input-element {
+  padding: 5px;
+}
+
+/* Material Auto Input New Project */
+
+#myForm .btn-plus {
+  margin: 5px 0 10px 0;
+}
+
+#myForm .mat-form-field .mat-chip-list-wrapper {
+  margin: 0;
+}
+
+#myForm .mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 0 !important;
+}
+
+#myForm .mat-form-field .mat-form-field-underline {
+  background-color: unset !important;
+}
+
+#myForm .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: unset !important;
+}
+
+#myForm .mat-form-field.mat-focused .mat-form-field-ripple {
+  opacity: 0 !important;
+}
+
+#myForm .mat-form-field-label {
+  padding: 10px 15px;
+}
+
+#myForm .mat-input-element {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
 }
 
 

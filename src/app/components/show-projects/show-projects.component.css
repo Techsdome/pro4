@@ -244,7 +244,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .projectcase {
- flex-basis: 35%; 
+ flex-basis: 35%;
 }
 
 .left_side_post{
@@ -315,13 +315,17 @@ h1, h2, h3, h4, h5 {
 }
 
 .description-container p {
-  overflow : hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
+  /*overflow : hidden;*/
+  /*text-overflow: ellipsis;*/
+  /*display: -webkit-box;*/
+  /*-webkit-line-clamp: 5;*/
+  /*-webkit-box-orient: vertical;*/
 }
 
 #commentsSize {
   font-size: 9px;
+}
+
+.pname .container.description {
+  overflow: hidden;
 }

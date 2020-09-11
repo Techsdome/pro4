@@ -66,6 +66,7 @@ export class NewProjectComponent implements OnInit {
   contributors = [];
   contributorUid = [];
   isShow = false;
+  isShow2 = false;
 
   @ViewChild('contributorInput') contributorInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -278,6 +279,10 @@ export class NewProjectComponent implements OnInit {
 
   toggleDisplay() {
     this.isShow = !this.isShow;
+  }
+
+  toggleDisplay2() {
+    this.isShow2 = !this.isShow2;
   }
 
   // contributor auto complete
