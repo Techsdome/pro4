@@ -5,7 +5,6 @@ textarea {
     height: 95px;
 }
 
-
 #header-input{
     display: flex;
 }
@@ -20,4 +19,16 @@ h4{
 
 .saveDataButton:hover {
   color: white;
+}
+
+#header-input h6{
+  font-weight: 600;
+}
+
+#header-input .edit-about-button {
+  margin: 0 0 8px 10px;
+}
+
+.inputfield-container {
+  margin: 15px 0 0 0;
 }
