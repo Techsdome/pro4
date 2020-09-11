@@ -76,16 +76,6 @@ body {
   background-size: cover;
 }
 
-#headline #menu .menupoints h2 a {
-  color: #b7b7b7;
-  margin: 10px;
-}
-
-#headline #menu .menupoints h2 a:hover {
-  color: #afafaf;
-  text-decoration: none;
-}
-
 #menu {
   width: 100%;
   margin-bottom: 10px;
@@ -107,7 +97,7 @@ body {
 }
 
 .menupoints h2 {
-  display: inline;
+  display: inline-block;
   margin: 5px 5px;
 }
 
@@ -405,12 +395,8 @@ input {
   border-color: #d3d9dc;
 }
 
-a:hover {
-  text-decoration: none;
-}
-
 #project-discussion {
- height: 400px;
+  height: 400px;
 }
 
 #project-discussion #comment-section p {
@@ -451,5 +437,56 @@ a:hover {
 
 .active {
   color: #222222 !important;
+}
+
+a:hover, a:focus, a:active {
+  color: #222222;
+  text-decoration: none;
+}
+
+a {
+  padding: 14px 12px;
+  text-decoration: none;
+  position: relative;
+  display: block;
+  letter-spacing: 1px;
+  font-size: 20px;
+  line-height: 16px;
+  text-transform: uppercase;
+  transition: color 0.1s, background-color 0.1s, padding 0.2s ease-in;
+  color: #b7b7b7;
+}
+
+.menupoints h2 {
+  color: #b7b7b7;
+}
+
+a::before {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #000;
+  transform-origin: right top;
+  transform: scale(0, 1);
+  transition: color 0.1s, transform 0.2s ease-out;
+}
+
+.menupoints h2:hover, .menupoints a:hover::before, a:focus::before {
+  transform-origin: left top;
+  transform: scale(1, 1);
+}
+
+a:hover, a:focus, a:active {
+  color: #222222;
+  text-decoration: none;
+}
+
+.active a::before {
+  transform-origin: left top;
+  transform: scale(1, 1);
 }
 

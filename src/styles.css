@@ -693,6 +693,10 @@ body::-webkit-scrollbar-thumb {
   margin: 0 0 30px 0;
 }
 
+.modal-dialog h6 {
+  margin: 10px 0 5px 0;
+}
+
 @media screen and (max-width: 767px) {
   nav {
     padding: 0 !important;
