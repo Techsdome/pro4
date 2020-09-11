@@ -415,15 +415,14 @@ ul > * {
   justify-self: center !important;
 }
 
-.content{
+#main-dashboard-container .content{
   display: flex;
   flex-direction: row;
-  min-width: 70%;
-  margin: 0 auto;
+  width: 100%;
 }
 
 #main-dashboard-container {
-  margin: 100px auto;
+  margin: 100px 0;
   width: 80%;
   display: flex;
   flex-direction: column;

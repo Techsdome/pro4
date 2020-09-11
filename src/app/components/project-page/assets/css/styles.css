@@ -93,12 +93,12 @@ body {
 
 #menu .menupoints {
   padding-top: 5px;
-  border-bottom: 2px solid #d3d9dc;
+  border-bottom: 3px solid rgba(0,0,0,0.1);
 }
 
 .menupoints h2 {
   display: inline-block;
-  margin: 5px 5px;
+  margin: 6px 0;
 }
 
 .editProject {
@@ -439,12 +439,12 @@ input {
   color: #222222 !important;
 }
 
-a:hover, a:focus, a:active {
+.menupoints a:hover, .menupoints a:focus, .menupoints a:active {
   color: #222222;
   text-decoration: none;
 }
 
-a {
+.menupoints a {
   padding: 14px 12px;
   text-decoration: none;
   position: relative;
@@ -461,7 +461,7 @@ a {
   color: #b7b7b7;
 }
 
-a::before {
+.menupoints a::before {
   content: '';
   display: block;
   position: absolute;
@@ -475,17 +475,17 @@ a::before {
   transition: color 0.1s, transform 0.2s ease-out;
 }
 
-.menupoints h2:hover, .menupoints a:hover::before, a:focus::before {
+.menupoints a:hover::before, .menupoints a:focus::before {
   transform-origin: left top;
   transform: scale(1, 1);
 }
 
-a:hover, a:focus, a:active {
+.menupoints h2:hover, .menupoints a:hover, .menupoints a:focus, .menupoints a:active {
   color: #222222;
   text-decoration: none;
 }
 
-.active a::before {
+.menupoints .active::before {
   transform-origin: left top;
   transform: scale(1, 1);
 }
