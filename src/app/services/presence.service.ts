@@ -4,20 +4,21 @@ import { AngularFireDatabase} from '@angular/fire/database';
 import * as firebase from 'firebase/app';
 import { tap, map, switchMap, first } from 'rxjs/operators';
 import { of } from 'rxjs';
+import {AngularFirestore} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PresenceService {
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
     this.updateOnUser().subscribe();
     this.updateOnDisconnect().subscribe();
     this.updateOnAway();
   }
 
   getPresence(uid: string) {
-    return this.db.object(`status/${uid}`).valueChanges();
+    return this.db.doc(`status/${uid}`).valueChanges();
   }
 
   getUser() {
@@ -27,7 +28,7 @@ export class PresenceService {
   async setPresence(status: string) {
     const user = await this.getUser();
     if (user) {
-      return this.db.object(`status/${user.uid}`).set({ status, timestamp: this.timestamp });
+      return this.db.doc(`status/${user.uid}`).set({ status, timestamp: this.timestamp }, {merge: true});
     }
   }
 
@@ -36,13 +37,12 @@ export class PresenceService {
   }
 
   updateOnUser() {
-    const connection = this.db.object('.info/connected').valueChanges().pipe(
+    const connection = this.db.doc('.info/connected').valueChanges().pipe(
       map(connected => connected ? 'online' : 'offline')
     );
-    console.log(connection);
 
     return this.afAuth.authState.pipe(
-      switchMap(user => user ? connection : of('offline')),
+      switchMap(user =>  user ? connection : of('offline')),
       tap(status => this.setPresence(status))
     );
   }
@@ -66,7 +66,7 @@ export class PresenceService {
     return this.afAuth.authState.pipe(
       tap(user => {
         if (user) {
-          this.db.object(`status/${user.uid}`).query.ref.onDisconnect()
+          this.db.doc(`status/${user.uid}`)
             .update({
               status: 'offline',
               timestamp: this.timestamp

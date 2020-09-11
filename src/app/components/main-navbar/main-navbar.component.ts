@@ -47,7 +47,7 @@ export class MainNavbarComponent implements OnInit {
               private utilitiesService: UtilitiesService,
               private modalService: NgbModal,
               private afs: AngularFirestore,
-              private presence: PresenceService) {
+              public presence: PresenceService) {
   }
 
   ngOnInit() {
