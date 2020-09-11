@@ -83,14 +83,23 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
     display: flex;
 }
 
-.text-content{
+#text-content{
     width: 100%;
-    color: #222;
 }
 
 #user-header{
     display: grid;
     grid-auto-flow: column;
+}
+
+#user-header h2 {
+  text-transform: uppercase;
+  color: rgb(168, 168, 168);
+  font-size: 24px;
+}
+
+.job-edit-button {
+  margin: 0 0 5px 10px
 }
 
 .email{
@@ -120,15 +129,26 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
   object-fit: cover;
 }
 
-#text-content p{
+.text-content p {
     margin: 0;
+}
+
+.text-content {
+
 }
 
 #job-input {
   border: 1px solid #ccc;
   border-radius: 30px;
   padding: 3px 10px;
-  color: #aaaaaa;
+  color: rgb(168, 168, 168);
+  text-transform: uppercase;
+}
+
+.job-title {
+  text-transform: uppercase;
+  color: rgb(168, 168, 168);
+  margin: 0 5px 20px 0;
 }
 
 .skillDeleteButton{
@@ -171,17 +191,30 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
     display: inline;
 }
 
+#skills-container h2 {
+  text-transform: uppercase;
+  color: rgb(168, 168, 168);
+  font-size: 22px;
+  margin: 3px 0 9px 0;
+  font-weight: 400;
+}
+
 #user-data-container > *{
     margin: 0 10px;
 }
 
-#image-container p {
-    text-align: center;
+#user-data-container #image-container {
+  margin: 0;
+}
+
+#text-content {
+  margin: 0 20px !important;
+  box-sizing: border-box;
 }
 
 hr{
     margin: 3px 0 5px 0;
-    width: 100%;
+    width: 95%;
 }
 
 h1,h2,h3,h4,h5{
