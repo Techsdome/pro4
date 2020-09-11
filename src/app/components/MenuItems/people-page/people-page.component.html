@@ -10,8 +10,10 @@
               <h2 class="text-center">People you may know..</h2>
             </div>
             <div class="row people">
-              <div *ngFor="let user of allUsers" class="col-md-6 col-lg-4 item">
-                <div class="box"><img class="large-profile-picture" src="{{ user.photoURL }}" alt="profile_pic" [routerLink]="['/app-user-profile', user.uid]" [state]="{data: user}" style="cursor: pointer"/>
+              <div *ngFor="let user of randomUsers" class="col-md-6 col-lg-4 item">
+                <div class="box"><img class="large-profile-picture" src="{{ user.photoURL }}" alt="profile_pic"
+                                      [routerLink]="['/app-user-profile', user.uid]" [state]="{data: user}"
+                                      style="cursor: pointer"/>
                   <h3 class="name">{{ user.displayName }}</h3>
                   <p class="title">{{ user.job }}</p>
                   <p class="description" [innerHTML]="user.description"></p>
@@ -20,11 +22,42 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
-
-
-
+<div class="d-md-flex user-list">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form class="">
+          <mat-form-field style="width: 100%" class="">
+            <mat-label>Search</mat-label>
+            <label>
+              <input type="text" matInput placeholder="Type name...">
+            </label>
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+    <div *ngFor="let user of this.allUsers">
+      <div class="row">
+        <div class="col">
+          <div>
+            <p class="alphabet">{{ user.lastName.charAt(0).toUpperCase() }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row align-self-auto user-info" style="padding: 5px;">
+        <div class="col-auto align-self-auto">
+          <img class="small-profile-picture user-picture" src="{{ user.photoURL }}"/>
+        </div>
+        <div class="d-flex flex-column bd-highlight mb-2">
+          <div class="user-name bd-highlight">{{ user.lastName + ' ' + user.firstName}}</div>
+          <div class="user-job bd-highlight">#{{ user.job }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

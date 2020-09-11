@@ -14,7 +14,8 @@ export class PeoplePageComponent implements OnInit {
 
   constructor(private userSerive: DataServiceService, private afs: AngularFirestore) { }
 
-  allUsers: User[] = [];
+  randomUsers: User[] = [];
+  allUsers: any[] = [];
   numUsers;
   randUserIndex: number[] = [];
 
@@ -33,17 +34,47 @@ export class PeoplePageComponent implements OnInit {
 
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.randUserIndex.length; i++) {
-        console.log(this.randUserIndex[i]);
         this.afs.collection('users', ref => ref.where('countId', '==', this.randUserIndex[i]))
           .get().toPromise().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            this.allUsers.push(doc.data() as User);
+            this.randomUsers.push(doc.data() as User);
           });
         });
       }
     });
+
+    this.setAlphabet();
   }
 
+  setAlphabet() {
+    const s = new Set();
+
+    this.afs.collection('users').get().toPromise().then(querySnapshot => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().hasOwnProperty('lastname')) {
+          this.allUsers.push(
+            { lastName: doc.data().lastname,
+              firstName: doc.data().firstname,
+              job: doc.data().job,
+              photoURL: doc.data().photoURL
+          });
+          this.allUsers.sort((a, b) => {
+            const fa = a.lastName.toLowerCase();
+            const fb = b.lastName.toLowerCase();
+
+            if (fa < fb) {
+              return -1;
+            }
+            if (fa > fb) {
+              return 1;
+            }
+            return 0;
+          });
+        }
+        console.log(this.allUsers);
+      });
+    });
+  }
 
 
 }
