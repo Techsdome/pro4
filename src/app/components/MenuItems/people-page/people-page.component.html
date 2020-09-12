@@ -11,7 +11,8 @@
             </div>
             <div class="row people">
               <div *ngFor="let user of randomUsers" class="col-md-6 col-lg-4 item">
-                <div class="box"><img class="large-profile-picture" src="{{ user.photoURL }}" alt="profile_pic"
+                <div class="box" style="border-radius: 50px">
+                  <img class="large-profile-picture" src="{{ user.photoURL }}" alt="profile_pic"
                                       [routerLink]="['/app-user-profile', user.uid]" [state]="{data: user}"
                                       style="cursor: pointer"/>
                   <h3 class="name">{{ user.displayName }}</h3>
