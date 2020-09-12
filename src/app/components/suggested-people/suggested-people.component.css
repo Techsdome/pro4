@@ -1,0 +1,42 @@
+.people-container {
+  margin: 30px;
+  background-color: white;
+  border-radius: 20px;
+  align-items: center;
+  padding: 10px;
+}
+
+.people-container .user-container {
+  margin: 10px;
+  padding: 0;
+}
+
+.people-container .name, .people-container .title {
+  display: block;
+}
+
+.people-container .name {
+  font-weight: 600;
+}
+
+.user-details {
+  display: inline-block;
+  margin: 10px 5px 5px 5px;
+  padding: 0;
+}
+
+.user-details span {
+  display: block;
+}
+
+.people-container .user-container .contributors {
+  display: inline-block;
+}
+
+.people-container h3 {
+  font-size: 20px;
+  color: #b7b7b7;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 5px 0;
+}

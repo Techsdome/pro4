@@ -1,0 +1,25 @@
+<div class="sug-project-container">
+  <h3> Top Project </h3>
+  <div *ngIf="topProject" class="project-container">
+    <div class="row banner-wrapper">
+      <img src="{{ topProject.projectBanner }}" class="img-responsive" alt="projectbanner"/>
+    </div>
+    <div class="row content">
+      <p class="title"> {{ topProject.projectName }}</p><br>
+      <div class="description-container"><span class="description"> {{ topProject.postText }}</span></div>
+    </div>
+    <div class="row" class="justifyCenter">
+      <app-tag-view [projectOrUserID]="topProject.postId" [mode]="'project'"></app-tag-view>
+    </div>
+    <button class="boderButton viewButton"
+            [routerLink]="['/project-page', topProject.postId]"
+            [state]="{data: topProject.postId}"> Explore
+      <svg class="bi bi-chevron-right icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+           xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+              d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
+              clip-rule="evenodd"/>
+      </svg>
+    </button>
+  </div>
+</div>

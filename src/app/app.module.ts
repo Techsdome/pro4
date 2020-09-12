@@ -69,6 +69,8 @@ import { TagInputComponent } from './components/tag-input/tag-input.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { InfoPageComponent } from './components/MenuItems/info-page/info-page.component';
 import { PeoplePageComponent } from './components/MenuItems/people-page/people-page.component';
+import { SuggestedPeopleComponent } from './components/suggested-people/suggested-people.component';
+import { SuggestedProjectComponent } from './components/suggested-project/suggested-project.component';
 
 
 @NgModule({
@@ -114,7 +116,9 @@ import { PeoplePageComponent } from './components/MenuItems/people-page/people-p
         ContributorInputComponent,
         TagInputComponent,
         InfoPageComponent,
-        PeoplePageComponent
+        PeoplePageComponent,
+        SuggestedPeopleComponent,
+        SuggestedProjectComponent
     ],
     imports: [
         MatTabsModule,
