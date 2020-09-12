@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 300 300" style="enable-background:new 0 0 300 300;" xml:space="preserve">
 <style type="text/css">
@@ -9,8 +9,8 @@
 	.st3{fill:#222222;}
 	.st4{fill:#F3F5F7;}
 	.st5{display:inline;fill:none;stroke:#FFFFFF;stroke-width:7;stroke-linecap:round;stroke-miterlimit:10;}
-	.st6{fill:#6C63FF;}
-	.st7{fill:#6C63FF;stroke:#FFFFFF;stroke-width:21;stroke-miterlimit:10;}
+	.st6{fill:#0058FF;}
+	.st7{fill:#0058FF;stroke:#FFFFFF;stroke-width:21;stroke-miterlimit:10;}
 </style>
 <g class="st0">
 	<line class="st1" x1="149.5" y1="23.7" x2="151.4" y2="278.6"/>
@@ -72,7 +72,7 @@
 <g>
 	<path class="st6" d="M264.6,260.9H39.4c-7.6,0-13.8-6.2-13.8-13.8v-143c0-7.6,6.2-13.8,13.8-13.8h225.2c7.6,0,13.8,6.2,13.8,13.8
 		v143C278.4,254.7,272.2,260.9,264.6,260.9z"/>
-	<path class="st7" d="M158.8,187.2l112.6-71.9c10.7-6.9,5.9-23.5-6.9-23.5H39.3c-12.7,0-17.6,16.6-6.9,23.5l112.6,71.9
+	<path class="st7" d="M158.8,187.2l112.6-71.9c10.7-6.9,5.9-23.5-6.9-23.5H39.3c-12.7,0-17.6,16.6-6.9,23.5L145,187.2
 		C149.2,189.8,154.6,189.8,158.8,187.2z"/>
 </g>
 </svg>
