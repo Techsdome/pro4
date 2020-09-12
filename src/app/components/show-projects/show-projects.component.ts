@@ -83,8 +83,8 @@ export class ShowProjectsComponent implements OnInit {
 
   formatDate(date) {
     return new Date(Date.parse(date)).toLocaleDateString('de-DE', {
-      day: '2-digit',
-      month: '2-digit',
+      day: '1-digit',
+      month: '1-digit',
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
@@ -136,13 +136,14 @@ export class ShowProjectsComponent implements OnInit {
             this.comments.push({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              date: date.toLocaleString('en-GB'),
+              date: date.toLocaleString('en-GB', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'}),
+              // date: date.toLocaleString('en-GB'),
             });
 
             this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              date: date.toLocaleString('en-GB'),
+              // date: date.toLocaleString('en-GB'),
             });
             this.comment = '';
           });

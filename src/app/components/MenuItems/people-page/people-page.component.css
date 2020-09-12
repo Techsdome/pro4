@@ -1,3 +1,18 @@
+.box {
+  position: relative;
+  padding: 35px 10px 20px 35px;
+  border-radius: 20px;
+  background: #fff;
+  margin-bottom: 30px;
+  transition: 0.1s;
+}
+
+.box:hover {
+  background-color: white;
+  box-shadow: 5px 5px 10px #e0e1e3,
+  -5px -5px 10px #ffffff;
+}
+
 .team-boxed {
   color: #313437;
 }

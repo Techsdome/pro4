@@ -1,6 +1,6 @@
   <div class="row">
     <div *ngFor="let mem of this.tmpAllContributors">
-      <div class="col-3 border rounded-circle view overlay zoom contributors">
+      <div class="col-3 border rounded-circle view overlay zoom contributors image-shadow">
         <img [routerLink]="['/app-user-profile', mem.uid]" [state]="{data: mem}" style="cursor: pointer" class="contributor img-fluid" src="{{mem.photoURL}}" alt="contributer"
              height="514"
              width="913"/>
