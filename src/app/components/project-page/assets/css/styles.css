@@ -93,7 +93,7 @@ body {
 
 #menu .menupoints {
   padding-top: 5px;
-  border-bottom: 3px solid rgba(0,0,0,0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
 }
 
 .menupoints h2 {
@@ -397,6 +397,30 @@ input {
 
 #project-discussion {
   height: 400px;
+}
+
+#project-discussion .comment {
+  border: none;
+  border-radius: 8px;
+  height: 35px;
+  padding-left: 10px;
+  color: white;
+  background-color: #d9d9d9;
+  width: 80%;
+}
+
+#project-discussion .comment:hover {
+  border: solid 2px #8e908c;
+  background-color: white;
+  color: #222;
+}
+
+#project-discussion #comment-section {
+  margin-top: 10px;
+}
+
+#project-discussion #comment-section ul {
+  display: unset;
 }
 
 #project-discussion #comment-section p {

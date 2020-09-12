@@ -121,14 +121,6 @@ export class ProjectPageComponent implements OnInit {
       await this.loadProject();
       this.fetchComments();
     });
-
-    // if (this.projectID) {
-    //   localStorage.setItem('projectID', this.projectID);
-    // } else if (localStorage.getItem('projectID')) {
-    //   this.projectID = localStorage.getItem('projectID');
-    // } else {
-    //   alert('No Project found!');
-    // }
   }
 
   fetchComments() {
@@ -177,12 +169,12 @@ export class ProjectPageComponent implements OnInit {
             this.authService.afs.doc(`mainFeed/allPosts/post/${this.projectID}`).collection('comments').add({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              date: date.toLocaleString('en-GB'),
+              date: date.toString(),
             });
             this.comments.unshift({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              date: date.toLocaleString('en-GB'),
+              date: date.toString(),
             });
             this.comment = '';
           });
@@ -191,13 +183,14 @@ export class ProjectPageComponent implements OnInit {
   }
 
   formatDate(date) {
-    return new Date(Date.parse(date)).toLocaleDateString('de-DE', {
+    const mydate = new Date(date).toLocaleDateString('en-GB', {
+      month: 'short',
       day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
     });
+
+    return mydate;
   }
 
   // opens disscusion component

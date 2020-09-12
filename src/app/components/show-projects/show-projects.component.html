@@ -57,7 +57,7 @@
             <li style="padding-bottom: 10px" *ngFor="let comment of comments">
               <p style="line-height: 1;"><span
                 style="font-weight: 500;">{{comment.commentName}}</span> {{comment.comment}}</p>
-              <span style="font-size: 11px; color: #8e908c; line-height: 2px"> {{ comment.date }}</span>
+              <span style="font-size: 11px; color: #8e908c; line-height: 2px"> {{ formatDate(comment.date) }}</span>
             </li>
           </ul>
           <div style="margin-top: 10px">
