@@ -13,6 +13,22 @@
 <!--            src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png"-->
 <!--            alt="post" type="button" (click)="savePost('post'); toggleScreen(); changePostTypeNormalPost();"-->
 <!--            class="boderButton smallButton button transition02s opacity-05">-->
+          <h6>Tags</h6>
+          <div class="btn-plus pointer" (click)="toggleDisplay()" [hidden]="isShow"></div>
+          <mat-form-field class="text-black-50 mat-form-field-inputs" [hidden]="!isShow">
+            <mat-chip-list #chipListTag1 aria-label="Tag selection">
+              <mat-chip *ngFor="let tag of selectedCategories" [selectable]="selectableTag"
+                        [removable]="removableTag" (removed)="removeTag(tag)">
+                {{tag}}
+                <mat-icon matChipRemove *ngIf="removableTag">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="New Tag..."
+                     [matChipInputFor]="chipListTag1"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="addTag($event)">
+            </mat-chip-list>
+          </mat-form-field>
           <button type="button" (click)="savePost('post'); toggleScreen(); changePostTypeNormalPost();"
                   class="boderButton roundButton button transition02s opacity-05 create-button">Create</button>
         </mat-tab>
@@ -28,6 +44,22 @@
 <!--            src="https://cdn4.iconfinder.com/data/icons/social-media-toolkit-2-line/32/new-post-write-social-media-tools-ui-512.png"-->
 <!--            alt="post" type="button" (click)="savePost('question'); toggleScreen();"-->
 <!--            class="boderButton smallButton button transition02s opacity-05">-->
+          <h6>Tags</h6>
+          <div class="btn-plus pointer" (click)="toggleDisplay()" [hidden]="isShow"></div>
+          <mat-form-field class="text-black-50 mat-form-field-inputs" [hidden]="!isShow">
+            <mat-chip-list #chipListTag2 aria-label="Tag selection">
+              <mat-chip *ngFor="let tag of selectedCategories" [selectable]="selectableTag"
+                        [removable]="removableTag" (removed)="removeTag(tag)">
+                {{tag}}
+                <mat-icon matChipRemove *ngIf="removableTag">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="New Tag..."
+                     [matChipInputFor]="chipListTag2"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="addTag($event)">
+            </mat-chip-list>
+          </mat-form-field>
           <button type="button" (click)="savePost('question'); toggleScreen()"
                   class="boderButton roundButton button transition02s opacity-05 create-button">Create</button>
         </mat-tab>

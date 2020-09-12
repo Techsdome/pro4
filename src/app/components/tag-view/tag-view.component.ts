@@ -38,7 +38,11 @@ export class TagViewComponent implements OnInit {
         return this.projectPromise = this.docRef.get().toPromise().then(async doc => {
           if (doc.exists) {
             this.project = doc.data();
-            this.tags = this.project.projectCategories;
+            if (doc.data().hasOwnProperty('projectCategories')) {
+              this.tags = this.project.projectCategories;
+            } else {
+              this.tags = this.project.tags;
+            }
           } else {
             console.log('No such document!');
 

@@ -81,16 +81,6 @@ export class ShowProjectsComponent implements OnInit {
     });
   }
 
-  formatDate(date) {
-    return new Date(Date.parse(date)).toLocaleDateString('de-DE', {
-      day: '1-digit',
-      month: '1-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  }
-
   sortAfterDate(a, b) {
     let date1;
     let date2;
@@ -136,19 +126,27 @@ export class ShowProjectsComponent implements OnInit {
             this.comments.push({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              date: date.toLocaleString('en-GB', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'}),
-              // date: date.toLocaleString('en-GB'),
+              date: date.toString(),
             });
 
             this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              date: date.toLocaleString('en-GB', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'}),
+              date: date.toString(),
             });
             this.comment = '';
           });
       });
     }
+  }
+
+  formatDate(date) {
+    return new Date(Date.parse(date)).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   }
 
   /**
@@ -180,11 +178,9 @@ export class ShowProjectsComponent implements OnInit {
   react(val) {
     this.reactionSvc.getReactions(this.allPostsObject.postId);
     if (this.userReaction === val) {
-        this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
+      this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
     } else {
         this.reactionSvc.updateReactions(this.allPostsObject.postId, val);
     }
   }
-
-
 }

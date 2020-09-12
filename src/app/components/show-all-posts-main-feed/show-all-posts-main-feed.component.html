@@ -1,13 +1,15 @@
 <div class="dash">
 
   <div class="posts">
-<app-profile-menu (activeMenuItemChange)="changeMenuItem($event)" [activeMenuItem]="this.activeMenu" (activeFilterChange)="changeFilterType($event)"></app-profile-menu>
+    <app-profile-menu (activeMenuItemChange)="changeMenuItem($event)" [activeMenuItem]="this.activeMenu"
+                      (activeFilterChange)="changeFilterType($event)"></app-profile-menu>
 
-<app-show-projects *ngFor="let post of posts" [allPostsObject]="post"></app-show-projects>
+    <app-show-projects *ngFor="let post of posts" [allPostsObject]="post"></app-show-projects>
   </div>
 
 <div class="stuff">
-  PLACEHOLDER
+  <app-suggested-people></app-suggested-people>
+  <app-suggested-project></app-suggested-project>
 </div>
 
 </div>

@@ -55,29 +55,11 @@
               <h2><a [ngClass]="switchComp ? 'active' : ''" (click)="openDisscusion()">DESCRIPTION</a></h2>
               <h2><a [ngClass]="!switchComp ? 'active' : ''" (click)="openDiscription()">DISCUSSION</a></h2>
             </div>
-            <div class="col-6 text-right">
-              <!--              <button class="editProject boderButton" (click)="editProject()" [class]="isOwner? 'd-inline' : 'd-none'">-->
-              <!--                <svg class="bi bi-pencil-square" width="1.2em" height="1.2em"-->
-              <!--                     viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">-->
-              <!--                  <path-->
-              <!--                    d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z"/>-->
-              <!--                  <path fill-rule="evenodd"-->
-              <!--                        d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z"-->
-              <!--                        clip-rule="evenodd"/>-->
-              <!--                </svg>-->
-              <!--                Edit-->
-              <!--              </button>-->
-            </div>
           </div>
         </div>
         <div id="description" class="col" *ngIf="switchComp">
           <div id="info" class="row">
             <div id="text-description" class="col-8">
-              <!--  Ersetzt durch quill component -->
-              <!--<textarea *ngIf="editMode" rows="6" name="pdescription" id="pdescription"
-                        class="form-control changeDescription"
-                        [(ngModel)]="tmpDescription"
-                        (change)="pushValue('projectDescription', tmpDescription)"> {{ project.projectDescription }} </textarea>-->
               <quill-editor *ngIf="editMode" [styles]="editorStyle" id="pdescription" [modules]="config"
                             name="description" (onContentChanged)="onContentChanged($event)"></quill-editor>
 
@@ -197,13 +179,15 @@
           <section id="comment-section">
             <ul>
               <li *ngFor="let comment of comments">
-                <p><strong>{{comment.commentName}}</strong>: {{comment.comment}}</p>
-                <span class="comment-date"> {{ formatDate(comment.date) }}</span>
+                <p style="line-height: 1;">
+                  <span style="font-weight: 500;">{{comment.commentName}}</span> {{comment.comment}}</p>
+                <span style="font-size: 11px; color: #8e908c; line-height: 2px"
+                      class="comment-date"> {{ formatDate(comment.date) }}</span>
               </li>
             </ul>
           </section>
           <div class="row add-comment align-self-end">
-            <input class="roundInputField comment" type="text" [(ngModel)]="comment">
+            <input class="roundInputField comment" type="text" (keydown.enter)="addComment()" [(ngModel)]="comment" [placeholder]="'    add a comment'">
             <button class="boderButton commentButton" (click)="addComment()">Send</button>
           </div>
         </div>

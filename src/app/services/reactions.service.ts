@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase, AngularFireObject} from '@angular/fire/database';
+import {AngularFireDatabase} from '@angular/fire/database';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import * as _ from 'lodash';
-import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +36,7 @@ export class ReactionsService {
   }
 
   updateReactions(itemId, reaction = 0) {
+    this.getReactions(itemId);
     const data = { [this.userId]: reaction};
     this.afs.collection('mainFeed/allPosts/post/').doc(itemId).set({
       likes: data,
@@ -46,6 +46,7 @@ export class ReactionsService {
   }
 
   removeReaction(itemId, uid) {
+    this.getReactions(itemId);
     const index = Object.keys(this.likeList).indexOf(uid);
     if (index >= 0) {
       delete this.likeList[uid];

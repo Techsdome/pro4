@@ -1,0 +1,15 @@
+<div class=" people-container">
+  <h3> Top User </h3>
+  <div *ngFor="let user of randomUsers" class="row user-container">
+    <div class="col-4 border rounded-circle view overlay zoom contributors">
+      <img [routerLink]="['/app-user-profile', user.uid]" [state]="{data: user}" style="cursor: pointer"
+           class="contributor img-fluid" src="{{user.photoURL}}"
+           height="514"
+           width="913"/>
+    </div>
+    <div class="col-8 user-details">
+      <span class="name">{{ user.displayName }}</span>
+      <span class="title">{{ user.job }}</span>
+    </div>
+  </div>
+</div>

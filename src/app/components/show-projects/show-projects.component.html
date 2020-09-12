@@ -57,7 +57,7 @@
             <li style="padding-bottom: 10px" *ngFor="let comment of comments">
               <p style="line-height: 1;"><span
                 style="font-weight: 500;">{{comment.commentName}}</span> {{comment.comment}}</p>
-              <span style="font-size: 11px; color: #8e908c; line-height: 2px"> {{ comment.date }}</span>
+              <span style="font-size: 11px; color: #8e908c; line-height: 2px"> {{ formatDate(comment.date) }}</span>
             </li>
           </ul>
           <div style="margin-top: 10px">
@@ -70,7 +70,7 @@
     </div>
     <div class="interaction">
       <div class="likes-area">
-        <svg (click)="react(0)" class="bi bi-heart-fill icon color" width="1.8em" height="1.6em" viewBox="0 0 16 16"
+        <svg (click)="react(0)" [ngClass]="{'liked' : this.userReaction === 0}" class="bi bi-heart-fill icon color" width="1.8em" height="1.6em" viewBox="0 0 16 16"
             xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
                 clip-rule="evenodd"/>
@@ -103,7 +103,7 @@
         <div class="sideinfo">
           <div class="row justify-content-center">
           </div>
-          <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
+          <div class="row myrow">
             <h6 style="font-size: 13px" class="block">Tags</h6>
             <div class="col-12" class="justifyCenter">
               <app-tag-view [projectOrUserID]="this.allPostsObject.postId" [mode]="'project'"></app-tag-view>

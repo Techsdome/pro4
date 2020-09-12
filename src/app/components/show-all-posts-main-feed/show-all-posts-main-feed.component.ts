@@ -14,11 +14,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
   posts: any[];
   photoURL: string;
   edit = false;
-  postLenght: any;
-
   postId: string;
-  projectObject: Posts;
-
   activeMenu: string;
   activeFilter: string;
 
@@ -35,16 +31,20 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
     this.activeFilter = 'recent';
     this.posts = [];
 
-    this.postService.getPosts().then(posts => {
+    this.changeFilterType(this.activeFilter);
+
+    // evtl wegen loading auskommentiert - old version
+    /*this.postService.getPosts().then(posts => {
       this.posts = posts;
 
       this.changeFilterType(this.activeFilter);
-    });
+    });*/
   }
 
   changeFilterType(type: string) {
     this.posts = [];
     this.activeFilter = type;
+
 
     if (type === 'recent') {
       if (this.activeMenu === '') {
