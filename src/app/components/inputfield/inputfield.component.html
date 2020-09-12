@@ -1,7 +1,7 @@
 <div class="inputfield-container">
     <div id="header-input">
         <h6 style="color: #8e908c">About me:</h6>
-        <img *ngIf="!this.searchedUser" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="editButton button edit-about-button" (click)="editToggle()" src="../../../assets/icons/about.svg" alt="edit text">
+        <img *ngIf="this.profileOwner" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" class="editButton button edit-about-button" (click)="editToggle()" src="../../../assets/icons/about.svg" alt="edit text">
     </div>
     <p style="color: #0058FF; font-weight: 300" [ngClass] = "edit?'hideBtnTechsdome':'showBtnTechsdome'" [innerHTML]="description"></p>
 

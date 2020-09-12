@@ -52,13 +52,14 @@ export class PeoplePageComponent implements OnInit {
     this.afs.collection('users').get().toPromise().then(querySnapshot => {
       querySnapshot.forEach((doc) => {
         if (doc.data().hasOwnProperty('lastname')) {
-          this.allUsers.push(
+        this.allUsers.push(
             { lastName: doc.data().lastname,
               firstName: doc.data().firstname,
               job: doc.data().job,
+              uid: doc.data().uid,
               photoURL: doc.data().photoURL
           });
-          this.allUsers.sort((a, b) => {
+        this.allUsers.sort((a, b) => {
             const fa = a.lastName.toLowerCase();
             const fb = b.lastName.toLowerCase();
 

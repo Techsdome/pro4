@@ -18,7 +18,7 @@
                [(ngModel)]="job" name="job" placeholder="Write something about yourself..."
                oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'/>
       </label>
-      <img *ngIf="!this.searchedUser" [ngClass]="editJob?'hideBtnTechsdome':'showBtnTechsdome'"
+      <img *ngIf="profileOwner" [ngClass]="editJob?'hideBtnTechsdome':'showBtnTechsdome'"
            class="editButton job-edit-button button" (click)="editToggleJob()" src="../../../assets/icons/about.svg" alt="edit text">
       <div id="edit-container">
         <button [ngClass]="editJob?'showBtnTechsdome':'hideBtnTechsdome'"
