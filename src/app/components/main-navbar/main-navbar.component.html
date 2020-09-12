@@ -15,14 +15,14 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <div *ngIf="presence$ | async as presence" class="tag is-large text-white"
+  <!--<div *ngIf="presence$ | async as presence" class="tag is-large text-white"
        [ngClass]="{
           'is-success':  presence.status  === 'online',
           'is-warning': presence.status  === 'away',
           'is-danger':  presence.status  === 'offline'
       }">
     {{ presence.status }}
-  </div>
+  </div>-->
 
   <div id="round_right"></div>
   <div id="settingsButton" class="dropdown text-white">
