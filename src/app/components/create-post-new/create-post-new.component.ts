@@ -9,6 +9,7 @@ import {NewProjectService} from '../../shared/services/new-project.service';
 import * as firebase from 'firebase';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 
 @Component({
@@ -62,7 +63,7 @@ export class CreatePostNewComponent implements OnInit {
     this.postType = 'post';
   }
 
-  constructor(private dataService: DataServiceService, private authService: AuthService, public form: FormsModule) {
+  constructor(private dataService: DataServiceService, private authService: AuthService, public form: FormsModule, public activeModal: NgbActiveModal) {
   }
 
   ngOnInit(): void {
@@ -114,11 +115,36 @@ export class CreatePostNewComponent implements OnInit {
       hour: date.getHours(),
       minutes: date.getMinutes(),
       second: date.getSeconds()
+    }).then(r => {});
+
+    this.authService.afs.doc(`mainFeed/allPosts`).collection('post').add({
+      post: postParam,
+      date: date.toLocaleString('en-GB'),
+      timeStamp: firebase.firestore.Timestamp.now(),
+      day: date.getUTCDate(),
+      month: (date.getUTCMonth() + 1),
+      year: date.getUTCFullYear(),
+      hour: date.getHours(),
+      minutes: date.getMinutes(),
+      second: date.getSeconds(),
+      uid: this.authService.afAuth.auth.currentUser.uid,
+      photoURL: this.user.photoURL,
+      displayName: this.user.displayName,
+    }).then(docRef => {
+      this.authService.afs.doc(`mainFeed/allPosts`).collection('post').doc(docRef.id).update({
+        postId: docRef.id,
+        tags: this.selectedCategories,
+        postType: '' + postType
+      }).then(r => {
+        this.activeModal.close();
+      });
     });
+    /*
     let tempPhotoUrl: string;
     let tempDisplayName: string;
     let tempFirstName: string;
     let tempLastName: string;
+
 
     this.authService.getCurrentUser().subscribe((result) => {
       this.user = result;
@@ -159,8 +185,8 @@ export class CreatePostNewComponent implements OnInit {
               postType: '' + postType
             });
           });
-        });
-    });
+        })
+    });;*/
   }
 
   toggleScreen() {
