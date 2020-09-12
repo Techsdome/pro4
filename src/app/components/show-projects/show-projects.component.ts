@@ -178,7 +178,7 @@ export class ShowProjectsComponent implements OnInit {
    * Currently only likes possible.
    */
   react(val) {
-    //this.reactionSvc.getReactions(this.allPostsObject.postId);
+    this.reactionSvc.getReactions(this.allPostsObject.postId);
     if (this.userReaction === val) {
         this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
     } else {

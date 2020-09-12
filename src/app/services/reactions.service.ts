@@ -29,7 +29,7 @@ export class ReactionsService {
     if (this.docRef) {
       return this.reactionPromise = this.docRef.get().toPromise().then(doc => {
         if (doc.exists) {
-          return this.likeList = doc.data().likes;
+          this.likeList = doc.data().likes;
         }
       });
     }
