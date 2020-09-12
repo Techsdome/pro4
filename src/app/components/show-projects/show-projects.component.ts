@@ -180,11 +180,9 @@ export class ShowProjectsComponent implements OnInit {
   react(val) {
     this.reactionSvc.getReactions(this.allPostsObject.postId);
     if (this.userReaction === val) {
-        this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
+      this.reactionSvc.removeReaction(this.allPostsObject.postId, this.allPostsObject.uid);
     } else {
         this.reactionSvc.updateReactions(this.allPostsObject.postId, val);
     }
   }
-
-
 }
