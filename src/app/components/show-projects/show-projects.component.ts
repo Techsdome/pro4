@@ -143,7 +143,7 @@ export class ShowProjectsComponent implements OnInit {
             this.authservice.afs.doc(`mainFeed/allPosts/post/${this.allPostsObject.postId}`).collection('comments').add({
               comment: this.comment,
               commentName: val.firstname + ' ' + val.lastname,
-              // date: date.toLocaleString('en-GB'),
+              date: date.toLocaleString('en-GB', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'}),
             });
             this.comment = '';
           });
