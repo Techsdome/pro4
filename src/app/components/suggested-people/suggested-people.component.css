@@ -15,6 +15,14 @@
   display: block;
 }
 
+.people-container .title {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #d0d0d0;
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
 .people-container .name {
   font-weight: 600;
 }
