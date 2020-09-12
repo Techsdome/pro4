@@ -1,16 +1,14 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataServiceService} from '../../shared/services/data-service.service';
 import {AuthService} from '../../shared/services/auth.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {FormControl, FormGroup, FormsModule} from '@angular/forms';
 import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
-import {finalize} from 'rxjs/operators';
 import {NewProjectService} from '../../shared/services/new-project.service';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import * as firebase from "firebase";
-import { MatTabGroup } from "@angular/material/tabs";
-
+import * as firebase from 'firebase';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
 
 
 @Component({
@@ -30,22 +28,20 @@ export class CreatePostNewComponent implements OnInit {
 
   description: string;
   task: AngularFireUploadTask;
-  taskPromises = [];
-
-  bannerURLPromise: Promise<any>;
-  imagesURLPromises = [];
-  bannerFile: File;
-  imageFiles: File[];
   projectID: string;
-  selectedCategories: string[];
-  selectedMembers: string[];
-  isPurpose: string;
+  selectedCategories: string[] = [];
   public type: string;
   public tabIndex = 0;
-
-  clickElement: string;
-
   editorForm: FormGroup;
+
+  // tags variables
+  selectableTag = true;
+  removableTag = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  isShow = false;
+
 
   editorStyle = {
     justifyContent: 'center',
@@ -66,22 +62,34 @@ export class CreatePostNewComponent implements OnInit {
     this.postType = 'post';
   }
 
-  constructor(private dataService: DataServiceService, private authService: AuthService, public pservice: NewProjectService,
-              public form: FormsModule, public activeModal: NgbActiveModal, private modalService: NgbModal,
-              private storage: AngularFireStorage) {}
-
-  getChildMessage(message: any) {
-    if (this.isPurpose === 'tags') {
-      this.selectedCategories = message;
-    }
-    if (this.isPurpose === 'members') {
-      this.selectedMembers = message;
-    }
+  constructor(private dataService: DataServiceService, private authService: AuthService, public form: FormsModule) {
   }
 
-  getPurposeMessage(message: string) {
-    this.isPurpose = message;
+  ngOnInit(): void {
+
+    if (this.type === 'post') {
+      this.tabIndex = 0;
+    } else if (this.type === 'question') {
+      this.tabIndex = 1;
+    } else if (this.type === 'project') {
+      this.tabIndex = 2;
+    }
+
+    (document.getElementById('create-post-form') as HTMLInputElement).click();
+
+    this.dataService.getItems().subscribe(items => {
+      this.items = items;
+      this.getExtendedData(items);
+    });
+
+    this.dataService.getCurrentUser().subscribe(user => {
+      this.user = user;
+    });
+    this.editorForm = new FormGroup({
+      editor: new FormControl(null)
+    });
   }
+
   getExtendedData(item) {
     for (const it in item) {
       if (this.user.uid === item[it].uid) {
@@ -147,6 +155,7 @@ export class CreatePostNewComponent implements OnInit {
           }).then(docRef => {
             this.authService.afs.doc(`mainFeed/allPosts`).collection('post').doc(docRef.id).update({
               postId: docRef.id,
+              tags: this.selectedCategories,
               postType: '' + postType
             });
           });
@@ -159,33 +168,31 @@ export class CreatePostNewComponent implements OnInit {
     this.post = '';
   }
 
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
 
+  addTag(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
 
-  ngOnInit(): void {
-
-    if (this.type === "post") {
-      this.tabIndex = 0;
+    // Add our tag
+    if ((value || '').trim()) {
+      this.selectedCategories.push(value);
     }
-    else if (this.type === "question") {
-      this.tabIndex = 1;
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
     }
-    else if (this.type === "project") {
-      this.tabIndex = 2;
+  }
+
+  removeTag(tag: string): void {
+    const index = this.selectedCategories.indexOf(tag);
+
+    if (index >= 0) {
+      this.selectedCategories.splice(index, 1);
     }
-
-    (<HTMLInputElement>document.getElementById('create-post-form')).click();
-
-    this.dataService.getItems().subscribe(items => {
-      this.items = items;
-      this.getExtendedData(items);
-    });
-
-    this.dataService.getCurrentUser().subscribe(user => {
-      this.user = user;
-    });
-    this.editorForm = new FormGroup({
-      editor: new FormControl(null)
-    });
   }
 
   maxLength(e) {
