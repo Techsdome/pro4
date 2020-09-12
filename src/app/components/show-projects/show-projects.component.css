@@ -14,6 +14,7 @@ ol, ul {
   padding-left: 10px;
   color: white;
   background-color: #d9d9d9;
+  width: 80%;
 }
 
 .comment:hover {
@@ -71,9 +72,8 @@ h1, h2, h3, h4, h5 {
   padding: 35px 10px 20px 35px;
   border-radius: 20px;
   background: #fff;
-  /*box-shadow: 5px 5px 10px #e0e1e3,
-  -5px -5px 10px #ffffff;*/
   margin-bottom: 30px;
+  transition: 0.1s;
 }
 
 .projectpost:hover .typeMark {
@@ -81,8 +81,14 @@ h1, h2, h3, h4, h5 {
   opacity: 40%;
 }
 
+.projectpost:hover .small-profile-picture {
+    border: solid 2px #0058FF;
+}
+
 .projectpost:hover {
   background-color: white;
+  box-shadow: 5px 5px 10px #e0e1e3,
+  -5px -5px 10px #ffffff;
 }
 
 .projectpost > .row {
@@ -240,7 +246,7 @@ h1, h2, h3, h4, h5 {
   /*margin-left: auto !important;*/
   height: 40px;
   width: 150px;
-  border-color: rgba(108, 99, 255, .5);
+  border-color: rgba(0, 88, 255, .5);
 }
 
 .projectcase {
@@ -261,6 +267,7 @@ h1, h2, h3, h4, h5 {
 
 .sub-maindescription {
   display: flex;
+  margin-bottom: 20px !important;
 }
 
 .line {
@@ -293,7 +300,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .color:hover {
-  fill: #6C63FF;
+  fill: #0058FF;
   filter: grayscale(0%);
   opacity: 100%;
 }
@@ -303,7 +310,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .small-profile-picture {
-  /*border: solid 2px #6C63FF;*/
+  border: solid 2px rgba(0, 88, 255, 0.5);
 }
 
 .mat-divider.mat-divider-vertical {

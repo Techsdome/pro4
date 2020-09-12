@@ -36,6 +36,7 @@ export class InputfieldComponent implements OnInit {
 
   @Input() searchedUser: any;                          // The searched User of search bar
   private searchedUserId: any;
+  profileOwner: boolean;
 
     constructor(private dataService: DataServiceService, private authService: AuthService, private route: ActivatedRoute) {
     }
@@ -67,13 +68,15 @@ export class InputfieldComponent implements OnInit {
 
       });
 
-      if (this.searchedUser) {
-        this.user = this.searchedUser;
-      } else {
-        this.dataService.getCurrentUser().subscribe(user => {
-          this.user = user;
-        });
-      }
+      this.dataService.getCurrentUser().subscribe(user => {
+        this.user = user;
+        if (this.searchedUserId === this.user.uid) {
+          this.profileOwner = true;
+        }
+        if (this.searchedUser) {
+          this.user = this.searchedUser;
+        }
+      });
 
       this.dataService.getItems().subscribe(items => {
         this.items = items;

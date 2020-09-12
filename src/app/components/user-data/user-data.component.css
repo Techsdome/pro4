@@ -125,7 +125,7 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
     background-color: #eee;
     width: 150px;
     height: 150px;
-    /*border: solid 2px #6C63FF;*/
+    border: solid 2px rgba(0, 88, 255, 0.5);
   object-fit: cover;
 }
 
@@ -181,7 +181,7 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"
 #skills-container input{
     border-radius: 100px;
     border: none;
-    background-color: #6C63FF;
+    background-color: #0058FF;
     color: #fff;
     padding: 5px 40px 5px 20px;
     margin: 2px 3px;

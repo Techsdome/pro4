@@ -103,7 +103,7 @@
         <div class="sideinfo">
           <div class="row justify-content-center">
           </div>
-          <div *ngIf="allPostsObject.type == 'project'" class="row myrow">
+          <div class="row myrow">
             <h6 style="font-size: 13px" class="block">Tags</h6>
             <div class="col-12" class="justifyCenter">
               <app-tag-view [projectOrUserID]="this.allPostsObject.postId" [mode]="'project'"></app-tag-view>
