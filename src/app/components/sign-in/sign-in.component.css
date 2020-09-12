@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform:uppercase
 }
 .navbar.solid {
-  background-color: #490D40;
+  background-color: #0058FF;
   transition: background-color 1s ease 0s;
   box-shadow: 0 0 4px grey;
 }
@@ -140,7 +140,7 @@ form > div > label {
 }
 
 .btn.btn-style {
-  background-color: #6C63FF;
+  background-color: #0058FF;
 }
 
 .btn.btn-outline-style {
@@ -278,7 +278,7 @@ form > div > label {
 }
 .site-footer a:hover
 {
-  color:#6C63FF;
+  color:#0058FF;
   text-decoration:none;
 }
 .footer-links
@@ -296,7 +296,7 @@ form > div > label {
 }
 .footer-links a:active,.footer-links a:focus,.footer-links a:hover
 {
-  color:#6C63FF;
+  color:#0058FF;
   text-decoration:none;
 }
 .footer-links.inline li
@@ -376,7 +376,7 @@ form > div > label {
 .social-icons a:active,.social-icons a:focus,.social-icons a:hover
 {
   color:#fff;
-  background-color:#6C63FF
+  background-color:#0058FF;
 }
 .social-icons.size-sm a
 {
@@ -387,15 +387,15 @@ form > div > label {
 }
 .social-icons a.facebook:hover
 {
-  background-color:#6C63FF
+  background-color:#0058FF;
 }
 .social-icons a.twitter:hover
 {
-  background-color:#6C63FF
+  background-color:#0058FF;
 }
 .social-icons a.linkedin:hover
 {
-  background-color:#6C63FF
+  background-color:#0058FF;
 }
 
 @media (max-width:767px)
@@ -418,7 +418,7 @@ form > div > label {
 }
 
 .btn.md-btn {
-  background: #6C63FF;
+  background: #0058FF;
   color: #fff;
   border: 0;
   border-radius: 0;
@@ -427,7 +427,7 @@ form > div > label {
 }
 
 .btn.md-btn:active {
-  background: #6C63FF;
+  background: #0058FF;
   color: #fff;
   border: 0;
   border-radius: 0;
@@ -489,7 +489,7 @@ label.md-input-label {
 }
 
 .btn.md-btn {
-  background: #6C63FF;
+  background: #0058FF;
   color: #fff;
   border: 0;
   border-radius: 0;
@@ -498,7 +498,7 @@ label.md-input-label {
 }
 
 .btn.md-btn:active {
-  background: #6C63FF;
+  background: #0058FF;
   color: #fff;
   border: 0;
   border-radius: 0;
@@ -535,7 +535,7 @@ section form {
 
 #btn_register:hover {
   /*color: #6C63FF;*/
-  background-color: #6C63FF;
+  background-color: #0058FF;
   border-color: #FFFFFF;
 }
 
@@ -545,7 +545,7 @@ section form {
 
 #btn_login {
   color: #ffffff;
-  background-color: #6C63FF;
+  background-color: #0058FF;
   border: 2px solid rgb(0, 0, 0);
   border-radius: 35px;
 }
@@ -556,7 +556,7 @@ section form {
 
 .btn-register:hover {
   color: #fff;
-  background-color: #6C63FF;
+  background-color: #0058FF;
 }
 
 #header-image {
