@@ -101,7 +101,6 @@ export class PostsService {
         }
 
         if (doc.data().postType === 'question') {
-          // tslint:disable-next-line:max-line-length
           typeImage = '../../../assets/icons/q2.svg';
         }
         const userDoc = await this.authService.afs.collection('users').doc(theuserid).get().toPromise();

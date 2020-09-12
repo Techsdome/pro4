@@ -127,6 +127,7 @@ export class CreatePostNewComponent implements OnInit {
       hour: date.getHours(),
       minutes: date.getMinutes(),
       second: date.getSeconds(),
+      likes: [],
       uid: this.authService.afAuth.auth.currentUser.uid,
       photoURL: this.user.photoURL,
       displayName: this.user.displayName,
