@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
+import {Posts} from '../../shared/services/posts';
 import {PostsService} from '../../services/posts.service';
 
 @Component({
@@ -32,8 +33,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
 
     this.changeFilterType(this.activeFilter);
 
-    // !!!!!!!!! LOADING DELAY PERHAPS !!!!!!!!!! 
-
+    // evtl wegen loading auskommentiert - old version
     /*this.postService.getPosts().then(posts => {
       this.posts = posts;
 
@@ -44,6 +44,7 @@ export class ShowAllPostsMainFeedComponent implements OnInit {
   changeFilterType(type: string) {
     this.posts = [];
     this.activeFilter = type;
+
 
     if (type === 'recent') {
       if (this.activeMenu === '') {
