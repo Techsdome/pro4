@@ -414,7 +414,6 @@ export class ProjectPageComponent implements OnInit {
 
 // removes a member
   removeMember(index) {
-    console.log(this.tmpAllContributors);
     this.tmpAllContributors.forEach((mem, i) => {
       if (i === index) {
         this.tmpAllContributors.splice(index, 1);
