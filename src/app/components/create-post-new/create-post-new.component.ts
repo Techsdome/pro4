@@ -4,12 +4,11 @@ import {AuthService} from '../../shared/services/auth.service';
 import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {FormControl, FormGroup, FormsModule} from '@angular/forms';
-import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
-import {NewProjectService} from '../../shared/services/new-project.service';
+import {AngularFireUploadTask} from '@angular/fire/storage';
 import * as firebase from 'firebase';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -63,7 +62,8 @@ export class CreatePostNewComponent implements OnInit {
     this.postType = 'post';
   }
 
-  constructor(private dataService: DataServiceService, private authService: AuthService, public form: FormsModule, public activeModal: NgbActiveModal) {
+  constructor(private dataService: DataServiceService, private authService: AuthService,
+              public form: FormsModule, public activeModal: NgbActiveModal) {
   }
 
   ngOnInit(): void {
@@ -140,7 +140,7 @@ export class CreatePostNewComponent implements OnInit {
         this.activeModal.close();
       });
     });
-    /*
+    /*      loading Time
     let tempPhotoUrl: string;
     let tempDisplayName: string;
     let tempFirstName: string;

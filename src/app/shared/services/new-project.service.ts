@@ -33,7 +33,7 @@ export class NewProjectService {
     return this.authService.getCurrentUser();
   }
 
-  async addData(id, pname, pdescription, pcategories, members, bannerDefault): Promise<void> {
+  async addData(id, pname, pdescription, pcategories, members, bannerDefault, contributorPhotoURL): Promise<void> {
     let myuser: any;
     let username: string;
 
@@ -75,6 +75,7 @@ export class NewProjectService {
             projectDescription: pdescription ? pdescription : ' ',
             projectCategories: pcategories ? pcategories : [],
             projectMembers: members ? members : [],
+            projectMembersPhotoURL: contributorPhotoURL,
             timeStamp: firebase.firestore.Timestamp.now(),
             postId: docID,
             postType: 'project'
