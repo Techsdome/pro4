@@ -5,3 +5,12 @@
 .contributors .contributor {
   object-fit: cover;
 }
+
+.conttr {
+  margin-right: -10%;
+  transition: 0.2s;
+}
+
+.conttr:hover {
+  z-index: 100;
+}
