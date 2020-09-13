@@ -23,7 +23,8 @@ export class ContributorInputComponent implements OnInit {
 
   contributors = [];
   contributorUid = [];
-  isShow = false;
+  contributorPhotoURL = [];
+
 
   @ViewChild('contributorInput') contributorInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -75,6 +76,7 @@ export class ContributorInputComponent implements OnInit {
     if (index >= 0) {
       this.contributors.splice(index, 1);
       this.contributorUid.splice(index, 1);
+      this.contributorPhotoURL.splice(index, 1);
     }
   }
 
@@ -89,6 +91,12 @@ export class ContributorInputComponent implements OnInit {
   addContributorUid(uid: string) {
     if (!this.contributorUid.includes(uid)) {
       this.contributorUid.push(uid);
+    }
+  }
+
+  addContributorPhotoURL(photoURL: string) {
+    if (!this.contributorPhotoURL.includes(photoURL)) {
+      this.contributorPhotoURL.push(photoURL);
     }
   }
 

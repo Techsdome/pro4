@@ -66,6 +66,7 @@ export class ProjectPageComponent implements OnInit {
 
   tmpAllContributors: User[] = [];
   tmpAllContributorsUid = [];
+  tmpAllContributorsPhotoURL = [];
   tmpDeletedContributors = [];
   memberChange = false;
   myControl = new FormControl();
@@ -221,7 +222,6 @@ export class ProjectPageComponent implements OnInit {
   discardChanges() {
     this.editMode = false;
     this.removeListener();
-    //this.loadProject();
   }
 
   // tmp banner picture is displayed
@@ -382,6 +382,7 @@ export class ProjectPageComponent implements OnInit {
 
     if (this.memberChange) {
       data['projectMembers'] = this.tmpAllContributorsUid;
+      data['projectMembersPhotoURL'] = this.tmpAllContributorsPhotoURL;
     }
 
     if (this.tagChange) {
@@ -413,10 +414,12 @@ export class ProjectPageComponent implements OnInit {
 
 // removes a member
   removeMember(index) {
+    console.log(this.tmpAllContributors);
     this.tmpAllContributors.forEach((mem, i) => {
       if (i === index) {
         this.tmpAllContributors.splice(index, 1);
         this.tmpAllContributorsUid.splice(index, 1);
+        this.tmpAllContributorsPhotoURL.splice(index, 1);
         this.tmpDeletedContributors.push(mem.displayName);
         this.memberChange = true;
       }
@@ -466,12 +469,15 @@ export class ProjectPageComponent implements OnInit {
 
           this.tmpDescription = this.project.projectDescription;
           this.tmpAllContributorsUid = this.project.projectMembers;
+          this.tmpAllContributorsPhotoURL = this.project.projectMembersPhotoURL;
           this.tags = this.project.projectCategories;
 
+          this.tmpAllContributors = [];
           for (const userId of this.tmpAllContributorsUid) {
             const user = await this.userSerive.getUserWithUid(userId);
             this.tmpAllContributors.push(user);
           }
+
 
           if (this.project.projectBanner) {
             this.bannerURL = this.project.projectBanner;
@@ -589,6 +595,12 @@ export class ProjectPageComponent implements OnInit {
       const user = await this.userSerive.getUserWithUid(uid);
       this.tmpAllContributors.push(user);
       this.memberChange = true;
+    }
+  }
+
+  addContributorPhotoURL(photoURL: string) {
+    if (!this.tmpAllContributorsPhotoURL.includes(photoURL)) {
+      this.tmpAllContributorsPhotoURL.push(photoURL);
     }
   }
 

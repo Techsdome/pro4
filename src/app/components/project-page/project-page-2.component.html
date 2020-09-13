@@ -73,7 +73,7 @@
                 <div class="row contri-container">
                   <div class="col single-contributor" *ngFor="let mem of this.tmpAllContributors; let mindex = index"
                        [ngClass]="editMode ? 'editbg' : ''">
-                    <button *ngIf="editMode" class="removeMemberButton" (click)="removeMember(mindex)">
+                    <button *ngIf="editMode" class="removeMemberButton" (click)="removeMember(mindex, mem)">
                       <svg class="bi bi-x-circle-fill removePicture" width="1.5em" height="1.5em" viewBox="0 0 16 16"
                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -98,7 +98,7 @@
                              [matAutocomplete]="auto">
                       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                         <mat-option *ngFor="let offset of results | async" [value]="offset.displayName">
-                          <small (click)="addContributorUid(offset.uid)"><img class="example-option-img rounded"
+                          <small (click)="addContributorUid(offset.uid); addContributorPhotoURL(offset.photoURL)"><img class="example-option-img rounded"
                                                                               [src]="offset.photoURL" height="25"
                                                                               aria-hidden="true"
                                                                               alt="profile_pic">   {{ offset.displayName }}

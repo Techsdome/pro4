@@ -19,7 +19,7 @@
   </mat-chip-list>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
     <mat-option *ngFor="let offset of results | async" [value]="offset.displayName">
-      <small (click)="addContributorUid(offset.uid)"><img class="example-option-img rounded" [src]="offset.photoURL" height="25" aria-hidden ="true" alt="profile_pic">   {{ offset.displayName }}</small>
+      <small (click)="addContributorUid(offset.uid); addContributorPhotoURL(offset.photoURL)"><img class="example-option-img rounded" [src]="offset.photoURL" height="25" aria-hidden ="true" alt="profile_pic">   {{ offset.displayName }}</small>
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>

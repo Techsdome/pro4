@@ -65,6 +65,7 @@ export class NewProjectComponent implements OnInit {
 
   contributors = [];
   contributorUid = [];
+  contributorPhotoURL = [];
   isShow = false;
   isShow2 = false;
 
@@ -154,19 +155,6 @@ export class NewProjectComponent implements OnInit {
 
             const URL = `project/${this.user.uid}/${this.projectID}/images/${today}_${myFile.name}`;
 
-            // const reader = new FileReader();
-            // reader.readAsDataURL(myFile);
-            // reader.onload = () => {
-            //   const img = new Image();
-            //   img.onload = () => {
-            //     this.imagesMetadata.push({
-            //       imageWidth: img.width,
-            //       imageHeight: img.height
-            //     });
-            //   };
-            //   img.src = (reader.result) as string;
-            // };
-
             this.task = this.storage.upload(URL, myFile);
 
             this.taskPromises.push(this.task.snapshotChanges().pipe(
@@ -190,7 +178,7 @@ export class NewProjectComponent implements OnInit {
 
       try {
         await this.pservice.addData(this.user.uid, name, this.description, this.selectedCategories,
-          this.contributorUid, this.bannerDefault);
+          this.contributorUid, this.bannerDefault, this.contributorPhotoURL);
         await this.pictureManager();
 
         (document.getElementById('myForm') as HTMLFormElement).reset();
@@ -332,6 +320,7 @@ export class NewProjectComponent implements OnInit {
     if (index >= 0) {
       this.contributors.splice(index, 1);
       this.contributorUid.splice(index, 1);
+      this.contributorPhotoURL.splice(index, 1);
     }
   }
 
@@ -346,6 +335,12 @@ export class NewProjectComponent implements OnInit {
   addContributorUid(uid: string) {
     if (!this.contributorUid.includes(uid)) {
       this.contributorUid.push(uid);
+    }
+  }
+
+  addContributorPhotoURL(photoURL: string) {
+    if (!this.contributorPhotoURL.includes(photoURL)) {
+      this.contributorPhotoURL.push(photoURL);
     }
   }
 

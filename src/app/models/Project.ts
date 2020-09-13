@@ -4,6 +4,7 @@ export interface Project {
   projectDescription: string;
   projectCategories: string[];
   projectMembers: string[];
+  projectMembersPhotoURL: string[];
   projectBanner: string;
   projectImages: string[];
   projectTimeStamp: string;
