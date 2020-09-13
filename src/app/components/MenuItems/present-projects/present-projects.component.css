@@ -9,6 +9,19 @@ canvas{
   position: fixed;
 }
 
+
+#bubble_container{
+  position: relative;
+  margin: 125px;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  justify-items: center;
+  gap: 150px;
+}
+
 .regler{
   position: fixed;
   z-index: 10;

@@ -1,11 +1,28 @@
+import {User} from '../shared/services/user';
+
+
 export class ProjectBubble {
 
-    constructor(private ctx: CanvasRenderingContext2D, private x:number, private y:number ,private name: string, private banner) {}
-    private width = 75;
+    constructor(private ctx: CanvasRenderingContext2D, 
+        private x:number, 
+        private y:number,
+        private name: string,
+        private banner,
+        private id,
+        private ath) {}
+    private width = 150;
     private zoomWidth = this.width;
     private members: string[] = [];
     private tags: string[] = [];
-    membersPositions = [[0,-this.width*1.6],[this.width*1.13,-this.width*1.13],[this.width*1.6,0],[this.width*1.13,this.width*1.13],[0,this.width*1.6],[-this.width*1.13,this.width*1.13],[-this.width*1.6,0],[-this.width*1.13,-this.width*1.13]]
+    private memeberPhoto ="";
+    membersPositions = [[this.width/3,-(this.width/3+10)],
+                        [this.width-20,-(this.width/3-20)],
+                        [this.width+10,this.width/3],
+                        [this.width-20,this.width-20],
+                        [this.width/3,this.width+10],
+                        [-(this.width/3-20),this.width-20],
+                        [-(this.width/3+10),this.width/3],
+                        [-(this.width/3-20),-(this.width/3-20)]]
 
     draw() {
         this.ctx.beginPath();
@@ -29,6 +46,31 @@ export class ProjectBubble {
             this.ctx.fill();
             this.ctx.closePath();
         });
+    }
+
+
+    htmlRenderer(){
+        return `<div class="main_bubble_container" id=${this.id} style="height:${this.width}px; width:${this.width}px;" >
+                    <div class="main_bubble_image_container">
+                        <img class="main_bubble_img" src=${this.banner} alt="altext"/>
+                    </div>
+                    ${this.htmlRendererMembers()}
+                </div>`;
+    }
+
+
+    htmlRendererMembers(){
+        let innerHTML = "";
+        let img_src;
+
+        this.tags.forEach((element,i) => {
+            innerHTML += `<img class="members_img" src="" style="height:${this.width/3}px;
+             width:${this.width/3}px; 
+             left:${this.membersPositions[i][0]}px; 
+             top:${this.membersPositions[i][1]}px"/>`
+        });
+
+        return innerHTML;
     }
 
     zoom(zoomValue){

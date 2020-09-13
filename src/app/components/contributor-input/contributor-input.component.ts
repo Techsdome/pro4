@@ -78,6 +78,7 @@ export class ContributorInputComponent implements OnInit {
     }
   }
 
+
   selected(event: MatAutocompleteSelectedEvent): void {
     if (!this.contributors.includes(event.option.value)) {
       this.contributors.push(event.option.value);

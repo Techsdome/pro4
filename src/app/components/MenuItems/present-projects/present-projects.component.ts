@@ -1,7 +1,7 @@
 import {Component, ViewChild, ElementRef, OnInit, AfterViewInit} from '@angular/core';
-import {User} from '../../../shared/services/user';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {User} from '../../../shared/services/user';
 import {AuthService} from '../../../shared/services/auth.service';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { ProjectBubble } from '../../../classes/project-bubble'
@@ -44,9 +44,44 @@ export class PresentProjectsComponent implements OnInit {
 
 
   createProjectBubbles(){
+    let innerHTML_bubble = " ";
+    let bubble_container = document.getElementById('bubble_container') as HTMLInputElement;
+
     this.projectBubble.forEach(element => {
-      element.draw();
+      innerHTML_bubble += element.htmlRenderer();
+      console.log(innerHTML_bubble);
     });
+
+    bubble_container.innerHTML = innerHTML_bubble;
+
+    const main_bubble_container = Array.from(document.getElementsByClassName('main_bubble_container'));
+      for (const item of main_bubble_container) {
+      const item_cast = <HTMLElement> item;
+      item_cast.style.position = "relative"
+    }
+    
+    const members_img = Array.from(document.getElementsByClassName('members_img'));
+      for (const item of members_img) {
+      const item_cast = <HTMLElement> item;
+      item_cast.style.position = "absolute"
+      item_cast.addEventListener('mouseover',()=>{
+        item_cast.style.cursor = "pointer";
+      });
+    }
+
+    const main_bubble_img = Array.from(document.getElementsByClassName('main_bubble_img'));
+      for (const item of main_bubble_img) {
+      const item_cast = <HTMLElement> item;
+      item_cast.addEventListener('mouseover',()=>{
+        item_cast.style.transform = "scale(1.1)";
+        item_cast.style.cursor = "pointer";
+      });
+      item_cast.addEventListener('mouseleave',()=>{
+        item_cast.style.transform = "scale(1.0)";
+      });
+      item_cast.style.transition = "0.2s"
+    }
+
   }
 
   checkTarget(){
@@ -128,12 +163,20 @@ export class PresentProjectsComponent implements OnInit {
                       postText: posts.postText,
                       postId: posts.postId,
                       projectName: posts.projectName,
-                      projectBanner: posts.projectBanner
+                      projectBanner: posts.projectBanner,
+                      projectMembers: posts.projectMembers
                     });
                     let randomX = (Math.random()*window.innerWidth) + window.innerWidth/2;
-                    let randomY = (Math.random()*window.innerHeight) + window.innerHeight/2;
-                    console.log(randomX);
-                    let bubble = new ProjectBubble(this.ctx, randomX, randomY, posts.projectName, posts.projectBanner);
+                    let randomY = (Math.random()*window.innerHeight) + window.innerHeight/2;        
+                    
+                    let bubble = new ProjectBubble(this.ctx,
+                      randomX,
+                      randomY,
+                      posts.projectName,
+                      posts.projectBanner,
+                      posts.postId,
+                      this.authService
+                      );
                     bubble.setTags(posts.projectCategories);
                     bubble.setMembers(posts.projectMembers);
                     this.projectBubble.push(bubble);
