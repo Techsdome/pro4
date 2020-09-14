@@ -3,7 +3,7 @@
   <div id="create-post-header flex">
     <h5>Create a new project</h5>
   </div>
-  <input type="text" name="pname" id="pname" class="form-control" placeholder="Project name" #name required>
+  <label for="pname"></label><input type="text" name="pname" id="pname" class="form-control mat-input-element bg-white" placeholder="Project name" #name required>
   <label class="description-label" for="pdescription"><h6>Description</h6></label>
   <quill-editor [styles]="editorStyle" id="pdescription" [modules]="config" placeholder="describe your project..."
                 name="description" (onContentChanged)="onContentChanged($event)"></quill-editor>

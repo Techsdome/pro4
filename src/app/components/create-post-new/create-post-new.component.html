@@ -7,7 +7,7 @@
           <div class="create-post-header flex">
             <h5>Create a new post</h5>
           </div>
-          <quill-editor [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)"
+          <quill-editor class="ql-editor" [styles]="editorStyle" [modules]="config" (onContentChanged)="maxLength($event)"
                         [(ngModel)]="post" name="post" placeholder="My post..."></quill-editor>
           <h6>Tags</h6>
           <div class="btn-plus pointer" (click)="toggleDisplay()" [hidden]="isShow"></div>
