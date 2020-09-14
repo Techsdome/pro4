@@ -1,86 +1,86 @@
-[debug] [2020-09-09T15:59:11.825Z] ----------------------------------------------------------------------
-[debug] [2020-09-09T15:59:11.827Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
-[debug] [2020-09-09T15:59:11.827Z] CLI Version:   8.0.2
-[debug] [2020-09-09T15:59:11.827Z] Platform:      darwin
-[debug] [2020-09-09T15:59:11.827Z] Node Version:  v12.16.2
-[debug] [2020-09-09T15:59:11.835Z] Time:          Wed Sep 09 2020 17:59:11 GMT+0200 (Central European Summer Time)
-[debug] [2020-09-09T15:59:11.835Z] ----------------------------------------------------------------------
-[debug] [2020-09-09T15:59:11.836Z] 
-[debug] [2020-09-09T15:59:11.846Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2020-09-09T15:59:11.846Z] > authorizing via signed-in user
-[debug] [2020-09-09T15:59:11.846Z] [iam] checking project techsdome-6983c for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
-[debug] [2020-09-09T15:59:11.847Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/techsdome-6983c:testIamPermissions  
+[debug] [2020-09-14T12:50:38.924Z] ----------------------------------------------------------------------
+[debug] [2020-09-14T12:50:38.925Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2020-09-14T12:50:38.925Z] CLI Version:   8.10.0
+[debug] [2020-09-14T12:50:38.925Z] Platform:      darwin
+[debug] [2020-09-14T12:50:38.925Z] Node Version:  v12.16.2
+[debug] [2020-09-14T12:50:38.926Z] Time:          Mon Sep 14 2020 14:50:38 GMT+0200 (Central European Summer Time)
+[debug] [2020-09-14T12:50:38.926Z] ----------------------------------------------------------------------
+[debug] [2020-09-14T12:50:38.926Z] 
+[debug] [2020-09-14T12:50:38.932Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-14T12:50:38.932Z] > authorizing via signed-in user
+[debug] [2020-09-14T12:50:38.932Z] [iam] checking project techsdome-6983c for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2020-09-14T12:50:38.934Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/techsdome-6983c:testIamPermissions  
  {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
-[debug] [2020-09-09T15:59:12.632Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 09 Sep 2020 15:59:12 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=659","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2020-09-09T15:59:12.633Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/techsdome-6983c/serviceAccounts/techsdome-6983c@appspot.gserviceaccount.com:testIamPermissions  
+[debug] [2020-09-14T12:50:39.976Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 14 Sep 2020 12:50:39 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=614","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-14T12:50:39.978Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/techsdome-6983c/serviceAccounts/techsdome-6983c@appspot.gserviceaccount.com:testIamPermissions  
  {"permissions":["iam.serviceAccounts.actAs"]}
-[debug] [2020-09-09T15:59:13.402Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 09 Sep 2020 15:59:13 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2020-09-09T15:59:13.404Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/techsdome-6983c  
+[debug] [2020-09-14T12:50:40.997Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 14 Sep 2020 12:50:40 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-14T12:50:40.999Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/techsdome-6983c  
  
-[debug] [2020-09-09T15:59:13.669Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 09 Sep 2020 15:59:13 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-14T12:50:41.290Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 14 Sep 2020 12:50:41 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions.
+Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
 [info] 
 [info] === Deploying to 'techsdome-6983c'...
 [info] 
-[info] i  deploying database, storage, firestore, functions, hosting
+[info] i  deploying database, storage, firestore, functions, hosting 
 [info] Running command: npm --prefix "$RESOURCE_DIR" run lint
 [info] Running command: npm --prefix "$RESOURCE_DIR" run build
-[info] ✔  functions: Finished running predeploy script.
-[info] i  database: checking rules syntax...
-[debug] [2020-09-09T15:59:19.945Z] >>> HTTP REQUEST PUT https://techsdome-6983c.firebaseio.com/.settings/rules.json?dryRun=true  
+[info] ✔  functions: Finished running predeploy script. 
+[info] i  database: checking rules syntax... 
+[debug] [2020-09-14T12:50:47.079Z] >>> HTTP REQUEST PUT https://techsdome-6983c.firebaseio.com/.settings/rules.json?dryRun=true  
  {
   "rules": {
     ".read": "auth != null",
     ".write": "auth != null"
   }
 }
-[debug] [2020-09-09T15:59:20.501Z] <<< HTTP RESPONSE 423 {"server":"nginx","date":"Wed, 09 Sep 2020 15:59:20 GMT","content-type":"application/json; charset=utf-8","content-length":"97","connection":"keep-alive","access-control-allow-origin":"*","cache-control":"no-cache","strict-transport-security":"max-age=31556926; includeSubDomains; preload"}
-[debug] [2020-09-09T15:59:20.501Z] <<< HTTP RESPONSE BODY {
+[debug] [2020-09-14T12:50:47.705Z] <<< HTTP RESPONSE 423 {"server":"nginx","date":"Mon, 14 Sep 2020 12:50:47 GMT","content-type":"application/json; charset=utf-8","content-length":"97","connection":"keep-alive","access-control-allow-origin":"*","cache-control":"no-cache","strict-transport-security":"max-age=31556926; includeSubDomains; preload"}
+[debug] [2020-09-14T12:50:47.705Z] <<< HTTP RESPONSE BODY {
   "error" : "The Firebase database 'techsdome-6983c' has been disabled by a database owner."
 }
 
 [error] 
 [error] Error: Unexpected error while deploying database rules.
-[debug] [2020-09-10T08:06:33.044Z] ----------------------------------------------------------------------
-[debug] [2020-09-10T08:06:33.047Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
-[debug] [2020-09-10T08:06:33.048Z] CLI Version:   8.0.2
-[debug] [2020-09-10T08:06:33.048Z] Platform:      darwin
-[debug] [2020-09-10T08:06:33.048Z] Node Version:  v12.16.2
-[debug] [2020-09-10T08:06:33.055Z] Time:          Thu Sep 10 2020 10:06:33 GMT+0200 (Central European Summer Time)
-[debug] [2020-09-10T08:06:33.055Z] ----------------------------------------------------------------------
-[debug] [2020-09-10T08:06:33.055Z] 
-[debug] [2020-09-10T08:06:33.069Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2020-09-10T08:06:33.069Z] > authorizing via signed-in user
-[debug] [2020-09-10T08:06:33.070Z] [iam] checking project techsdome-6983c for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
-[debug] [2020-09-10T08:06:33.074Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2020-09-10T08:06:33.074Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2020-09-10T08:06:33.760Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Sep 2020 08:06:33 GMT","server":"scaffolding on HTTPServer2","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2020-09-10T08:06:33.835Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/techsdome-6983c:testIamPermissions  
+[debug] [2020-09-14T12:53:44.442Z] ----------------------------------------------------------------------
+[debug] [2020-09-14T12:53:44.443Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2020-09-14T12:53:44.444Z] CLI Version:   8.10.0
+[debug] [2020-09-14T12:53:44.444Z] Platform:      darwin
+[debug] [2020-09-14T12:53:44.444Z] Node Version:  v12.16.2
+[debug] [2020-09-14T12:53:44.445Z] Time:          Mon Sep 14 2020 14:53:44 GMT+0200 (Central European Summer Time)
+[debug] [2020-09-14T12:53:44.445Z] ----------------------------------------------------------------------
+[debug] [2020-09-14T12:53:44.445Z] 
+[debug] [2020-09-14T12:53:44.452Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-14T12:53:44.452Z] > authorizing via signed-in user
+[debug] [2020-09-14T12:53:44.452Z] [iam] checking project techsdome-6983c for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2020-09-14T12:53:44.454Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/techsdome-6983c:testIamPermissions  
  {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
-[debug] [2020-09-10T08:06:34.427Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Sep 2020 08:06:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=129","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2020-09-10T08:06:34.429Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/techsdome-6983c/serviceAccounts/techsdome-6983c@appspot.gserviceaccount.com:testIamPermissions  
+[debug] [2020-09-14T12:53:45.386Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 14 Sep 2020 12:53:45 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=622","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-14T12:53:45.387Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/techsdome-6983c/serviceAccounts/techsdome-6983c@appspot.gserviceaccount.com:testIamPermissions  
  {"permissions":["iam.serviceAccounts.actAs"]}
-[debug] [2020-09-10T08:06:35.177Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Sep 2020 08:06:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2020-09-10T08:06:35.178Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/techsdome-6983c  
+[debug] [2020-09-14T12:53:45.681Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 14 Sep 2020 12:53:45 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-14T12:53:45.682Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/techsdome-6983c  
  
-[debug] [2020-09-10T08:06:36.157Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Sep 2020 08:06:36 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-14T12:53:46.001Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 14 Sep 2020 12:53:45 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions.
+Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
 [info] 
 [info] === Deploying to 'techsdome-6983c'...
 [info] 
-[info] i  deploying database, storage, firestore, functions, hosting
+[info] i  deploying database, storage, firestore, functions, hosting 
 [info] Running command: npm --prefix "$RESOURCE_DIR" run lint
 [info] Running command: npm --prefix "$RESOURCE_DIR" run build
-[info] ✔  functions: Finished running predeploy script.
-[info] i  database: checking rules syntax...
-[debug] [2020-09-10T08:06:46.809Z] >>> HTTP REQUEST PUT https://techsdome-6983c.firebaseio.com/.settings/rules.json?dryRun=true  
+[info] ✔  functions: Finished running predeploy script. 
+[info] i  database: checking rules syntax... 
+[debug] [2020-09-14T12:53:52.035Z] >>> HTTP REQUEST PUT https://techsdome-6983c.firebaseio.com/.settings/rules.json?dryRun=true  
  {
   "rules": {
     ".read": "auth != null",
     ".write": "auth != null"
   }
 }
-[debug] [2020-09-10T08:06:47.558Z] <<< HTTP RESPONSE 423 {"server":"nginx","date":"Thu, 10 Sep 2020 08:06:47 GMT","content-type":"application/json; charset=utf-8","content-length":"97","connection":"keep-alive","access-control-allow-origin":"*","cache-control":"no-cache","strict-transport-security":"max-age=31556926; includeSubDomains; preload"}
-[debug] [2020-09-10T08:06:47.559Z] <<< HTTP RESPONSE BODY {
+[debug] [2020-09-14T12:53:52.894Z] <<< HTTP RESPONSE 423 {"server":"nginx","date":"Mon, 14 Sep 2020 12:53:52 GMT","content-type":"application/json; charset=utf-8","content-length":"97","connection":"keep-alive","access-control-allow-origin":"*","cache-control":"no-cache","strict-transport-security":"max-age=31556926; includeSubDomains; preload"}
+[debug] [2020-09-14T12:53:52.894Z] <<< HTTP RESPONSE BODY {
   "error" : "The Firebase database 'techsdome-6983c' has been disabled by a database owner."
 }
 

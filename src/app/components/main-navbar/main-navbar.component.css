@@ -165,28 +165,45 @@
   background-color: #cacaca;
 }
 
-.bar-button{
-    border: 1px solid #000 !important;
-}
+/*.bar-button:hover {*/
+/*    border: 1px solid #0058FF !important;*/
+/*}*/
 
-.bar-button:hover{
-    background-color: #e0e0e0;
-}
+/*.bar-button:hover{*/
+/*    background-color: #e0e0e0;*/
+/*}*/
 
 #questionButton {
   background-image: url("../../../assets/icons/q.svg");
+}
+
+#questionButton:hover {
+  background-image: url("../../../assets/icons/qu2.svg");
 }
 
 #messageButton {
   background-image: url("../../../assets/icons/talk.svg");
 }
 
-#questionButton:hover ~ .detail_info{
-    display: grid;
+#messageButton:hover {
+  background-image: url("../../../assets/icons/talk2.svg");
 }
+
+.detail_info {
+  color: #0058FF;
+  /*background-color: #0058FF;*/
+}
+
+/*#questionButton:hover ~ .detail_info{*/
+/*    display: grid;*/
+/*}*/
 
 #projectButton {
   background-image: url("../../../assets/icons/pen.svg");
+}
+
+#projectButton:hover {
+  background-image: url("../../../assets/icons/pen2.svg");
 }
 
 #plusButton {
@@ -246,10 +263,14 @@
 
 .bar-button {
   margin-left: 1rem;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border: none;
   border-radius: 50px;
+  background-color: #fff;
+  box-shadow: 5px 5px 10px #e0e1e3,
+  -5px -5px 10px #e0e1e3;
+  transition: .1s;
 }
 
 .link-text {
@@ -371,7 +392,7 @@
 
 .translateMessage {
     display: inline;
-    transform: translate(44px, 35px);
+    transform: translate(44px, 40px);
 }
 
 .translateQuestion {
@@ -381,7 +402,7 @@
 
 .translateProject {
     display: inline;
-    transform: translate(44px, -35px);
+    transform: translate(44px, -40px);
 }
 
 #puffer-60-margin {

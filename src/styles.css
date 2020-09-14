@@ -192,9 +192,41 @@ mat-tab-label{
   padding: 0;
 }
 
-.smallButton {
+/**
+ * -------- BUTTONS --------
+ */
+
+.btn-discard {
+  margin: 5px;
+  background-color: #dcdcdc;
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+}
+
+.btn-discard:hover {
+  background-color: #eaeaea;
+}
+
+.btn-small {
   width: 30px;
   padding: 3px;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 50px;
+  border: solid 2px #a6b0bf;
+  transition: 0.1s;
+}
+
+.btn-small:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.roundButton {
+  border-radius: 100px;
 }
 
 .boderButton {
@@ -206,15 +238,44 @@ mat-tab-label{
   transition: 0.1s;
 }
 
+.boderButton:hover {
+  background-color: rgba(0, 88, 255, 1);
+  color: white;
+}
+
+.btn-item-delete{
+  margin: -5px 10px 0 -25px;
+  width: 15px;
+  transform: rotate(45deg);
+}
+
+.btn-item-delete:hover{
+  cursor: pointer;
+}
+
+.itemInputButton{
+  padding: 0 25px 0 10px;
+  border-radius: 100px;
+  border: none;
+  background-color: #0058FF;
+  color: #fff;
+  margin: 2px 0 2px 5px !important;
+  width: auto;
+  display: inline-block;
+}
+
+.itemInputButton:hover{
+  cursor: inherit !important;
+}
+
+/**
+ * Buttons -- end
+ */
+
 .roundInputField{
   border-radius: 20px;
   padding: 0 10px;
   border: solid 2px #a6b0bf;
-}
-
-.boderButton:hover {
-  background-color: rgba(0, 88, 255, 1);
-  color: white;
 }
 
 .itemInput, .skillInput {
@@ -246,51 +307,7 @@ mat-tab-label{
   height: 100px;
 }
 
-.button:hover {
-  cursor: pointer;
-}
 
-.roundButton {
-  border-radius: 100px;
-}
-
-.smallButton:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.smallButton {
-  background-color: rgba(0, 0, 0, 0);
-  border-radius: 50px;
-  border: solid 2px #a6b0bf;
-  transition: 0.1s;
-  width: 30px;
-  padding: 3px;
-}
-
-.itemDeleteButton{
-  margin: -5px 10px 0 -25px;
-  width: 15px;
-  transform: rotate(45deg);
-}
-
-.itemDeleteButton:hover{
-  cursor: pointer;
-}
-
-.itemInputButton:hover{
-  cursor: inherit !important;
-}
-
-.itemInputButton{
-  padding: 0 25px 0 10px;
-  border-radius: 100px;
-  border: none;
-  background-color: #0058FF;
-  color: #fff;
-  margin: 2px 0 2px 5px !important;
-  width: auto;
-  display: inline-block;
-}
 
 .itemInputButton p {
   padding-left: 8px !important;
@@ -726,5 +743,3 @@ body::-webkit-scrollbar-thumb {
     padding: 0 !important;
   }
 }
-
-

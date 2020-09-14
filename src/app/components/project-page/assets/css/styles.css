@@ -311,7 +311,7 @@ p {
   margin: 2px 10px;
 }
 
-.SaveProjectButton {
+.div-save-discard {
   display: inline-block;
   width: 10%;
 }
@@ -330,19 +330,8 @@ p {
   min-height: 80px;
 }
 
+
 .saveProject {
-  margin: 5px;
-  background-color: #dcdcdc;
-  border: none;
-  border-radius: 5px;
-  padding: 6px;
-}
-
-.saveProject:hover {
-  background-color: #eaeaea;
-}
-
-.discardProject {
   margin: 5px;
   padding: 5px;
 }

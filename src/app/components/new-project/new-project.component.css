@@ -25,6 +25,7 @@
   margin: 0;
   padding: 0;
   justify-content: end;
+  float: right;
 }
 
 .saving-project {
@@ -192,5 +193,3 @@
 .mat-form-field-inputs {
   width: 100%;
 }
-
-

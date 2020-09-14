@@ -2,7 +2,7 @@
   <h6 *ngIf="headline">{{ headline }}</h6>
   <li *ngFor="let item of itemsList">
     <input class="itemInputButton" type="button" [value]="item">
-    <img *ngIf="show" class="itemDeleteButton" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="delete"
+    <img *ngIf="show" class="btn-item-delete" src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="delete"
          (click)="deleteItemElement($event)">
   </li>
   <div *ngIf="show" class="editTags">
@@ -13,7 +13,7 @@
            (keydown.space)="editToggle(); saveItem(); sendToParent()" class="itemInput" type="text"
            [placeholder]="placeholder" #myinput> {{ myinput.focus() }}
     <img [ngClass]="edit?'hideBtnTechsdome':'showBtnTechsdome'"
-         class="createItemButton boderButton smallButton button transition02s" (click)="editToggle(); letFocus()"
+         class="createItemButton boderButton btn-small button transition02s" (click)="editToggle(); letFocus()"
          src="https://pluspng.com/img-png/free-png-plus-sign-plus-icon-512.png" alt="edit text">
     <br>
   </div>
