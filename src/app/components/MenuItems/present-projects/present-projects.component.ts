@@ -83,21 +83,6 @@ export class PresentProjectsComponent implements OnInit {
 
   }
 
-  checkTarget(){
-    let offset = 50;
-    this.canvas.nativeElement.addEventListener('mousemove', (e)=>{
-      this.projectBubble.forEach(element => {
-        if(e.x - offset > (element.getX() - element.getWidth()) &&
-          e.x - offset < (element.getX() + element.getWidth()) &&
-          e.y - offset > (element.getY() - element.getWidth()) &&
-          e.y - offset < (element.getY() + element.getWidth())){  
-            this.canvas.nativeElement.style.cursor="pointer";
-        }
-        else this.canvas.nativeElement.style.cursor="default";
-      });
-    });
-  }
-
 
   resize(canvas) {
     this.canvas.nativeElement.width  = window.innerWidth*2;
@@ -145,8 +130,6 @@ export class PresentProjectsComponent implements OnInit {
       this.resize(this.canvas);
     });
     this.resize(this.canvas);
-
-    this.checkTarget();
 
     this.authService.getCurrentUser().subscribe(user => {
       this.authService.afs.collection('users').doc(user.uid)
