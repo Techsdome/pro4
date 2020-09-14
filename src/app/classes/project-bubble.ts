@@ -30,7 +30,7 @@ export class ProjectBubble {
     htmlRendererMembers(){
         let innerHTML = "";
         this.postOject.projectMembersPhotoURL.forEach((element,i) => {
-            innerHTML += `<img class="members_img" src="${this.postOject.projectMembersPhotoURL[i]}" style="height:${this.width/3}px;
+            innerHTML += `<img class="members_img" id="${this.postOject.projectMembers[i]}" src="${this.postOject.projectMembersPhotoURL[i]}" style="height:${this.width/3}px;
              width:${this.width/3}px; 
              left:${this.membersPositions[i][0]}px; 
              top:${this.membersPositions[i][1]}px"/>`
