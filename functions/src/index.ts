@@ -11,6 +11,21 @@ import * as admin from "firebase-admin";
 
 admin.initializeApp(functions.config().firebase);
 
+exports.createUser = functions.firestore
+  .document('mainFeed/allPosts/post/{userId}')
+  .onCreate((snap, context) => {
+    // Get an object representing the document
+    // e.g. {'name': 'Marie', 'age': 66}
+    const newValue = snap.data();
+
+    // access a particular field as you would any JS property
+    // @ts-ignore
+    const name = newValue.displayName;
+
+    console.log(newValue + ' ' + name);
+    // perform desired operations ...
+  });
+
 
 exports.updateIndex = functions.firestore
   .document('users/{userId}')
