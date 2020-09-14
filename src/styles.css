@@ -424,6 +424,10 @@ ul > * {
   display: flex;
 }
 
+.main_bubble_container{
+  justify-items: center;
+}
+
 .members_img{
   border:solid 2px #abc9ff;
 }

@@ -18,7 +18,7 @@ export class ProjectBubble {
                         [-(this.width/3-20),-(this.width/3-20)]]
 
     htmlRenderer(){
-        return `<div class="main_bubble_container" id=${this.postOject.id} style="height:${this.width}px; width:${this.width}px;" >
+        return `<div class="main_bubble_container" id=${this.postOject.postId} style="height:${this.width}px; width:${this.width}px;" >
                     <div class="main_bubble_image_container">
                         <img class="main_bubble_img" src=${this.postOject.projectBanner} alt="altext"/>
                     </div>
