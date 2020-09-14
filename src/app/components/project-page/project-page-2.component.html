@@ -158,12 +158,11 @@
                 <app-uploader (childMessage)="getImagesFiles($event)" class="uploader"></app-uploader>
               </div>
             </div>
-            <div class="col-4 SaveProjectButton text-right align-items-end">
-
-              <button *ngIf="editMode" class="discardProject boderButton align-self-end" (click)="discardChanges()">
+            <div class="col-4 div-save-discard text-right align-items-end">
+              <button *ngIf="editMode" class="btn-discard align-self-end" (click)="discardChanges()">
                 Discard Changes
               </button>
-              <button *ngIf="editMode" class="saveProject  align-self-end" (click)="saveChanges()"> Save
+              <button *ngIf="editMode" class="saveProject boderButton align-self-end" (click)="saveChanges()"> Save
                 Changes
               </button>
               <div class="saving-project" *ngIf="loading">

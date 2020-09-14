@@ -23,7 +23,9 @@
   fill: #721c24;
 }
 
-.create-button {
+.btn-save-discard {
+  margin: 0;
+  padding: 0;
+  justify-content: end;
   float: right;
-  margin: 25px 0 0 0;
 }

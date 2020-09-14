@@ -47,7 +47,7 @@ export class AddTagComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.htmlItemsElements = (document.getElementsByClassName('itemDeleteButton') as HTMLCollection);
+    this.htmlItemsElements = (document.getElementsByClassName('btn-item-delete') as HTMLCollection);
     this.authService.getCurrentUser().subscribe(user => {
       this.user = user;
     });
