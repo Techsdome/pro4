@@ -30,8 +30,6 @@ export class UserDataComponent implements OnInit, OnDestroy {
   private sub: any;
   searchedUserId;
 
-  @Input() profile_id_meber: any;   
-
   constructor(private dataService: DataServiceService,
               private authService: AuthService,
               private route: ActivatedRoute,
@@ -84,15 +82,6 @@ export class UserDataComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
       this.searchedUserId = params.user;
-
-      console.log
-      //todoo hier id von member einsetzen
-      
-      /*if(typeof this.profile_id_meber !== "undefined"){
-        this.searchedUserId = this.profile_id_meber;
-      }
-      console.log(this.searchedUserId)
-      */
       this.authService.afs.collection('users').doc(this.searchedUserId).valueChanges().subscribe((val: any) => {
         console.log(val);
         this.job = val.job;

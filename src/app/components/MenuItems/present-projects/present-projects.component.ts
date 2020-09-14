@@ -54,27 +54,33 @@ export class PresentProjectsComponent implements OnInit {
     });
 
     bubble_container.innerHTML = innerHTML_bubble;
-    this.openContributer();
+    this.contributerEventListener();
+    this.projectsEventListener();
   }
 
-  openContributer(){
+  contributerEventListener(){
     const members_img = Array.from(document.getElementsByClassName('members_img'));
       for (const item of members_img) {
       const item_cast = <HTMLElement> item;
       item_cast.addEventListener('click',()=>{
-        this.router.navigate(['/app-user-profile/' + item_cast.id], { state: { profile_id_meber: item_cast.id } });
+        this.router.navigate(['/app-user-profile/' + item_cast.id]);
+        //openPost.componentInstance.type = type;
+      });
+    }
+  }
+
+  projectsEventListener(){
+    const main_bubble_image_container = Array.from(document.getElementsByClassName('main_bubble_image_container'));
+      for (const item of main_bubble_image_container) {
+      const item_cast = <HTMLElement> item;
+      item_cast.addEventListener('click',()=>{
+        this.router.navigate(['/project-page/' + item_cast.id]);
         //openPost.componentInstance.type = type;
       });
     }
   }
 
   ngOnInit(): void {
-    /*
-    [routerLink]="['/project-page', allPostsObject.postId]"
-[state]="{data: allPostsObject.postId}"
-
-    */
-
     this.ctx = this.canvas.nativeElement.getContext('2d');
 
     this.authService.getCurrentUser().subscribe(user => {
