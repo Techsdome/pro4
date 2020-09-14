@@ -49,7 +49,6 @@ export class PresentProjectsComponent implements OnInit {
 
     this.projectBubble.forEach(element => {
       innerHTML_bubble += element.htmlRenderer();
-      console.log(innerHTML_bubble);
     });
 
     bubble_container.innerHTML = innerHTML_bubble;
@@ -166,19 +165,8 @@ export class PresentProjectsComponent implements OnInit {
                       projectBanner: posts.projectBanner,
                       projectMembers: posts.projectMembers
                     });
-                    let randomX = (Math.random()*window.innerWidth) + window.innerWidth/2;
-                    let randomY = (Math.random()*window.innerHeight) + window.innerHeight/2;        
-                    
-                    let bubble = new ProjectBubble(this.ctx,
-                      randomX,
-                      randomY,
-                      posts.projectName,
-                      posts.projectBanner,
-                      posts.postId,
-                      this.authService
-                      );
-                    bubble.setTags(posts.projectCategories);
-                    bubble.setMembers(posts.projectMembers);
+
+                    let bubble = new ProjectBubble(this.ctx, posts);
                     this.projectBubble.push(bubble);
                     this.createProjectBubbles();
                   }

@@ -408,7 +408,11 @@ ul > * {
 }
 
 .members_img{
-  background-color: aqua;
+  border:solid 2px #abc9ff;
+}
+
+.members_img{
+  background-color: grey;
   border-radius: 100px;
 }
 
