@@ -2,7 +2,7 @@
 <div id="all-posts-container">
   <app-profile-menu (activeMenuItemChange)="changeMenuItem($event)" [activeMenuItem]="this.activeMenu" (activeFilterChange)="changeFilterType($event)"></app-profile-menu>
 
-  <app-user-data [searchedUser]="userObject"></app-user-data>
+  <app-user-data [searchedUser]="userObject" ></app-user-data>
 
   <mat-divider class="userData-divider"></mat-divider>
 

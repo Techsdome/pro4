@@ -1,6 +1,5 @@
 import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import {DataServiceService} from '../../shared/services/data-service.service';
-import {Item} from '../../models/Item';
 import {User} from '../../shared/services/user';
 import {AuthService} from '../../shared/services/auth.service';
 import {ActivatedRoute} from '@angular/router';
@@ -13,7 +12,6 @@ import {AngularFirestore} from 'angularfire2/firestore';
   styleUrls: ['./user-data.component.css']
 })
 export class UserDataComponent implements OnInit, OnDestroy {
-  items: Item[];
   user: User;
   job: string;
   public description: string;
@@ -54,21 +52,6 @@ export class UserDataComponent implements OnInit, OnDestroy {
     this.editJob = !this.editJob;
   }
 
-  getExtendedData(item) {
-    for (const it in item) {
-      if (this.user.uid === item[it].uid) {
-        this.job = item[it].job;
-        this.description = item[it].description;
-        this.skills = item[it].skills;
-        this.firstname = item[it].firstname;
-        this.lastname = item[it].lastname;
-        this.photoURL = item[it].photoURL;
-        this.displayName = item[it].displayName;
-        this.email = item[it].email;
-      }
-    }
-  }
-
   saveDataJob() {
     if (this.editJob) {
         this.editJob = !this.editJob;
@@ -99,23 +82,15 @@ export class UserDataComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
       this.searchedUserId = params.user;
-
-      this.authService.afs.collection('users').doc(this.searchedUserId).valueChanges().subscribe((val) => {
-        // @ts-ignore
+      this.authService.afs.collection('users').doc(this.searchedUserId).valueChanges().subscribe((val: any) => {
+        console.log(val);
         this.job = val.job;
-        // @ts-ignore
         this.description = val.description;
-        // @ts-ignore
         this.skills = val.skills;
-        // @ts-ignore
         this.firstname = val.firstname;
-        // @ts-ignore
         this.lastname = val.lastname;
-        // @ts-ignore
         this.photoURL = val.photoURL;
-        // @ts-ignore
         this.displayName = val.displayName;
-        // @ts-ignore
         this.email = val.email;
       });
     });
@@ -130,11 +105,6 @@ export class UserDataComponent implements OnInit, OnDestroy {
       if (this.searchedUser) {
         this.user = this.searchedUser;
       }
-    });
-
-    this.dataService.getItems().subscribe(items => {
-      this.items = items;
-      this.getExtendedData(items);
     });
   }
 

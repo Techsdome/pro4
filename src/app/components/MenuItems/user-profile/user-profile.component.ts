@@ -20,6 +20,7 @@ export class UserProfileComponent implements OnInit {
   postId: string;
   private sub: any;
   searchedUserId;
+  profile_id_meber = history.state.profile_id_meber;
 
   // filtering
   activeMenu: string;
@@ -54,7 +55,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-   ngOnInit() {
+   ngOnInit() {    
     this.activeMenu = '';
     this.activeFilter = 'recent';
     this.posts = [];
