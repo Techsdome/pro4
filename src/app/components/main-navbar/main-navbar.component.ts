@@ -67,7 +67,6 @@ export class MainNavbarComponent implements OnInit {
     this.authService.afAuth.authState.subscribe(user => {
       if (user) {
         this.user = user;
-        this.photoURL = user.photoURL;
         this.userId = user.uid;
         this.presence$ = this.presence.getPresence(this.userId);
 
@@ -75,6 +74,7 @@ export class MainNavbarComponent implements OnInit {
           .get().toPromise().then(
           doc => {
             if (doc.exists) {
+              this.photoURL = doc.data().photoURL;
               this.afs.collection('users').doc(this.user.uid).collection('viewed').get().toPromise().then(sub => {
                 if (sub.docs.length > 0) {
                   this.afs.collection(`users/${this.user.uid}/viewed`, ref => ref.orderBy('viewedTime'))

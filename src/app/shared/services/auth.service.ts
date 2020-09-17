@@ -4,6 +4,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import * as firebase from 'firebase';
+import {AngularFireStorage} from 'angularfire2/storage';
 
 
 @Injectable({
@@ -17,7 +18,8 @@ export class AuthService {
     public afs: AngularFirestore,     // Inject Firestore service
     public afAuth: AngularFireAuth,   // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone             // NgZone service to remove outside scope warning
+    public ngZone: NgZone,             // NgZone service to remove outside scope warning
+    private storage: AngularFireStorage
   ) {
 
     /* Saving user data in localstorage when
@@ -32,7 +34,6 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user'));
       }
     });
-
     this.setMaxUser();
   }
 
@@ -41,6 +42,7 @@ export class AuthService {
   public firstname;
   public lastname;
   public online;
+  private defaultPhotoURL;
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
@@ -161,22 +163,25 @@ export class AuthService {
       merge: true
     }).then(r => { });
 
-    const userData: any = {
-      countId: ++this.userCount,
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName ? user.displayName : this.firstname + ' ' + this.lastname,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-      job: user.job ? user.job : 'Project starter',
-      firstname: this.firstname ? this.firstname : 'First Name',
-      lastname: this.lastname ? this.lastname : 'Last Name'
-    };
+    this.storage.ref('Users/Default_ProfilePicture/default_pic.png').getDownloadURL().toPromise().then(url => {
+      this.defaultPhotoURL = url;
 
-    userRef.set(userData, {
-      merge: true
-    }).then(r => {});
+      const userData: any = {
+        countId: ++this.userCount,
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName ? user.displayName : this.firstname + ' ' + this.lastname,
+        photoURL: user.photoURL ? user.photoURL : this.defaultPhotoURL,
+        emailVerified: user.emailVerified,
+        job: user.job ? user.job : 'Project starter',
+        firstname: this.firstname ? this.firstname : 'First Name',
+        lastname: this.lastname ? this.lastname : 'Last Name'
+      };
 
+      userRef.set(userData, {
+        merge: true
+      }).then(r => {});
+    });
   }
 
   // Sign out
