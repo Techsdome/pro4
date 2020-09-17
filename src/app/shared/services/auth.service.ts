@@ -3,7 +3,7 @@ import {auth} from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
 
 @Injectable({
@@ -32,9 +32,11 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user'));
       }
     });
+
+    this.setMaxUser();
   }
 
-  private static countUsers = 0;
+  private userCount: number;
   public userData: any; // Save logged in user data
   public firstname;
   public lastname;
@@ -72,7 +74,7 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((result) => {
       /* Call the SendVerificaitonMail() function when new user sign
       up and returns promise */
-      this.SendVerificationMail();
+      this.SendVerificationMail().then(r => {});
       this.SetUserData(result.user);
     }).catch((error) => {
       window.alert(error.message);
@@ -148,15 +150,19 @@ export class AuthService {
 
 
   SetUserData(user) {
-    const countUsers = firebase.firestore.FieldValue.increment(1);
-
     const countRef: AngularFirestoreDocument<any> = this.afs.doc(`users/userCount`);
-    const countData: any = {
-      numberUsers: countUsers
-    };
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+
+    const countData: any = {
+      numberUsers: firebase.firestore.FieldValue.increment(1)
+    };
+
+    countRef.set(countData, {
+      merge: true
+    }).then(r => { });
+
     const userData: any = {
-      countId: countUsers,
+      countId: ++this.userCount,
       uid: user.uid,
       email: user.email,
       displayName: user.displayName ? user.displayName : this.firstname + ' ' + this.lastname,
@@ -167,13 +173,10 @@ export class AuthService {
       lastname: this.lastname ? this.lastname : 'Last Name'
     };
 
-    countRef.set(countData, {
+    userRef.set(userData, {
       merge: true
     }).then(r => {});
 
-    return userRef.set(userData, {
-      merge: true
-    });
   }
 
   // Sign out
@@ -189,5 +192,14 @@ export class AuthService {
     const splitName = currentUser.displayName.split(' ');
     this.firstname = splitName[0];
     this.lastname = splitName[1];
+  }
+
+  setMaxUser() {
+    this.afs.collection('users/').doc('userCount').get().toPromise().then(
+      doc => {
+        if (doc.exists) {
+          this.userCount = doc.data().numberUsers;
+        }
+      });
   }
 }
