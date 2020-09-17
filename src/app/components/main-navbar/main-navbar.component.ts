@@ -71,7 +71,7 @@ export class MainNavbarComponent implements OnInit {
         this.userId = user.uid;
         this.presence$ = this.presence.getPresence(this.userId);
 
-  /*      this.afs.collection('users').doc(this.user.uid)
+        this.afs.collection('users').doc(this.user.uid)
           .get().toPromise().then(
           doc => {
             if (doc.exists) {
@@ -97,28 +97,28 @@ export class MainNavbarComponent implements OnInit {
                             this.notificationPosts.push(post.payload.doc.data());
                             this.notificationIds.push(post.payload.doc.data().postId);
                           }
-                          /!*       this.viewed.forEach(a => {
+                          /*       this.viewed.forEach(a => {
                                    if (post.payload.doc.data().postId !== a.postId) {
                                      if (!this.notificationIds.includes(post.payload.doc.data().postId)) {
                                        this.notificationPosts.push(post.payload.doc.data());
                                        this.notificationIds.push(post.payload.doc.data().postId);
                                      }
                                    }
-                                 });*!/
+                                 });*/
                         });
                       }
                     });
                   });
                 } else {
-                  /!*
+                  /*
                   * TODO: set view notification limit 3
                   *
-                  * *!/
+                  * */
                   console.log('no collection');
                 }
               });
             } // End if doc
-          });*/
+          });
       } // End if user
     });
   }
