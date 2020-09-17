@@ -24,8 +24,36 @@
     {{ presence.status }}
   </div>-->
 
-  <div id="round_right"></div>
-  <div id="settingsButton" class="dropdown text-white">
+  <div class="btn-group notification">
+    <button id="notificationDropdown" type="button" matBadge="{{this.notificationPosts.length}}" matBadgeColor="warn"
+            class="btn m-0 shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-bell fa-lg text-white"></i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
+      <div class="dropdown-header">
+        <div style="display: inline-flex">Notifications</div>
+        <button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="dropdown-divider"></div>
+      <div *ngFor="let post of this.notificationPosts" class="dropdown-item d-inline-flex">
+        <mat-card style="width: 100%">
+          <mat-card-title>{{ post.postType.toUpperCase() }}{{post.postType === 'project' ? ' - ' + post.projectName : ''}}</mat-card-title>
+          <mat-card-content>{{ post.post }}</mat-card-content>
+        </mat-card>
+        <button (click)="removeOneNotification($event)" type="button" class="close">
+          <i id="{{ post.postId }}" class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="dropdown-divider"></div>
+      <div class="dropdown-item">
+        <p (click)="removeAllNotification()">mark all as read</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-group settings">
     <button type="button" class="btn m-0 shadow-none" id="dropdownMenu" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
       <i class="fa fa-cog fa-lg text-white"></i>

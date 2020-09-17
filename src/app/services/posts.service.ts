@@ -22,7 +22,7 @@ export class PostsService {
         if (doc.data().postType === filter) {
           const postId = doc.data().postId;
           const date = doc.data().date;
-          const timestamp = ((doc.data().timeStamp) as unknown as Timestamp).toDate() ;
+          const timestamp = ((doc.data().timeStamp) as unknown as Timestamp).toDate();
           let theuserid = doc.data().uid;
           let username = doc.data().displayName;
           let photoURL = '';
@@ -71,7 +71,7 @@ export class PostsService {
                 commentName: '',
                 comment: ''
               }
-              ]
+            ]
           };
 
           if (userid) {
@@ -85,7 +85,7 @@ export class PostsService {
       } else {
         const postId = doc.data().postId;
         const date = doc.data().date;
-        const timestamp = ((doc.data().timeStamp) as unknown as Timestamp).toDate() ;
+        const timestamp = ((doc.data().timeStamp) as unknown as Timestamp).toDate();
         let theuserid = doc.data().uid;
         let username = doc.data().displayName;
         let photoURL = '';
@@ -145,5 +145,21 @@ export class PostsService {
       }
     }
     return posts;
+  }
+
+  setViewed(postID: string, creatorID: string) {
+    firebase.firestore().collection('users').get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().hasOwnProperty('uid')) {
+          if (doc.data().uid === creatorID) {
+            firebase.firestore().collection(`users`).doc(doc.data().uid).collection('viewed').doc(postID).set({
+              postId: postID,
+              viewedTime: firebase.firestore.Timestamp.now()
+            }, {merge: true}).then(r => {
+            });
+          }
+        }
+      });
+    });
   }
 }

@@ -3,6 +3,8 @@ export interface Posts {
     typeImage: string;
     postDate: Date;
     postText: string;
+    post: string;
+    postType: string;
     postId: string;
     displayName: string;
     projectName: string;

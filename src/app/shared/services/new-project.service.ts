@@ -6,6 +6,7 @@ import { Project } from '../../models/Project';
 import * as firebase from 'firebase';
 import FieldValue = firebase.firestore.FieldValue;
 import { AngularFireStorage } from 'angularfire2/storage';
+import {PostsService} from "../../services/posts.service";
 
 @Injectable({
   providedIn: 'root'   // available to dependency injection, register to a provider
@@ -17,8 +18,7 @@ export class NewProjectService {
   bannerURL: string;
   imageURL: string[];
 
-  constructor(public afs: AngularFirestore, public authService: AuthService, private storage: AngularFireStorage) {
-    // this.projectItem = this.afs.collection('project').valueChanges();
+  constructor(public afs: AngularFirestore, public authService: AuthService, private storage: AngularFireStorage, private postsService: PostsService) {
   }
 
   getProjectID() {
@@ -48,6 +48,8 @@ export class NewProjectService {
     } else {
       tempPhotoUrl = this.authService.afAuth.auth.currentUser.photoURL;
     }
+
+    this.postsService.setViewed(this.projectID, id);
 
     this.authService.getCurrentUser().subscribe((user) => {
       myuser = user;

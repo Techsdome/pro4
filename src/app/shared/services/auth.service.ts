@@ -3,6 +3,7 @@ import {auth} from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
+import * as firebase from "firebase";
 
 
 @Injectable({
@@ -10,11 +11,7 @@ import {Router} from '@angular/router';
 })
 
 export class AuthService {
-  public userData: any; // Save logged in user data
-  public firstname;
-  public lastname;
-  public online;
-  private countUsers = 0;
+
 
   constructor(
     public afs: AngularFirestore,     // Inject Firestore service
@@ -22,6 +19,7 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone             // NgZone service to remove outside scope warning
   ) {
+
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
@@ -35,6 +33,19 @@ export class AuthService {
       }
     });
   }
+
+  private static countUsers = 0;
+  public userData: any; // Save logged in user data
+  public firstname;
+  public lastname;
+  public online;
+
+  // Returns true when user is looged in and email is verified
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return (user !== null && user.emailVerified !== false);
+  }
+
 
   public getCurrentUser() {
     return this.afAuth.authState;
@@ -68,12 +79,6 @@ export class AuthService {
     });
   }
 
-  setSocialNames(name) {
-    const splitName = name.split(' ');
-    this.firstname = splitName[0];
-    this.lastname = splitName[1];
-  }
-
 
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
@@ -105,42 +110,10 @@ export class AuthService {
       });
   }
 
-  // Returns true when user is looged in and email is verified
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
-  }
-
-  /*
-      get isLoggedIn(): boolean {
-          const user = JSON.parse(localStorage.getItem('user'));
-          return (user !== null && user.emailVerified !== false);
-      }
-  */
-
-  /*
-// Sign in with Google
-GoogleAuth() {
-  const google = new auth.GoogleAuthProvider();
-  this.AuthLogin(google).then(() => {
-      this.addExtraFields();
-  });
-}*/
-
 
   GoogleAuth() {
     const google = new auth.GoogleAuthProvider();
     this.AuthLogin(google).then(() => {
-    });
-  }
-
-  addExtraFields() {
-    this.afs.collection('users').doc(this.userData.uid).update({
-      job: 'My job title',
-      // description: 'Tell something about yourself..',
-      // skills: [],
-      firstname: this.firstname ? this.firstname : 'First Name',
-      lastname: this.lastname ? this.lastname : 'Last Name'
     });
   }
 
@@ -158,7 +131,6 @@ GoogleAuth() {
       .then((result) => {
         const usernew = result.additionalUserInfo.isNewUser;
         if (usernew === true) {
-          this.countUsers ++;
           this.splitName(result.user);
           this.SetUserData(result.user);
         }
@@ -166,7 +138,7 @@ GoogleAuth() {
           this.router.navigate(['dashboard']);
         });
       }).catch((error) => {
-        window.alert(error);
+        console.log(error);
       });
   }
 
@@ -176,22 +148,21 @@ GoogleAuth() {
 
 
   SetUserData(user) {
-    this.countUsers++;
+    const countUsers = firebase.firestore.FieldValue.increment(1);
+
     const countRef: AngularFirestoreDocument<any> = this.afs.doc(`users/userCount`);
     const countData: any = {
-      numberUsers: this.countUsers
+      numberUsers: countUsers
     };
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: any = {
-      countId: this.countUsers,
+      countId: countUsers,
       uid: user.uid,
       email: user.email,
       displayName: user.displayName ? user.displayName : this.firstname + ' ' + this.lastname,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
       job: user.job ? user.job : 'Project starter',
-      // description: user.description ? user.description : 'Tell something about yourself..',
-      // skills: user.skills ? user.skills : [],
       firstname: this.firstname ? this.firstname : 'First Name',
       lastname: this.lastname ? this.lastname : 'Last Name'
     };

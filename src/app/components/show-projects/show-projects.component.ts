@@ -4,6 +4,8 @@ import {Posts} from '../../shared/services/posts';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {ReactionsService} from '../../services/reactions.service';
 import * as _ from 'lodash';
+import {ToastrService} from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-show-projects',
@@ -30,7 +32,7 @@ export class ShowProjectsComponent implements OnInit {
 
   constructor(private authservice: AuthService,
               private afs: AngularFirestore,
-              private reactionSvc: ReactionsService
+              private reactionSvc: ReactionsService,
              ) { }
 
   ngOnInit(): void {
@@ -182,5 +184,9 @@ export class ShowProjectsComponent implements OnInit {
     } else {
         this.reactionSvc.updateReactions(this.allPostsObject.postId, val);
     }
+  }
+
+  showNotifications() {
+
   }
 }

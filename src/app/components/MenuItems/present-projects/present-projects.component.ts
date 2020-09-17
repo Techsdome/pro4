@@ -3,9 +3,8 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {User} from '../../../shared/services/user';
 import {AuthService} from '../../../shared/services/auth.service';
-import { ProjectBubble } from '../../../classes/project-bubble'
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import {faThumbsDown} from '@fortawesome/free-solid-svg-icons';
+import {ProjectBubble} from '../../../classes/project-bubble';
 
 @Component({
   selector: 'app-present-projects',
@@ -16,10 +15,10 @@ import { Router } from '@angular/router';
 
 export class PresentProjectsComponent implements OnInit {
 
-  @ViewChild('canvas', { static: true }) 
+  @ViewChild('canvas', {static: true})
   canvas: ElementRef<HTMLCanvasElement>;
 
-  @ViewChild('regler', { static: true }) 
+  @ViewChild('regler', {static: true})
   regler: ElementRef<HTMLInputElement>;
 
   private ctx: CanvasRenderingContext2D;
@@ -29,59 +28,107 @@ export class PresentProjectsComponent implements OnInit {
   loading = true;
   projectBubble: ProjectBubble[] = [];
   that = this;
-  zoomValue:number = 0;
-  canvasIsClicked: boolean = false;
-  mouseClickedX: number = 0;
-  mouseClickedY: number = 0;
-  mouseMoveX: number = 0;
-  mouseMoveY: number = 0;
-  canvasMarginLeft: number = 0;
-  canvasMarginTop: number = 0;
-  
+  zoomValue = 0;
+  canvasIsClicked = false;
+  mouseClickedX = 0;
+  mouseClickedY = 0;
+  mouseMoveX = 0;
+  mouseMoveY = 0;
+  canvasMarginLeft = 0;
+  canvasMarginTop = 0;
+
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
-              public authService: AuthService,
-              private router: Router) {
+              public authService: AuthService) {
   }
 
 
-  createProjectBubbles(){
-    let innerHTML_bubble = " ";
-    let bubble_container = document.getElementById('bubble_container') as HTMLInputElement;
+  createProjectBubbles() {
+    let innerHTML_bubble = ' ';
+    const bubble_container = document.getElementById('bubble_container') as HTMLInputElement;
 
     this.projectBubble.forEach(element => {
       innerHTML_bubble += element.htmlRenderer();
     });
 
     bubble_container.innerHTML = innerHTML_bubble;
-    this.contributerEventListener();
-    this.projectsEventListener();
-  }
 
-  contributerEventListener(){
+    const main_bubble_container = Array.from(document.getElementsByClassName('main_bubble_container'));
+    for (const item of main_bubble_container) {
+      const item_cast = item as HTMLElement;
+      item_cast.style.position = 'relative';
+    }
+
     const members_img = Array.from(document.getElementsByClassName('members_img'));
-      for (const item of members_img) {
-      const item_cast = <HTMLElement> item;
-      item_cast.addEventListener('click',()=>{
-        this.router.navigate(['/app-user-profile/' + item_cast.id]);
-        //openPost.componentInstance.type = type;
+    for (const item of members_img) {
+      const item_cast = item as HTMLElement;
+      item_cast.style.position = 'absolute';
+      item_cast.addEventListener('mouseover', () => {
+        item_cast.style.cursor = 'pointer';
       });
     }
+
+    const main_bubble_img = Array.from(document.getElementsByClassName('main_bubble_img'));
+    for (const item of main_bubble_img) {
+      const item_cast = item as HTMLElement;
+      item_cast.addEventListener('mouseover', () => {
+        item_cast.style.transform = 'scale(1.1)';
+        item_cast.style.cursor = 'pointer';
+      });
+      item_cast.addEventListener('mouseleave', () => {
+        item_cast.style.transform = 'scale(1.0)';
+      });
+      item_cast.style.transition = '0.2s';
+    }
+
   }
 
-  projectsEventListener(){
-    const main_bubble_image_container = Array.from(document.getElementsByClassName('main_bubble_image_container'));
-      for (const item of main_bubble_image_container) {
-      const item_cast = <HTMLElement> item;
-      item_cast.addEventListener('click',()=>{
-        this.router.navigate(['/project-page/' + item_cast.id]);
-        //openPost.componentInstance.type = type;
-      });
-    }
+
+  resize(canvas) {
+    this.canvas.nativeElement.width = window.innerWidth * 2;
+    this.canvas.nativeElement.height = window.innerHeight * 4;
+    this.createProjectBubbles();
   }
 
   ngOnInit(): void {
+
+    this.regler.nativeElement.addEventListener('input', () => {
+      this.zoomValue = Number(this.regler.nativeElement.value);
+      this.projectBubble.forEach(element => {
+        this.canvas.nativeElement.style.transform = 'scale(' + this.zoomValue / 100 + ')';
+      });
+    });
+
+    window.addEventListener('mousedown', (e) => {
+      if (this.regler.nativeElement != e.target) {
+        this.canvasIsClicked = true;
+        this.mouseClickedX = e.x;
+        this.mouseClickedY = e.y;
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      this.canvasIsClicked = false;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (this.canvasIsClicked) {
+        this.canvas.nativeElement.style.cursor = 'move';
+        this.mouseMoveX = this.mouseClickedX - e.x;
+        this.mouseMoveY = this.mouseClickedY - e.y;
+        this.canvasMarginLeft += -(this.mouseMoveX) / 15;
+        this.canvasMarginTop += -(this.mouseMoveY) / 15;
+        this.canvas.nativeElement.style.marginLeft = this.canvasMarginLeft + 'px';
+        this.canvas.nativeElement.style.marginTop = this.canvasMarginTop + 'px';
+      }
+    });
+
+
     this.ctx = this.canvas.nativeElement.getContext('2d');
+    window.addEventListener('resize', () => {
+      this.resize(this.canvas);
+    });
+    this.resize(this.canvas);
 
     this.authService.getCurrentUser().subscribe(user => {
       this.authService.afs.collection('users').doc(user.uid)
@@ -101,7 +148,7 @@ export class PresentProjectsComponent implements OnInit {
                       projectMembers: posts.projectMembers
                     });
 
-                    let bubble = new ProjectBubble(this.ctx, posts);
+                    const bubble = new ProjectBubble(this.ctx, posts);
                     this.projectBubble.push(bubble);
                     this.createProjectBubbles();
                   }
@@ -111,6 +158,6 @@ export class PresentProjectsComponent implements OnInit {
           }
           this.loading = false;
         });
-    })
+    });
   }
 }

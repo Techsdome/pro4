@@ -11,25 +11,34 @@ import * as admin from "firebase-admin";
 
 admin.initializeApp(functions.config().firebase);
 
-exports.createUser = functions.firestore
+/*exports.createPost = functions.firestore
   .document('mainFeed/allPosts/post/{userId}')
-  .onCreate((snap, context) => {
+  .onUpdate((snap, context) => {
     // Get an object representing the document
-    // e.g. {'name': 'Marie', 'age': 66}
-    const newValue = snap.data();
+    const newValue = snap.after.data();
+    let newPost;
+    if (newValue) {
+      newPost = {
+        postId: newValue.postId,
+        postType: newValue.postType,
+        postText: newValue.post,
+        projectName: newValue.projectName ? newValue.projectName : '',
+        displayName: newValue.displayName,
+        uid: newValue.uid,
+        timestamp: newValue.timeStamp,
+        read: false,
+      };
+    }
+    const db = admin.firestore()
 
-    // access a particular field as you would any JS property
     // @ts-ignore
-    const name = newValue.displayName;
-
-    console.log(newValue + ' ' + name);
-    // perform desired operations ...
-  });
+    return db.collection(`notification`).doc(newPost.postId).collection(newPost.uid).doc(newPost.postType).set(newPost, {merge: true}).then(r => {console.log(r)})
+  });*/
 
 
 exports.updateIndex = functions.firestore
   .document('users/{userId}')
-  .onCreate( (snap, context) => {
+  .onCreate((snap, context) => {
     const userId = snap.id;
     const user = snap.data();
 
@@ -39,22 +48,22 @@ exports.updateIndex = functions.firestore
     const indexedUser = {...user, searchableIndex}
     const db = admin.firestore()
 
-    return db.collection('users').doc(userId).set(indexedUser, { merge: true })
+    return db.collection('users').doc(userId).set(indexedUser, {merge: true})
   })
 
 function createIndex(displayName: string) {
-    const arr = displayName.toLowerCase().split('');
-    const searchableIndex = {}
+  const arr = displayName.toLowerCase().split('');
+  const searchableIndex = {}
 
-    let prevKey = '';
+  let prevKey = '';
 
-    for (const char of arr) {
-      const key = prevKey + char;
-      // @ts-ignore
-      searchableIndex[key] = true
-      prevKey = key
+  for (const char of arr) {
+    const key = prevKey + char;
+    // @ts-ignore
+    searchableIndex[key] = true
+    prevKey = key
   }
-    return searchableIndex
+  return searchableIndex
 }
 
 

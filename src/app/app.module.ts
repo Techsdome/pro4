@@ -71,6 +71,7 @@ import { InfoPageComponent } from './components/MenuItems/info-page/info-page.co
 import { PeoplePageComponent } from './components/MenuItems/people-page/people-page.component';
 import { SuggestedPeopleComponent } from './components/suggested-people/suggested-people.component';
 import { SuggestedProjectComponent } from './components/suggested-project/suggested-project.component';
+import {MatBadgeModule} from "@angular/material/badge";
 
 
 @NgModule({
@@ -120,36 +121,37 @@ import { SuggestedProjectComponent } from './components/suggested-project/sugges
         SuggestedPeopleComponent,
         SuggestedProjectComponent
     ],
-    imports: [
-        MatTabsModule,
-        BrowserModule,
-        AppRoutingModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        CoreModule,
-        SharedModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        AngularFireStorageModule,
-        AngularFireDatabaseModule,
-        NgbModule,
-        FileUploadModule,
-        FontAwesomeModule,
-        QuillModule.forRoot(),
-        ToastrModule.forRoot({
-            preventDuplicates: true,
-        }),
-        ScrollToModule.forRoot(),
-        MatFormFieldModule,
-        MatInputModule,
-        MatAutocompleteModule,
-        MatIconModule,
-        MatCardModule,
-        MatChipsModule,
-        MatDividerModule
-    ],
+  imports: [
+    MatTabsModule,
+    BrowserModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    CoreModule,
+    SharedModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    NgbModule,
+    FileUploadModule,
+    FontAwesomeModule,
+    QuillModule.forRoot(),
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+    }),
+    ScrollToModule.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    MatCardModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatBadgeModule
+  ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
       NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal, { provide: LOCALE_ID, useValue: 'de-AT' }],
     bootstrap: [AppComponent]

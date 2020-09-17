@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {PostsService} from "../../services/posts.service";
 
 
 @Component({
@@ -63,7 +64,7 @@ export class CreatePostNewComponent implements OnInit {
   }
 
   constructor(private dataService: DataServiceService, private authService: AuthService,
-              public form: FormsModule, public activeModal: NgbActiveModal) {
+              public form: FormsModule, public activeModal: NgbActiveModal, private postsService: PostsService) {
   }
 
   ngOnInit(): void {
@@ -137,6 +138,7 @@ export class CreatePostNewComponent implements OnInit {
         tags: this.selectedCategories,
         postType: '' + postType
       }).then(r => {
+        this.postsService.setViewed(docRef.id, this.authService.afAuth.auth.currentUser.uid);
         this.activeModal.close();
       });
     });
