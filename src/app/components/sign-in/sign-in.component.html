@@ -55,7 +55,7 @@
           </div>
         </form>
         <ng-template #register>
-          <form [formGroup]="myForm" class="sign-up-form">
+       <!--   <form [formGroup]="myForm" class="sign-up-form">
             <p class="text-left">Welcome to <br>Techsdome</p>
 
             <div class="row">
@@ -110,7 +110,88 @@
                 </button>
               </div>
             </div>
-          </form>
+          </form>-->
+          <div class="text-white">
+          <mat-horizontal-stepper class="bg-transparent" linear #stepper>
+            <mat-step [stepControl]="firstFormGroup">
+              <form [formGroup]="firstFormGroup" class="sign-up-form-first">
+                <ng-template matStepLabel>Fill out account data</ng-template>
+                <mat-form-field class="form-group col-6">
+                  <input matInput placeholder="First Name" type="text" [(ngModel)]="firstname" name="fName"
+                         formControlName="firstName" required>
+                  <mat-error *ngIf="firstFormGroup.hasError('required', 'firstName')">
+                    Please enter your First Name.
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group col-6">
+                  <input matInput placeholder="Last Name" type="text" [(ngModel)]="lastname" name="lName"
+                         formControlName="lastName">
+                </mat-form-field>
+                <mat-form-field class="form-group col-12">
+                  <input matInput placeholder="Email" type="email" formControlName="email" #userEmail required>
+                  <mat-error *ngIf="firstFormGroup.hasError('required', 'email')">
+                    Please enter your email.
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group col-6">
+                  <input matInput placeholder="Password" type="password" formControlName="password" #userPwd required>
+                  <mat-error *ngIf="firstFormGroup.hasError('required', 'password')">
+                    Please enter your password.
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-group col-6">
+                  <input matInput placeholder="Repeat password" type="password" formControlName="confirmPassword"
+                         [errorStateMatcher]="matcher" required>
+                  <mat-error *ngIf="firstFormGroup.hasError('notSame')">
+                    Passwords do not match.
+                  </mat-error>
+                </mat-form-field>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-register btn-outline-style" (click)="toggleLoginRegister(); stepper.reset()">Close</button>
+                  <button class="btn btn-register btn-outline-style" mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+              <form [formGroup]="secondFormGroup" class="sign-up-form-second">
+                <ng-template matStepLabel>Fill out your personal data</ng-template>
+                <div class="media">
+                  <div class="view overlay align-self-center mr-3 form-group">
+                    <img class="img-fluid large-profile-picture rounded-lg z-depth-1-half" [src]="this.imageSrc ? this.imageSrc : defaultPhotoURL" alt="profilePic">
+                    <div class="mask flex-center rgba-black-strong input-pic-wrapper">
+                      <label class="row" for="picUpload"> <i class="fa fa-images text-white"></i></label>
+                      <input class="row" (click)="fileUpload($event);" type="file" id="picUpload">
+                    </div>
+                  </div>
+                </div>
+                <mat-form-field class="form-group col-6">
+                  <mat-label>Job</mat-label>
+                  <input matInput placeholder="Ex. Developer" formControlName="userJob">
+                </mat-form-field>
+                <mat-form-field class="form-group col-6">
+                  <mat-label>Describe yourself</mat-label>
+                  <textarea matInput placeholder="Ex. It makes me feel..." formControlName="userDescription"></textarea>
+                </mat-form-field>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-register btn-outline-style" (click)="toggleLoginRegister(); stepper.reset()">Close</button>
+                  <button class="btn btn-register btn-outline-style" mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Done</ng-template>
+              <p>You are now done.</p>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-register btn-outline-style" (click)="toggleLoginRegister(); stepper.reset()">Close</button>
+                <button [disabled]="!firstFormGroup.valid" type="button" class="btn btn-login btn-rounded btn-style"
+                        (click)="authService.SignUp(userEmail.value, userPwd.value); authService.setFirstName(firstname); authService.setLastName(lastname);">
+                  Register
+                </button>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+          </div>
         </ng-template>
       </div>
     </div>

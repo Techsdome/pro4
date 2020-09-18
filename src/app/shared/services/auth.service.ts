@@ -42,6 +42,9 @@ export class AuthService {
   public firstname;
   public lastname;
   public online;
+  public job;
+  public description;
+  public profilePicture;
   private defaultPhotoURL;
 
   // Returns true when user is looged in and email is verified
@@ -94,6 +97,18 @@ export class AuthService {
 
   setLastName(lastname) {
     this.lastname = lastname;
+  }
+
+  setDescription(description) {
+    this.description = description
+  }
+
+  setJob(job) {
+    this.job = job;
+  }
+
+  setProfilePicture(file) {
+    this.profilePicture = file;
   }
 
   // Send email verfificaiton when new user sign up
@@ -170,10 +185,11 @@ export class AuthService {
         countId: ++this.userCount,
         uid: user.uid,
         email: user.email,
+        description: this.description ? this.description : '',
         displayName: user.displayName ? user.displayName : this.firstname + ' ' + this.lastname,
-        photoURL: user.photoURL ? user.photoURL : this.defaultPhotoURL,
+        photoURL: this.profilePicture ? this.profilePicture : this.defaultPhotoURL,
         emailVerified: user.emailVerified,
-        job: user.job ? user.job : 'Project starter',
+        job: this.job ? this.job : 'Project starter',
         firstname: this.firstname ? this.firstname : 'First Name',
         lastname: this.lastname ? this.lastname : 'Last Name'
       };
