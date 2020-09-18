@@ -15,7 +15,6 @@ export class SignUpComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('test');
     }
 
 }

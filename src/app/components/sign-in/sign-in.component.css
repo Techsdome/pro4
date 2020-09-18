@@ -16,7 +16,6 @@ body body.page-top {
 .masthead {
   height: 100vh;
   background-color: #222;
-  /*background-image: url('./assets/img/intro-bg.jpg');*/
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -44,8 +43,6 @@ p {
 
 #people_teaser {
   background-color: #222;
-  /*background: url('./assets/img/student.jpg') center no-repeat;*/
-  /*background-size: cover;*/
 }
 
 #bubbles {
@@ -725,3 +722,5 @@ section form {
     transform: translateX(50%);
   }
 }
+
+

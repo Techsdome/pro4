@@ -1,93 +1,39 @@
-<!--<body class="text-center">
-<div class="displayTable">
-  <div class="displayTableCell">
-
-    <div class="authBlock">
-
-      <div class="text-center social-btn">
-        &lt;!&ndash; Continue with Google &ndash;&gt;
-        <div class="form-group">
-          <button type="button" class="btn btn-danger btn-block" (click)="authService.GoogleAuth()">
-            <i class="fa fa-google-plus-g"></i>
-            Continue with Google
-          </button>
-        </div>
-
-        &lt;!&ndash; Continue with Facebook &ndash;&gt;
-        <div class="form-group">
-          <button type="button" class="btn btn-primary btn-block" (click)="authService.FacebookAuth()">
-            <i class="fa fa-facebook"></i>
-            Continue with Facebook
-          </button>
-        </div>
-      </div>
-
-      <div class="or-seperator"><i>or</i></div>
-
-      <h3>Sign Up</h3>
-      <div class="form-group">
-        <input type="text" class="formControl" placeholder="First Name" #firstName required>
-      </div>
-
-      <div class="form-group">
-        <input type="text" class="formControl" placeholder="Last Name" #lastName required>
-      </div>
-
-      <div class="form-group">
-        <input type="email" class="formControl" placeholder="Email Address" #userEmail required>
-      </div>
-
-      <div class="form-group">
-        <input type="password" class="formControl" placeholder="Password" #userPwd required>
-      </div>
-
-      <div class="form-group">
-        <input type="button" class="btn btn-primary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value); authService.setName(firstName.value, lastName.value)">
-      </div>
+<form>
+  <p class="text-left">Welcome to <br>Techsdome</p>
+  <div class="md-form">
+    <input id="input_fN" type="text" class="form-control" #firstName required>
+    <label for="input_fN">First Name</label>
+  </div>
+  <div class="md-form">
+    <input id="input_lN" type="text" class="form-control" #lastName required>
+    <label for="input_lN">Last Name</label>
+  </div>
+  <div class="md-form">
+    <input id="input_email" type="email" class="form-control" #userEmail>
+    <label for="input_email">E-mail</label>
+  </div>
+  <div class="md-form">
+    <input id="input_re_email" type="email" class="form-control" #repeatUserEmail>
+    <label for="input_re_email">Repeat E-mail</label>
+  </div>
+  <div class="md-form">
+    <input id="input_passwd" type="password" class="form-control validate" #userPwd>
+    <label for="input_passwd" data-error="wrong" data-success="right">Password</label>
+  </div>
+  <div class="md-form">
+    <input id="input_re_passwd" type="password" class="form-control validate" #repeatUserPwd>
+    <label for="input_re_passwd" data-error="wrong" data-success="right">Repeat Password</label>
+  </div>
+  <div class="btn-group-justified" role="group" aria-label="Basic example">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-login btn-rounded btn-style"
+              (click)="authService.SignUp(userEmail.value, userPwd.value);">
+        Register
+      </button>
     </div>
-
-    <div class="redirectToLogin">
-      <span>Already have an account? <span class="redirect" routerLink="/sign-in">Log In</span></span>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-register btn-outline-style">Back</button>
     </div>
   </div>
-
-</div>-->
-
-    <form>
-      <p class="text-left">Welcome to <br>Techsdome</p>
-      <div class="md-form">
-        <input id="input_fN" type="text" class="form-control"  #firstName required>
-        <label for="input_fN">First Name</label>
-      </div>
-      <div class="md-form">
-        <input id="input_lN" type="text" class="form-control"  #lastName required>
-        <label for="input_lN">Last Name</label>
-      </div>
-      <div class="md-form">
-        <input id="input_email" type="email" class="form-control" #userEmail>
-        <label for="input_email">E-mail</label>
-      </div>
-      <div class="md-form">
-        <input id="input_re_email" type="email" class="form-control" #repeatUserEmail>
-        <label for="input_re_email">Repeat E-mail</label>
-      </div>
-      <div class="md-form">
-        <input id="input_passwd" type="password" class="form-control validate" #userPwd >
-        <label for="input_passwd" data-error="wrong" data-success="right">Password</label>
-      </div>
-      <div class="md-form">
-        <input id="input_re_passwd" type="password" class="form-control validate" #repeatUserPwd >
-        <label for="input_re_passwd" data-error="wrong" data-success="right">Repeat Password</label>
-      </div>
-      <div class="btn-group-justified" role="group" aria-label="Basic example">
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-login btn-rounded btn-style" (click)="authService.SignUp(userEmail.value, userPwd.value);">
-            Register
-          </button>
-        </div>
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-register btn-outline-style">Back</button>
-        </div>
-      </div>
-    </form>
+</form>
 
