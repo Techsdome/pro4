@@ -3,7 +3,8 @@ import {auth} from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
+import {AngularFireStorage} from 'angularfire2/storage';
 
 
 @Injectable({
@@ -17,7 +18,8 @@ export class AuthService {
     public afs: AngularFirestore,     // Inject Firestore service
     public afAuth: AngularFireAuth,   // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone             // NgZone service to remove outside scope warning
+    public ngZone: NgZone,             // NgZone service to remove outside scope warning
+    private storage: AngularFireStorage
   ) {
 
     /* Saving user data in localstorage when
@@ -32,13 +34,18 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user'));
       }
     });
+    this.setMaxUser();
   }
 
-  private static countUsers = 0;
+  private userCount: number;
   public userData: any; // Save logged in user data
   public firstname;
   public lastname;
   public online;
+  public job;
+  public description;
+  public profilePicture;
+  private defaultPhotoURL;
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
@@ -72,7 +79,7 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((result) => {
       /* Call the SendVerificaitonMail() function when new user sign
       up and returns promise */
-      this.SendVerificationMail();
+      this.SendVerificationMail().then(r => {});
       this.SetUserData(result.user);
     }).catch((error) => {
       window.alert(error.message);
@@ -90,6 +97,18 @@ export class AuthService {
 
   setLastName(lastname) {
     this.lastname = lastname;
+  }
+
+  setDescription(description) {
+    this.description = description
+  }
+
+  setJob(job) {
+    this.job = job;
+  }
+
+  setProfilePicture(file) {
+    this.profilePicture = file;
   }
 
   // Send email verfificaiton when new user sign up
@@ -148,31 +167,36 @@ export class AuthService {
 
 
   SetUserData(user) {
-    const countUsers = firebase.firestore.FieldValue.increment(1);
-
     const countRef: AngularFirestoreDocument<any> = this.afs.doc(`users/userCount`);
-    const countData: any = {
-      numberUsers: countUsers
-    };
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    const userData: any = {
-      countId: countUsers,
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName ? user.displayName : this.firstname + ' ' + this.lastname,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-      job: user.job ? user.job : 'Project starter',
-      firstname: this.firstname ? this.firstname : 'First Name',
-      lastname: this.lastname ? this.lastname : 'Last Name'
+
+    const countData: any = {
+      numberUsers: firebase.firestore.FieldValue.increment(1)
     };
 
     countRef.set(countData, {
       merge: true
-    }).then(r => {});
+    }).then(r => { });
 
-    return userRef.set(userData, {
-      merge: true
+    this.storage.ref('Users/Default_ProfilePicture/default_pic.png').getDownloadURL().toPromise().then(url => {
+      this.defaultPhotoURL = url;
+
+      const userData: any = {
+        countId: ++this.userCount,
+        uid: user.uid,
+        email: user.email,
+        description: this.description ? this.description : '',
+        displayName: user.displayName ? user.displayName : this.firstname + ' ' + this.lastname,
+        photoURL: this.profilePicture ? this.profilePicture : this.defaultPhotoURL,
+        emailVerified: user.emailVerified,
+        job: this.job ? this.job : 'Project starter',
+        firstname: this.firstname ? this.firstname : 'First Name',
+        lastname: this.lastname ? this.lastname : 'Last Name'
+      };
+
+      userRef.set(userData, {
+        merge: true
+      }).then(r => {});
     });
   }
 
@@ -189,5 +213,14 @@ export class AuthService {
     const splitName = currentUser.displayName.split(' ');
     this.firstname = splitName[0];
     this.lastname = splitName[1];
+  }
+
+  setMaxUser() {
+    this.afs.collection('users/').doc('userCount').get().toPromise().then(
+      doc => {
+        if (doc.exists) {
+          this.userCount = doc.data().numberUsers;
+        }
+      });
   }
 }

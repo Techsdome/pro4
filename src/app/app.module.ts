@@ -72,6 +72,8 @@ import { PeoplePageComponent } from './components/MenuItems/people-page/people-p
 import { SuggestedPeopleComponent } from './components/suggested-people/suggested-people.component';
 import { SuggestedProjectComponent } from './components/suggested-project/suggested-project.component';
 import {MatBadgeModule} from "@angular/material/badge";
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -150,7 +152,9 @@ import {MatBadgeModule} from "@angular/material/badge";
     MatCardModule,
     MatChipsModule,
     MatDividerModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatStepperModule,
+    MatButtonModule
   ],
     providers: [AuthService, DataServiceService, UploadTaskComponent, DropzoneDirective,
       NewProjectComponent, DashboardComponent, NgbModule, NgbActiveModal, { provide: LOCALE_ID, useValue: 'de-AT' }],

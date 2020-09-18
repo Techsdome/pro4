@@ -18,16 +18,22 @@ export class PeoplePageComponent implements OnInit {
   allUsers: any[] = [];
   numUsers;
   randUserIndex: number[] = [];
+  numSearchPeople: number;
 
   ngOnInit(): void {
 
     this.afs.doc('users/userCount').get().toPromise().then(doc => {
       if (doc.exists) {
         this.numUsers = doc.data().numberUsers;
+        if (this.numUsers < 3) {
+          this.numSearchPeople = this.numUsers;
+        } else {
+          this.numSearchPeople = 3;
+        }
       }
     }).then(() => {
 
-      while (Object.keys(this.randUserIndex).length < 3) {
+      while (Object.keys(this.randUserIndex).length < this.numSearchPeople) {
         const randomIndex = Math.floor(Math.random() * this.numUsers) + 1;
         if (this.randUserIndex.indexOf(randomIndex) === -1) { this.randUserIndex.push(randomIndex); }
       }

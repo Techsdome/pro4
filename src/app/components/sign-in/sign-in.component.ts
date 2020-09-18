@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {AngularFireStorage} from "angularfire2/storage";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -19,23 +20,23 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class SignInComponent implements OnInit {
-  myForm: FormGroup;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  isOptional = true;
 
   public openMainLogin = true;
   firstname: string;
   lastname: string;
+  photoURL: any;
+  file: File;
+  progress: any = 0;
 
   matcher = new MyErrorStateMatcher();
+  defaultPhotoURL: any;
+  private toastr: any;
+  imageSrc: string;
 
-  constructor(public authService: AuthService, private formBuilder: FormBuilder) {
-    this.myForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: [''],
-      password: ['', [Validators.required]],
-      confirmPassword: [''],
-      email: ['', [Validators.required, Validators.email]]
-    });
-
+  constructor(public authService: AuthService, private formBuilder: FormBuilder, private storage: AngularFireStorage) {
   }
 
   checkPasswords(group: FormGroup) {
@@ -50,8 +51,44 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.firstFormGroup = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: [''],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirmPassword: [''],
+    }, {validator: this.checkPasswords});
+    this.secondFormGroup = this.formBuilder.group({
+      userJob: [''],
+      userDescription: [''],
+      fileSource: ['']
+    });
+
+    this.storage.ref('Users/Default_ProfilePicture/default_pic.png').getDownloadURL().toPromise().then(url => {
+      this.defaultPhotoURL = url;
+      console.log(url);
+    });
 
   }
 
 
+  fileUpload(e: any) {
+    const reader = new FileReader();
+
+    const uploadPicInput = document.getElementById('picUpload');
+    uploadPicInput.addEventListener('change', () => {
+      this.file = e.target.files[0];
+      reader.readAsDataURL(this.file);
+
+      reader.onload = () => {
+
+        this.imageSrc = reader.result as string;
+
+        this.secondFormGroup.patchValue({
+          fileSource: reader.result
+        });
+
+      };
+    });
+  }
 }

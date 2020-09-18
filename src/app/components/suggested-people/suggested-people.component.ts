@@ -15,19 +15,25 @@ export class SuggestedPeopleComponent implements OnInit {
   randomUsers: User[] = [];
   numUsers;
   randUserIndex: number[] = [];
+  numSearchPeople: number;
+
 
   constructor(public storage: AngularFireStorage, public afs: AngularFirestore,
-              public authService: AuthService,
-              public userSerivce: DataServiceService) {
+              public authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.afs.doc('users/userCount').get().toPromise().then(doc => {
       if (doc.exists) {
         this.numUsers = doc.data().numberUsers;
+        if (this.numUsers < 4) {
+          this.numSearchPeople = this.numUsers;
+        } else {
+          this.numSearchPeople = 4;
+        }
       }
     }).then(() => {
-      while (Object.keys(this.randUserIndex).length < 4) {
+      while (Object.keys(this.randUserIndex).length < this.numSearchPeople) {
         const randomIndex = Math.floor(Math.random() * this.numUsers) + 1;
         if (this.randUserIndex.indexOf(randomIndex) === -1) {
           this.randUserIndex.push(randomIndex);

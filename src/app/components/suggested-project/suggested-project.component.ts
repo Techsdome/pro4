@@ -24,7 +24,6 @@ export class SuggestedProjectComponent implements OnInit {
 
   getRandomProject() {
     const randomIndex = Math.round(Math.random() * ((this.posts.length - 1)));
-    console.log(randomIndex);
     this.topProject = this.posts[randomIndex];
   }
 

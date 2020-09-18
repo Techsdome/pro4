@@ -445,7 +445,7 @@ ul > * {
 
 .main_bubble_image_container{
   overflow: hidden;
-  border-radius:100px; 
+  border-radius:100px;
 }
 
 .main_bubble_img{
@@ -673,6 +673,35 @@ body::-webkit-scrollbar-thumb {
 
 .modal-customclass .modal-dialog {
   width: max-content;
+}
+
+/* Material Sign Up Page*/
+.sign-up-form-first .mat-form-field .mat-form-field-underline, .sign-up-form-second .mat-form-field .mat-form-field-underline {
+  background-color: rgba(255, 255, 255, 0.62) !important;
+}
+
+.sign-up-form-first .mat-form-field-label, .sign-up-form-second .mat-form-field-label {
+  color: white;
+}
+
+.sign-up-form-first .mat-input-invalid .mat-input-ripple .mat-warn {
+  background-color: #f44336 !important;
+}
+
+.sign-up-form-first .mat-step-header .mat-step-label .mat-step-label-active, .sign-up-form-second .mat-step-header .mat-step-label .mat-step-label-active {
+  color: red;
+}
+
+.mat-step-header[aria-selected="true"] .mat-step-label-active{
+  color: rgba(9, 88, 255, 0.84) !important
+}
+
+.mat-step-header[aria-selected="false"] .mat-step-label, .mat-step-optional{
+  color: rgba(255, 255, 255, 0.8) !important
+}
+
+.mat-stepper-horizontal-line {
+  background-color: white;
 }
 
 /* Material Auto Input Project Page*/
