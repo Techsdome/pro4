@@ -167,11 +167,11 @@
                 </div>
                 <mat-form-field class="form-group col-6">
                   <mat-label>Job</mat-label>
-                  <input matInput placeholder="Ex. Developer" formControlName="userJob">
+                  <input matInput placeholder="Ex. Developer" formControlName="userJob" #userJob>
                 </mat-form-field>
                 <mat-form-field class="form-group col-6">
                   <mat-label>Describe yourself</mat-label>
-                  <textarea matInput placeholder="Ex. It makes me feel..." formControlName="userDescription"></textarea>
+                  <textarea matInput placeholder="Ex. It makes me feel..." formControlName="userDescription" #userDescription></textarea>
                 </mat-form-field>
                 <div class="btn-group" role="group">
                   <button type="button" class="btn btn-register btn-outline-style" (click)="toggleLoginRegister(); stepper.reset()">Close</button>
@@ -185,7 +185,10 @@
               <div class="btn-group" role="group">
                 <button type="button" class="btn btn-register btn-outline-style" (click)="toggleLoginRegister(); stepper.reset()">Close</button>
                 <button [disabled]="!firstFormGroup.valid" type="button" class="btn btn-login btn-rounded btn-style"
-                        (click)="authService.SignUp(userEmail.value, userPwd.value); authService.setFirstName(firstname); authService.setLastName(lastname);">
+                        (click)="authService.SignUp(userEmail.value, userPwd.value);
+                        authService.setFirstName(firstname); authService.setLastName(lastname);
+                        authService.setDescription(userDescription.value); authService.setJob(userJob.value);
+                        authService.setProfilePicture(this.file)">
                   Register
                 </button>
               </div>
