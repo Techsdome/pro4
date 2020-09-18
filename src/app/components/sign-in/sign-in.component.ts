@@ -66,7 +66,6 @@ export class SignInComponent implements OnInit {
 
     this.storage.ref('Users/Default_ProfilePicture/default_pic.png').getDownloadURL().toPromise().then(url => {
       this.defaultPhotoURL = url;
-      console.log(url);
     });
 
   }

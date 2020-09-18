@@ -173,9 +173,9 @@
                   <mat-label>Describe yourself</mat-label>
                   <textarea matInput placeholder="Ex. It makes me feel..." formControlName="userDescription" #userDescription></textarea>
                 </mat-form-field>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-register btn-outline-style" (click)="toggleLoginRegister(); stepper.reset()">Close</button>
-                  <button class="btn btn-register btn-outline-style" mat-button matStepperNext>Next</button>
+                <div class="btn-group-justified" role="group">
+                  <button style="right: 15px" type="button" class="btn btn-register btn-outline-style" (click)="toggleLoginRegister(); stepper.reset()">Close</button>
+                  <button style="left: 15px" class="btn btn-register btn-outline-style" mat-button matStepperNext>Next</button>
                 </div>
               </form>
             </mat-step>

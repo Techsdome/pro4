@@ -20,7 +20,6 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone,             // NgZone service to remove outside scope warning
     private storage: AngularFireStorage,
-    public authService: AuthService
   ) {
 
     /* Saving user data in localstorage when
@@ -205,7 +204,7 @@ export class AuthService {
             firebase.auth().currentUser.updateProfile({
               photoURL: url
             }).then(() => {
-              this.authService.afs.collection('users').doc(this.authService.userData.uid).update({
+              this.afs.collection('users').doc(user.uid).update({
                 photoURL: url,
               });
             });
