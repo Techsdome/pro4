@@ -40,7 +40,7 @@
       <div *ngFor="let post of this.notificationPosts" class="dropdown-item d-inline-flex">
         <mat-card style="width: 100%">
           <mat-card-title>{{ post.postType.toUpperCase() }}{{post.postType === 'project' ? ' - ' + post.projectName : ''}}</mat-card-title>
-          <mat-card-content>{{ post.post }}</mat-card-content>
+          <mat-card-content [innerHTML]="post.post"></mat-card-content>
         </mat-card>
         <button (click)="removeOneNotification($event)" type="button" class="close">
           <i id="{{ post.postId }}" class="fa fa-times"></i>

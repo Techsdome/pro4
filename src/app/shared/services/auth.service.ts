@@ -194,7 +194,7 @@ export class AuthService {
         lastname: this.lastname ? this.lastname : 'Last Name'
       };
 
-      if (this.profilePicture !== '') {
+      if ( typeof this.profilePicture !== 'undefined') {
         const uploadTask = firebase.storage().ref(`Users/${user.uid}/profilePic/profilePic`).put(this.profilePicture);
         uploadTask.on('state_changed', (snapshot) => {
         }, (error) => {
@@ -211,9 +211,10 @@ export class AuthService {
           });
         });
       }
+
       userRef.set(userData, {
         merge: true
-      }).then(r => {});
+      }).then(r => {console.log(r);});
     });
   }
 
