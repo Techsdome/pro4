@@ -141,7 +141,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="form-group col-6">
-                  <input matInput placeholder="Repeat password" type="password" formControlName="confirmPassword"
+                  <input matInput placeholder="Repeat password" type="password" formControlName="confirmPassword" #userPwdRepeat
                          [errorStateMatcher]="matcher" required>
                   <mat-error *ngIf="firstFormGroup.hasError('notSame')">
                     Passwords do not match.

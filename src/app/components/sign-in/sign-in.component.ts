@@ -33,7 +33,6 @@ export class SignInComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
   defaultPhotoURL: any;
-  private toastr: any;
   imageSrc: string;
 
   constructor(public authService: AuthService, private formBuilder: FormBuilder, private storage: AngularFireStorage) {

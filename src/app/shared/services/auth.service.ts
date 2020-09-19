@@ -46,6 +46,7 @@ export class AuthService {
   public description;
   public profilePicture;
   private defaultPhotoURL;
+  private providerId;
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
@@ -58,11 +59,7 @@ export class AuthService {
     return this.afAuth.authState;
   }
 
-  public getUserData() {
-    return this.userData;
-  }
-
-  // Sign in with email/password
+// Sign in with email/password
   SignIn(email, password) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
@@ -100,7 +97,7 @@ export class AuthService {
   }
 
   setDescription(description) {
-    this.description = description
+    this.description = description;
   }
 
   setJob(job) {
@@ -148,6 +145,7 @@ export class AuthService {
   AuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
+        this.providerId = provider.providerId;
         const usernew = result.additionalUserInfo.isNewUser;
         if (usernew === true) {
           this.splitName(result.user);
@@ -180,14 +178,13 @@ export class AuthService {
 
     this.storage.ref('Users/Default_ProfilePicture/default_pic.png').getDownloadURL().toPromise().then(url => {
       this.defaultPhotoURL = url;
-
       const userData: any = {
         countId: ++this.userCount,
         uid: user.uid,
         email: user.email,
         description: this.description ? this.description : '',
         displayName: user.displayName ? user.displayName : this.firstname + ' ' + this.lastname,
-        photoURL: this.profilePicture ? this.profilePicture : this.defaultPhotoURL,
+        photoURL: this.providerId ? user.photoURL : this.defaultPhotoURL,
         emailVerified: user.emailVerified,
         job: this.job ? this.job : 'Project starter',
         firstname: this.firstname ? this.firstname : 'First Name',
@@ -214,7 +211,7 @@ export class AuthService {
 
       userRef.set(userData, {
         merge: true
-      }).then(r => {console.log(r);});
+      }).then(r => {console.log(r); });
     });
   }
 
