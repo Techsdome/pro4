@@ -55,7 +55,7 @@ export class CreatePostNewComponent implements OnInit {
   config = {
     toolbar: [
       ['bold', 'italic', 'underline', 'size'],
-      ['blockquote', 'code-block', 'link'],
+      ['code-block', 'link'],
     ]
   };
 
