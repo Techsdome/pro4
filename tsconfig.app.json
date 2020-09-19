@@ -7,7 +7,7 @@
   "files": [
     "src/main.ts",
     "src/polyfills.ts",
-    "../../../Library/Application Support/JetBrains/WebStorm2020.1/javascript/extLibs/global-types/node_modules/@types/p5/global.d.ts"
+//    "../../../Library/Application Support/JetBrains/WebStorm2020.1/javascript/extLibs/global-types/node_modules/@types/p5/global.d.ts"
   ],
   "include": [
     "src/**/*.d.ts"
