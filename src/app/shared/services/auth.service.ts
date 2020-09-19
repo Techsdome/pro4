@@ -19,7 +19,7 @@ export class AuthService {
     public afAuth: AngularFireAuth,   // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone,             // NgZone service to remove outside scope warning
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
   ) {
 
     /* Saving user data in localstorage when
@@ -194,6 +194,23 @@ export class AuthService {
         lastname: this.lastname ? this.lastname : 'Last Name'
       };
 
+      if (this.profilePicture !== '') {
+        const uploadTask = firebase.storage().ref(`Users/${user.uid}/profilePic/profilePic`).put(this.profilePicture);
+        uploadTask.on('state_changed', (snapshot) => {
+        }, (error) => {
+          console.log(error);
+        }, () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+            firebase.auth().currentUser.updateProfile({
+              photoURL: url
+            }).then(() => {
+              this.afs.collection('users').doc(user.uid).update({
+                photoURL: url,
+              });
+            });
+          });
+        });
+      }
       userRef.set(userData, {
         merge: true
       }).then(r => {});

@@ -183,8 +183,8 @@
               <ng-template matStepLabel>Done</ng-template>
               <p>You are now done.</p>
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-register btn-outline-style" (click)="toggleLoginRegister(); stepper.reset()">Close</button>
-                <button [disabled]="!firstFormGroup.valid" type="button" class="btn btn-login btn-rounded btn-style"
+                <button style="right: 15px" type="button" class="btn btn-register btn-outline-style" (click)="toggleLoginRegister(); stepper.reset()">Close</button>
+                <button style="left: 15px" [disabled]="!firstFormGroup.valid" type="button" class="btn btn-login btn-rounded btn-style"
                         (click)="authService.SignUp(userEmail.value, userPwd.value);
                         authService.setFirstName(firstname); authService.setLastName(lastname);
                         authService.setDescription(userDescription.value); authService.setJob(userJob.value);
