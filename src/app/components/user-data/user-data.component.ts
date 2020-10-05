@@ -83,7 +83,6 @@ export class UserDataComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.searchedUserId = params.user;
       this.authService.afs.collection('users').doc(this.searchedUserId).valueChanges().subscribe((val: any) => {
-        console.log(val);
         this.job = val.job;
         this.description = val.description;
         this.skills = val.skills;

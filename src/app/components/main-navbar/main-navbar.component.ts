@@ -86,13 +86,11 @@ export class MainNavbarComponent implements OnInit {
                       this.lastTimeStamp = this.viewed[this.viewed.length - 1].viewedTime;
                     }
 
-                    console.log(new Date(this.lastTimeStamp.seconds * 1000));
 
                     this.afs.collection(`mainFeed/allPosts/post/`, ref => ref.orderBy('timeStamp').startAfter(this.lastTimeStamp))
                       .snapshotChanges().subscribe((data: any) => {
                       if (data) {
                         data.map(post => {
-                          console.log(post.payload.doc.data().postId);
                           if (!this.notificationIds.includes(post.payload.doc.data().postId)) {
                             this.notificationPosts.push(post.payload.doc.data());
                             this.notificationIds.push(post.payload.doc.data().postId);
